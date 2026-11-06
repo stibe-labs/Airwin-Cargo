@@ -1,0 +1,20 @@
+{
+  "name": "united-carriers-replica",
+  "version": "1.0.0",
+  "description": "Pixel-perfect, production-grade replica of United Carriers (https://unitedcarriers.com/)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "united-carriers",
+    "logistics",
+    "freight-forwarding",
+    "replica",
+    "awwwards"
+  ],
+  "author": "",
+  "license": "ISC"
+}
+

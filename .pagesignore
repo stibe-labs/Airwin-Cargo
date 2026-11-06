@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+tools/
+.git/
+.gitignore
+.pagesignore
+*.md
+*.pdf
+pages_archive/
+server.js
+package.json
+package-lock.json

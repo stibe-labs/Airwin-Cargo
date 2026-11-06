@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Cloudflare and Wrangler cache
+.wrangler/
+
+# Development diagnostic scripts & screenshots
+tools/
+*.log
+
+# System & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
