@@ -614,9 +614,10 @@
     min-height: auto !important;
   }
 
-  /* Prevent .home-intro from pulling up and overlapping hero */
+  /* Prevent .home-intro from pulling up and overlapping hero; add clean space */
   .home-intro-wrap {
-    margin-top: 0 !important;
+    margin-top: 5rem !important;
+    padding-top: 2rem !important;
     position: relative !important;
     z-index: 10 !important;
     pointer-events: auto !important;
@@ -2703,16 +2704,18 @@
     position: absolute !important;
     right: 0 !important;
     bottom: 0 !important;
-    width: 58vw !important;
-    max-width: 1150px !important;
+    width: 63vw !important;
+    max-width: 1260px !important;
     min-width: 480px !important;
-    aspect-ratio: 1618 / 972 !important;
+    aspect-ratio: 1743 / 972 !important;
     z-index: 4 !important;
     pointer-events: auto !important;
     display: flex !important;
     align-items: flex-end !important;
     justify-content: flex-end !important;
     overflow: visible !important;
+    transition: opacity 0.15s ease-out !important;
+    will-change: opacity !important;
   }
 
   .hero-containers-canvas {
@@ -2738,7 +2741,7 @@
     .hero-containers-interactive-wrap {
       position: relative !important;
       width: 100% !important;
-      max-width: 650px !important;
+      max-width: 720px !important;
       margin: 3rem auto 0 !important;
       right: auto !important;
       bottom: auto !important;
@@ -3286,6 +3289,21 @@
         });
       }, { threshold: 0.05 });
       observer.observe(canvas);
+
+      // Scroll-linked smooth fadeout as user scrolls down towards next section
+      function updateContainersScrollFade() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const fadeStart = 40;
+        const fadeEnd = Math.max(380, window.innerHeight * 0.48);
+        let opacity = 1.0;
+        if (scrollY > fadeStart) {
+          opacity = Math.max(0.0, 1.0 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
+        }
+        wrap.style.opacity = opacity.toFixed(3);
+        wrap.style.pointerEvents = opacity > 0.05 ? 'auto' : 'none';
+      }
+      window.addEventListener('scroll', updateContainersScrollFade, { passive: true });
+      updateContainersScrollFade();
 
       function render() {
         if (isVisible && texturesReady === 2) {
