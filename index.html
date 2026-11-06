@@ -2758,9 +2758,12 @@
   /* Keep hero text wrap constrained on desktop so it doesn't collide with containers */
   @media (min-width: 992px) {
     .home-hero-text-wrap {
-      max-width: 58rem !important;
+      max-width: 86rem !important;
       z-index: 10 !important;
       position: relative !important;
+    }
+    .home-hero-title h1 span {
+      white-space: nowrap !important;
     }
   }
 
