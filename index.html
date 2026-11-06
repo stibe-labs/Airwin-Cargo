@@ -3294,7 +3294,7 @@
       function updateContainersScrollFade() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
         const fadeStart = 40;
-        const fadeEnd = Math.max(380, window.innerHeight * 0.48);
+        const fadeEnd = 350;
         let opacity = 1.0;
         if (scrollY > fadeStart) {
           opacity = Math.max(0.0, 1.0 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
