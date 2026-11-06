@@ -508,7 +508,7 @@
     pointer-events: none !important;
   }
 
-  /* Eliminate upper white gap and hero spacing */
+  /* Eliminate upper white gap and unwanted empty layouts */
   .article-layout,
   .related-news {
     display: none !important;
@@ -528,17 +528,44 @@
   /* ========================================================= */
   .home-hero-wrap,
   .home-hero,
-  .home-hero-stick-wrap,
-  .home-hero-stick {
+  .home-hero-stick-wrap {
     margin-top: 0 !important;
     padding-top: 0 !important;
     background-color: #ffffff !important;
     background: #ffffff !important;
     color: #111111 !important;
+    position: relative !important;
+    overflow: visible !important;
     --_color---bg--main: #ffffff !important;
     --_color---content--main: #111111 !important;
     --_color---content--sub: #222222 !important;
     --_color---content--soft: #444444 !important;
+  }
+
+  .home-hero-stick {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 100vh !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  /* Prevent .home-intro from pulling up and overlapping the hero section */
+  .home-intro-wrap {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+  }
+
+  .home-hero-empty-block {
+    display: none !important;
+    height: 0 !important;
   }
 
   /* Hide dark space nebula & starry backgrounds */
@@ -558,6 +585,20 @@
   }
 
   /* Hero Headings and Text in Black */
+  .home-hero-text-wrap {
+    height: auto !important;
+    min-height: 100vh !important;
+    padding-top: 14rem !important;
+    padding-bottom: 8rem !important;
+    padding-left: 4rem !important;
+    justify-content: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    z-index: 5 !important;
+    pointer-events: auto !important;
+  }
+
   .home-hero-label,
   .home-hero-label .txt {
     color: #0077ee !important;
@@ -573,6 +614,7 @@
   .home-hero-title .h1 {
     color: #111111 !important;
     -webkit-text-fill-color: #111111 !important;
+    font-weight: 800 !important;
   }
 
   .home-hero-desc,
@@ -760,6 +802,11 @@
       padding: 0.75rem 1.8rem !important;
       font-size: 1.1rem !important;
     }
+    .home-hero-text-wrap {
+      padding-top: 10rem !important;
+      padding-bottom: 4rem !important;
+      padding-left: 2rem !important;
+    }
   }
 
   @media (max-width: 767px) {
@@ -771,6 +818,12 @@
     }
     .header-brand-logo {
       height: 2.6rem !important;
+    }
+    .home-hero-text-wrap {
+      padding-top: 8rem !important;
+      padding-bottom: 3rem !important;
+      padding-left: 1.5rem !important;
+      padding-right: 1.5rem !important;
     }
   }</style><script src="https://js.stripe.com/v3/" type="text/javascript" data-wf-ecomm-key="pk_live_nyPnaDuxaj8zDxRbuaPHJjip" data-wf-ecomm-acct-id="acct_1ToLBEKRbk1YnZ5t"></script><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"AUD","symbol":"A$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {&quot;path&quot;:&quot;amount&quot;,&quot;type&quot;:&quot;CommercePrice&quot;\\} }} {{wf {&quot;path&quot;:&quot;currencyCode&quot;,&quot;type&quot;:&quot;PlainText&quot;\\} }}","hideDecimalForWholeNumbers":false};</script>
 <style id="scroll-engine-fix">
