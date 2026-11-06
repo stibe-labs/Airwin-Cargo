@@ -495,7 +495,8 @@
   /* Airwin 1-Row Navigation Bar & Gap Removal                 */
   /* ========================================================= */
   html, body, .body {
-    background-color: #000000 !important;
+    background-color: #ffffff !important;
+    color: #111111 !important;
   }
 
   /* Completely remove Awwwards "Site of the Day" badge */
@@ -522,12 +523,99 @@
     border: none !important;
   }
 
+  /* ========================================================= */
+  /* Hero Section: White Background & Black Text               */
+  /* ========================================================= */
   .home-hero-wrap,
-  .home-hero {
+  .home-hero,
+  .home-hero-stick-wrap,
+  .home-hero-stick {
     margin-top: 0 !important;
     padding-top: 0 !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    --_color---bg--main: #ffffff !important;
+    --_color---content--main: #111111 !important;
+    --_color---content--sub: #222222 !important;
+    --_color---content--soft: #444444 !important;
   }
 
+  /* Hide dark space nebula & starry backgrounds */
+  .home-hero-bg-star,
+  .home-hero-bg,
+  .home-hero-bg-mb,
+  .home-hero-globe-blur,
+  .home-intro-overlap-bg {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  /* Soften globe shadows on white background */
+  .home-hero-globe-shadow-grp {
+    opacity: 0.12 !important;
+  }
+
+  /* Hero Headings and Text in Black */
+  .home-hero-label,
+  .home-hero-label .txt {
+    color: #0077ee !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+  }
+
+  .home-hero-title,
+  .home-hero-title .heading,
+  .home-hero-title h1,
+  .home-hero-title h1 span,
+  .home-hero-title .h1 {
+    color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
+  }
+
+  .home-hero-desc,
+  .home-hero-desc .txt {
+    color: #222222 !important;
+    -webkit-text-fill-color: #222222 !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Hero action buttons */
+  .home-hero-links .home-hero-btn .btn[data-wf--button--variant="filled"] {
+    background-color: #0077ee !important;
+    color: #ffffff !important;
+    border-color: #0077ee !important;
+    box-shadow: 0 4px 14px rgba(0, 119, 238, 0.35) !important;
+  }
+
+  .home-hero-links .home-hero-btn .btn[data-wf--button--variant="outline"] {
+    background-color: transparent !important;
+    color: #111111 !important;
+    border: 1.5px solid #111111 !important;
+    transition: all 0.25s ease !important;
+  }
+
+  .home-hero-links .home-hero-btn .btn[data-wf--button--variant="outline"]:hover {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+  }
+
+  /* Globe country labels on white background */
+  .globe-label-text {
+    background-color: rgba(255, 255, 255, 0.94) !important;
+    color: #111111 !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+  }
+
+  /* ========================================================= */
+  /* Header Navigation: Clean White Theme & Original Logo      */
+  /* ========================================================= */
   .header {
     position: fixed !important;
     top: 0 !important;
@@ -538,15 +626,16 @@
     margin-bottom: 0 !important;
     pointer-events: auto !important;
     background: transparent !important;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .header.is-scrolled,
   .header.on-scroll {
-    background: rgba(10, 10, 10, 0.88) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04) !important;
   }
 
   .header-inner {
@@ -574,14 +663,12 @@
   }
 
   .header-brand-logo {
-    height: 3.6rem !important;
+    height: 3.8rem !important;
     width: auto !important;
     object-fit: contain !important;
     display: block !important;
-  }
-
-  .header-brand-logo.is-light-theme {
-    display: none !important;
+    opacity: 1 !important;
+    filter: none !important;
   }
 
   .header-nav-links {
@@ -593,11 +680,11 @@
   }
 
   .nav-link-item {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: #111111 !important;
     font-family: inherit !important;
     font-size: 1.35rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.03em !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em !important;
     text-decoration: none !important;
     text-transform: capitalize !important;
     padding: 0.6rem 0 !important;
@@ -607,7 +694,7 @@
 
   .nav-link-item:hover,
   .nav-link-item.w--current {
-    color: #ffffff !important;
+    color: #0077ee !important;
   }
 
   .nav-link-item::after {
@@ -617,7 +704,7 @@
     left: 0 !important;
     width: 0 !important;
     height: 2px !important;
-    background-color: #0088ff !important;
+    background-color: #0077ee !important;
     transition: width 0.25s ease !important;
   }
 
@@ -685,8 +772,7 @@
     .header-brand-logo {
       height: 2.6rem !important;
     }
-  }
-</style><script src="https://js.stripe.com/v3/" type="text/javascript" data-wf-ecomm-key="pk_live_nyPnaDuxaj8zDxRbuaPHJjip" data-wf-ecomm-acct-id="acct_1ToLBEKRbk1YnZ5t"></script><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"AUD","symbol":"A$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {&quot;path&quot;:&quot;amount&quot;,&quot;type&quot;:&quot;CommercePrice&quot;\\} }} {{wf {&quot;path&quot;:&quot;currencyCode&quot;,&quot;type&quot;:&quot;PlainText&quot;\\} }}","hideDecimalForWholeNumbers":false};</script>
+  }</style><script src="https://js.stripe.com/v3/" type="text/javascript" data-wf-ecomm-key="pk_live_nyPnaDuxaj8zDxRbuaPHJjip" data-wf-ecomm-acct-id="acct_1ToLBEKRbk1YnZ5t"></script><script type="text/javascript">window.__WEBFLOW_CURRENCY_SETTINGS = {"currencyCode":"AUD","symbol":"A$","decimal":".","fractionDigits":2,"group":",","template":"{{wf {&quot;path&quot;:&quot;amount&quot;,&quot;type&quot;:&quot;CommercePrice&quot;\\} }} {{wf {&quot;path&quot;:&quot;currencyCode&quot;,&quot;type&quot;:&quot;PlainText&quot;\\} }}","hideDecimalForWholeNumbers":false};</script>
 <style id="scroll-engine-fix">
   html {
     overflow-x: clip !important;
@@ -2213,8 +2299,7 @@
 </style></div><div class="related-news"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_7d83b984-86ad-a7fd-5a9e-957fe7cf7e4a-e7cf7e47" class="related-news-inner"><div class="related-news-cms-wrap"><div class="related-news-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">News:</div></div><div class="related-news-cms w-dyn-list"><div role="list" class="related-news-list w-dyn-items"><div id="w-node-d265b61e-3398-e6ed-8b71-ede64fa5cc7e-e7cf7e47" role="listitem" class="related-news-item w-dyn-item"><a href="/insights/war-widens-in-the-black-sea-in-a-test-of-nato-red-lines" class="related-news-link w-inline-block"><div class="related-news-title"><div class="txt-clamp clamp-1"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">The Evolution of Airwin Logistics: Over 20 Years of Global Cargo Forwarding</div></div></div></a></div><div id="w-node-d265b61e-3398-e6ed-8b71-ede64fa5cc7e-e7cf7e47" role="listitem" class="related-news-item w-dyn-item"><a href="/insights/cyclone-arnab-disrupts-indias-transport-network-as-severe-weather-threatens-ports-airports-and-rail-services" class="related-news-link w-inline-block"><div class="related-news-title"><div class="txt-clamp clamp-1"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Cyclone Arnab Disrupts India&#x27;s Transport Network as Severe Weather Threatens Ports, Airports and Rail Services</div></div></div></a></div><div id="w-node-d265b61e-3398-e6ed-8b71-ede64fa5cc7e-e7cf7e47" role="listitem" class="related-news-item w-dyn-item"><a href="/insights/government-extends-relief-scheme-as-low-margin-exports-struggle-amid-west-asia-crisis" class="related-news-link w-inline-block"><div class="related-news-title"><div class="txt-clamp clamp-1"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Government extends RELIEF scheme as low-margin exports struggle amid West Asia crisis</div></div></div></a></div></div></div></div><div class="related-news-links"><a data-cursor="hidden" data-link-random="" data-is-btn="" href="https://www.carboncare.org/en/co2-emissions-calculator" target="_blank" class="related-news-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Carbon Calculator</div></a><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><a data-cursor="hidden" data-link-random="" data-is-btn="" href="http://u25prd.webtracker.wisegrid.net/Login/Login.aspx?ReturnUrl=%2fDefault.aspx" target="_blank" class="related-news-link is-last w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Live Tracking Portal</div></a></div></div></div></div><header class="header-inner">
   <div class="header-row-nav">
     <a href="./index.html" class="header-logo-link" title="Airwin Logistics">
-      <img src="./airwin_logo_white.png" alt="Airwin Logistics" class="header-brand-logo is-dark-theme" />
-      <img src="./airwin_logo.png" alt="Airwin Logistics" class="header-brand-logo is-light-theme" />
+      <img src="./airwin_logo.png" alt="Airwin Logistics" class="header-brand-logo" />
     </a>
     <nav class="header-nav-links" aria-label="Main Navigation">
       <a href="./index.html" class="nav-link-item w--current">Home</a>
