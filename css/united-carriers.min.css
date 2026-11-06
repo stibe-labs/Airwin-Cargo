@@ -7,3 +7,33 @@ html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-se
 .header-slot.w-variant-7b65b79f-1e98-9fbe-d76a-ec0d5a9abad9 .header-logo-img.is-light-theme{display:block!important}
 .header.is-light-theme .header-logo-img.is-dark-theme{display:none!important}
 .header.is-light-theme .header-logo-img.is-light-theme{display:block!important}
+
+/* Airwin Partner Logo Hover Transition */
+.home-partners-item .home-partners-item-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+.home-partners-item-thumb {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 7rem !important;
+  width: 100% !important;
+  transition: opacity .35s ease, transform .35s ease !important;
+}
+.home-partners-item-thumb.is-hover {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  opacity: 0 !important;
+}
+.home-partners-item:hover .home-partners-item-thumb:not(.is-hover) {
+  opacity: 0 !important;
+}
+.home-partners-item:hover .home-partners-item-thumb.is-hover {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1.06) !important;
+}
