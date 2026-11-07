@@ -4017,35 +4017,31 @@
   }
   .airwin-wordmark-letters {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
-    font-size: clamp(2.2rem, 7.5vw, 7.2rem);
+    font-size: clamp(3.8rem, 11.4vw, 11.4rem);
     font-weight: 800;
-    line-height: 0.85;
+    line-height: 0.82;
     letter-spacing: -0.04em;
+    gap: clamp(2rem, 4.5vw, 4.5rem);
     text-transform: uppercase;
     color: #111111;
   }
   .airwin-wordmark-word {
-    display: flex;
-    justify-content: space-between;
+    display: inline-flex;
     align-items: center;
-  }
-  .airwin-word-1 {
-    flex: 6;
+    letter-spacing: -0.04em;
+    flex: none;
   }
   .airwin-wordmark-spacer {
-    flex: 0.8;
-    min-width: 1.5rem;
-  }
-  .airwin-word-2 {
-    flex: 9;
+    display: none;
   }
   .airwin-wordmark-char {
     display: inline-block;
     color: #111111;
+    margin: 0 0.02em;
     transition: color 0.25s ease, transform 0.25s ease;
     will-change: color, transform;
   }
@@ -4053,19 +4049,16 @@
     color: #0016CB !important;
     transform: translateY(-4px);
   }
-  @media (max-width: 600px) {
+  @media (max-width: 680px) {
     .airwin-wordmark-letters {
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 0.8rem;
-      font-size: clamp(2.8rem, 13vw, 5rem);
     }
-    .airwin-word-1,
-    .airwin-word-2 {
-      flex: 1 1 100%;
-      width: 100%;
+    .airwin-wordmark-word.airwin-word-1 {
+      font-size: clamp(3.2rem, 15vw, 5.5rem);
     }
-    .airwin-wordmark-spacer {
-      display: none;
+    .airwin-wordmark-word.airwin-word-2 {
+      font-size: clamp(2.2rem, 10.5vw, 4rem);
     }
   }
 </style></div><footer class="footer"><div class="footer-inner"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bde-a0c65bd9" class="footer-sub" style="display:none !important;"><div data-wf--text--text-styles="standard" class="txt fs-14 fw-med fs-16-mb"></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65be3-a0c65bd9" class="footer-socials"><div class="footer-menu-line"></div><div class="footer-content-item item-align-right"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Socials</div></div><div class="footer-content-link-wrap"><a data-cursor="hidden" href="https://www.linkedin.com/company/airwin-logistics" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="LinkedIn"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.2847 5.97937H8.7607V7.21271C9.11736 6.50337 10.032 5.86604 11.406 5.86604C14.04 5.86604 14.6654 7.27804 14.6654 9.86871V14.6667H11.9987V10.4587C11.9987 8.98337 11.642 8.15137 10.734 8.15137C9.4747 8.15137 8.95136 9.04804 8.95136 10.458V14.6667H6.2847V5.97937ZM1.71203 14.5534H4.3787V5.86604H1.71203V14.5534ZM4.7607 3.03337C4.7608 3.25689 4.71647 3.4782 4.63029 3.68443C4.54411 3.89067 4.4178 4.07772 4.2587 4.23471C3.9363 4.55512 3.4999 4.73448 3.04536 4.73337C2.59162 4.73307 2.15624 4.55417 1.83336 4.23537C1.67484 4.07785 1.54896 3.89059 1.46293 3.68433C1.3769 3.47807 1.33242 3.25686 1.33203 3.03337C1.33203 2.58204 1.51203 2.15004 1.83403 1.83137C2.15662 1.51215 2.59219 1.33317 3.04603 1.33337C3.5007 1.33337 3.9367 1.51271 4.2587 1.83137C4.58003 2.15004 4.7607 2.58204 4.7607 3.03337Z" fill="currentColor"></path></svg></div></a><a data-cursor="hidden" href="https://www.instagram.com/airwin.logistics?igsh=MThkbnM2NWllamY2cA==" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="Instagram"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><g clip-path="url(#clip0_7107_102842)"><path d="M11.938 4.06226V4.07003M1 4.4998C1 3.5715 1.36877 2.68122 2.02517 2.02481C2.68158 1.3684 3.57186 0.999634 4.50016 0.999634H11.5005C12.4288 0.999634 13.3191 1.3684 13.9755 2.02481C14.6319 2.68122 15.0007 3.5715 15.0007 4.4998V11.5001C15.0007 12.4284 14.6319 13.3187 13.9755 13.9751C13.3191 14.6315 12.4288 15.0003 11.5005 15.0003H4.50016C3.57186 15.0003 2.68158 14.6315 2.02517 13.9751C1.36877 13.3187 1 12.4284 1 11.5001V4.4998ZM5.37565 8.00013C5.37565 8.69635 5.65223 9.36406 6.14453 9.85637C6.63684 10.3487 7.30455 10.6252 8.00078 10.6252C8.697 10.6252 9.36471 10.3487 9.85702 9.85637C10.3493 9.36406 10.6259 8.69635 10.6259 8.00013C10.6259 7.3039 10.3493 6.63619 9.85702 6.14388C9.36471 5.65158 8.697 5.375 8.00078 5.375C7.30455 5.375 6.63684 5.65158 6.14453 6.14388C5.65223 6.63619 5.37565 7.3039 5.37565 8.00013Z" stroke="currentColor" stroke-width="1.75008" stroke-linecap="round" stroke-linejoin="round"></path></g><defs><clippath id="clip0_7107_102842"><rect width="16" height="16" fill="currentColor"></rect></clippath></defs></svg></div></a><a data-cursor="hidden" href="https://www.facebook.com/airwinlogistics" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="Facebook"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path d="M9.33268 9.00004H10.9993L11.666 6.33337H9.33268V5.00004C9.33268 4.31337 9.33268 3.66671 10.666 3.66671H11.666V1.42671C11.4487 1.39804 10.628 1.33337 9.76135 1.33337C7.95135 1.33337 6.66602 2.43804 6.66602 4.46671V6.33337H4.66602V9.00004H6.66602V14.6667H9.33268V9.00004Z" fill="currentColor"></path></svg></div></a></div></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65beb-a0c65bd9" class="footer-menu"><div class="footer-menu-line line-mb"></div><div class="footer-content-item-wrap"><div class="footer-content-item"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Company</div></div><div class="footer-menu-list">
@@ -4796,7 +4789,7 @@
           const charCenterY = rect.top + rect.height / 2;
           const dist = Math.hypot(mouseX - charCenterX, mouseY - charCenterY);
 
-          const radius = Math.max(160, rect.width * 1.4);
+          const radius = Math.max(120, rect.width * 1.5);
           if (dist < radius) {
             char.style.setProperty('color', '#0016CB', 'important');
             const lift = Math.max(0, (1 - dist / radius) * 4);
