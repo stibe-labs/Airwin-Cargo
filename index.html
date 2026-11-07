@@ -4017,15 +4017,15 @@
   }
   .airwin-wordmark-letters {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
-    font-size: clamp(3.8rem, 11.4vw, 11.4rem);
+    font-size: clamp(3.8rem, 13.8vw, 14.5rem);
     font-weight: 800;
     line-height: 0.82;
     letter-spacing: -0.04em;
-    gap: clamp(2rem, 4.5vw, 4.5rem);
+    gap: clamp(1.8rem, 4.2vw, 4.5rem);
     text-transform: uppercase;
     color: #111111;
   }
@@ -4052,6 +4052,7 @@
   @media (max-width: 680px) {
     .airwin-wordmark-letters {
       flex-direction: column;
+      align-items: flex-start;
       gap: 0.8rem;
     }
     .airwin-wordmark-word.airwin-word-1 {
