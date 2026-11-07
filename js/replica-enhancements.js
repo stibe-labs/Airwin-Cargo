@@ -32,8 +32,13 @@
       bodyInner.style.setProperty('overflow', 'visible', 'important');
     }
 
-    // Trigger ScrollTrigger update / resize event
-    window.dispatchEvent(new Event('resize'));
+    // Trigger ScrollTrigger update / Lenis resize without tearing down section animations
+    if (window.ScrollTrigger) {
+      try { window.ScrollTrigger.refresh(); } catch (e) {}
+    }
+    if (window.lenis) {
+      try { window.lenis.resize(); } catch (e) {}
+    }
   }
 
   // 2. LOADER DISMISS & SMOOTH REVEAL
@@ -586,7 +591,56 @@
         item.style.setProperty('transform', 'none', 'important');
       });
 
-      // 4. Guarantee footer and wrapper are visible
+      // 4. Guarantee intro section text, numbers, and mosaic cards are visible
+      const introDesc = document.querySelector('.home-intro-desc');
+      if (introDesc) {
+        introDesc.style.setProperty('opacity', '1', 'important');
+        introDesc.style.setProperty('visibility', 'visible', 'important');
+      }
+      const introBtn = document.querySelector('.home-intro-btn');
+      if (introBtn) {
+        introBtn.style.setProperty('opacity', '1', 'important');
+        introBtn.style.setProperty('visibility', 'visible', 'important');
+      }
+      const introLabel = document.querySelector('.home-intro-label');
+      if (introLabel) {
+        introLabel.style.setProperty('opacity', '1', 'important');
+        introLabel.style.setProperty('visibility', 'visible', 'important');
+      }
+      document.querySelectorAll('.home-intro-stats-item').forEach(item => {
+        item.style.setProperty('opacity', '1', 'important');
+        item.style.setProperty('visibility', 'visible', 'important');
+      });
+      // Guarantee home service items and inner track visibility
+      const serviceMain = document.querySelector('.home-service-main');
+      if (serviceMain) {
+        serviceMain.style.setProperty('opacity', '1', 'important');
+        serviceMain.style.setProperty('visibility', 'visible', 'important');
+      }
+      const serviceInner = document.querySelector('.home-service-main-inner');
+      if (serviceInner) {
+        serviceInner.style.setProperty('opacity', '1', 'important');
+        serviceInner.style.setProperty('visibility', 'visible', 'important');
+      }
+      document.querySelectorAll('.home-service-item').forEach(item => {
+        item.style.setProperty('opacity', '1', 'important');
+        item.style.setProperty('visibility', 'visible', 'important');
+      });
+      // Ensure all split-line-p text in intro and service are fully visible
+      document.querySelectorAll('.home-intro .split-line-p, .home-service .split-line-p').forEach(line => {
+        line.style.setProperty('--bg-progress', '100');
+        line.style.setProperty('color', 'var(--color-final, inherit)');
+      });
+
+      // 5. Re-initialize mosaic cards layout & swing physics if elements exist
+      if (typeof window.initServicesMosaic === 'function' && document.getElementById('services-mosaic-canvas')) {
+        try { window.initServicesMosaic(); } catch (e) {}
+      }
+      if (typeof window.initWhyChooseSwing === 'function' && document.getElementById('why-choose-swing-el')) {
+        try { window.initWhyChooseSwing(); } catch (e) {}
+      }
+
+      // 6. Guarantee footer and wrapper are visible
       const footer = document.querySelector('.footer');
       if (footer) {
         footer.style.setProperty('display', 'block', 'important');
@@ -600,23 +654,20 @@
         footerWrap.style.setProperty('opacity', '1', 'important');
       }
 
-      // 5. Re-initialize wordmark interactive hover if present
+      // 7. Re-initialize wordmark interactive hover if present
       if (typeof window.initAirwinFooterWordmark === 'function') {
         try { window.initAirwinFooterWordmark(); } catch (e) {}
       }
 
-      // 6. Refresh GSAP ScrollTrigger if available
+      // 8. Refresh GSAP ScrollTrigger if available (safely without destructive window.resize)
       if (window.ScrollTrigger) {
         try { window.ScrollTrigger.refresh(); } catch (e) {}
       }
 
-      // 7. Refresh Lenis smooth scroll if available
+      // 9. Refresh Lenis smooth scroll if available
       if (window.lenis) {
         try { window.lenis.resize(); } catch (e) {}
       }
-
-      // 8. Trigger resize event for WebGL canvas and dynamic sizes
-      window.dispatchEvent(new Event('resize'));
     }
 
     // Schedule resilience sweeps on initial load

@@ -448,7 +448,13 @@
     padding-left: calc(var(--container--padding) + 2rem) !important;
   }
   .home-service-text-wrap {
-    display: none !important;
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .home-intro-desc, .home-intro-desc .txt, .home-intro-btn, .home-intro-label, .home-intro-stats-item {
+    opacity: 1 !important;
+    visibility: visible !important;
   }
   .home-service-cms {
     opacity: 1 !important;
@@ -4595,7 +4601,12 @@
   // Dropbox Replay Style Multi-Size Services Mosaic & Animations
   // ==============================================================
   (function() {
+    let _servicesMosaicCleanup = null;
     function initServicesMosaic() {
+      if (typeof _servicesMosaicCleanup === "function") {
+        try { _servicesMosaicCleanup(); } catch(e) {}
+        _servicesMosaicCleanup = null;
+      }
       const section = document.getElementById("home-intro-section") || document.querySelector(".home-intro");
       const canvas = document.getElementById("services-mosaic-canvas");
       if (!section || !canvas) return;
@@ -4716,7 +4727,17 @@
         window.lenis.on("scroll", onScroll);
       }
       setTimeout(resize, 200);
+
+      _servicesMosaicCleanup = function() {
+        window.removeEventListener("resize", resize);
+        window.removeEventListener("scroll", onScroll);
+        if (window.lenis && typeof window.lenis.off === "function") {
+          try { window.lenis.off("scroll", onScroll); } catch(e) {}
+        }
+      };
     }
+
+    window.initServicesMosaic = initServicesMosaic;
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", initServicesMosaic);
@@ -4817,6 +4838,8 @@
 
       requestAnimationFrame(animate);
     }
+
+    window.initWhyChooseSwing = initWhyChooseSwing;
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", initWhyChooseSwing);
