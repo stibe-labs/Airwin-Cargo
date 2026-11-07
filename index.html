@@ -2876,7 +2876,7 @@
   }
 
   .why-choose-container {
-    max-width: 1440px;
+    max-width: 1540px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -2885,7 +2885,7 @@
   /* Section Header */
   .why-choose-header {
     display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.8fr);
+    grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.85fr);
     align-items: end;
     gap: clamp(2rem, 5vw, 6rem);
     margin-bottom: 4.5rem;
@@ -2893,7 +2893,7 @@
 
   .why-choose-eyebrow {
     font-family: 'BT Steinhart Mono', monospace, sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -2915,7 +2915,7 @@
 
   .why-choose-title {
     font-family: 'BT Steinhart', Arial, sans-serif;
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-size: clamp(2.4rem, 4.8vw, 4.2rem);
     line-height: 1.05;
     letter-spacing: -0.03em;
     font-weight: 800;
@@ -2925,8 +2925,8 @@
   }
 
   .why-choose-desc {
-    font-size: clamp(1rem, 1.2vw, 1.15rem);
-    line-height: 1.6;
+    font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+    line-height: 1.65;
     color: #4a5568;
     margin: 0;
     padding-bottom: 0.5rem;
@@ -2935,9 +2935,9 @@
   /* 3-Column Split Layout */
   .why-choose-split {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(18rem, 28vw, 26rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) clamp(22rem, 30vw, 30rem) minmax(0, 1fr);
     align-items: stretch;
-    gap: clamp(1.5rem, 3.5vw, 3.5rem);
+    gap: clamp(2rem, 3.8vw, 4.5rem);
     position: relative;
   }
 
@@ -2958,7 +2958,7 @@
 
   /* Individual Item */
   .why-choose-item {
-    min-height: 11rem;
+    min-height: 11.5rem;
     padding: 2.2rem 0;
     border-top: 1px solid rgba(0, 0, 0, 0.09);
     transition: border-top-color 0.35s ease, transform 0.35s ease;
@@ -2972,7 +2972,7 @@
 
   .why-choose-item-num {
     font-family: 'BT Steinhart Mono', monospace, sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     color: #0066cc;
@@ -2983,11 +2983,11 @@
 
   .why-choose-item-title {
     font-family: 'BT Steinhart', Arial, sans-serif;
-    font-size: clamp(1.45rem, 1.9vw, 1.95rem);
+    font-size: clamp(1.5rem, 1.85vw, 1.95rem);
     font-weight: 700;
     line-height: 1.22;
     color: #111111;
-    margin: 0 0 0.75rem 0;
+    margin: 0 0 0.8rem 0;
     letter-spacing: -0.015em;
     transition: color 0.3s ease;
   }
@@ -2997,9 +2997,9 @@
   }
 
   .why-choose-item-desc {
-    font-size: 1.02rem;
-    line-height: 1.7;
-    color: #555555;
+    font-size: 1.15rem;
+    line-height: 1.72;
+    color: #4a5568;
     margin: 0;
     transition: color 0.3s ease;
   }
@@ -3008,38 +3008,25 @@
     color: #111111;
   }
 
-  /* Center Suspended Container */
+  /* Center Suspended Container (Line removed as requested) */
   .why-choose-center {
     position: relative;
-    min-height: 44rem;
+    min-height: 46rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  /* Vertical Crane Cable Line */
-  .why-choose-center::before {
-    content: "";
-    position: absolute;
-    top: -4rem;
-    bottom: 2rem;
-    left: 50%;
-    width: 2px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, rgba(0, 102, 204, 0.6) 0%, rgba(0, 0, 0, 0.08) 75%, transparent 100%);
-    z-index: 1;
   }
 
   .why-choose-container-stick {
     position: sticky;
-    top: 14vh;
-    width: 148%;
-    margin-left: -24%;
+    top: 13vh;
+    width: 130%;
+    margin-left: -15%;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    filter: drop-shadow(0 32px 42px rgba(0, 50, 120, 0.20));
+    filter: drop-shadow(0 38px 48px rgba(0, 50, 120, 0.22));
   }
 
   .why-choose-swing {
