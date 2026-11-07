@@ -2714,8 +2714,18 @@
     align-items: flex-end !important;
     justify-content: flex-end !important;
     overflow: visible !important;
-    transition: opacity 0.15s ease-out !important;
+    transition: opacity 0.2s ease-out !important;
     will-change: opacity !important;
+    background-image: url('./images/containers-gray.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
+
+  .home-partners-item {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
 
   .hero-containers-canvas {
@@ -4215,21 +4225,34 @@
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,0,0]));
 
         const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-          gl.activeTexture(gl.TEXTURE0 + unit);
-          gl.bindTexture(gl.TEXTURE_2D, tex);
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-          texturesReady++;
-          if (texturesReady === 2) {
-            render();
+        function onLoaded() {
+          try {
+            gl.activeTexture(gl.TEXTURE0 + unit);
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            texturesReady++;
+            if (texturesReady === 2) {
+              render();
+            }
+          } catch(e) {
+            console.warn('WebGL texImage2D error:', e);
           }
+        }
+
+        img.onload = onLoaded;
+        img.onerror = () => {
+          console.warn('Fallback: container texture error', url);
+          texturesReady++;
+          if (texturesReady === 2) render();
         };
         img.src = url;
+        if (img.complete && img.naturalWidth > 0) {
+          onLoaded();
+        }
       }
 
       loadTexture('./images/containers-gray.png', 0);
@@ -4300,7 +4323,7 @@
 
       // Scroll-linked smooth fadeout as user scrolls down towards next section
       function updateContainersScrollFade() {
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || (window.lenis ? window.lenis.scroll : 0);
         const fadeStart = 40;
         const fadeEnd = 350;
         let opacity = 1.0;
@@ -4311,7 +4334,11 @@
         wrap.style.pointerEvents = opacity > 0.05 ? 'auto' : 'none';
       }
       window.addEventListener('scroll', updateContainersScrollFade, { passive: true });
+      if (window.lenis) {
+        window.lenis.on('scroll', updateContainersScrollFade);
+      }
       updateContainersScrollFade();
+      setTimeout(updateContainersScrollFade, 200);
 
       function render() {
         if (isVisible && texturesReady === 2) {
@@ -4430,7 +4457,7 @@
           let rot = stackRotations[i];
           const fly = (progress + ((4 - i) * stackFlySpeed - (4 - i)) / 4) / stackFlySpeed;
           const easedFly = Math.max(fly, 0) ** 2;
-          yOffset += easedFly * -0.6;
+          yOffset += Math.min(easedFly, 1.2) * -0.6;
           innies[i].style.transform = `scale(${scale}) translateY(${yOffset * 100}%) rotate(${rot}deg)`;
         }
       }
@@ -4442,10 +4469,10 @@
         // Intro threshold: when section top enters
         if (rect.top > vh * 0.25) {
           setLayout("freeform");
-        } else if (rect.bottom < vh * 0.70) {
-          // Outro threshold: when section bottom is leaving
+        } else if (rect.bottom < vh * 0.15) {
+          // Outro threshold: ONLY when section is actually leaving the viewport!
           setLayout("stack");
-          const progress = Math.max(0, Math.min(1.5, (vh * 0.70 - rect.bottom) / (vh * 0.50)));
+          const progress = Math.max(0, Math.min(1.0, (vh * 0.15 - rect.bottom) / (vh * 0.35)));
           setStackProgression(progress);
         } else {
           // Active mosaic in view
@@ -4455,8 +4482,9 @@
 
       function resize() {
         const wrap = document.querySelector(".services-mosaic-graphics");
-        if (wrap && canvas) {
-          const size = Math.min(wrap.offsetWidth, 540);
+        const w = (wrap && wrap.offsetWidth > 0) ? wrap.offsetWidth : 440;
+        const size = Math.min(w, 540);
+        if (canvas) {
           canvas.style.setProperty("--c-canvas-size", `${size}px`);
         }
         onScroll();
@@ -4465,6 +4493,10 @@
       resize();
       window.addEventListener("resize", resize, { passive: true });
       window.addEventListener("scroll", onScroll, { passive: true });
+      if (window.lenis) {
+        window.lenis.on("scroll", onScroll);
+      }
+      setTimeout(resize, 200);
     }
 
     if (document.readyState === "loading") {

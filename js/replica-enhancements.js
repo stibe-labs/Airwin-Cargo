@@ -543,6 +543,39 @@
     requestAnimationFrame(updateSpeedometer);
   }
 
+  // 4. SCROLL & ANIMATION RESILIENCE ON HARD REFRESH / SLOW ASSETS
+  function initScrollResilience() {
+    function enforceVisibilityAndRefresh() {
+      // 1. Force all partner logos to be visible unconditionally
+      const partners = document.querySelectorAll('.home-partners-item');
+      partners.forEach(item => {
+        item.style.setProperty('opacity', '1', 'important');
+        item.style.setProperty('visibility', 'visible', 'important');
+        item.style.setProperty('transform', 'none', 'important');
+      });
+
+      // 2. Refresh GSAP ScrollTrigger if available
+      if (window.ScrollTrigger) {
+        try { window.ScrollTrigger.refresh(); } catch (e) {}
+      }
+
+      // 3. Refresh Lenis smooth scroll if available
+      if (window.lenis) {
+        try { window.lenis.resize(); } catch (e) {}
+      }
+
+      // 4. Trigger resize event for WebGL canvas and dynamic sizes
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    // Schedule resilience sweeps
+    [100, 400, 1000, 2500].forEach(delay => {
+      setTimeout(enforceVisibilityAndRefresh, delay);
+    });
+
+    window.addEventListener('load', enforceVisibilityAndRefresh);
+  }
+
   function init() {
     initDynamicSpeedometer();
     unlockScroll();
@@ -551,6 +584,7 @@
     initNavigation();
     initFAQ();
     initModals();
+    initScrollResilience();
     setTimeout(unlockScroll, 200);
     setTimeout(unlockScroll, 800);
   }
