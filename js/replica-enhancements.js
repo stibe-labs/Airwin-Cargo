@@ -546,7 +546,39 @@
   // 4. SCROLL & ANIMATION RESILIENCE ON HARD REFRESH / SLOW ASSETS
   function initScrollResilience() {
     function enforceVisibilityAndRefresh() {
-      // 1. Force all partner logos to be visible unconditionally
+      // 1. Remove all data-init-hidden markers across document
+      document.querySelectorAll('[data-init-hidden]').forEach(el => {
+        el.removeAttribute('data-init-hidden');
+      });
+
+      // 2. Guarantee hero section text, title, and buttons are visible
+      const heroTitle = document.querySelector('.home-hero-title .heading');
+      if (heroTitle) {
+        heroTitle.style.setProperty('opacity', '1', 'important');
+        heroTitle.style.setProperty('visibility', 'visible', 'important');
+        heroTitle.querySelectorAll('*').forEach(child => {
+          child.style.setProperty('opacity', '1', 'important');
+          child.style.setProperty('visibility', 'visible', 'important');
+          child.style.setProperty('transform', 'none', 'important');
+        });
+      }
+      const heroDesc = document.querySelector('.home-hero-desc');
+      if (heroDesc) {
+        heroDesc.style.setProperty('opacity', '1', 'important');
+        heroDesc.style.setProperty('visibility', 'visible', 'important');
+        heroDesc.querySelectorAll('*').forEach(child => {
+          child.style.setProperty('opacity', '1', 'important');
+          child.style.setProperty('visibility', 'visible', 'important');
+          child.style.setProperty('transform', 'none', 'important');
+        });
+      }
+      const heroLabel = document.querySelector('.home-hero-label');
+      if (heroLabel) {
+        heroLabel.style.setProperty('opacity', '1', 'important');
+        heroLabel.style.setProperty('visibility', 'visible', 'important');
+      }
+
+      // 3. Force all partner logos to be visible unconditionally
       const partners = document.querySelectorAll('.home-partners-item');
       partners.forEach(item => {
         item.style.setProperty('opacity', '1', 'important');
@@ -554,26 +586,83 @@
         item.style.setProperty('transform', 'none', 'important');
       });
 
-      // 2. Refresh GSAP ScrollTrigger if available
+      // 4. Guarantee footer and wrapper are visible
+      const footer = document.querySelector('.footer');
+      if (footer) {
+        footer.style.setProperty('display', 'block', 'important');
+        footer.style.setProperty('visibility', 'visible', 'important');
+        footer.style.setProperty('opacity', '1', 'important');
+      }
+      const footerWrap = document.querySelector('.footer-wrap');
+      if (footerWrap) {
+        footerWrap.style.setProperty('display', 'block', 'important');
+        footerWrap.style.setProperty('visibility', 'visible', 'important');
+        footerWrap.style.setProperty('opacity', '1', 'important');
+      }
+
+      // 5. Re-initialize wordmark interactive hover if present
+      if (typeof window.initAirwinFooterWordmark === 'function') {
+        try { window.initAirwinFooterWordmark(); } catch (e) {}
+      }
+
+      // 6. Refresh GSAP ScrollTrigger if available
       if (window.ScrollTrigger) {
         try { window.ScrollTrigger.refresh(); } catch (e) {}
       }
 
-      // 3. Refresh Lenis smooth scroll if available
+      // 7. Refresh Lenis smooth scroll if available
       if (window.lenis) {
         try { window.lenis.resize(); } catch (e) {}
       }
 
-      // 4. Trigger resize event for WebGL canvas and dynamic sizes
+      // 8. Trigger resize event for WebGL canvas and dynamic sizes
       window.dispatchEvent(new Event('resize'));
     }
 
-    // Schedule resilience sweeps
-    [100, 400, 1000, 2500].forEach(delay => {
+    // Schedule resilience sweeps on initial load
+    [100, 300, 700, 1500, 3000].forEach(delay => {
       setTimeout(enforceVisibilityAndRefresh, delay);
     });
 
     window.addEventListener('load', enforceVisibilityAndRefresh);
+
+    // Watch for Barba.js PJAX / SPA transitions and mutations
+    try {
+      const barbaWrapper = document.querySelector('[data-barba="wrapper"]') || document.body;
+      const observer = new MutationObserver((mutations) => {
+        let hasContainerChange = false;
+        for (const m of mutations) {
+          if (m.type === 'childList' && m.addedNodes.length > 0) {
+            hasContainerChange = true;
+            break;
+          }
+        }
+        if (hasContainerChange) {
+          enforceVisibilityAndRefresh();
+          setTimeout(enforceVisibilityAndRefresh, 150);
+          setTimeout(enforceVisibilityAndRefresh, 500);
+          setTimeout(enforceVisibilityAndRefresh, 1200);
+        }
+      });
+      observer.observe(barbaWrapper, { childList: true, subtree: true });
+    } catch (e) {}
+
+    // Back / Forward browser navigation
+    window.addEventListener('popstate', () => {
+      setTimeout(enforceVisibilityAndRefresh, 50);
+      setTimeout(enforceVisibilityAndRefresh, 300);
+      setTimeout(enforceVisibilityAndRefresh, 800);
+    });
+
+    // Internal navigation links
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (link && link.href && link.href.startsWith(window.location.origin)) {
+        setTimeout(enforceVisibilityAndRefresh, 350);
+        setTimeout(enforceVisibilityAndRefresh, 850);
+        setTimeout(enforceVisibilityAndRefresh, 1600);
+      }
+    }, { passive: true });
   }
 
   function init() {
