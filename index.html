@@ -3801,7 +3801,7 @@
     </div>
   </div>
 </section>
-<div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style>
+<div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style id="airwin-common-footer-style">
   @keyframes world-wide-dot {
     0% {
       transform: scale(0);
@@ -3828,51 +3828,20 @@
     transform: scale(1);
     animation: 3s cubic-bezier(0.445, 0.05, 0.55, 0.95) var(--final-delay) infinite alternate world-wide-dot;
   }
-  .contact-hero-map-dot.world-wide:nth-child(1) svg circle {
-    --stagger: -0.3s;
-  }
+  .contact-hero-map-dot.world-wide:nth-child(1) svg circle { --stagger: -0.3s; }
+  .contact-hero-map-dot.world-wide:nth-child(2) svg circle { --stagger: -2.1s; }
+  .contact-hero-map-dot.world-wide:nth-child(3) svg circle { --stagger: -4.7s; }
+  .contact-hero-map-dot.world-wide:nth-child(4) svg circle { --stagger: -1.4s; }
+  .contact-hero-map-dot.world-wide:nth-child(5) svg circle { --stagger: -6.2s; }
+  .contact-hero-map-dot.world-wide:nth-child(6) svg circle { --stagger: -3.5s; }
 
-  .contact-hero-map-dot.world-wide:nth-child(2) svg circle {
-    --stagger: -2.1s;
-  }
-
-  .contact-hero-map-dot.world-wide:nth-child(3) svg circle {
-    --stagger: -4.7s;
-  }
-
-  .contact-hero-map-dot.world-wide:nth-child(4) svg circle {
-    --stagger: -1.4s;
-  }
-
-  .contact-hero-map-dot.world-wide:nth-child(5) svg circle {
-    --stagger: -6.2s;
-  }
-
-  .contact-hero-map-dot.world-wide:nth-child(6) svg circle {
-    --stagger: -3.5s;
-  }
   .footer-info-text-list .footer-info-text-item:after {
     content: '•';
   }
-  /* .footer-main-address-list .footer-main-address-item:not(:last-child):after {
-    content: '/';
-    margin-inline: 0.5rem;
-    font-weight: 500;
-    pointer-events: none;
-  } */
   .footer-link:has(.footer-link-ic):hover .footer-link-ic svg path {
     transition: all 600ms cubic-bezier(0.59, 0.23, 0.22, 0.96);
     stroke-dashoffset: 29px;
   }
-  /* .footer-legal-item:not(:last-child):after {
-    content: '/';
-    font-family: initial;
-    margin-left: 1.2rem;
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.4;
-    pointer-events: none;
-  } */
   .footer-main-address-item:last-child .footer-slash {
     display: none;
   }
@@ -3898,9 +3867,7 @@
     }
   }
 
-  /* ========================================================= */
-  /* Airwin Cargo Footer Polish & Precise Spacing              */
-  /* ========================================================= */
+  /* Airwin Cargo Footer Layout & Alignment */
   .airwin-blog-section {
     padding-bottom: 3.5rem !important;
   }
@@ -3909,8 +3876,8 @@
     min-height: auto !important;
   }
   .footer-inner {
-    padding-top: 2.4rem !important;
-    padding-bottom: 2.4rem !important;
+    padding-top: clamp(2rem, 3.5vw, 3.5rem) !important;
+    padding-bottom: clamp(1.2rem, 2vw, 2rem) !important;
   }
   .footer-sub {
     display: none !important;
@@ -3961,23 +3928,7 @@
   }
   .footer-thumb {
     margin-top: 1.6rem !important;
-  }
-  /* Uncurved Image Corners */
-  .footer-thumb-img,
-  .footer-thumb-img img {
-    border-radius: 0px !important;
-    box-shadow: none !important;
-    aspect-ratio: 16 / 9 !important;
-    background: #f0f2f5;
     width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    clip-path: none !important;
-  }
-  .footer-inner {
-    padding-top: clamp(2rem, 3.5vw, 3.5rem) !important;
-    padding-bottom: clamp(1.2rem, 2vw, 2rem) !important;
   }
   .footer-main {
     margin-top: 1.6rem !important;
@@ -3997,9 +3948,92 @@
     margin-top: 1.6rem !important;
   }
 
-  /* ========================================================= */
+  /* GET A QUOTE Form Styling */
+  .footer-quote-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: clamp(1.2rem, 1.8vw, 1.6rem);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .footer-quote-title {
+    font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
+    font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #111111;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+    line-height: 1.1;
+  }
+  .footer-quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+  }
+  .footer-quote-field {
+    width: 100%;
+  }
+  .footer-quote-input {
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #111111;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .footer-quote-input::placeholder {
+    color: #94A3B8;
+  }
+  .footer-quote-input:focus {
+    border-color: #0016CB;
+    box-shadow: 0 0 0 3px rgba(0, 22, 203, 0.12);
+  }
+  .footer-quote-textarea {
+    resize: vertical;
+    min-height: 4.2rem;
+  }
+  .footer-quote-btn-wrap {
+    margin-top: 0.2rem;
+  }
+  .footer-quote-submit {
+    background: #0016CB;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.65rem 2.2rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .footer-quote-submit:hover {
+    background: #0012A3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 22, 203, 0.25);
+  }
+  .footer-quote-success {
+    padding: 0.85rem 1rem;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: 8px;
+    color: #0016CB;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
   /* Large AIRWIN LOGISTICS Footer Wordmark (Cargoworks Style) */
-  /* ========================================================= */
   .airwin-wordmark-wrap {
     width: 100%;
     margin-top: clamp(2.5rem, 4.5vw, 4.5rem);
@@ -4062,27 +4096,50 @@
       font-size: clamp(2.2rem, 10.5vw, 4rem);
     }
   }
-</style></div><footer class="footer"><div class="footer-inner"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bde-a0c65bd9" class="footer-sub" style="display:none !important;"><div data-wf--text--text-styles="standard" class="txt fs-14 fw-med fs-16-mb"></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65be3-a0c65bd9" class="footer-socials"><div class="footer-menu-line"></div><div class="footer-content-item item-align-right"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Socials</div></div><div class="footer-content-link-wrap"><a data-cursor="hidden" href="https://www.linkedin.com/company/airwin-logistics" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="LinkedIn"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.2847 5.97937H8.7607V7.21271C9.11736 6.50337 10.032 5.86604 11.406 5.86604C14.04 5.86604 14.6654 7.27804 14.6654 9.86871V14.6667H11.9987V10.4587C11.9987 8.98337 11.642 8.15137 10.734 8.15137C9.4747 8.15137 8.95136 9.04804 8.95136 10.458V14.6667H6.2847V5.97937ZM1.71203 14.5534H4.3787V5.86604H1.71203V14.5534ZM4.7607 3.03337C4.7608 3.25689 4.71647 3.4782 4.63029 3.68443C4.54411 3.89067 4.4178 4.07772 4.2587 4.23471C3.9363 4.55512 3.4999 4.73448 3.04536 4.73337C2.59162 4.73307 2.15624 4.55417 1.83336 4.23537C1.67484 4.07785 1.54896 3.89059 1.46293 3.68433C1.3769 3.47807 1.33242 3.25686 1.33203 3.03337C1.33203 2.58204 1.51203 2.15004 1.83403 1.83137C2.15662 1.51215 2.59219 1.33317 3.04603 1.33337C3.5007 1.33337 3.9367 1.51271 4.2587 1.83137C4.58003 2.15004 4.7607 2.58204 4.7607 3.03337Z" fill="currentColor"></path></svg></div></a><a data-cursor="hidden" href="https://www.instagram.com/airwin.logistics?igsh=MThkbnM2NWllamY2cA==" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="Instagram"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><g clip-path="url(#clip0_7107_102842)"><path d="M11.938 4.06226V4.07003M1 4.4998C1 3.5715 1.36877 2.68122 2.02517 2.02481C2.68158 1.3684 3.57186 0.999634 4.50016 0.999634H11.5005C12.4288 0.999634 13.3191 1.3684 13.9755 2.02481C14.6319 2.68122 15.0007 3.5715 15.0007 4.4998V11.5001C15.0007 12.4284 14.6319 13.3187 13.9755 13.9751C13.3191 14.6315 12.4288 15.0003 11.5005 15.0003H4.50016C3.57186 15.0003 2.68158 14.6315 2.02517 13.9751C1.36877 13.3187 1 12.4284 1 11.5001V4.4998ZM5.37565 8.00013C5.37565 8.69635 5.65223 9.36406 6.14453 9.85637C6.63684 10.3487 7.30455 10.6252 8.00078 10.6252C8.697 10.6252 9.36471 10.3487 9.85702 9.85637C10.3493 9.36406 10.6259 8.69635 10.6259 8.00013C10.6259 7.3039 10.3493 6.63619 9.85702 6.14388C9.36471 5.65158 8.697 5.375 8.00078 5.375C7.30455 5.375 6.63684 5.65158 6.14453 6.14388C5.65223 6.63619 5.37565 7.3039 5.37565 8.00013Z" stroke="currentColor" stroke-width="1.75008" stroke-linecap="round" stroke-linejoin="round"></path></g><defs><clippath id="clip0_7107_102842"><rect width="16" height="16" fill="currentColor"></rect></clippath></defs></svg></div></a><a data-cursor="hidden" href="https://www.facebook.com/airwinlogistics" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="Facebook"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path d="M9.33268 9.00004H10.9993L11.666 6.33337H9.33268V5.00004C9.33268 4.31337 9.33268 3.66671 10.666 3.66671H11.666V1.42671C11.4487 1.39804 10.628 1.33337 9.76135 1.33337C7.95135 1.33337 6.66602 2.43804 6.66602 4.46671V6.33337H4.66602V9.00004H6.66602V14.6667H9.33268V9.00004Z" fill="currentColor"></path></svg></div></a></div></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65beb-a0c65bd9" class="footer-menu"><div class="footer-menu-line line-mb"></div><div class="footer-content-item-wrap"><div class="footer-content-item"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Company</div></div><div class="footer-menu-list">
+</style>
+<footer class="footer"><div class="footer-inner"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bde-a0c65bd9" class="footer-sub" style="display:none !important;"><div data-wf--text--text-styles="standard" class="txt fs-14 fw-med fs-16-mb"></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65be3-a0c65bd9" class="footer-socials"><div class="footer-menu-line"></div><div class="footer-content-item item-align-right"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Socials</div></div><div class="footer-content-link-wrap"><a data-cursor="hidden" href="https://www.linkedin.com/company/airwin-logistics" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="LinkedIn"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.2847 5.97937H8.7607V7.21271C9.11736 6.50337 10.032 5.86604 11.406 5.86604C14.04 5.86604 14.6654 7.27804 14.6654 9.86871V14.6667H11.9987V10.4587C11.9987 8.98337 11.642 8.15137 10.734 8.15137C9.4747 8.15137 8.95136 9.04804 8.95136 10.458V14.6667H6.2847V5.97937ZM1.71203 14.5534H4.3787V5.86604H1.71203V14.5534ZM4.7607 3.03337C4.7608 3.25689 4.71647 3.4782 4.63029 3.68443C4.54411 3.89067 4.4178 4.07772 4.2587 4.23471C3.9363 4.55512 3.4999 4.73448 3.04536 4.73337C2.59162 4.73307 2.15624 4.55417 1.83336 4.23537C1.67484 4.07785 1.54896 3.89059 1.46293 3.68433C1.3769 3.47807 1.33242 3.25686 1.33203 3.03337C1.33203 2.58204 1.51203 2.15004 1.83403 1.83137C2.15662 1.51215 2.59219 1.33317 3.04603 1.33337C3.5007 1.33337 3.9367 1.51271 4.2587 1.83137C4.58003 2.15004 4.7607 2.58204 4.7607 3.03337Z" fill="currentColor"></path></svg></div></a><a data-cursor="hidden" href="https://www.instagram.com/airwin.logistics?igsh=MThkbnM2NWllamY2cA==" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="Instagram"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><g clip-path="url(#clip0_7107_102842)"><path d="M11.938 4.06226V4.07003M1 4.4998C1 3.5715 1.36877 2.68122 2.02517 2.02481C2.68158 1.3684 3.57186 0.999634 4.50016 0.999634H11.5005C12.4288 0.999634 13.3191 1.3684 13.9755 2.02481C14.6319 2.68122 15.0007 3.5715 15.0007 4.4998V11.5001C15.0007 12.4284 14.6319 13.3187 13.9755 13.9751C13.3191 14.6315 12.4288 15.0003 11.5005 15.0003H4.50016C3.57186 15.0003 2.68158 14.6315 2.02517 13.9751C1.36877 13.3187 1 12.4284 1 11.5001V4.4998ZM5.37565 8.00013C5.37565 8.69635 5.65223 9.36406 6.14453 9.85637C6.63684 10.3487 7.30455 10.6252 8.00078 10.6252C8.697 10.6252 9.36471 10.3487 9.85702 9.85637C10.3493 9.36406 10.6259 8.69635 10.6259 8.00013C10.6259 7.3039 10.3493 6.63619 9.85702 6.14388C9.36471 5.65158 8.697 5.375 8.00078 5.375C7.30455 5.375 6.63684 5.65158 6.14453 6.14388C5.65223 6.63619 5.37565 7.3039 5.37565 8.00013Z" stroke="currentColor" stroke-width="1.75008" stroke-linecap="round" stroke-linejoin="round"></path></g><defs><clippath id="clip0_7107_102842"><rect width="16" height="16" fill="currentColor"></rect></clippath></defs></svg></div></a><a data-cursor="hidden" href="https://www.facebook.com/airwinlogistics" target="_blank" rel="noopener noreferrer" class="footer-link is-linkedin w-inline-block" aria-label="Facebook"><div class="footer-linkedin"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path d="M9.33268 9.00004H10.9993L11.666 6.33337H9.33268V5.00004C9.33268 4.31337 9.33268 3.66671 10.666 3.66671H11.666V1.42671C11.4487 1.39804 10.628 1.33337 9.76135 1.33337C7.95135 1.33337 6.66602 2.43804 6.66602 4.46671V6.33337H4.66602V9.00004H6.66602V14.6667H9.33268V9.00004Z" fill="currentColor"></path></svg></div></a></div></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65beb-a0c65bd9" class="footer-menu"><div class="footer-menu-line line-mb"></div><div class="footer-content-item-wrap"><div class="footer-content-item"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Company</div></div><div class="footer-menu-list">
 
 <!-- 1. Home -->
-<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bf1-a0c65bd9" href="./index.html" aria-current="page" class="footer-link w-inline-block w--current"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Home</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Home</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
+<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bf1-a0c65bd9" href="/index.html" aria-current="page" class="footer-link w-inline-block w--current"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Home</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Home</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
 
 <!-- 2. About -->
-<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bfd-a0c65bd9" href="./about.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">About</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">About</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
+<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bfd-a0c65bd9" href="/about.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">About</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">About</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
 
 <!-- 3. Services -->
-<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c03-a0c65bd9" href="./services.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Services</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Services</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
+<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c03-a0c65bd9" href="/services.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Services</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Services</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
 
 <!-- 4. News & Updates -->
-<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bf4-a0c65bd9" href="./insights.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">News &amp; Updates</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">News &amp; Updates</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
+<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bf4-a0c65bd9" href="/insights.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">News &amp; Updates</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">News &amp; Updates</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
 
 <!-- 5. Career -->
-<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bfa-a0c65bd9" href="./careers.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Career</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Career</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
+<a id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bfa-a0c65bd9" href="/careers.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Career</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Career</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
 
 <!-- 6. Contact -->
-<a id="w-node-aaabe6d4-7655-73aa-1cf9-ab1bbc44354d-a0c65bd9" href="./contact.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Contact</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Contact</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
+<a id="w-node-aaabe6d4-7655-73aa-1cf9-ab1bbc44354d-a0c65bd9" href="/contact.html" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Contact</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Contact</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a>
 
-</div></div></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c22-a0c65bd9" class="footer-thumb"><div class="footer-thumb-img"><img sizes="(max-width: 586px) 100vw, 586px" srcset="./images/footer-container-port.webp 1x, ./images/footer-container-port.png 2x" alt="Airwin Cargo Container Port Aerial" src="./images/footer-container-port.webp" loading="eager" class="img-df img-fill"/></div></div>
+</div></div></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c22-a0c65bd9" class="footer-thumb"><div class="footer-quote-card">
+  <div class="footer-quote-title">GET A QUOTE</div>
+  <form class="footer-quote-form" onsubmit="event.preventDefault(); this.querySelector('.footer-quote-btn-wrap').style.display='none'; this.querySelector('.footer-quote-success').style.display='block';">
+    <div class="footer-quote-field">
+      <input type="text" name="name" class="footer-quote-input" placeholder="Your Name" required />
+    </div>
+    <div class="footer-quote-field">
+      <input type="tel" name="mobile" class="footer-quote-input" placeholder="Mobile" required />
+    </div>
+    <div class="footer-quote-field">
+      <input type="email" name="email" class="footer-quote-input" placeholder="Email" required />
+    </div>
+    <div class="footer-quote-field">
+      <textarea name="comments" class="footer-quote-input footer-quote-textarea" placeholder="Comments" rows="3"></textarea>
+    </div>
+    <div class="footer-quote-btn-wrap">
+      <button type="submit" class="footer-quote-submit">Submit</button>
+    </div>
+    <div class="footer-quote-success" style="display:none;">
+      ✓ Thank you! Your quote request has been received. Our team will get back to you shortly.
+    </div>
+  </form>
+</div></div>
 
 <!-- Footer Main (Address, Contact, Map) -->
 <div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c25-a0c65bd9" class="footer-main"><div id="w-node-ac2cc8ce-ac20-8f13-2ca8-f787ae44424b-a0c65bd9" class="footer-main-line"></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c26-a0c65bd9" class="footer-main-address">
@@ -4107,7 +4164,7 @@
 <div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c4c-a0c65bd9" class="footer-main-contact"><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c4d-a0c65bd9" class="footer-content-item"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Email</div></div><a href="mailto:delhi@airwinlogistic.com" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med fs-14-mb">delhi@airwinlogistic.com</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med fs-14-mb">delhi@airwinlogistic.com</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a></div><div class="footer-content-item"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Hotline</div></div><a href="tel:+919886714286" class="footer-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="base" class="link"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med fs-14-mb">+91 98867 14286</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med fs-14-mb">+91 98867 14286</div></div></div><div class="link-ic-wrap"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c5b-a0c65bd9" class="footer-content-item"><div class="footer-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Office Hours</div></div><div class="footer-content"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med fs-14-mb">Mon - Sat / 9:00AM - 7:00PM</div></div></div></div>
 
 <!-- World Map -->
-<div id="w-node-_073090fb-a78b-f8f0-d7c5-a8532d0f9424-a0c65bd9" class="footer-main-map"><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8eeb-a0c65bd9" class="contact-hero-map-img"><img loading="lazy" src="./images/map.png" alt="World map formed from small black circular dots on a white background." class="img-df"/></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8eed-a0c65bd9" class="contact-hero-map-dot office"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="505" cy="175" r="5" fill="#0016CB"></circle><circle cx="505" cy="195" r="5" fill="#0016CB"></circle><circle cx="575" cy="285" r="5" fill="#0016CB"></circle><circle cx="635" cy="285" r="5" fill="#0016CB"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8ef3-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="395" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="545" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="485" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="445" cy="175" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="405" cy="185" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="335" cy="205" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="375" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="345" cy="265" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8efd-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="345" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="105" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="575" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="335" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="485" cy="175" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="325" cy="195" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="495" cy="215" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="245" cy="235" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="205" cy="275" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f08-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="425" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="325" cy="115" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="345" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="525" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="425" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="295" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="465" cy="175" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="515" cy="215" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="585" cy="245" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f13-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="135" cy="95" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="185" cy="115" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="565" cy="115" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="165" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="445" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="395" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="185" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="175" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f1e-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="335" cy="95" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="475" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="405" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="305" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="555" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="455" cy="195" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="545" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="575" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="185" cy="255" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f29-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="365" cy="75" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="315" cy="125" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="135" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="295" cy="195" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="215" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="575" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="185" cy="255" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div></div></div></div>
+<div id="w-node-_073090fb-a78b-f8f0-d7c5-a8532d0f9424-a0c65bd9" class="footer-main-map"><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8eeb-a0c65bd9" class="contact-hero-map-img"><img loading="eager" src="/images/map.png" alt="World map formed from small black circular dots on a white background." class="img-df"/></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8eed-a0c65bd9" class="contact-hero-map-dot office"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="505" cy="175" r="5" fill="#0016CB"></circle><circle cx="505" cy="195" r="5" fill="#0016CB"></circle><circle cx="575" cy="285" r="5" fill="#0016CB"></circle><circle cx="635" cy="285" r="5" fill="#0016CB"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8ef3-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="395" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="545" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="485" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="445" cy="175" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="405" cy="185" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="335" cy="205" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="375" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="345" cy="265" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8efd-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="345" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="105" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="575" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="335" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="485" cy="175" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="325" cy="195" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="495" cy="215" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="245" cy="235" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="205" cy="275" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f08-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="425" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="325" cy="115" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="345" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="525" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="425" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="295" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="465" cy="175" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="515" cy="215" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="585" cy="245" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f13-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="135" cy="95" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="185" cy="115" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="565" cy="115" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="135" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="165" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="445" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="395" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="185" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="175" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f1e-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="335" cy="95" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="475" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="405" cy="145" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="305" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="555" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="455" cy="195" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="545" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="575" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="185" cy="255" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div><div id="w-node-_7aa150db-b2d1-7e8f-5a62-dce4a35a8f29-a0c65bd9" class="contact-hero-map-dot world-wide icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 662 340" fill="none" class="svg"><circle cx="365" cy="75" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="105" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="315" cy="125" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="135" cy="155" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="165" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="295" cy="195" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="365" cy="215" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="575" cy="225" r="5" fill="#111111" fill-opacity="0.16"></circle><circle cx="185" cy="255" r="5" fill="#111111" fill-opacity="0.16"></circle></svg></div></div></div></div>
 
 <!-- Footer Bottom Bar (Clean legal bar) -->
 <!-- AIRWIN LOGISTICS Large Wordmark (Cargoworks Style with Interactive Blue Hover) -->
@@ -4137,7 +4194,7 @@
     </div>
   </a>
 </div>
-<div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c73-a0c65bd9" class="footer-bot"><div class="line"></div><div class="footer-gb-bot-inner"><div class="footer-gb-copyright hidden-mb"><div class="footer-copyright-text w-richtext"><p class="txt fs-9">© 2026 Airwin Cargo Services Pvt Ltd. All Rights Reserved.</p></div></div><div class="footer-gb-wrap"><div class="footer-gb-legal-menu"><div class="footer-legal-item"><a data-cursor="hidden" href="./qhse.html" class="footer-legal-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">QHSE</div></a></div><div class="footer-legal-item"><a data-cursor="hidden" href="./privacy-policy.html" class="footer-legal-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">Privacy Policy</div></a></div><div class="footer-legal-item"><a data-cursor="hidden" href="./terms-conditions.html" class="footer-legal-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">TERMS &amp; CONDITIONS</div></a></div><div class="footer-legal-item"><button data-cursor="hidden" class="footer-legal-link cky-banner-element"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">Cookie Settings</div></button></div></div></div></div></div>
+<div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65c73-a0c65bd9" class="footer-bot"><div class="line"></div><div class="footer-gb-bot-inner"><div class="footer-gb-copyright hidden-mb"><div class="footer-copyright-text w-richtext"><p class="txt fs-9">© 2026 Airwin Cargo Services Pvt Ltd. All Rights Reserved.</p></div></div><div class="footer-gb-wrap"><div class="footer-gb-legal-menu"><div class="footer-legal-item"><a data-cursor="hidden" href="/qhse.html" class="footer-legal-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">QHSE</div></a></div><div class="footer-legal-item"><a data-cursor="hidden" href="/privacy-policy.html" class="footer-legal-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">Privacy Policy</div></a></div><div class="footer-legal-item"><a data-cursor="hidden" href="/terms-conditions.html" class="footer-legal-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">TERMS &amp; CONDITIONS</div></a></div><div class="footer-legal-item"><button data-cursor="hidden" class="footer-legal-link cky-banner-element"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9 fs-10-mb">Cookie Settings</div></button></div></div></div></div></div>
 
 
 
@@ -4769,10 +4826,7 @@
   </script>
 
 
-<script>
-  // =========================================================
-  // Large AIRWIN Footer Wordmark Hover Interactivity
-  // =========================================================
+<script id="airwin-common-footer-script">
   (function initAirwinFooterWordmark() {
     function setup() {
       const wrap = document.querySelector('.airwin-wordmark-wrap');
