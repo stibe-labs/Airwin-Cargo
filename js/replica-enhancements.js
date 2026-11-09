@@ -34,7 +34,8 @@
 
     // Trigger ScrollTrigger update / Lenis resize without tearing down section animations
     if (window.ScrollTrigger) {
-      try { window.ScrollTrigger.refresh(); } catch (e) {}
+      try { window.ScrollTrigger.refresh();
+        initHeroVideoScrollAnimation(); } catch (e) {}
     }
     if (window.lenis) {
       try { window.lenis.resize(); } catch (e) {}
@@ -731,7 +732,8 @@
 
       // 8. Refresh GSAP ScrollTrigger if available (safely without destructive window.resize)
       if (window.ScrollTrigger) {
-        try { window.ScrollTrigger.refresh(); } catch (e) {}
+        try { window.ScrollTrigger.refresh();
+        initHeroVideoScrollAnimation(); } catch (e) {}
       }
 
       // 9. Refresh Lenis smooth scroll if available
@@ -786,6 +788,107 @@
     }, { passive: true });
   }
 
+  
+  // 12. HERO VIDEO SCROLL ANIMATION (CONTAINER LOADING ONTO TRUCK)
+  function initHeroVideoScrollAnimation() {
+    const canvas = document.getElementById('airwin-hero-canvas');
+    if (!canvas) return;
+    if (canvas.dataset.initialized === 'true') return;
+    canvas.dataset.initialized = 'true';
+
+    const ctx = canvas.getContext('2d');
+    const totalFrames = 118;
+    const framePaths = [];
+    for (let i = 0; i < totalFrames; i++) {
+      const num = String(i).padStart(4, '0');
+      framePaths.push('/assets/hero-video-frames/frame_' + num + '.webp');
+    }
+
+    const images = [];
+    let currentFrame = 0;
+    let targetFrame = 0;
+
+    function resizeCanvas() {
+      const parent = canvas.parentElement || canvas.closest('.service-hero') || window;
+      canvas.width = parent.offsetWidth || window.innerWidth;
+      canvas.height = parent.offsetHeight || window.innerHeight;
+      drawFrame(Math.round(currentFrame));
+    }
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    function drawFrame(idx) {
+      const frameIdx = Math.max(0, Math.min(totalFrames - 1, idx));
+      const img = images[frameIdx];
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const w = canvas.width;
+      const h = canvas.height;
+      const imgW = img.naturalWidth;
+      const imgH = img.naturalHeight;
+
+      const scale = Math.max(w / imgW, h / imgH);
+      const drawW = imgW * scale;
+      const drawH = imgH * scale;
+      const drawX = (w - drawW) / 2;
+      const drawY = (h - drawH) / 2;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    }
+
+    // Load first frame immediately
+    const firstImg = new Image();
+    firstImg.src = framePaths[0];
+    images[0] = firstImg;
+    firstImg.onload = function() {
+      resizeCanvas();
+      drawFrame(0);
+    };
+
+    // Preload remaining frames
+    for (let i = 1; i < totalFrames; i++) {
+      const img = new Image();
+      img.src = framePaths[i];
+      images[i] = img;
+    }
+
+    // Smooth render loop
+    let isRunning = true;
+    function renderLoop() {
+      if (Math.abs(targetFrame - currentFrame) > 0.04) {
+        currentFrame += (targetFrame - currentFrame) * 0.22;
+        drawFrame(Math.round(currentFrame));
+      }
+      if (isRunning) requestAnimationFrame(renderLoop);
+    }
+    requestAnimationFrame(renderLoop);
+
+    function setupScrollTrigger() {
+      if (typeof window.ScrollTrigger === 'undefined' || typeof window.gsap === 'undefined') {
+        setTimeout(setupScrollTrigger, 100);
+        return;
+      }
+
+      const heroWrap = document.querySelector('.service-hero-wrap');
+      if (!heroWrap) return;
+
+      window.ScrollTrigger.create({
+        trigger: heroWrap,
+        start: 'top top',
+        end: '+=160%',
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.6,
+        anticipatePin: 1,
+        onUpdate: function(self) {
+          targetFrame = self.progress * (totalFrames - 1);
+        }
+      });
+    }
+
+    setupScrollTrigger();
+  }
+
   function init() {
     initDynamicSpeedometer();
     unlockScroll();
@@ -795,6 +898,7 @@
     initFAQ();
     initModals();
     initScrollResilience();
+    initHeroVideoScrollAnimation();
     setTimeout(unlockScroll, 200);
     setTimeout(unlockScroll, 800);
   }
