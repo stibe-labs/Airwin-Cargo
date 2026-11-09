@@ -484,6 +484,420 @@
     .header-brand-logo { height: 2.6rem !important; }
   }
 </style>
+
+
+
+
+
+
+
+
+
+
+<style>
+  .about-member-thumb-mask-top {
+    --mask-img-top: 0%;
+    clip-path: inset(var(--mask-img-top) 0 0 0);
+  }
+  .about-member-thumb-mask-bottom {
+    --mask-img-bottom: 100%;
+    clip-path: inset(0 0 var(--mask-img-bottom) 0);
+  }
+  .about-fea-item-title {
+    --fea-progress: 100%;
+  }
+  .about-fea-content-list {
+    --index: 0;
+  }
+  .about-fea-content-item.active > * {
+    opacity: 1;
+  }
+  .about-fea-content-item.active.passed .about-fea-item-desc {
+    opacity: 0;
+  }
+  .about-fea-content-item:has(~ .about-fea-content-item.active) .about-fea-item-title {
+    opacity: 1;
+  }
+  .about-fea-item-desc .word {
+    opacity: 0;
+    transition-delay: 0s;
+    transform: translateY(50%);
+    transition: all 0.6s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    line-height: 1.1;
+  }
+  .about-fea-content-item.active .about-fea-item-desc .word {
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: var(--trans-delay);
+  }
+  .member-popup-content p + p {
+    margin-top: 2.4rem;
+  }
+  .about-diff-text-wrap:last-child {
+    padding-bottom: 0;
+  }
+  .about-team-main-item.swiper-slide-active .about-team-main-item-text {
+    opacity: 1;
+  }
+  .about-team-main-item.swiper-slide-active .about-team-main-img-mask {
+    opacity: 0;
+  }
+  .about-team-sub-item.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .about-faq-main-cms-item.active .about-faq-main-cms-item-line {
+    background-color: var(--_color---content--main);
+  }
+  .about-faq-main-cms-item.active {
+    color: var(--_color---content--main);
+  }
+  .about-faq-main-cms-item.active .about-faq-main-cms-item-dot {
+    background-color: var(--_color---content--main);
+  }
+  .about-faq-toc.active::after {
+    color: var(--_color---content--main);
+  }
+  .about-faq-toc::after {
+    text-box-edge: text;
+    font-family: var(--font--button);
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: var(--_color---content--note);
+    transition: color 0.4s ease;
+    position: absolute;
+    top: 50%;
+    right: 1.2rem;
+    transform: translateY(-50%);
+    content: counter(faq-toc, decimal-leading-zero);
+  }
+  @media (min-width: 768px) {
+    .about-diff-sub-group {
+      --index: 0;
+    }
+    .about-diff-sub {
+      transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      transform: translateY(calc(var(--index) * -100%));
+    }
+    .about-diff-text-wrap.active .about-diff-title {
+      color: var(--_color---content--main);
+    }
+    .about-diff-text-wrap.active .about-diff-desc {
+      opacity: 1;
+    }
+    .about-member-list {
+      --index: 0;
+    }
+    .about-member-item-name {
+      --line-height: 2.72rem;
+      transform: translateY(calc(var(--line-height) * var(--index) * -1 - var(--line-height) / 2));
+    }
+    .about-member-item.active .about-member-item-name {
+      color: var(--_color---content--main);
+    }
+    .about-member-item.active .about-member-item-content-inner > * {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .about-member-item.is-passed .about-member-item-role-inner {
+      transform: translateY(-100%);
+    }
+    .about-member-item.active .about-member-item-role-inner {
+      transform: translateY(0);
+    }
+    .about-member-item.active .about-member-item-role {
+      pointer-events: auto;
+    }
+    .about-member-item.active + * + * + * ~ .about-member-item,
+    .about-member-item:has(~ * + * + * + .active) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .about-member-list.ready .about-member-item:nth-child(n + 6) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .about-member-thumbs {
+      --thumb-clip-top: 100%;
+      --thumb-clip-bottom: 0%;
+    }
+    .about-member-overlay.is-top,
+    .about-member-overlay-halftone.is-top {
+      clip-path: inset(var(--thumb-clip-top) 0 0 0);
+    }
+    .about-member-overlay.is-bottom,
+    .about-member-overlay-halftone.is-bottom {
+      clip-path: inset(0 0 var(--thumb-clip-bottom) 0);
+    }
+  }
+  .member-popup-link.hidden-dsk {
+    display: none !important;
+  }
+  .member-popup-link.hidden-mb {
+    display: block !important;
+  }
+  @media (hover: hover) and (min-width: 992px) {
+    .about-faq-main-cms-item:hover .about-faq-main-cms-item-dot {
+      background-color: var(--_color---content--main);
+    }
+    .about-stand-item:hover .about-stand-item-line .line-inner {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .about-stand-item:hover .about-stand-item-desc {
+      opacity: 0.7;
+    }
+    .about-stand-item:hover .about-stand-item-ic .icon .icon-slot path {
+      animation-name: in-icon-new;
+    }
+    .about-faq-toc:hover .line-inner {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+  @media (max-width: 991px) {
+    .about-stand-item .about-stand-item-ic .icon .icon-slot path {
+      transform: scale(1) !important;
+      color: var(--_color---content--main) !important;
+    }
+  }
+  @media (min-width: 768px) {
+    .about-member-item:not(.active) .about-member-item-name-ic {
+      opacity: 0;
+    }
+    .about-fea-content-item:has(~ .about-fea-content-item.active):not(:has(+ .about-fea-content-item.active)) > .about-fea-item-title {
+      transform: translateY(3.6rem);
+    }
+    .about-member-thumb:first-child .about-member-thumb-img {
+      padding-top: 0;
+    }
+    .about-member-thumb:last-child .about-member-thumb-img {
+      padding-bottom: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-trade-title br {
+      display: none;
+    }
+    .about-faq-main-cms-item.active .about-faq-main-cms-item-line {
+      background-color: var(--_color---border--highlight);
+    }
+    .about-fea-content-item:nth-child(1) {
+      --item-index: 0;
+    }
+    .about-fea-content-item:nth-child(2) {
+      --item-index: 1;
+    }
+    .about-fea-content-item:nth-child(3) {
+      --item-index: 2;
+    }
+    .member-popup-link.hidden-dsk {
+      display: block !important;
+    }
+    .member-popup-link.hidden-mb {
+      display: none !important;
+    }
+    .popup-wrap.active .member-popup {
+      transform: translate(0, 0);
+    }
+    /* .about-intro-gallery-img:nth-child(1) {
+      width: 100%;
+    }
+    .about-intro-gallery-img:nth-child(2) {
+      width: 63.2876712329%;
+      margin-left: auto;
+    }
+
+    .about-intro-gallery-img:nth-child(3) {
+      width: 100%;
+    }
+
+    .about-intro-gallery-img:nth-child(4) {
+      width: 66.02739726%;
+      margin-right: auto;
+    } */
+  }
+</style>
+<style id="airwin-fea-2item-adjustments">
+  /* Section sticky setup */
+  .about-fea {
+    height: 100vh !important;
+    position: sticky !important;
+    top: 0 !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+  }
+  .about-fea-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+  }
+  .about-fea-bg-item {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .about-fea-bg-item-thumb {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .about-fea-bg-item-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform-origin: center center !important;
+  }
+  /* Subtle vignette overlay protecting text readability while keeping center vehicle crisp */
+  .about-fea-bg-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.15) 32%, rgba(0, 0, 0, 0.15) 68%, rgba(0, 0, 0, 0.6) 100%) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+  
+  /* Content container */
+  .about-fea-content {
+    position: relative !important;
+    z-index: 5 !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+  .about-fea-content-wrap {
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* Horizontal divider line */
+  .about-fea-line {
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    z-index: 1 !important;
+  }
+  .about-fea-line-progress {
+    height: 100% !important;
+    background: #0077ee !important;
+    width: 0%;
+    box-shadow: 0 0 12px rgba(0, 119, 238, 0.8) !important;
+  }
+
+  /* Label 'OUR' vertically aligned with the active item at center line */
+  .about-fea-label {
+    position: absolute !important;
+    top: calc(50% - 2.4rem) !important;
+    left: 0 !important;
+    z-index: 10 !important;
+  }
+  .about-fea-label .txt {
+    font-family: monospace !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Content list: stays stationary so descriptions on right never bounce vertically */
+  .about-fea-content-list {
+    transform: none !important;
+    position: relative !important;
+    z-index: 6 !important;
+  }
+  .about-fea-content-item {
+    margin-left: calc(var(--container--one-column, 7rem) + var(--container--column-gap, 2rem)) !important;
+    padding-bottom: 4.2rem !important;
+    position: relative !important;
+  }
+  .about-fea-content-item:last-child {
+    padding-bottom: 0 !important;
+  }
+
+  /* Titles: both titles are always visible in the list (United Carriers style) */
+  .about-fea-item-title {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    position: relative !important;
+    width: fit-content !important;
+    cursor: default !important;
+    opacity: 1 !important;
+    /* Translate titles so active item aligns with 'OUR' and center line */
+    transform: translateY(calc(var(--index, 0) * -8.6rem)) !important;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+  .about-fea-item-title-inner,
+  .about-fea-item-title-mask {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* Inactive titles show dimmed mask (semi-transparent white) */
+  .about-fea-item-title-mask {
+    color: rgba(255, 255, 255, 0.32) !important;
+    z-index: 2 !important;
+    transition: color 0.4s ease !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  }
+  /* Active title shines in bright glowing white */
+  .about-fea-item-title-inner {
+    color: #ffffff !important;
+    z-index: 3 !important;
+    clip-path: inset(0 var(--fea-progress, 100%) 0 0) !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+  }
+  .about-fea-content-item.active .about-fea-item-title-mask {
+    color: rgba(255, 255, 255, 0.45) !important;
+  }
+
+  /* Description on right: pinned at center line, non-overlapping center vehicle */
+  .about-fea-item-desc {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: min(44rem, 36vw) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: 10 !important;
+  }
+  .about-fea-content-item:last-child .about-fea-item-desc {
+    transform: translateY(calc(-50% - 8.6rem)) !important;
+  }
+  .about-fea-content-item.active .about-fea-item-desc {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .about-fea-item-desc .txt {
+    font-family: var(--font--body, 'Space Grotesk', Arial, sans-serif) !important;
+    font-size: clamp(1.4rem, 1.45vw, 1.85rem) !important;
+    line-height: 1.7 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  @media (max-width: 991px) {
+    .about-fea-item-desc {
+      width: min(38rem, 40vw) !important;
+    }
+  }
+</style>
 </head> tag -->
 <script type="text/javascript">
   (function (e, c) {
@@ -729,6 +1143,420 @@
     .header-nav-links { display: none !important; }
     .header-inner { padding: 1.2rem 1.6rem !important; }
     .header-brand-logo { height: 2.6rem !important; }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+<style>
+  .about-member-thumb-mask-top {
+    --mask-img-top: 0%;
+    clip-path: inset(var(--mask-img-top) 0 0 0);
+  }
+  .about-member-thumb-mask-bottom {
+    --mask-img-bottom: 100%;
+    clip-path: inset(0 0 var(--mask-img-bottom) 0);
+  }
+  .about-fea-item-title {
+    --fea-progress: 100%;
+  }
+  .about-fea-content-list {
+    --index: 0;
+  }
+  .about-fea-content-item.active > * {
+    opacity: 1;
+  }
+  .about-fea-content-item.active.passed .about-fea-item-desc {
+    opacity: 0;
+  }
+  .about-fea-content-item:has(~ .about-fea-content-item.active) .about-fea-item-title {
+    opacity: 1;
+  }
+  .about-fea-item-desc .word {
+    opacity: 0;
+    transition-delay: 0s;
+    transform: translateY(50%);
+    transition: all 0.6s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    line-height: 1.1;
+  }
+  .about-fea-content-item.active .about-fea-item-desc .word {
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: var(--trans-delay);
+  }
+  .member-popup-content p + p {
+    margin-top: 2.4rem;
+  }
+  .about-diff-text-wrap:last-child {
+    padding-bottom: 0;
+  }
+  .about-team-main-item.swiper-slide-active .about-team-main-item-text {
+    opacity: 1;
+  }
+  .about-team-main-item.swiper-slide-active .about-team-main-img-mask {
+    opacity: 0;
+  }
+  .about-team-sub-item.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .about-faq-main-cms-item.active .about-faq-main-cms-item-line {
+    background-color: var(--_color---content--main);
+  }
+  .about-faq-main-cms-item.active {
+    color: var(--_color---content--main);
+  }
+  .about-faq-main-cms-item.active .about-faq-main-cms-item-dot {
+    background-color: var(--_color---content--main);
+  }
+  .about-faq-toc.active::after {
+    color: var(--_color---content--main);
+  }
+  .about-faq-toc::after {
+    text-box-edge: text;
+    font-family: var(--font--button);
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: var(--_color---content--note);
+    transition: color 0.4s ease;
+    position: absolute;
+    top: 50%;
+    right: 1.2rem;
+    transform: translateY(-50%);
+    content: counter(faq-toc, decimal-leading-zero);
+  }
+  @media (min-width: 768px) {
+    .about-diff-sub-group {
+      --index: 0;
+    }
+    .about-diff-sub {
+      transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      transform: translateY(calc(var(--index) * -100%));
+    }
+    .about-diff-text-wrap.active .about-diff-title {
+      color: var(--_color---content--main);
+    }
+    .about-diff-text-wrap.active .about-diff-desc {
+      opacity: 1;
+    }
+    .about-member-list {
+      --index: 0;
+    }
+    .about-member-item-name {
+      --line-height: 2.72rem;
+      transform: translateY(calc(var(--line-height) * var(--index) * -1 - var(--line-height) / 2));
+    }
+    .about-member-item.active .about-member-item-name {
+      color: var(--_color---content--main);
+    }
+    .about-member-item.active .about-member-item-content-inner > * {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .about-member-item.is-passed .about-member-item-role-inner {
+      transform: translateY(-100%);
+    }
+    .about-member-item.active .about-member-item-role-inner {
+      transform: translateY(0);
+    }
+    .about-member-item.active .about-member-item-role {
+      pointer-events: auto;
+    }
+    .about-member-item.active + * + * + * ~ .about-member-item,
+    .about-member-item:has(~ * + * + * + .active) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .about-member-list.ready .about-member-item:nth-child(n + 6) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .about-member-thumbs {
+      --thumb-clip-top: 100%;
+      --thumb-clip-bottom: 0%;
+    }
+    .about-member-overlay.is-top,
+    .about-member-overlay-halftone.is-top {
+      clip-path: inset(var(--thumb-clip-top) 0 0 0);
+    }
+    .about-member-overlay.is-bottom,
+    .about-member-overlay-halftone.is-bottom {
+      clip-path: inset(0 0 var(--thumb-clip-bottom) 0);
+    }
+  }
+  .member-popup-link.hidden-dsk {
+    display: none !important;
+  }
+  .member-popup-link.hidden-mb {
+    display: block !important;
+  }
+  @media (hover: hover) and (min-width: 992px) {
+    .about-faq-main-cms-item:hover .about-faq-main-cms-item-dot {
+      background-color: var(--_color---content--main);
+    }
+    .about-stand-item:hover .about-stand-item-line .line-inner {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .about-stand-item:hover .about-stand-item-desc {
+      opacity: 0.7;
+    }
+    .about-stand-item:hover .about-stand-item-ic .icon .icon-slot path {
+      animation-name: in-icon-new;
+    }
+    .about-faq-toc:hover .line-inner {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+  @media (max-width: 991px) {
+    .about-stand-item .about-stand-item-ic .icon .icon-slot path {
+      transform: scale(1) !important;
+      color: var(--_color---content--main) !important;
+    }
+  }
+  @media (min-width: 768px) {
+    .about-member-item:not(.active) .about-member-item-name-ic {
+      opacity: 0;
+    }
+    .about-fea-content-item:has(~ .about-fea-content-item.active):not(:has(+ .about-fea-content-item.active)) > .about-fea-item-title {
+      transform: translateY(3.6rem);
+    }
+    .about-member-thumb:first-child .about-member-thumb-img {
+      padding-top: 0;
+    }
+    .about-member-thumb:last-child .about-member-thumb-img {
+      padding-bottom: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-trade-title br {
+      display: none;
+    }
+    .about-faq-main-cms-item.active .about-faq-main-cms-item-line {
+      background-color: var(--_color---border--highlight);
+    }
+    .about-fea-content-item:nth-child(1) {
+      --item-index: 0;
+    }
+    .about-fea-content-item:nth-child(2) {
+      --item-index: 1;
+    }
+    .about-fea-content-item:nth-child(3) {
+      --item-index: 2;
+    }
+    .member-popup-link.hidden-dsk {
+      display: block !important;
+    }
+    .member-popup-link.hidden-mb {
+      display: none !important;
+    }
+    .popup-wrap.active .member-popup {
+      transform: translate(0, 0);
+    }
+    /* .about-intro-gallery-img:nth-child(1) {
+      width: 100%;
+    }
+    .about-intro-gallery-img:nth-child(2) {
+      width: 63.2876712329%;
+      margin-left: auto;
+    }
+
+    .about-intro-gallery-img:nth-child(3) {
+      width: 100%;
+    }
+
+    .about-intro-gallery-img:nth-child(4) {
+      width: 66.02739726%;
+      margin-right: auto;
+    } */
+  }
+</style>
+<style id="airwin-fea-2item-adjustments">
+  /* Section sticky setup */
+  .about-fea {
+    height: 100vh !important;
+    position: sticky !important;
+    top: 0 !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+  }
+  .about-fea-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+  }
+  .about-fea-bg-item {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .about-fea-bg-item-thumb {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .about-fea-bg-item-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform-origin: center center !important;
+  }
+  /* Subtle vignette overlay protecting text readability while keeping center vehicle crisp */
+  .about-fea-bg-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.15) 32%, rgba(0, 0, 0, 0.15) 68%, rgba(0, 0, 0, 0.6) 100%) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+  
+  /* Content container */
+  .about-fea-content {
+    position: relative !important;
+    z-index: 5 !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+  .about-fea-content-wrap {
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* Horizontal divider line */
+  .about-fea-line {
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    z-index: 1 !important;
+  }
+  .about-fea-line-progress {
+    height: 100% !important;
+    background: #0077ee !important;
+    width: 0%;
+    box-shadow: 0 0 12px rgba(0, 119, 238, 0.8) !important;
+  }
+
+  /* Label 'OUR' vertically aligned with the active item at center line */
+  .about-fea-label {
+    position: absolute !important;
+    top: calc(50% - 2.4rem) !important;
+    left: 0 !important;
+    z-index: 10 !important;
+  }
+  .about-fea-label .txt {
+    font-family: monospace !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Content list: stays stationary so descriptions on right never bounce vertically */
+  .about-fea-content-list {
+    transform: none !important;
+    position: relative !important;
+    z-index: 6 !important;
+  }
+  .about-fea-content-item {
+    margin-left: calc(var(--container--one-column, 7rem) + var(--container--column-gap, 2rem)) !important;
+    padding-bottom: 4.2rem !important;
+    position: relative !important;
+  }
+  .about-fea-content-item:last-child {
+    padding-bottom: 0 !important;
+  }
+
+  /* Titles: both titles are always visible in the list (United Carriers style) */
+  .about-fea-item-title {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    position: relative !important;
+    width: fit-content !important;
+    cursor: default !important;
+    opacity: 1 !important;
+    /* Translate titles so active item aligns with 'OUR' and center line */
+    transform: translateY(calc(var(--index, 0) * -8.6rem)) !important;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+  .about-fea-item-title-inner,
+  .about-fea-item-title-mask {
+    grid-column: 1 / 2 !important;
+    grid-row: 1 / 2 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  /* Inactive titles show dimmed mask (semi-transparent white) */
+  .about-fea-item-title-mask {
+    color: rgba(255, 255, 255, 0.32) !important;
+    z-index: 2 !important;
+    transition: color 0.4s ease !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  }
+  /* Active title shines in bright glowing white */
+  .about-fea-item-title-inner {
+    color: #ffffff !important;
+    z-index: 3 !important;
+    clip-path: inset(0 var(--fea-progress, 100%) 0 0) !important;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+  }
+  .about-fea-content-item.active .about-fea-item-title-mask {
+    color: rgba(255, 255, 255, 0.45) !important;
+  }
+
+  /* Description on right: pinned at center line, non-overlapping center vehicle */
+  .about-fea-item-desc {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: min(44rem, 36vw) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: 10 !important;
+  }
+  .about-fea-content-item:last-child .about-fea-item-desc {
+    transform: translateY(calc(-50% - 8.6rem)) !important;
+  }
+  .about-fea-content-item.active .about-fea-item-desc {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .about-fea-item-desc .txt {
+    font-family: var(--font--body, 'Space Grotesk', Arial, sans-serif) !important;
+    font-size: clamp(1.4rem, 1.45vw, 1.85rem) !important;
+    line-height: 1.7 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  @media (max-width: 991px) {
+    .about-fea-item-desc {
+      width: min(38rem, 40vw) !important;
+    }
   }
 </style>
 </head><body class="body"><div class="component-global"><div class="css-layout embed-css w-embed"><style>
@@ -2040,7 +2868,7 @@
 </style></div><section class="article-layout-block"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-b84a2613-623e-f1e0-e973-f3654bba759c-6fa9cebb" class="article-hero"><div class="article-title-wrap"><div class="article-hero-title"><h2 class="heading h1 h2-mb">Insights</h2></div><div class="article-hero-label"><div class="heading h4 h5-mb">(12)</div></div></div><div class="article-breadcrumb"><div class="article-breadcrumb-item"><a data-link-random="" data-cursor="hidden" href="./index.html" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Home</div></a></div><div class="article-breadcrumb-item"><a data-link-random="" article-breadcrumb-ins="" data-cursor="hidden" href="./insights.html" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">Insights</div></a></div><div class="article-breadcrumb-item"><div data-breadcrumb-type="" class="article-breadcrumb-link"><div data-article-sub-cate="" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb"></div></div></div><div class="article-breadcrumb-item"><a data-cursor="hidden" data-breadcrumb-cate="" data-link-random="" href="#" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">Insights</div></a></div></div></div><div id="w-node-_070d8942-acc5-13b8-8525-c2936fa9ced7-6fa9cebb" class="line hidden-mb"></div><div id="w-node-_070d8942-acc5-13b8-8525-c2936fa9ced8-6fa9cebb" class="article-tab"><div class="article-tab-title"><h3 class="heading h6 hidden-mb">Categories</h3><div class="article-tab-title-mb hidden-dsk"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10-mb">CATEGORIES</div></div><div class="article-tab-title-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 8 8" fill="none" class="svg"><path d="M0.75 2L3.75 5L6.75 2" stroke="currentColor"></path></svg></div></div><div class="line"></div><div data-lenis-prevent="" class="article-tab-main-wrap"><div class="article-tab-main"><div class="article-tab-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">articles</div></div><div class="article-tab-cms w-dyn-list"><div role="list" class="article-tab-list w-dyn-items"><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/featured" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Featured</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/company-news" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company News</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/industry-news" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Industry News</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/case-studies" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Case Studies</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/company-updates" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company Updates</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/announcements" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Market Updates</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div><div class="article-tab-main"><div class="article-tab-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">AI news</div></div><div class="article-tab-cms w-dyn-list"><div role="list" class="article-tab-list w-dyn-items"><div data-cursor="hidden" data-category="Global" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/global" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Global</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Europe" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/europe" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Europe</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Rest of World" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/rest-of-world-d2yv8" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Rest of World</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Middle East &amp; Africa " data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/middle-east-africa" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Middle East &amp; Africa </div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Asia" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/asia" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Asia</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Americas" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/americas" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Americas</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Asia Pacific" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/asia-pacific" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Asia Pacific</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Company Update" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/company-update" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company Update</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div><div class="article-tab-main"><div class="article-tab-label"><a href="/linkedin" class="w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">SOCIAL updates</div></a></div><div data-cursor="hidden" data-category="Linkedin" data-type="SOCIAL updates" class="article-tab-item"><a data-cursor="hidden" data-link-random="" href="/linkedin" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Linkedin</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div></div><div class="hidden"><div class="insight-counter w-dyn-list"><div role="list" class="w-dyn-items"><div data-type="AI news" data-category="Europe" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Middle East &amp; Africa " role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Market Updates" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Market Updates" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div></div></div><div class="insight-counter w-dyn-list"><div role="list" class="w-dyn-items"><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div></div></div></div></section></div><main data-barba="wrapper" class="main"><div data-header="light" data-barba="container" data-barba-namespace="about" class="main-inner">
 
 <section class="about-hero-clean" style="padding: 16rem 4rem 10rem; max-width: 140rem; margin: 0 auto; box-sizing: border-box;">
-  <div style="display: flex; flex-direction: column; gap: 2rem;">
+  <div style="display: flex; flex-direction: column; gap: 2.4rem;">
     <div style="display: inline-flex; align-items: center; gap: 1rem;">
       <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #0077ee;"></span>
       <span style="font-family: monospace; font-size: 1.3rem; letter-spacing: 0.18em; text-transform: uppercase; color: #0077ee; font-weight: 700;">ABOUT AIRWIN LOGISTICS</span>
@@ -2048,9 +2876,29 @@
     <h1 style="font-size: clamp(3rem, 4.8vw, 5.4rem); font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif); font-weight: 700; text-transform: uppercase; line-height: 1.12; color: #111111; margin: 0; letter-spacing: 0.02em;">
       GLOBAL FREIGHT FORWARDING &amp; CARGO SOLUTION PROVIDERS
     </h1>
-    <p style="font-size: clamp(1.5rem, 1.6vw, 1.9rem); line-height: 1.7; color: #444444; max-width: 92rem; margin: 1rem 0 2rem;">
-      Airwin Logistics is a distinguished cargo forwarding and courier distribution company operating with excellence globally since 2001. With more than two decades of proven experience, we manage mission-critical supply chains with complete reliability and transparent execution across India, the GCC, and over 200 global trade destinations.
+    <p style="font-size: clamp(1.5rem, 1.6vw, 1.95rem); line-height: 1.75; color: #333333; max-width: 96rem; margin: 0.5rem 0 1.5rem;">
+      Airwin Logistics is a distinguished cargo forwarding and courier distribution company operating with excellence globally established in 2001. With more than two decades of proven experience, we offer a comprehensive range of services including Sea Freight, Air Freight, Land Transport, Courier, Warehousing, Packing, Forwarding, and value-added supply chain services. Our commitment to exceptional service has made us a leader in both international and domestic logistics.
     </p>
+
+    <!-- Key Company Pillars from airwincargo.com/about -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; margin: 2rem 0;">
+      <div style="border-top: 2px solid #0077ee; padding-top: 1.5rem;">
+        <div style="font-family: monospace; font-size: 1.2rem; color: #0077ee; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;">01 / NETWORK &amp; REACH</div>
+        <div style="font-size: 1.6rem; font-weight: 700; color: #111111; margin-bottom: 0.6rem;">200+ Global Trade Destinations</div>
+        <div style="font-size: 1.35rem; line-height: 1.6; color: #666666;">Operating across India, UAE Dubai Hub, GCC, Asia-Pacific, Europe, and the Americas.</div>
+      </div>
+      <div style="border-top: 2px solid #0077ee; padding-top: 1.5rem;">
+        <div style="font-family: monospace; font-size: 1.2rem; color: #0077ee; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;">02 / MULTIMODAL CAPABILITY</div>
+        <div style="font-size: 1.6rem; font-weight: 700; color: #111111; margin-bottom: 0.6rem;">Air, Ocean &amp; Land Transport</div>
+        <div style="font-size: 1.35rem; line-height: 1.6; color: #666666;">Full container load, consolidated air cargo, express courier distribution, and heavy surface trucking.</div>
+      </div>
+      <div style="border-top: 2px solid #0077ee; padding-top: 1.5rem;">
+        <div style="font-family: monospace; font-size: 1.2rem; color: #0077ee; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;">03 / OPERATIONAL INTEGRITY</div>
+        <div style="font-size: 1.6rem; font-weight: 700; color: #111111; margin-bottom: 0.6rem;">Accountable &amp; On-Time Delivery</div>
+        <div style="font-size: 1.35rem; line-height: 1.6; color: #666666;">Clear and honest communications with dedicated single-point account managers for every shipment.</div>
+      </div>
+    </div>
+
     <div style="display: flex; gap: 1.8rem; flex-wrap: wrap; margin-top: 1rem;">
       <a href="./contact.html" style="display: inline-flex; align-items: center; justify-content: center; padding: 1.2rem 3.2rem; background-color: #0077ee; color: #ffffff; text-decoration: none; border-radius: 9999px; font-weight: 600; font-size: 1.35rem; letter-spacing: 0.04em; text-transform: uppercase; box-shadow: 0 4px 14px rgba(0, 119, 238, 0.4);">
         Work With Us
@@ -2061,6 +2909,84 @@
     </div>
   </div>
 </section>
+
+
+<div class="about-fea-wrap">
+  <div class="about-fea-empty-block hidden-dsk"></div>
+  <section data-section="dark" class="about-fea">
+    <div class="w-layout-blockcontainer container grid full-h w-container">
+      <div class="about-fea-bg-overlay"></div>
+      
+      <!-- Background images container (Center Object Imagery) -->
+      <div class="about-fea-bg">
+        <!-- Item 1: Desert Highway Truck (Mission) -->
+        <div class="about-fea-bg-item">
+          <div class="about-fea-bg-item-thumb">
+            <img src="./images/desert-truck-above.png" loading="eager" alt="Airwin Cargo Fleet Transport" class="img-df img-fill" />
+            <div class="about-fea-bg-item-overlay"></div>
+          </div>
+        </div>
+
+        <!-- Item 2: Airliner in Wispy Blue Skies (Management) -->
+        <div class="about-fea-bg-item">
+          <div class="about-fea-bg-item-thumb">
+            <img src="./images/airliner-blue-skies.png" loading="eager" alt="Airwin Global Air Freight" class="img-df img-fill" />
+            <div class="about-fea-bg-item-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content (Headings left, Center clear for truck/plane, Content right) -->
+      <div class="about-fea-content">
+        <div class="about-fea-label">
+          <div class="txt">OUR</div>
+        </div>
+        <div class="about-fea-content-wrap">
+          <div class="about-fea-line">
+            <div class="about-fea-line-progress"></div>
+          </div>
+          <div class="about-fea-content-list" style="--index: 0;">
+            <!-- Mission Item -->
+            <div class="about-fea-content-item active">
+              <div class="about-fea-item-title">
+                <div class="about-fea-item-title-inner">
+                  <h2 class="heading h2" style="font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif); font-size: clamp(3.2rem, 4.2vw, 5.2rem); font-weight: 700; text-transform: uppercase; margin: 0; white-space: nowrap;">MISSION</h2>
+                </div>
+                <div class="about-fea-item-title-mask">
+                  <h2 class="heading h2" style="font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif); font-size: clamp(3.2rem, 4.2vw, 5.2rem); font-weight: 700; text-transform: uppercase; margin: 0; white-space: nowrap;">MISSION</h2>
+                </div>
+              </div>
+              <div class="about-fea-item-desc">
+                <div class="txt">
+                  Our mission is to provide unparalleled quality service, delivering value that exceeds expectations. We customize our products to meet the unique requirements of our clients, aiming to impress them with our responsiveness, clear and honest communications, and proactive approach. We are dedicated to maintaining close relationships with our clients, fostering a culture of teamwork and transparency in management.
+                </div>
+              </div>
+            </div>
+
+            <!-- Management Item -->
+            <div class="about-fea-content-item">
+              <div class="about-fea-item-title">
+                <div class="about-fea-item-title-inner">
+                  <h2 class="heading h2" style="font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif); font-size: clamp(3.2rem, 4.2vw, 5.2rem); font-weight: 700; text-transform: uppercase; margin: 0; white-space: nowrap;">MANAGEMENT</h2>
+                </div>
+                <div class="about-fea-item-title-mask">
+                  <h2 class="heading h2" style="font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif); font-size: clamp(3.2rem, 4.2vw, 5.2rem); font-weight: 700; text-transform: uppercase; margin: 0; white-space: nowrap;">MANAGEMENT</h2>
+                </div>
+              </div>
+              <div class="about-fea-item-desc">
+                <div class="txt">
+                  At Airwin, our dedicated professionals ensure the success of every transaction. With a global network, we strive to be the most reliable freight forwarding, project logistics management, and removal &amp; relocation company. Excelling in worldwide moving and related services, we aim to be trusted advisors, committed to serving our valued customers and associates with integrity and efficiency.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="about-fea-empty-block hidden-mb"></div>
+  <div class="about-stand" style="height: 1px; margin-top: -1px;"></div>
+</div>
 
 <div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style id="airwin-common-footer-style">
   /* =========================================================
