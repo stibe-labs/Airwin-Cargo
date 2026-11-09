@@ -1144,3 +1144,51 @@
     window.initContainersShader();
   }
 
+
+
+  /* =========================================================
+     AIRWIN NAVIGATION ACTIVE LINK SYNCHRONIZER
+     ========================================================= */
+  function updateAirwinActiveNavLinks() {
+    const currentPath = window.location.pathname.toLowerCase();
+    document.querySelectorAll('.nav-link-item').forEach(link => {
+      const href = (link.getAttribute('href') || '').toLowerCase();
+      const isHome = (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath === '' || currentPath.endsWith('/index'));
+      if (isHome) {
+        if (href.includes('index.html') || href === '/' || href === './') {
+          link.classList.add('w--current');
+        } else {
+          link.classList.remove('w--current');
+        }
+      } else {
+        if (href.includes('about') && currentPath.includes('about')) {
+          link.classList.add('w--current');
+        } else if (href.includes('services') && currentPath.includes('services')) {
+          link.classList.add('w--current');
+        } else if (href.includes('insights') && (currentPath.includes('insights') || currentPath.includes('news'))) {
+          link.classList.add('w--current');
+        } else if (href.includes('careers') && currentPath.includes('career')) {
+          link.classList.add('w--current');
+        } else if (href.includes('contact') && currentPath.includes('contact')) {
+          link.classList.add('w--current');
+        } else {
+          link.classList.remove('w--current');
+        }
+      }
+    });
+  }
+
+  window.updateAirwinActiveNavLinks = updateAirwinActiveNavLinks;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateAirwinActiveNavLinks);
+  } else {
+    updateAirwinActiveNavLinks();
+  }
+
+  window.addEventListener('popstate', updateAirwinActiveNavLinks);
+  if (window.barba) {
+    try {
+      window.barba.hooks.after(updateAirwinActiveNavLinks);
+      window.barba.hooks.afterEnter(updateAirwinActiveNavLinks);
+    } catch(e) {}
+  }
