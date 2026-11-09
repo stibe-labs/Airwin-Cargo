@@ -116,8 +116,12 @@
 
   // 4. HEADER SCROLL & MOBILE MENU
   function initNavigation() {
-    const header = document.querySelector('.header') || document.querySelector('header');
+    const header = document.getElementById('airwin-main-header') || document.querySelector('header.header') || document.querySelector('.header');
     if (!header) return;
+
+    // Ensure initial visibility and reset hidden state
+    header.classList.remove('nav-hidden');
+    header.classList.add('nav-visible');
 
     let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
     let ticking = false;
@@ -151,13 +155,12 @@
       }
     }, { passive: true });
 
-    // Handle clicks on header links reliably across Barba transitions
+    // Handle clicks smoothly: if clicking link to current page, smooth scroll to top
     header.querySelectorAll('.header-row-nav a, .nav-link-item, .header-tracking-btn, .header-logo-link').forEach((link) => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
         if (!href || href === '#' || href.startsWith('javascript:')) return;
 
-        // If clicking link to current page, smooth scroll to top
         const currentPath = window.location.pathname.toLowerCase();
         const targetHref = href.toLowerCase();
         const isCurrentPage = (
@@ -177,23 +180,19 @@
         if (isCurrentPage) {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: 'smooth' });
-          return;
         }
-
-        // Try Barba navigation if available
-        if (window.barba && typeof window.barba.go === 'function') {
-          try {
-            e.preventDefault();
-            window.barba.go(href);
-            return;
-          } catch (err) {
-            console.warn('Barba navigation fallback:', err);
-          }
-        }
-        // Fallback to direct navigation
-        window.location.href = href;
+        // For other pages: allow standard browser / Barba navigation without interference
       });
     });
+
+    if (window.barba) {
+      try {
+        window.barba.hooks.afterEnter(() => {
+          header.classList.remove('nav-hidden');
+          header.classList.add('nav-visible');
+        });
+      } catch (e) {}
+    }
   }
 
   function initFAQ() {

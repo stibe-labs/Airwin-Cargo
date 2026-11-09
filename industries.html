@@ -371,17 +371,17 @@
 </style>
 <style id="airwin-common-navbar-style">
   /* ========================================================= */
-  /* Global Floating Transparent Navbar with Auto-Hide on Scroll */
+  /* Airwin Common Floating Transparent Navbar with Auto-Hide */
   /* ========================================================= */
-  .header,
   header.header,
-  header.header-inner {
+  #airwin-main-header,
+  .header {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    z-index: 99999 !important;
+    z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
     background: transparent !important;
@@ -392,22 +392,33 @@
     border-bottom: none !important;
     box-shadow: none !important;
     pointer-events: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     transform: translateY(0%) !important;
-    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
   }
 
-  /* Hide on scroll down */
-  .header.nav-hidden,
+  /* Neutralize any Webflow scripts/styles trying to hide or zero-size the header */
+  header.header.on-loader,
+  header.header.on-hide,
+  .header.on-loader,
+  .header.on-hide {
+    opacity: 1 !important;
+  }
+
+  /* Smooth auto-hide on scroll down */
   header.header.nav-hidden,
-  header.header-inner.nav-hidden {
+  #airwin-main-header.nav-hidden,
+  .header.nav-hidden {
     transform: translateY(-110%) !important;
     pointer-events: none !important;
   }
 
-  /* Show on scroll up or top */
-  .header.nav-visible,
+  /* Smooth auto-reveal on scroll up or at top */
   header.header.nav-visible,
-  header.header-inner.nav-visible {
+  #airwin-main-header.nav-visible,
+  .header.nav-visible {
     transform: translateY(0%) !important;
     pointer-events: auto !important;
   }
@@ -683,17 +694,17 @@
 
 <style id="airwin-common-navbar-style">
   /* ========================================================= */
-  /* Global Floating Transparent Navbar with Auto-Hide on Scroll */
+  /* Airwin Common Floating Transparent Navbar with Auto-Hide */
   /* ========================================================= */
-  .header,
   header.header,
-  header.header-inner {
+  #airwin-main-header,
+  .header {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    z-index: 99999 !important;
+    z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
     background: transparent !important;
@@ -704,22 +715,33 @@
     border-bottom: none !important;
     box-shadow: none !important;
     pointer-events: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     transform: translateY(0%) !important;
-    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
   }
 
-  /* Hide on scroll down */
-  .header.nav-hidden,
+  /* Neutralize any Webflow scripts/styles trying to hide or zero-size the header */
+  header.header.on-loader,
+  header.header.on-hide,
+  .header.on-loader,
+  .header.on-hide {
+    opacity: 1 !important;
+  }
+
+  /* Smooth auto-hide on scroll down */
   header.header.nav-hidden,
-  header.header-inner.nav-hidden {
+  #airwin-main-header.nav-hidden,
+  .header.nav-hidden {
     transform: translateY(-110%) !important;
     pointer-events: none !important;
   }
 
-  /* Show on scroll up or top */
-  .header.nav-visible,
+  /* Smooth auto-reveal on scroll up or at top */
   header.header.nav-visible,
-  header.header-inner.nav-visible {
+  #airwin-main-header.nav-visible,
+  .header.nav-visible {
     transform: translateY(0%) !important;
     pointer-events: auto !important;
   }
@@ -888,7 +910,30 @@
     }
   }
 </style>
-</head><body class="body"><div class="component-global"><div class="css-layout embed-css w-embed"><style>
+</head><body class="body">
+<header class="header nav-visible" id="airwin-main-header">
+  <div class="header-inner">
+    <div class="header-row-nav">
+      <a href="/index.html" class="header-logo-link" title="Airwin Logistics">
+        <img src="/airwin_logo.png" alt="Airwin Logistics" class="header-brand-logo" />
+      </a>
+      <nav class="header-nav-links" aria-label="Main Navigation">
+        <a href="/index.html" class="nav-link-item">Home</a>
+        <a href="/about.html" class="nav-link-item">About</a>
+        <a href="/services.html" class="nav-link-item">Services</a>
+        <a href="/insights.html" class="nav-link-item">News &amp; Updates</a>
+        <a href="/careers.html" class="nav-link-item">Career</a>
+        <a href="/contact.html" class="nav-link-item">Contact</a>
+      </nav>
+      <div class="header-nav-actions">
+        <a href="/tracking.html" class="header-tracking-btn">
+          <span>Tracking</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="component-global"><div class="css-layout embed-css w-embed"><style>
   html {
     font-size: 0.57870370373vw;
     height: -webkit-fill-available;
@@ -2128,274 +2173,7 @@
   .trans-bg-mask {
     will-change: width, height;
   }
-</style></div><div class="trans-inner"><div id="w-node-fc2b2965-5e95-df2f-a9ee-2c80696493c4-696493c1" class="trans-bg-clippath"><div class="trans-circs-mask"><div class="trans-circs"><div class="trans-circ anim-wave"></div></div></div><div id="w-node-f2fabc19-a6d0-6025-9be1-f6af2a0be84c-696493c1" class="trans-bg-mask mask-1"></div><div id="w-node-faeede17-1951-5807-95bc-93b8c805dd4c-696493c1" class="trans-bg-mask mask-2"></div><div id="w-node-_23b337a9-e5ef-194e-cd1e-f8c7b71ffe36-696493c1" class="trans-bg-mask mask-3"></div></div></div></div><div class="body-inner"><div class="header"><div data-wf--header--mode="dark" class="header-slot"><div class="embed-css w-embed"><style>
-  .header.on-scroll .header-linkedin {
-    opacity: 1;
-  }
-  .related-news-item .related-news-link {
-    overflow: hidden;
-  }
-  .related-news-item .related-news-title {
-    opacity: 1;
-    transform: translateY(100%);
-  }
-  .related-news-item.active .related-news-title {
-    transform: translateY(0%);
-  }
-  .related-news-item.de-active .related-news-title {
-    transform: translateY(-100%);
-  }
-  .related-news-item.opacity .related-news-title {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  .header.show-menu .header-menu-toggle {
-    pointer-events: none;
-  }
-  .header.on-scroll .header-logo-char {
-    grid-template-columns: auto 0fr;
-  }
-  .header-menu-toggle-dot:nth-child(1) {
-    display: none;
-  }
-  .header-menu-toggle-dot:nth-child(2) {
-    display: none;
-  }
-  .header-menu-toggle-dot:nth-child(3) {
-    opacity: 0.24;
-  }
-  .header-menu-toggle-dot:nth-child(4) {
-    opacity: 0.5;
-  }
-  .header-menu-toggle-dot:nth-child(5) {
-    opacity: 0.7;
-  }
-  .header.on-hide {
-    pointer-events: none;
-  }
-  .header.on-hide {
-    transform: translateY(-101%);
-  }
-  /* .header.on-hide .header-inner {
-    transform: translateY(-101%);
-  } */
-  .header.on-scroll .header-inner {
-    background-color: white;
-    color: #111;
-  }
-
-  .header.on-scroll .header-inner .header-locale {
-    color: rgba(17, 17, 17, 0.72);
-  }
-  .header.on-scroll.on-dark .header-inner {
-    background-color: transparent;
-    color: white;
-  }
-  .header.on-scroll.on-dark .header-inner .header-locale {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  .header.on-scroll:not(.on-dark) .btn {
-    background: var(--_color---m-black);
-    border-color: var(--_color---m-black);
-    color: var(--_color---m-white);
-  }
-  .header.show-menu .header-menu-toggle-wrap {
-    pointer-events: none;
-  }
-  .header.show-menu .header-link {
-    transform: translate(0, 0%);
-  }
-  .header .header-menu-toggle-dots-inner,
-  .header .header-menu-toggle-text-inner {
-    transform: translate(0, 0%);
-  }
-  .header.show-menu .header-menu-toggle-dots-inner,
-  .header.show-menu .header-menu-toggle-text-inner {
-    transform: translate(0, 105%);
-  }
-  .header .header-menu-toggle-dots-inner {
-    opacity: 1;
-  }
-  .header.show-menu .header-menu-toggle-dots-inner {
-    opacity: 0;
-  }
-  .header.show-menu .header-menu-list {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .header-menu.active .header-menu-toggle {
-    color: var(--_color---m-white);
-  }
-  .header-menu.active .header-menu-toggle-menu {
-    opacity: 0;
-  }
-  .header-menu.active .header-menu-toggle-text-close {
-    opacity: 1;
-  }
-  .header-logo-char {
-    transition: grid-template-columns 0.5s ease 0.3s;
-  }
-  .header-logo-char-full {
-    transition: width 0.45s ease 0.3s;
-  }
-  .header.on-scroll .header-logo-char-full {
-    width: 0px;
-  }
-  .header.on-loader{
-    opacity: 0;
-}
-  @media (hover: hover) and (min-width: 992px) {
-    .header.on-scroll:not(.on-dark) .btn:hover {
-      background: var(--_color---secondary);
-      border-color: var(--_color---secondary);
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .header.show-menu .header-menu-toggle {
-      pointer-events: auto;
-    }
-    .header-menu-toggle.active .header-menu-toggle-menu {
-      opacity: 0;
-    }
-    .header-menu-toggle.active .header-menu-toggle-text-close {
-      opacity: 1;
-    }
-    .header.on-scroll .header-inner {
-      padding-top: 1.2rem;
-    }
-    .header.show-menu .header-menu-toggle-wrap {
-      pointer-events: auto;
-    }
-    .header.show-menu .header-menu-toggle,
-    .header .header-menu-toggle {
-      transform: translate(0, 0%);
-    }
-    .header .header-menu-toggle-dots-inner,
-    .header .header-menu-toggle-text-inner,
-    .header.show-menu .header-menu-toggle-dots-inner,
-    .header.show-menu .header-menu-toggle-text-inner {
-      transform: translate(0, 0%);
-    }
-    .header.show-menu .header-menu-toggle-dots-inner,
-    .header .header-menu-toggle-dots-inner {
-      opacity: 1;
-    }
-    .header.on-scroll .header-dropdown-inner {
-      padding-top: 4.8rem;
-    }
-
-    .header.on-open-nav:not(.on-dark) .header-menu-toggle {
-      color: var(--_color---m-white);
-    }
-    .header.on-open-nav:not(.on-dark) .header-dropdown-bot-cta .btn {
-      color: var(--_color---m-black);
-      background-color: var(--_color---m-white);
-    }
-
-    .header-menu-toggle-wrap:has(.header-menu-toggle.active) {
-      transform: translateX(calc((var(--container--one-column) * 2 + var(--container--column-gap) * 2 + 1.2rem) * -1));
-    }
-    .header-inner:has(.header-menu-toggle.active) .header-act {
-      opacity: 0;
-      transition-duration: 0.3s;
-    }
-    .header-dropdown-bot-label-inner,
-    .header-dropdown-bot-link,
-    .header-dropdown-link,
-    .header-btn.hidden-dsk {
-      transform: translateX(5rem);
-      opacity: 0;
-
-      transition:
-        opacity 0.5s,
-        transform 0.6s;
-
-      transition-delay: 0s;
-    }
-    .header-dropdown.active .header-dropdown-bot-label-inner,
-    .header-dropdown.active .header-dropdown-bot-link,
-    .header-dropdown.active .header-dropdown-link,
-    .header-dropdown.active .header-btn.hidden-dsk {
-      transform: translateX(0);
-      opacity: 1;
-
-      transition-delay: var(--delay);
-    }
-    .header-dropdown-line {
-      transform: scale(0);
-      transition: transform 0.4s;
-      transition-delay: 0.03s;
-    }
-    .header-dropdown.active .header-dropdown-line {
-      transform: scale(1);
-    }
-    .header-dropdown-bot-line {
-      transform: scale(0);
-      transition: transform 0.4s;
-      transition-delay: 0.24s;
-    }
-    .header-dropdown.active .header-dropdown-bot-line {
-      transform: scale(1);
-    }
-    .header-dropdown-link:nth-child(1) {
-      --delay: 0s;
-    }
-    .header-dropdown-link:nth-child(2) {
-      --delay: 0.03s;
-    }
-    .header-dropdown-link:nth-child(3) {
-      --delay: 0.06s;
-    }
-    .header-dropdown-link:nth-child(4) {
-      --delay: 0.09s;
-    }
-    .header-dropdown-link:nth-child(5) {
-      --delay: 0.12s;
-    }
-    .header-dropdown-link:nth-child(6) {
-      --delay: 0.15s;
-    }
-    .header-dropdown-link:nth-child(7) {
-      --delay: 0.18s;
-    }
-    .header-dropdown-link:nth-child(8) {
-      --delay: 0.21s;
-    }
-    .header-dropdown-link:nth-child(9) {
-      --delay: 0.24s;
-    }
-    .header-btn.hidden-dsk {
-      --delay: 0.27s;
-    }
-    .header-dropdown-bot-label-inner {
-      --delay: 0.3s;
-    }
-    .header-dropdown-bot-link {
-      --delay: 0.33s;
-    }
-  }
-</style></div><div class="related-news"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_7d83b984-86ad-a7fd-5a9e-957fe7cf7e4a-e7cf7e47" class="related-news-inner"><div class="related-news-cms-wrap"><div class="related-news-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">News:</div></div><div class="related-news-cms w-dyn-list"><div role="list" class="related-news-list w-dyn-items"><div id="w-node-d265b61e-3398-e6ed-8b71-ede64fa5cc7e-e7cf7e47" role="listitem" class="related-news-item w-dyn-item"><a href="/insights/war-widens-in-the-black-sea-in-a-test-of-nato-red-lines" class="related-news-link w-inline-block"><div class="related-news-title"><div class="txt-clamp clamp-1"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">War widens in the Black Sea in a test of NATO red lines</div></div></div></a></div><div id="w-node-d265b61e-3398-e6ed-8b71-ede64fa5cc7e-e7cf7e47" role="listitem" class="related-news-item w-dyn-item"><a href="/insights/cyclone-arnab-disrupts-indias-transport-network-as-severe-weather-threatens-ports-airports-and-rail-services" class="related-news-link w-inline-block"><div class="related-news-title"><div class="txt-clamp clamp-1"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Cyclone Arnab Disrupts India&#x27;s Transport Network as Severe Weather Threatens Ports, Airports and Rail Services</div></div></div></a></div><div id="w-node-d265b61e-3398-e6ed-8b71-ede64fa5cc7e-e7cf7e47" role="listitem" class="related-news-item w-dyn-item"><a href="/insights/government-extends-relief-scheme-as-low-margin-exports-struggle-amid-west-asia-crisis" class="related-news-link w-inline-block"><div class="related-news-title"><div class="txt-clamp clamp-1"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Government extends RELIEF scheme as low-margin exports struggle amid West Asia crisis</div></div></div></a></div></div></div></div><div class="related-news-links"><a data-cursor="hidden" data-link-random="" data-is-btn="" href="https://www.carboncare.org/en/co2-emissions-calculator" target="_blank" class="related-news-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Carbon Calculator</div></a><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><a data-cursor="hidden" data-link-random="" data-is-btn="" href="http://u25prd.webtracker.wisegrid.net/Login/Login.aspx?ReturnUrl=%2fDefault.aspx" target="_blank" class="related-news-link is-last w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Live Tracking Portal</div></a></div></div></div></div><header class="header">
-  <div class="header-inner">
-    <div class="header-row-nav">
-      <a href="./index.html" class="header-logo-link" title="Airwin Logistics">
-        <img src="./airwin_logo.png" alt="Airwin Logistics" class="header-brand-logo" />
-      </a>
-      <nav class="header-nav-links" aria-label="Main Navigation">
-        <a href="./index.html" class="nav-link-item">Home</a>
-        <a href="./about.html" class="nav-link-item">About</a>
-        <a href="./services.html" class="nav-link-item">Services</a>
-        <a href="./insights.html" class="nav-link-item">News &amp; Updates</a>
-        <a href="./careers.html" class="nav-link-item">Career</a>
-        <a href="./contact.html" class="nav-link-item">Contact</a>
-      </nav>
-      <div class="header-nav-actions">
-        <a href="./tracking.html" class="header-tracking-btn">
-          <span>Tracking</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</header></div></div><div data-init-hidden="" data-wf--article-master-layout--variant="listing-page" class="article-layout"><div class="css-embed w-embed"><style>
+</style></div><div class="trans-inner"><div id="w-node-fc2b2965-5e95-df2f-a9ee-2c80696493c4-696493c1" class="trans-bg-clippath"><div class="trans-circs-mask"><div class="trans-circs"><div class="trans-circ anim-wave"></div></div></div><div id="w-node-f2fabc19-a6d0-6025-9be1-f6af2a0be84c-696493c1" class="trans-bg-mask mask-1"></div><div id="w-node-faeede17-1951-5807-95bc-93b8c805dd4c-696493c1" class="trans-bg-mask mask-2"></div><div id="w-node-_23b337a9-e5ef-194e-cd1e-f8c7b71ffe36-696493c1" class="trans-bg-mask mask-3"></div></div></div></div><div class="body-inner"><div data-init-hidden="" data-wf--article-master-layout--variant="listing-page" class="article-layout"><div class="css-embed w-embed"><style>
   .article-layout[data-wf--article-master-layout--variant="listing-page"] .article-breadcrumb{
     pointer-events: none;
   }

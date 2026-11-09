@@ -228,17 +228,17 @@
 </style>
 <style id="airwin-common-navbar-style">
   /* ========================================================= */
-  /* Global Floating Transparent Navbar with Auto-Hide on Scroll */
+  /* Airwin Common Floating Transparent Navbar with Auto-Hide */
   /* ========================================================= */
-  .header,
   header.header,
-  header.header-inner {
+  #airwin-main-header,
+  .header {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    z-index: 99999 !important;
+    z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
     background: transparent !important;
@@ -249,22 +249,33 @@
     border-bottom: none !important;
     box-shadow: none !important;
     pointer-events: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     transform: translateY(0%) !important;
-    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
   }
 
-  /* Hide on scroll down */
-  .header.nav-hidden,
+  /* Neutralize any Webflow scripts/styles trying to hide or zero-size the header */
+  header.header.on-loader,
+  header.header.on-hide,
+  .header.on-loader,
+  .header.on-hide {
+    opacity: 1 !important;
+  }
+
+  /* Smooth auto-hide on scroll down */
   header.header.nav-hidden,
-  header.header-inner.nav-hidden {
+  #airwin-main-header.nav-hidden,
+  .header.nav-hidden {
     transform: translateY(-110%) !important;
     pointer-events: none !important;
   }
 
-  /* Show on scroll up or top */
-  .header.nav-visible,
+  /* Smooth auto-reveal on scroll up or at top */
   header.header.nav-visible,
-  header.header-inner.nav-visible {
+  #airwin-main-header.nav-visible,
+  .header.nav-visible {
     transform: translateY(0%) !important;
     pointer-events: auto !important;
   }
@@ -538,17 +549,17 @@
 
 <style id="airwin-common-navbar-style">
   /* ========================================================= */
-  /* Global Floating Transparent Navbar with Auto-Hide on Scroll */
+  /* Airwin Common Floating Transparent Navbar with Auto-Hide */
   /* ========================================================= */
-  .header,
   header.header,
-  header.header-inner {
+  #airwin-main-header,
+  .header {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    z-index: 99999 !important;
+    z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
     background: transparent !important;
@@ -559,22 +570,33 @@
     border-bottom: none !important;
     box-shadow: none !important;
     pointer-events: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     transform: translateY(0%) !important;
-    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease !important;
   }
 
-  /* Hide on scroll down */
-  .header.nav-hidden,
+  /* Neutralize any Webflow scripts/styles trying to hide or zero-size the header */
+  header.header.on-loader,
+  header.header.on-hide,
+  .header.on-loader,
+  .header.on-hide {
+    opacity: 1 !important;
+  }
+
+  /* Smooth auto-hide on scroll down */
   header.header.nav-hidden,
-  header.header-inner.nav-hidden {
+  #airwin-main-header.nav-hidden,
+  .header.nav-hidden {
     transform: translateY(-110%) !important;
     pointer-events: none !important;
   }
 
-  /* Show on scroll up or top */
-  .header.nav-visible,
+  /* Smooth auto-reveal on scroll up or at top */
   header.header.nav-visible,
-  header.header-inner.nav-visible {
+  #airwin-main-header.nav-visible,
+  .header.nav-visible {
     transform: translateY(0%) !important;
     pointer-events: auto !important;
   }
@@ -743,7 +765,30 @@
     }
   }
 </style>
-</head><body class="body"><div class="component-global"><div class="css-layout embed-css w-embed"><style>
+</head><body class="body">
+<header class="header nav-visible" id="airwin-main-header">
+  <div class="header-inner">
+    <div class="header-row-nav">
+      <a href="/index.html" class="header-logo-link" title="Airwin Logistics">
+        <img src="/airwin_logo.png" alt="Airwin Logistics" class="header-brand-logo" />
+      </a>
+      <nav class="header-nav-links" aria-label="Main Navigation">
+        <a href="/index.html" class="nav-link-item">Home</a>
+        <a href="/about.html" class="nav-link-item">About</a>
+        <a href="/services.html" class="nav-link-item">Services</a>
+        <a href="/insights.html" class="nav-link-item">News &amp; Updates</a>
+        <a href="/careers.html" class="nav-link-item">Career</a>
+        <a href="/contact.html" class="nav-link-item">Contact</a>
+      </nav>
+      <div class="header-nav-actions">
+        <a href="/tracking.html" class="header-tracking-btn">
+          <span>Tracking</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="component-global"><div class="css-layout embed-css w-embed"><style>
   html {
     font-size: 0.57870370373vw;
     height: -webkit-fill-available;
@@ -1983,28 +2028,7 @@
   .trans-bg-mask {
     will-change: width, height;
   }
-</style></div><div class="trans-inner"><div id="w-node-fc2b2965-5e95-df2f-a9ee-2c80696493c4-696493c1" class="trans-bg-clippath"><div class="trans-circs-mask"><div class="trans-circs"><div class="trans-circ anim-wave"></div></div></div><div id="w-node-f2fabc19-a6d0-6025-9be1-f6af2a0be84c-696493c1" class="trans-bg-mask mask-1"></div><div id="w-node-faeede17-1951-5807-95bc-93b8c805dd4c-696493c1" class="trans-bg-mask mask-2"></div><div id="w-node-_23b337a9-e5ef-194e-cd1e-f8c7b71ffe36-696493c1" class="trans-bg-mask mask-3"></div></div></div></div><div class="body-inner"><header class="header">
-  <div class="header-inner">
-    <div class="header-row-nav">
-      <a href="./index.html" class="header-logo-link" title="Airwin Logistics">
-        <img src="./airwin_logo.png" alt="Airwin Logistics" class="header-brand-logo" />
-      </a>
-      <nav class="header-nav-links" aria-label="Main Navigation">
-        <a href="./index.html" class="nav-link-item">Home</a>
-        <a href="./about.html" class="nav-link-item">About</a>
-        <a href="./services.html" class="nav-link-item">Services</a>
-        <a href="./insights.html" class="nav-link-item">News &amp; Updates</a>
-        <a href="./careers.html" class="nav-link-item">Career</a>
-        <a href="./contact.html" class="nav-link-item">Contact</a>
-      </nav>
-      <div class="header-nav-actions">
-        <a href="./tracking.html" class="header-tracking-btn">
-          <span>Tracking</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</header></div></header><div data-init-hidden="" data-wf--article-master-layout--variant="listing-page" class="article-layout"><div class="css-embed w-embed"><style>
+</style></div><div class="trans-inner"><div id="w-node-fc2b2965-5e95-df2f-a9ee-2c80696493c4-696493c1" class="trans-bg-clippath"><div class="trans-circs-mask"><div class="trans-circs"><div class="trans-circ anim-wave"></div></div></div><div id="w-node-f2fabc19-a6d0-6025-9be1-f6af2a0be84c-696493c1" class="trans-bg-mask mask-1"></div><div id="w-node-faeede17-1951-5807-95bc-93b8c805dd4c-696493c1" class="trans-bg-mask mask-2"></div><div id="w-node-_23b337a9-e5ef-194e-cd1e-f8c7b71ffe36-696493c1" class="trans-bg-mask mask-3"></div></div></div></div><div class="body-inner"></div></header><div data-init-hidden="" data-wf--article-master-layout--variant="listing-page" class="article-layout"><div class="css-embed w-embed"><style>
   .article-layout[data-wf--article-master-layout--variant="listing-page"] .article-breadcrumb{
     pointer-events: none;
   }
