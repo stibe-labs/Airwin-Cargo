@@ -119,33 +119,83 @@
     const header = document.querySelector('.header') || document.querySelector('header');
     if (!header) return;
 
+    let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    let ticking = false;
+
+    function handleScroll() {
+      const currentScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const diff = currentScrollY - lastScrollY;
+
+      if (currentScrollY <= 40) {
+        // At the very top: always visible and transparent
+        header.classList.remove('nav-hidden');
+        header.classList.add('nav-visible');
+      } else if (diff > 6 && currentScrollY > 80) {
+        // Scrolling DOWN: smoothly hide navbar
+        header.classList.add('nav-hidden');
+        header.classList.remove('nav-visible');
+      } else if (diff < -6) {
+        // Scrolling UP: smoothly reveal navbar
+        header.classList.remove('nav-hidden');
+        header.classList.add('nav-visible');
+      }
+
+      lastScrollY = Math.max(0, currentScrollY);
+      ticking = false;
+    }
+
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        header.classList.add('on-scroll');
-      } else {
-        header.classList.remove('on-scroll');
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
       }
     }, { passive: true });
 
-    const menuButtons = document.querySelectorAll('.header-menu-btn, .header-menu, [data-menu-toggle]');
-    menuButtons.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        header.classList.toggle('show-menu');
-        const isExpanded = header.classList.contains('show-menu');
-        btn.setAttribute('aria-expanded', isExpanded);
-      });
-    });
+    // Handle clicks on header links reliably across Barba transitions
+    header.querySelectorAll('.header-row-nav a, .nav-link-item, .header-tracking-btn, .header-logo-link').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
 
-    const menuLinks = header.querySelectorAll('.header-menu-nav a, .header-slot a');
-    menuLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        header.classList.remove('show-menu');
+        // If clicking link to current page, smooth scroll to top
+        const currentPath = window.location.pathname.toLowerCase();
+        const targetHref = href.toLowerCase();
+        const isCurrentPage = (
+          (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath === '') && (targetHref.includes('index.html') || targetHref === '/' || targetHref === './')
+        ) || (
+          currentPath.includes('about') && targetHref.includes('about')
+        ) || (
+          currentPath.includes('services') && targetHref.includes('services')
+        ) || (
+          (currentPath.includes('insights') || currentPath.includes('news')) && targetHref.includes('insights')
+        ) || (
+          (currentPath.includes('career') || currentPath.includes('careers')) && targetHref.includes('career')
+        ) || (
+          currentPath.includes('contact') && targetHref.includes('contact')
+        );
+
+        if (isCurrentPage) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        // Try Barba navigation if available
+        if (window.barba && typeof window.barba.go === 'function') {
+          try {
+            e.preventDefault();
+            window.barba.go(href);
+            return;
+          } catch (err) {
+            console.warn('Barba navigation fallback:', err);
+          }
+        }
+        // Fallback to direct navigation
+        window.location.href = href;
       });
     });
   }
 
-  // 5. FAQ ACCORDION
   function initFAQ() {
     const faqItems = document.querySelectorAll('.home-faq-item, .faq-item');
     faqItems.forEach((item) => {
