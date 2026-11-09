@@ -494,6 +494,8 @@
 
 
 
+
+
 <style>
   .about-member-thumb-mask-top {
     --mask-img-top: 0%;
@@ -726,7 +728,9 @@
     top: 0 !important;
     overflow: hidden !important;
     background: #000000 !important;
+    width: 100% !important;
   }
+  /* Full-bleed background spanning entire viewport with zero side gap */
   .about-fea-bg {
     position: absolute !important;
     inset: 0 !important;
@@ -735,6 +739,8 @@
     display: grid !important;
     grid-template-columns: 1fr !important;
     grid-template-rows: 1fr !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
   }
   .about-fea-bg-item {
     grid-column: 1 / 2 !important;
@@ -747,18 +753,23 @@
   .about-fea-bg-item-thumb {
     width: 100% !important;
     height: 100% !important;
+    overflow: hidden !important;
   }
+  /* Base size increased to 1.08 so image starts larger with zero gaps, then GSAP zooms it further on scroll */
   .about-fea-bg-item-thumb img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     object-position: center center !important;
+    transform: scale(1.08) !important;
     transform-origin: center center !important;
   }
   /* Subtle vignette overlay protecting text readability while keeping center vehicle crisp */
   .about-fea-bg-overlay {
     position: absolute !important;
     inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.15) 32%, rgba(0, 0, 0, 0.15) 68%, rgba(0, 0, 0, 0.6) 100%) !important;
     pointer-events: none !important;
     z-index: 2 !important;
@@ -1155,6 +1166,8 @@
 
 
 
+
+
 <style>
   .about-member-thumb-mask-top {
     --mask-img-top: 0%;
@@ -1387,7 +1400,9 @@
     top: 0 !important;
     overflow: hidden !important;
     background: #000000 !important;
+    width: 100% !important;
   }
+  /* Full-bleed background spanning entire viewport with zero side gap */
   .about-fea-bg {
     position: absolute !important;
     inset: 0 !important;
@@ -1396,6 +1411,8 @@
     display: grid !important;
     grid-template-columns: 1fr !important;
     grid-template-rows: 1fr !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
   }
   .about-fea-bg-item {
     grid-column: 1 / 2 !important;
@@ -1408,18 +1425,23 @@
   .about-fea-bg-item-thumb {
     width: 100% !important;
     height: 100% !important;
+    overflow: hidden !important;
   }
+  /* Base size increased to 1.08 so image starts larger with zero gaps, then GSAP zooms it further on scroll */
   .about-fea-bg-item-thumb img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     object-position: center center !important;
+    transform: scale(1.08) !important;
     transform-origin: center center !important;
   }
   /* Subtle vignette overlay protecting text readability while keeping center vehicle crisp */
   .about-fea-bg-overlay {
     position: absolute !important;
     inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.15) 32%, rgba(0, 0, 0, 0.15) 68%, rgba(0, 0, 0, 0.6) 100%) !important;
     pointer-events: none !important;
     z-index: 2 !important;
@@ -2914,29 +2936,30 @@
 <div class="about-fea-wrap">
   <div class="about-fea-empty-block hidden-dsk"></div>
   <section data-section="dark" class="about-fea">
-    <div class="w-layout-blockcontainer container grid full-h w-container">
-      <div class="about-fea-bg-overlay"></div>
-      
-      <!-- Background images container (Center Object Imagery) -->
-      <div class="about-fea-bg">
-        <!-- Item 1: Desert Highway Truck (Mission) -->
-        <div class="about-fea-bg-item">
-          <div class="about-fea-bg-item-thumb">
-            <img src="./images/desert-truck-above.png" loading="eager" alt="Airwin Cargo Fleet Transport" class="img-df img-fill" />
-            <div class="about-fea-bg-item-overlay"></div>
-          </div>
-        </div>
-
-        <!-- Item 2: Airliner in Wispy Blue Skies (Management) -->
-        <div class="about-fea-bg-item">
-          <div class="about-fea-bg-item-thumb">
-            <img src="./images/airliner-blue-skies.png" loading="eager" alt="Airwin Global Air Freight" class="img-df img-fill" />
-            <div class="about-fea-bg-item-overlay"></div>
-          </div>
+    <!-- Background overlay spans full viewport width -->
+    <div class="about-fea-bg-overlay"></div>
+    
+    <!-- Background images container (100vw edge-to-edge, zero side gaps) -->
+    <div class="about-fea-bg">
+      <!-- Item 1: Desert Highway Truck (Mission) -->
+      <div class="about-fea-bg-item">
+        <div class="about-fea-bg-item-thumb">
+          <img src="./images/desert-truck-above.png" loading="eager" alt="Airwin Cargo Fleet Transport" class="img-df img-fill" />
+          <div class="about-fea-bg-item-overlay"></div>
         </div>
       </div>
 
-      <!-- Content (Headings left, Center clear for truck/plane, Content right) -->
+      <!-- Item 2: Airliner in Wispy Blue Skies (Management) -->
+      <div class="about-fea-bg-item">
+        <div class="about-fea-bg-item-thumb">
+          <img src="./images/airliner-blue-skies.png" loading="eager" alt="Airwin Global Air Freight" class="img-df img-fill" />
+          <div class="about-fea-bg-item-overlay"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content inside grid container (Headings left, Center clear for truck/plane, Content right) -->
+    <div class="w-layout-blockcontainer container grid full-h w-container">
       <div class="about-fea-content">
         <div class="about-fea-label">
           <div class="txt">OUR</div>
