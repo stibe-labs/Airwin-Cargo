@@ -46,25 +46,33 @@
     const loader = document.querySelector('.loader');
     const hiddenElements = document.querySelectorAll('[data-init-hidden]');
 
+    if (loader) {
+      if (!loader.querySelector('.airwin-loader-screen')) {
+        const screen = document.createElement('div');
+        screen.className = 'airwin-loader-screen';
+        screen.innerHTML = '<div class="airwin-loader-brand">AIRWIN LOGISTICS</div>';
+        loader.prepend(screen);
+      }
+    }
+
     function revealPage() {
       if (loader) {
-        loader.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        loader.style.opacity = '0';
-        loader.style.pointerEvents = 'none';
+        loader.classList.add('is-dismissed');
         setTimeout(() => {
-          loader.style.display = 'none';
-        }, 600);
+          loader.classList.add('is-hidden');
+          loader.style.setProperty('display', 'none', 'important');
+        }, 550);
       }
       hiddenElements.forEach((el) => {
-        el.style.transition = 'opacity 0.8s ease';
-        el.style.opacity = '1';
+        el.style.setProperty('transition', 'opacity 0.8s ease');
+        el.style.setProperty('opacity', '1', 'important');
         el.style.display = '';
       });
       unlockScroll();
     }
 
     if (loader) {
-      setTimeout(revealPage, 500);
+      setTimeout(revealPage, 600);
     } else {
       revealPage();
     }

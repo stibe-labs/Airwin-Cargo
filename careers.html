@@ -124,6 +124,108 @@
   }
 </style>
 
+<style>
+
+/* ==========================================================================
+   AIRWIN LOGISTICS CLEAN BLACK LOADING SCREEN
+   ========================================================================== */
+.loader {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  background-color: #000000 !important;
+  background: #000000 !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: none !important;
+  border: none !important;
+  overflow: hidden !important;
+  transition: opacity 0.5s ease, visibility 0.5s ease !important;
+}
+
+.loader.is-dismissed,
+.loader.is-loaded {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.loader.is-hidden {
+  display: none !important;
+}
+
+.airwin-loader-screen {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #000000 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 100000 !important;
+  pointer-events: none !important;
+}
+
+.airwin-loader-brand {
+  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif) !important;
+  font-size: clamp(1.2rem, 1.4vw, 1.55rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+  text-align: center !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  line-height: 1 !important;
+  padding: 0 1.5rem !important;
+  animation: airwinLoaderPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes airwinLoaderPulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: scale(0.99);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hide all template animated elements: map, countries, service lists, circular rings */
+.loader-inner,
+.loader-home,
+.loader-page,
+.loader-map,
+.loader-countries,
+.loader-service,
+.loader-progress,
+.loader-circs,
+.loader-circs-mask,
+.loader-circ,
+.loader-bg-mask,
+.loader-logo,
+.loader-bg {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+.trans-circ {
+  display: none !important;
+}
+
+</style>
 </head> tag -->
 <script type="text/javascript">
   (function (e, c) {
@@ -1445,7 +1547,8 @@
       display: none;
     }
   }
-</style></div><div class="w-layout-blockcontainer container grid check w-container"><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186c-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186d-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186e-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186f-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41870-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41871-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41872-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41873-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41874-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41875-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41876-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41877-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41878-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41879-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4187a-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4187b-7cf41864" class="container-column"></div></div></div><div class="cursor-wrap pe-mix-blend"><div class="cursor"><div class="cursor-main"><div class="cursor-ic-wrap"><div class="cursor-ic item-control"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.3032 12.8L7.30322 8.00004L11.3032 3.20002L10.3157 2.40002L5.59988 8.00004L10.3157 13.6L11.3032 12.8Z" fill="currentColor"></path></svg></div></div><div class="cursor-outline"><div class="ic-embed w-embed"><svg viewBox="0 0 60 60" width="100%" class="home-service-pagi-prog"><circle r="28.5" cx="30" cy="30" stroke-width="2" fill="none" stroke="currentColor" stroke-dashoffset="120" stroke-dasharray="189" ></circle></svg></div><div class="cursor-dot"></div></div><div class="cursor-link"><div class="cursor-txt-wrap"><div data-wf--text--text-styles="steinhart" class="txt w-variant-d95cf440-970f-3f2a-7400-9067de38c5ba cursor-hover-txt fs-14 fw-bold">work <br/>with us</div></div></div></div><div class="cursor-trail-item-wrap"><div class="cursor-trail-item"></div></div></div></div></div><div class="loader"><div class="embed-css w-embed"><style>
+</style></div><div class="w-layout-blockcontainer container grid check w-container"><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186c-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186d-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186e-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4186f-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41870-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41871-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41872-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41873-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41874-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41875-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41876-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41877-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41878-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf41879-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4187a-7cf41864" class="container-column"></div><div id="w-node-_88226d1e-b8e8-8576-a51f-9a677cf4187b-7cf41864" class="container-column"></div></div></div><div class="cursor-wrap pe-mix-blend"><div class="cursor"><div class="cursor-main"><div class="cursor-ic-wrap"><div class="cursor-ic item-control"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.3032 12.8L7.30322 8.00004L11.3032 3.20002L10.3157 2.40002L5.59988 8.00004L10.3157 13.6L11.3032 12.8Z" fill="currentColor"></path></svg></div></div><div class="cursor-outline"><div class="ic-embed w-embed"><svg viewBox="0 0 60 60" width="100%" class="home-service-pagi-prog"><circle r="28.5" cx="30" cy="30" stroke-width="2" fill="none" stroke="currentColor" stroke-dashoffset="120" stroke-dasharray="189" ></circle></svg></div><div class="cursor-dot"></div></div><div class="cursor-link"><div class="cursor-txt-wrap"><div data-wf--text--text-styles="steinhart" class="txt w-variant-d95cf440-970f-3f2a-7400-9067de38c5ba cursor-hover-txt fs-14 fw-bold">work <br/>with us</div></div></div></div><div class="cursor-trail-item-wrap"><div class="cursor-trail-item"></div></div></div></div></div><div class="loader">
+  <div class="airwin-loader-screen"><div class="airwin-loader-brand">AIRWIN LOGISTICS</div></div><div class="embed-css w-embed"><style>
   .loader-service-item [data-wf--text--text-styles='mono'],
   .loader-countries-item [data-wf--text--text-styles='mono'] {
     text-box-edge: unset;

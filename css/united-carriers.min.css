@@ -37,3 +37,103 @@ html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-se
   opacity: 1 !important;
   transform: translate(-50%, -50%) scale(1.06) !important;
 }
+
+/* ==========================================================================
+   AIRWIN LOGISTICS CLEAN BLACK LOADING SCREEN
+   ========================================================================== */
+.loader {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  background-color: #000000 !important;
+  background: #000000 !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  opacity: 1;
+  pointer-events: auto;
+  box-shadow: none !important;
+  border: none !important;
+  overflow: hidden !important;
+  transition: opacity 0.5s ease, visibility 0.5s ease !important;
+}
+
+.loader.is-dismissed,
+.loader.is-loaded {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.loader.is-hidden {
+  display: none !important;
+}
+
+.airwin-loader-screen {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #000000 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 100000 !important;
+  pointer-events: none !important;
+}
+
+.airwin-loader-brand {
+  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif) !important;
+  font-size: clamp(1.2rem, 1.4vw, 1.55rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: #FFFFFF !important;
+  text-align: center !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  line-height: 1 !important;
+  padding: 0 1.5rem !important;
+  animation: airwinLoaderPulse 2s ease-in-out infinite !important;
+}
+
+@keyframes airwinLoaderPulse {
+  0%, 100% {
+    opacity: 0.75;
+    transform: scale(0.99);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hide all template animated elements: map, countries, service lists, circular rings */
+.loader-inner,
+.loader-home,
+.loader-page,
+.loader-map,
+.loader-countries,
+.loader-service,
+.loader-progress,
+.loader-circs,
+.loader-circs-mask,
+.loader-circ,
+.loader-bg-mask,
+.loader-logo,
+.loader-bg {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+.trans-circ {
+  display: none !important;
+}
+
