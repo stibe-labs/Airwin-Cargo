@@ -577,11 +577,7 @@
           child.style.setProperty('transform', 'none', 'important');
         });
       }
-      const heroLabel = document.querySelector('.home-hero-label');
-      if (heroLabel) {
-        heroLabel.style.setProperty('opacity', '1', 'important');
-        heroLabel.style.setProperty('visibility', 'visible', 'important');
-      }
+
 
       // 3. Force all partner logos to be visible unconditionally
       const partners = document.querySelectorAll('.home-partners-item');
