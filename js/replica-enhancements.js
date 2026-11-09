@@ -1238,6 +1238,11 @@
   if (window.barba) {
     try {
       window.barba.hooks.after(updateAirwinActiveNavLinks);
-      window.barba.hooks.afterEnter(updateAirwinActiveNavLinks);
+      window.barba.hooks.afterEnter(() => {
+        updateAirwinActiveNavLinks();
+        if (typeof window.initAboutHeroCardsAnimation === 'function') {
+          window.initAboutHeroCardsAnimation();
+        }
+      });
     } catch(e) {}
   }

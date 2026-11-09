@@ -1127,6 +1127,248 @@
     }
   }
 </style>
+<style id="airwin-about-hero-styles">
+  /* ========================================================= */
+  /* About Hero 2-Column Split Layout & Floating Parallax Cards */
+  /* ========================================================= */
+  .about-hero-clean {
+    position: relative !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    box-sizing: border-box !important;
+    padding: 16rem 4rem 10rem !important;
+    overflow: hidden !important;
+  }
+
+  .about-hero-container {
+    max-width: 144rem !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.95fr !important;
+    gap: 6rem !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Left Side: Content & Typography Aligned Left like Home Hero */
+  .about-hero-left {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 2.2rem !important;
+  }
+
+  .about-hero-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  .about-hero-badge-dot {
+    display: inline-block !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    background-color: #0077ee !important;
+  }
+
+  .about-hero-badge-text {
+    font-family: monospace !important;
+    font-size: 1.25rem !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: #0077ee !important;
+    font-weight: 700 !important;
+  }
+
+  .about-hero-title {
+    font-size: clamp(3rem, 4.4vw, 5.2rem) !important;
+    font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    line-height: 1.12 !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    letter-spacing: 0.02em !important;
+    text-align: left !important;
+  }
+
+  .about-hero-desc {
+    font-size: clamp(1.45rem, 1.45vw, 1.85rem) !important;
+    line-height: 1.75 !important;
+    color: #333333 !important;
+    max-width: 62rem !important;
+    margin: 0.4rem 0 0.8rem !important;
+    text-align: left !important;
+  }
+
+  .about-hero-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.8rem !important;
+    margin-top: 0.6rem !important;
+  }
+
+  .about-hero-btn-services {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.2rem 3.4rem !important;
+    background-color: transparent !important;
+    color: #111111 !important;
+    text-decoration: none !important;
+    border: 1.5px solid #111111 !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, border-color 0.25s ease !important;
+    cursor: pointer !important;
+  }
+
+  .about-hero-btn-services:hover {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Right Side: 3 Separate Light Gray Cards */
+  .about-hero-right {
+    position: relative !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .about-cards-wrapper {
+    width: 100% !important;
+    max-width: 530px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.2rem !important;
+    position: relative !important;
+  }
+
+  .about-pillar-card {
+    background-color: #f3f4f7 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 20px !important;
+    padding: 2.6rem 3rem !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease !important;
+    will-change: transform !important;
+    cursor: default !important;
+  }
+
+  .about-pillar-card:hover {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 119, 238, 0.06) !important;
+    border-color: rgba(0, 119, 238, 0.3) !important;
+  }
+
+  /* Subtle horizontal staggering matching home page cards aesthetic */
+  .about-card-1 {
+    width: 95% !important;
+    margin-right: auto !important;
+  }
+
+  .about-card-2 {
+    width: 95% !important;
+    margin-left: auto !important;
+  }
+
+  .about-card-3 {
+    width: 95% !important;
+    margin-right: auto !important;
+    margin-left: 2.5% !important;
+  }
+
+  .about-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .about-card-num {
+    font-family: monospace !important;
+    font-size: 1.25rem !important;
+    color: #0077ee !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .about-card-icon-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background-color: rgba(0, 119, 238, 0.08) !important;
+  }
+
+  .about-card-title {
+    font-size: 1.85rem !important;
+    font-weight: 700 !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.3 !important;
+  }
+
+  .about-card-desc {
+    font-size: 1.4rem !important;
+    line-height: 1.65 !important;
+    color: #555555 !important;
+    margin: 0 !important;
+  }
+
+  @media (max-width: 1024px) {
+    .about-hero-clean {
+      padding: 14rem 3rem 8rem !important;
+    }
+    .about-hero-container {
+      grid-template-columns: 1fr !important;
+      gap: 5rem !important;
+    }
+    .about-hero-desc {
+      max-width: 100% !important;
+    }
+    .about-cards-wrapper {
+      max-width: 100% !important;
+    }
+    .about-card-1,
+    .about-card-2,
+    .about-card-3 {
+      width: 100% !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-hero-clean {
+      padding: 12rem 2rem 6rem !important;
+    }
+    .about-pillar-card {
+      padding: 2rem 2.2rem !important;
+    }
+    .about-card-title {
+      font-size: 1.65rem !important;
+    }
+    .about-card-desc {
+      font-size: 1.3rem !important;
+    }
+  }
+</style>
 </head> tag -->
 <script type="text/javascript">
   (function (e, c) {
@@ -2014,6 +2256,248 @@
     }
     .header-brand-logo {
       height: 2.6rem !important;
+    }
+  }
+</style>
+<style id="airwin-about-hero-styles">
+  /* ========================================================= */
+  /* About Hero 2-Column Split Layout & Floating Parallax Cards */
+  /* ========================================================= */
+  .about-hero-clean {
+    position: relative !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    box-sizing: border-box !important;
+    padding: 16rem 4rem 10rem !important;
+    overflow: hidden !important;
+  }
+
+  .about-hero-container {
+    max-width: 144rem !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.95fr !important;
+    gap: 6rem !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Left Side: Content & Typography Aligned Left like Home Hero */
+  .about-hero-left {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 2.2rem !important;
+  }
+
+  .about-hero-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  .about-hero-badge-dot {
+    display: inline-block !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    background-color: #0077ee !important;
+  }
+
+  .about-hero-badge-text {
+    font-family: monospace !important;
+    font-size: 1.25rem !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: #0077ee !important;
+    font-weight: 700 !important;
+  }
+
+  .about-hero-title {
+    font-size: clamp(3rem, 4.4vw, 5.2rem) !important;
+    font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    line-height: 1.12 !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    letter-spacing: 0.02em !important;
+    text-align: left !important;
+  }
+
+  .about-hero-desc {
+    font-size: clamp(1.45rem, 1.45vw, 1.85rem) !important;
+    line-height: 1.75 !important;
+    color: #333333 !important;
+    max-width: 62rem !important;
+    margin: 0.4rem 0 0.8rem !important;
+    text-align: left !important;
+  }
+
+  .about-hero-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.8rem !important;
+    margin-top: 0.6rem !important;
+  }
+
+  .about-hero-btn-services {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.2rem 3.4rem !important;
+    background-color: transparent !important;
+    color: #111111 !important;
+    text-decoration: none !important;
+    border: 1.5px solid #111111 !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease, border-color 0.25s ease !important;
+    cursor: pointer !important;
+  }
+
+  .about-hero-btn-services:hover {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Right Side: 3 Separate Light Gray Cards */
+  .about-hero-right {
+    position: relative !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .about-cards-wrapper {
+    width: 100% !important;
+    max-width: 530px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.2rem !important;
+    position: relative !important;
+  }
+
+  .about-pillar-card {
+    background-color: #f3f4f7 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 20px !important;
+    padding: 2.6rem 3rem !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease !important;
+    will-change: transform !important;
+    cursor: default !important;
+  }
+
+  .about-pillar-card:hover {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 119, 238, 0.06) !important;
+    border-color: rgba(0, 119, 238, 0.3) !important;
+  }
+
+  /* Subtle horizontal staggering matching home page cards aesthetic */
+  .about-card-1 {
+    width: 95% !important;
+    margin-right: auto !important;
+  }
+
+  .about-card-2 {
+    width: 95% !important;
+    margin-left: auto !important;
+  }
+
+  .about-card-3 {
+    width: 95% !important;
+    margin-right: auto !important;
+    margin-left: 2.5% !important;
+  }
+
+  .about-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .about-card-num {
+    font-family: monospace !important;
+    font-size: 1.25rem !important;
+    color: #0077ee !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .about-card-icon-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background-color: rgba(0, 119, 238, 0.08) !important;
+  }
+
+  .about-card-title {
+    font-size: 1.85rem !important;
+    font-weight: 700 !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    letter-spacing: 0.01em !important;
+    line-height: 1.3 !important;
+  }
+
+  .about-card-desc {
+    font-size: 1.4rem !important;
+    line-height: 1.65 !important;
+    color: #555555 !important;
+    margin: 0 !important;
+  }
+
+  @media (max-width: 1024px) {
+    .about-hero-clean {
+      padding: 14rem 3rem 8rem !important;
+    }
+    .about-hero-container {
+      grid-template-columns: 1fr !important;
+      gap: 5rem !important;
+    }
+    .about-hero-desc {
+      max-width: 100% !important;
+    }
+    .about-cards-wrapper {
+      max-width: 100% !important;
+    }
+    .about-card-1,
+    .about-card-2,
+    .about-card-3 {
+      width: 100% !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-hero-clean {
+      padding: 12rem 2rem 6rem !important;
+    }
+    .about-pillar-card {
+      padding: 2rem 2.2rem !important;
+    }
+    .about-card-title {
+      font-size: 1.65rem !important;
+    }
+    .about-card-desc {
+      font-size: 1.3rem !important;
     }
   }
 </style>
@@ -3329,46 +3813,74 @@
   } */
 </style></div><section class="article-layout-block"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-b84a2613-623e-f1e0-e973-f3654bba759c-6fa9cebb" class="article-hero"><div class="article-title-wrap"><div class="article-hero-title"><h2 class="heading h1 h2-mb">Insights</h2></div><div class="article-hero-label"><div class="heading h4 h5-mb">(12)</div></div></div><div class="article-breadcrumb"><div class="article-breadcrumb-item"><a data-link-random="" data-cursor="hidden" href="./index.html" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Home</div></a></div><div class="article-breadcrumb-item"><a data-link-random="" article-breadcrumb-ins="" data-cursor="hidden" href="./insights.html" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">Insights</div></a></div><div class="article-breadcrumb-item"><div data-breadcrumb-type="" class="article-breadcrumb-link"><div data-article-sub-cate="" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb"></div></div></div><div class="article-breadcrumb-item"><a data-cursor="hidden" data-breadcrumb-cate="" data-link-random="" href="#" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">Insights</div></a></div></div></div><div id="w-node-_070d8942-acc5-13b8-8525-c2936fa9ced7-6fa9cebb" class="line hidden-mb"></div><div id="w-node-_070d8942-acc5-13b8-8525-c2936fa9ced8-6fa9cebb" class="article-tab"><div class="article-tab-title"><h3 class="heading h6 hidden-mb">Categories</h3><div class="article-tab-title-mb hidden-dsk"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10-mb">CATEGORIES</div></div><div class="article-tab-title-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 8 8" fill="none" class="svg"><path d="M0.75 2L3.75 5L6.75 2" stroke="currentColor"></path></svg></div></div><div class="line"></div><div data-lenis-prevent="" class="article-tab-main-wrap"><div class="article-tab-main"><div class="article-tab-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">articles</div></div><div class="article-tab-cms w-dyn-list"><div role="list" class="article-tab-list w-dyn-items"><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/featured" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Featured</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/company-news" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company News</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/industry-news" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Industry News</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/case-studies" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Case Studies</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/company-updates" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company Updates</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/announcements" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Market Updates</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div><div class="article-tab-main"><div class="article-tab-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">AI news</div></div><div class="article-tab-cms w-dyn-list"><div role="list" class="article-tab-list w-dyn-items"><div data-cursor="hidden" data-category="Global" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/global" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Global</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Europe" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/europe" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Europe</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Rest of World" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/rest-of-world-d2yv8" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Rest of World</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Middle East &amp; Africa " data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/middle-east-africa" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Middle East &amp; Africa </div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Asia" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/asia" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Asia</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Americas" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/americas" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Americas</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Asia Pacific" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/asia-pacific" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Asia Pacific</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Company Update" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/company-update" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company Update</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div><div class="article-tab-main"><div class="article-tab-label"><a href="/linkedin" class="w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">SOCIAL updates</div></a></div><div data-cursor="hidden" data-category="Linkedin" data-type="SOCIAL updates" class="article-tab-item"><a data-cursor="hidden" data-link-random="" href="/linkedin" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Linkedin</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div></div><div class="hidden"><div class="insight-counter w-dyn-list"><div role="list" class="w-dyn-items"><div data-type="AI news" data-category="Europe" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Middle East &amp; Africa " role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Market Updates" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Market Updates" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div></div></div><div class="insight-counter w-dyn-list"><div role="list" class="w-dyn-items"><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div></div></div></div></section></div><main data-barba="wrapper" class="main"><div data-header="light" data-barba="container" data-barba-namespace="about" class="main-inner">
 
-<section class="about-hero-clean" style="padding: 16rem 4rem 10rem; max-width: 140rem; margin: 0 auto; box-sizing: border-box;">
-  <div style="display: flex; flex-direction: column; gap: 2.4rem;">
-    <div style="display: inline-flex; align-items: center; gap: 1rem;">
-      <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #0077ee;"></span>
-      <span style="font-family: monospace; font-size: 1.3rem; letter-spacing: 0.18em; text-transform: uppercase; color: #0077ee; font-weight: 700;">ABOUT AIRWIN LOGISTICS</span>
-    </div>
-    <h1 style="font-size: clamp(3rem, 4.8vw, 5.4rem); font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif); font-weight: 700; text-transform: uppercase; line-height: 1.12; color: #111111; margin: 0; letter-spacing: 0.02em;">
-      GLOBAL FREIGHT FORWARDING &amp; CARGO SOLUTION PROVIDERS
-    </h1>
-    <p style="font-size: clamp(1.5rem, 1.6vw, 1.95rem); line-height: 1.75; color: #333333; max-width: 96rem; margin: 0.5rem 0 1.5rem;">
-      Airwin Logistics is a distinguished cargo forwarding and courier distribution company operating with excellence globally established in 2001. With more than two decades of proven experience, we offer a comprehensive range of services including Sea Freight, Air Freight, Land Transport, Courier, Warehousing, Packing, Forwarding, and value-added supply chain services. Our commitment to exceptional service has made us a leader in both international and domestic logistics.
-    </p>
+<section class="about-hero-clean" id="about-hero-section">
+  <div class="about-hero-container">
+    
+    <!-- Left Column: Aligned Left, Exact Heading & Fonts -->
+    <div class="about-hero-left">
+      <div class="about-hero-badge">
+        <span class="about-hero-badge-dot"></span>
+        <span class="about-hero-badge-text">ABOUT AIRWIN LOGISTICS</span>
+      </div>
+      
+      <h1 class="about-hero-title">
+        GLOBAL FREIGHT FORWARDING &amp; CARGO SOLUTION PROVIDERS
+      </h1>
+      
+      <p class="about-hero-desc">
+        Airwin Logistics is a distinguished cargo forwarding and courier distribution company operating with excellence globally established in 2001. With more than two decades of proven experience, we offer a comprehensive range of services including Sea Freight, Air Freight, Land Transport, Courier, Warehousing, Packing, Forwarding, and value-added supply chain services. Our commitment to exceptional service has made us a leader in both international and domestic logistics.
+      </p>
 
-    <!-- Key Company Pillars from airwincargo.com/about -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; margin: 2rem 0;">
-      <div style="border-top: 2px solid #0077ee; padding-top: 1.5rem;">
-        <div style="font-family: monospace; font-size: 1.2rem; color: #0077ee; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;">01 / NETWORK &amp; REACH</div>
-        <div style="font-size: 1.6rem; font-weight: 700; color: #111111; margin-bottom: 0.6rem;">200+ Global Trade Destinations</div>
-        <div style="font-size: 1.35rem; line-height: 1.6; color: #666666;">Operating across India, UAE Dubai Hub, GCC, Asia-Pacific, Europe, and the Americas.</div>
-      </div>
-      <div style="border-top: 2px solid #0077ee; padding-top: 1.5rem;">
-        <div style="font-family: monospace; font-size: 1.2rem; color: #0077ee; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;">02 / MULTIMODAL CAPABILITY</div>
-        <div style="font-size: 1.6rem; font-weight: 700; color: #111111; margin-bottom: 0.6rem;">Air, Ocean &amp; Land Transport</div>
-        <div style="font-size: 1.35rem; line-height: 1.6; color: #666666;">Full container load, consolidated air cargo, express courier distribution, and heavy surface trucking.</div>
-      </div>
-      <div style="border-top: 2px solid #0077ee; padding-top: 1.5rem;">
-        <div style="font-family: monospace; font-size: 1.2rem; color: #0077ee; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;">03 / OPERATIONAL INTEGRITY</div>
-        <div style="font-size: 1.6rem; font-weight: 700; color: #111111; margin-bottom: 0.6rem;">Accountable &amp; On-Time Delivery</div>
-        <div style="font-size: 1.35rem; line-height: 1.6; color: #666666;">Clear and honest communications with dedicated single-point account managers for every shipment.</div>
+      <div class="about-hero-actions">
+        <a href="/services.html" class="about-hero-btn-services">
+          <span>Our Services</span>
+        </a>
       </div>
     </div>
 
-    <div style="display: flex; gap: 1.8rem; flex-wrap: wrap; margin-top: 1rem;">
-      <a href="./contact.html" style="display: inline-flex; align-items: center; justify-content: center; padding: 1.2rem 3.2rem; background-color: #0077ee; color: #ffffff; text-decoration: none; border-radius: 9999px; font-weight: 600; font-size: 1.35rem; letter-spacing: 0.04em; text-transform: uppercase; box-shadow: 0 4px 14px rgba(0, 119, 238, 0.4);">
-        Work With Us
-      </a>
-      <a href="./services.html" style="display: inline-flex; align-items: center; justify-content: center; padding: 1.2rem 3.2rem; background-color: transparent; color: #111111; text-decoration: none; border: 1px solid rgba(0,0,0,0.2); border-radius: 9999px; font-weight: 600; font-size: 1.35rem; letter-spacing: 0.04em; text-transform: uppercase;">
-        Our Services
-      </a>
+    <!-- Right Column: 3 Separate Light Gray Cards with Floating Parallax Scroll Animation -->
+    <div class="about-hero-right">
+      <div class="about-cards-wrapper" id="about-cards-stage">
+        
+        <!-- Card 1 -->
+        <div class="about-pillar-card about-card-1" id="about-card-1">
+          <div class="about-card-header">
+            <span class="about-card-num">01 / NETWORK &amp; REACH</span>
+            <span class="about-card-icon-pill">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0077ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </span>
+          </div>
+          <h3 class="about-card-title">200+ Global Trade Destinations</h3>
+          <p class="about-card-desc">Operating across India, UAE Dubai Hub, GCC, Asia-Pacific, Europe, and the Americas.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="about-pillar-card about-card-2" id="about-card-2">
+          <div class="about-card-header">
+            <span class="about-card-num">02 / MULTIMODAL CAPABILITY</span>
+            <span class="about-card-icon-pill">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0077ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+            </span>
+          </div>
+          <h3 class="about-card-title">Air, Ocean &amp; Land Transport</h3>
+          <p class="about-card-desc">Full container load, consolidated air cargo, express courier distribution, and heavy surface trucking.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="about-pillar-card about-card-3" id="about-card-3">
+          <div class="about-card-header">
+            <span class="about-card-num">03 / OPERATIONAL INTEGRITY</span>
+            <span class="about-card-icon-pill">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0077ee" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            </span>
+          </div>
+          <h3 class="about-card-title">Accountable &amp; On-Time Delivery</h3>
+          <p class="about-card-desc">Clear and honest communications with dedicated single-point account managers for every shipment.</p>
+        </div>
+
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -4076,4 +4588,75 @@
   }
 </script>
 
+<script id="airwin-about-cards-animation-script">
+  function initAboutHeroCardsAnimation() {
+    const hero = document.getElementById('about-hero-section');
+    const card1 = document.getElementById('about-card-1');
+    const card2 = document.getElementById('about-card-2');
+    const card3 = document.getElementById('about-card-3');
+    if (!hero || !card1 || !card2 || !card3) return;
+
+    let ticking = false;
+
+    function updateParallax() {
+      if (window.innerWidth <= 1024) {
+        card1.style.transform = '';
+        card2.style.transform = '';
+        card3.style.transform = '';
+        ticking = false;
+        return;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      
+      // Calculate scroll progress through hero section
+      if (rect.bottom > 0 && rect.top < windowHeight) {
+        const progress = Math.max(0, Math.min(1.2, -rect.top / (rect.height * 0.9 || 600)));
+        
+        // Card 1: glides upward and tilts left
+        const y1 = progress * -55;
+        const r1 = progress * -2.2;
+        card1.style.transform = `translate3d(0, ${y1}px, 0) rotate(${r1}deg)`;
+
+        // Card 2: glides downward and shifts slightly right
+        const y2 = progress * 42;
+        const x2 = progress * 16;
+        const r2 = progress * 1.8;
+        card2.style.transform = `translate3d(${x2}px, ${y2}px, 0) rotate(${r2}deg)`;
+
+        // Card 3: glides upward at steady pace
+        const y3 = progress * -35;
+        const x3 = progress * -8;
+        const r3 = progress * -1.2;
+        card3.style.transform = `translate3d(${x3}px, ${y3}px, 0) rotate(${r3}deg)`;
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    });
+
+    updateParallax();
+  }
+
+  window.initAboutHeroCardsAnimation = initAboutHeroCardsAnimation;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutHeroCardsAnimation);
+  } else {
+    initAboutHeroCardsAnimation();
+  }
+</script>
 </body></html>
