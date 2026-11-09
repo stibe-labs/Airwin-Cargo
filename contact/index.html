@@ -208,6 +208,28 @@
 </style>
 
 <style id="airwin-contact-footer-style">
+  .footer-wrap,
+  .footer {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #FFFFFF !important;
+  }
+  .footer-bot .line {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  .footer-copyright-text,
+  .footer-copyright-text .txt {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .footer-legal-link,
+  .footer-legal-link .txt {
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: color 0.2s ease !important;
+  }
+  .footer-legal-link:hover,
+  .footer-legal-link:hover .txt {
+    color: #0016CB !important;
+  }
   .airwin-wordmark-wrap {
     width: 100%;
     margin-top: clamp(2.5rem, 4.5vw, 4.5rem);
@@ -236,7 +258,7 @@
     letter-spacing: -0.04em;
     gap: clamp(1.8rem, 4.2vw, 4.5rem);
     text-transform: uppercase;
-    color: #111111;
+    color: #FFFFFF !important;
   }
   .airwin-wordmark-word {
     display: inline-flex;
@@ -249,7 +271,7 @@
   }
   .airwin-wordmark-char {
     display: inline-block;
-    color: #111111;
+    color: #FFFFFF !important;
     margin: 0 0.02em;
     transition: color 0.25s ease, transform 0.25s ease;
     will-change: color, transform;
@@ -366,6 +388,28 @@
 </style>
 
 <style id="airwin-contact-footer-style">
+  .footer-wrap,
+  .footer {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #FFFFFF !important;
+  }
+  .footer-bot .line {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  .footer-copyright-text,
+  .footer-copyright-text .txt {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .footer-legal-link,
+  .footer-legal-link .txt {
+    color: rgba(255, 255, 255, 0.6) !important;
+    transition: color 0.2s ease !important;
+  }
+  .footer-legal-link:hover,
+  .footer-legal-link:hover .txt {
+    color: #0016CB !important;
+  }
   .airwin-wordmark-wrap {
     width: 100%;
     margin-top: clamp(2.5rem, 4.5vw, 4.5rem);
@@ -394,7 +438,7 @@
     letter-spacing: -0.04em;
     gap: clamp(1.8rem, 4.2vw, 4.5rem);
     text-transform: uppercase;
-    color: #111111;
+    color: #FFFFFF !important;
   }
   .airwin-wordmark-word {
     display: inline-flex;
@@ -407,7 +451,7 @@
   }
   .airwin-wordmark-char {
     display: inline-block;
-    color: #111111;
+    color: #FFFFFF !important;
     margin: 0 0.02em;
     transition: color 0.25s ease, transform 0.25s ease;
     will-change: color, transform;
@@ -2339,56 +2383,59 @@
     <script src="./js/replica-enhancements.js"></script>
     
 <script id="airwin-common-footer-script">
-  (function initAirwinFooterWordmark() {
-    function setup() {
-      const wrap = document.querySelector('.airwin-wordmark-wrap');
-      if (!wrap) return;
-      const chars = wrap.querySelectorAll('.airwin-wordmark-char');
-      if (!chars.length) return;
+  function initAirwinFooterWordmark() {
+    const wrap = document.querySelector('.airwin-wordmark-wrap');
+    if (!wrap) return;
+    if (wrap.dataset.wordmarkBound === 'true') return;
+    wrap.dataset.wordmarkBound = 'true';
+    const chars = wrap.querySelectorAll('.airwin-wordmark-char');
+    if (!chars.length) return;
 
-      wrap.addEventListener('mousemove', function(e) {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
+    wrap.addEventListener('mousemove', function(e) {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
 
-        chars.forEach(function(char) {
-          const rect = char.getBoundingClientRect();
-          const charCenterX = rect.left + rect.width / 2;
-          const charCenterY = rect.top + rect.height / 2;
-          const dist = Math.hypot(mouseX - charCenterX, mouseY - charCenterY);
+      chars.forEach(function(char) {
+        const rect = char.getBoundingClientRect();
+        const charCenterX = rect.left + rect.width / 2;
+        const charCenterY = rect.top + rect.height / 2;
+        const dist = Math.hypot(mouseX - charCenterX, mouseY - charCenterY);
 
-          const radius = Math.max(120, rect.width * 1.5);
-          if (dist < radius) {
-            char.style.setProperty('color', '#0016CB', 'important');
-            const lift = Math.max(0, (1 - dist / radius) * 4);
-            char.style.transform = 'translateY(-' + lift + 'px)';
-          } else {
-            char.style.removeProperty('color');
-            char.style.transform = '';
-          }
-        });
-      });
-
-      wrap.addEventListener('mouseleave', function() {
-        chars.forEach(function(char) {
+        const radius = Math.max(120, rect.width * 1.5);
+        if (dist < radius) {
+          char.style.setProperty('color', '#0016CB', 'important');
+          const lift = Math.max(0, (1 - dist / radius) * 4);
+          char.style.transform = 'translateY(-' + lift + 'px)';
+        } else {
           char.style.removeProperty('color');
           char.style.transform = '';
-        });
+        }
       });
+    });
 
-      const link = wrap.querySelector('.airwin-wordmark-link');
-      if (link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    }
+    wrap.addEventListener('mouseleave', function() {
+      chars.forEach(function(char) {
+        char.style.removeProperty('color');
+        char.style.transform = '';
+      });
+    });
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setup);
-    } else {
-      setup();
+    const link = wrap.querySelector('.airwin-wordmark-link');
+    if (link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     }
-  })();
+  }
+
+  window.initAirwinFooterWordmark = initAirwinFooterWordmark;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAirwinFooterWordmark);
+  } else {
+    initAirwinFooterWordmark();
+  }
 </script>
+
 </body></html>
