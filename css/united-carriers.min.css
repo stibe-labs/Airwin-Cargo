@@ -137,3 +137,9 @@ html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-se
   display: none !important;
 }
 
+
+/* Hide footer on temporarily unavailable pages */
+body:has(.unavailable-viewport) .footer-wrap,
+body:has(.unavailable-viewport) footer {
+  display: none !important;
+}
