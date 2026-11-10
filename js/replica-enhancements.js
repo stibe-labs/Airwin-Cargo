@@ -34,8 +34,7 @@
 
     // Trigger ScrollTrigger update / Lenis resize without tearing down section animations
     if (window.ScrollTrigger) {
-      try { window.ScrollTrigger.refresh();
-        initHeroVideoScrollAnimation(); } catch (e) {}
+      try { window.ScrollTrigger.refresh(); } catch (e) {}
     }
     if (window.lenis) {
       try { window.lenis.resize(); } catch (e) {}
@@ -696,6 +695,12 @@
           try { window.initContainersShader(); } catch (e) {}
         }
       }
+      // 5c. Re-initialize Hero Video Scroll Animation (services page container loading)
+      if (document.getElementById('airwin-hero-canvas')) {
+        if (typeof window.initHeroVideoScrollAnimation === 'function') {
+          try { window.initHeroVideoScrollAnimation(); } catch (e) {}
+        }
+      }
       // Guarantee home service icons are visible
       document.querySelectorAll('.home-service-item-ic').forEach(el => {
         el.style.setProperty('opacity', '1', 'important');
@@ -732,8 +737,7 @@
 
       // 8. Refresh GSAP ScrollTrigger if available (safely without destructive window.resize)
       if (window.ScrollTrigger) {
-        try { window.ScrollTrigger.refresh();
-        initHeroVideoScrollAnimation(); } catch (e) {}
+        try { window.ScrollTrigger.refresh(); } catch (e) {}
       }
 
       // 9. Refresh Lenis smooth scroll if available
@@ -789,12 +793,23 @@
   }
 
   
-  // 12. HERO VIDEO SCROLL ANIMATION (CONTAINER LOADING ONTO TRUCK)
-  function initHeroVideoScrollAnimation() {
+  // =========================================================
+  // HERO VIDEO SCROLL ANIMATION (CONTAINER LOADING ONTO TRUCK)
+  // Non-blocking, frame-by-frame scrub without layout thrashing
+  // =========================================================
+  window.initHeroVideoScrollAnimation = function initHeroVideoScrollAnimation() {
     const canvas = document.getElementById('airwin-hero-canvas');
     if (!canvas) return;
-    if (canvas.dataset.initialized === 'true') return;
-    canvas.dataset.initialized = 'true';
+    if (canvas.dataset.heroVidInit === 'true') {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+        canvas.width = w;
+        canvas.height = h;
+      }
+      return;
+    }
+    canvas.dataset.heroVidInit = 'true';
 
     const ctx = canvas.getContext('2d');
     const totalFrames = 118;
@@ -807,22 +822,29 @@
     const images = [];
     let currentFrame = 0;
     let targetFrame = 0;
+    let lastRenderedFrame = -1;
 
     function resizeCanvas() {
-      const parent = canvas.parentElement || canvas.closest('.service-hero') || window;
-      canvas.width = parent.offsetWidth || window.innerWidth;
-      canvas.height = parent.offsetHeight || window.innerHeight;
-      drawFrame(Math.round(currentFrame));
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
+        canvas.width = w;
+        canvas.height = h;
+        lastRenderedFrame = -1;
+        drawFrame(Math.round(currentFrame));
+      }
     }
-    window.addEventListener('resize', resizeCanvas, { passive: true });
 
     function drawFrame(idx) {
       const frameIdx = Math.max(0, Math.min(totalFrames - 1, idx));
-      const img = images[frameIdx];
+      let img = images[frameIdx];
+      if (!img || !img.complete || img.naturalWidth === 0) {
+        img = images[0];
+      }
       if (!img || !img.complete || img.naturalWidth === 0) return;
 
-      const w = canvas.width;
-      const h = canvas.height;
+      const w = canvas.width || window.innerWidth;
+      const h = canvas.height || window.innerHeight;
       const imgW = img.naturalWidth;
       const imgH = img.naturalHeight;
 
@@ -845,49 +867,50 @@
       drawFrame(0);
     };
 
-    // Preload remaining frames
+    // Preload remaining frames in background
     for (let i = 1; i < totalFrames; i++) {
       const img = new Image();
       img.src = framePaths[i];
       images[i] = img;
     }
 
+    function updateProgress() {
+      const heroWrap = document.querySelector('.service-hero-wrap') || document.querySelector('.service-hero');
+      const maxScroll = heroWrap ? (heroWrap.offsetHeight || window.innerHeight * 1.2) : (window.innerHeight * 1.2);
+      const sy = (window.lenis && typeof window.lenis.scroll === 'number')
+        ? window.lenis.scroll
+        : (window.scrollY || window.pageYOffset || 0);
+      const progress = Math.min(1, Math.max(0, sy / maxScroll));
+      targetFrame = progress * (totalFrames - 1);
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', () => { resizeCanvas(); updateProgress(); }, { passive: true });
+
     // Smooth render loop
-    let isRunning = true;
     function renderLoop() {
-      if (Math.abs(targetFrame - currentFrame) > 0.04) {
-        currentFrame += (targetFrame - currentFrame) * 0.22;
-        drawFrame(Math.round(currentFrame));
+      if (!document.getElementById('airwin-hero-canvas')) return;
+      if (canvas.width <= 300 || canvas.height <= 150) {
+        resizeCanvas();
       }
-      if (isRunning) requestAnimationFrame(renderLoop);
+      updateProgress();
+      if (Math.abs(targetFrame - currentFrame) > 0.01) {
+        currentFrame += (targetFrame - currentFrame) * 0.28;
+      } else {
+        currentFrame = targetFrame;
+      }
+      const rounded = Math.round(currentFrame);
+      if (rounded !== lastRenderedFrame) {
+        lastRenderedFrame = rounded;
+        drawFrame(rounded);
+      }
+      requestAnimationFrame(renderLoop);
     }
     requestAnimationFrame(renderLoop);
 
-    function setupScrollTrigger() {
-      if (typeof window.ScrollTrigger === 'undefined' || typeof window.gsap === 'undefined') {
-        setTimeout(setupScrollTrigger, 100);
-        return;
-      }
-
-      const heroWrap = document.querySelector('.service-hero-wrap');
-      if (!heroWrap) return;
-
-      window.ScrollTrigger.create({
-        trigger: heroWrap,
-        start: 'top top',
-        end: '+=160%',
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.6,
-        anticipatePin: 1,
-        onUpdate: function(self) {
-          targetFrame = self.progress * (totalFrames - 1);
-        }
-      });
-    }
-
-    setupScrollTrigger();
-  }
+    resizeCanvas();
+    updateProgress();
+  };
 
   function init() {
     initDynamicSpeedometer();
@@ -898,7 +921,7 @@
     initFAQ();
     initModals();
     initScrollResilience();
-    initHeroVideoScrollAnimation();
+    window.initHeroVideoScrollAnimation();
     setTimeout(unlockScroll, 200);
     setTimeout(unlockScroll, 800);
   }
@@ -1346,6 +1369,9 @@
         updateAirwinActiveNavLinks();
         if (typeof window.initAboutHeroCardsAnimation === 'function') {
           window.initAboutHeroCardsAnimation();
+        }
+        if (typeof window.initHeroVideoScrollAnimation === 'function') {
+          window.initHeroVideoScrollAnimation();
         }
       });
     } catch(e) {}
