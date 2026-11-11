@@ -2225,245 +2225,674 @@
   .trans-bg-mask {
     will-change: width, height;
   }
-</style></div><div class="trans-inner"><div id="w-node-fc2b2965-5e95-df2f-a9ee-2c80696493c4-696493c1" class="trans-bg-clippath"><div class="trans-circs-mask"><div class="trans-circs"><div class="trans-circ anim-wave"></div></div></div><div id="w-node-f2fabc19-a6d0-6025-9be1-f6af2a0be84c-696493c1" class="trans-bg-mask mask-1"></div><div id="w-node-faeede17-1951-5807-95bc-93b8c805dd4c-696493c1" class="trans-bg-mask mask-2"></div><div id="w-node-_23b337a9-e5ef-194e-cd1e-f8c7b71ffe36-696493c1" class="trans-bg-mask mask-3"></div></div></div></div><div class="body-inner"></div></header><div data-init-hidden="" data-wf--article-master-layout--variant="listing-page" class="article-layout"><div class="css-embed w-embed"><style>
-  .article-layout[data-wf--article-master-layout--variant="listing-page"] .article-breadcrumb{
-    pointer-events: none;
+</style></div><div class="trans-inner"><div id="w-node-fc2b2965-5e95-df2f-a9ee-2c80696493c4-696493c1" class="trans-bg-clippath"><div class="trans-circs-mask"><div class="trans-circs"><div class="trans-circ anim-wave"></div></div></div><div id="w-node-f2fabc19-a6d0-6025-9be1-f6af2a0be84c-696493c1" class="trans-bg-mask mask-1"></div><div id="w-node-faeede17-1951-5807-95bc-93b8c805dd4c-696493c1" class="trans-bg-mask mask-2"></div><div id="w-node-_23b337a9-e5ef-194e-cd1e-f8c7b71ffe36-696493c1" class="trans-bg-mask mask-3"></div></div></div></div><div class="body-inner"></div></header><!-- ========================================================= -->
+<!-- AIRWIN NEWS & UPDATES - EDITORIAL SHOWCASE                -->
+<!-- Exact Homepage Blog Card Aesthetics - Compact Sizing      -->
+<!-- ========================================================= -->
+<style id="airwin-news-page-style">
+  .airwin-news-page-wrap {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+    min-height: 80vh;
+    padding-top: clamp(6.5rem, 9vw, 8.5rem);
+    padding-bottom: clamp(4rem, 6vw, 6rem);
+    overflow: hidden;
   }
-  .article-breadcrumb .article-breadcrumb-item:not(:first-child):before {
-    content: '/';
-    font-family: var(--font--button);
-    margin-right: 1rem;
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.4;
-    pointer-events: none;
-    color: var(--_color---content--disable);
+
+  .airwin-news-hero {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 4vw, 3.5rem);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
-  .article-tab-item-link.w--current .article-tab-item-sub {
-    color: var(--_color---content--main);
+
+  .airwin-news-eyebrow {
+    font-family: 'BT Steinhart Mono', monospace, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0066cc;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
-  .article-layout ~ .main:has([data-barba-namespace='article']) {
-    z-index: 0;
-    background-color: transparent;
+
+  .news-eyebrow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0066cc;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 102, 204, 0.5);
   }
-  /*.article-layout ~ .main:has([data-barba-namespace=article]),
-.article-layout ~ .main .main-inner[data-barba-namespace=article] {
-  pointer-events: none;
-}*/
-  .article-layout[data-wf--article-master-layout--variant='detail-page'] .article-hero-label {
+
+  .airwin-news-hero-title {
+    font-family: 'BT Steinhart', Arial, sans-serif;
+    font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: #111111;
+    text-transform: uppercase;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .airwin-news-hero-desc {
+    font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+    line-height: 1.6;
+    color: #4a5568;
+    max-width: 680px;
+    margin: 0;
+  }
+
+  /* News Grid Container */
+  .airwin-news-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 4vw, 3.5rem) clamp(1.25rem, 4vw, 3rem) 0;
+  }
+
+  .airwin-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 2vw, 2rem);
+  }
+
+  @media (max-width: 1024px) {
+    .airwin-news-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .airwin-news-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* News Card - Compact Edition of Homepage Blog Card */
+  .airwin-news-card {
+    position: relative;
+    min-height: 420px;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #f6f7f9;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.45s ease;
+  }
+
+  .airwin-news-card:hover {
+    transform: translateY(-6px);
+    border-color: transparent;
+    box-shadow: 0 24px 48px -10px rgba(0, 0, 0, 0.32);
+  }
+
+  .airwin-news-card-link {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    z-index: 2;
+  }
+
+  /* Background Image Wrap */
+  .airwin-news-card-bg-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    background: #f6f7f9;
+  }
+
+  /* Soft Faded at rest -> Vivid on hover */
+  .airwin-news-card-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    opacity: 0.18;
+    color: transparent;
+    filter: grayscale(70%) contrast(105%);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .airwin-news-card:hover .airwin-news-card-bg-img {
     opacity: 1;
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.07);
   }
-  .article-layout[data-wf--article-master-layout--variant='listing-page'] .article-breadcrumb {
+
+  /* Light Overlay Wash (Active Before Hover) */
+  .airwin-news-card-overlay-light {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(246, 247, 249, 0.35) 0%,
+      rgba(246, 247, 249, 0.75) 50%,
+      rgba(246, 247, 249, 0.98) 100%
+    );
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+  }
+
+  .airwin-news-card:hover .airwin-news-card-overlay-light {
     opacity: 0;
   }
-  .article-layout[data-wf--article-master-layout--variant='detail-page'] .article-breadcrumb {
+
+  /* Dark Cinematic Overlay (Active On Hover) */
+  .airwin-news-card-overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 12, 18, 0.52) 0%,
+      rgba(8, 12, 18, 0.22) 24%,
+      rgba(8, 12, 18, 0.65) 50%,
+      rgba(8, 12, 18, 0.95) 72%,
+      rgba(8, 12, 18, 1.0) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+  }
+
+  .airwin-news-card:hover .airwin-news-card-overlay-dark {
     opacity: 1;
   }
-  @media (max-width: 767px) {
-    .article-tab.active .article-tab-title-ic {
-      transform: rotate(180deg);
-    }
+
+  /* Top Bar: Date Badge (Left) + Category Pill (Right) */
+  .airwin-news-card-top {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1.15rem 1.25rem;
+    width: 100%;
   }
-  /* @media (max-width: 767px) {
-    .article-layout[data-wf--article-master-layout--variant='listing-page'] .article-layout-block {
-      top: -15rem;
-    }
-    .article-layout[data-wf--article-master-layout--variant='detail-page'] .article-layout-block {
-      top: -13rem;
-    }
-  } */
-</style></div><section class="article-layout-block"><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-b84a2613-623e-f1e0-e973-f3654bba759c-6fa9cebb" class="article-hero"><div class="article-title-wrap"><div class="article-hero-title"><h2 class="heading h1 h2-mb">Insights</h2></div><div class="article-hero-label"><div class="heading h4 h5-mb">(12)</div></div></div><div class="article-breadcrumb"><div class="article-breadcrumb-item"><a data-link-random="" data-cursor="hidden" href="./index.html" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Home</div></a></div><div class="article-breadcrumb-item"><a data-link-random="" article-breadcrumb-ins="" data-cursor="hidden" href="./insights.html" aria-current="page" class="article-breadcrumb-link w-inline-block w--current"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">Insights</div></a></div><div class="article-breadcrumb-item"><div data-breadcrumb-type="" class="article-breadcrumb-link"><div data-article-sub-cate="" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">AI News</div></div></div><div class="article-breadcrumb-item"><a data-cursor="hidden" data-breadcrumb-cate="" data-link-random="" href="#" class="article-breadcrumb-link w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12  fs-10-mb">Insights</div></a></div></div></div><div id="w-node-_070d8942-acc5-13b8-8525-c2936fa9ced7-6fa9cebb" class="line hidden-mb"></div><div id="w-node-_070d8942-acc5-13b8-8525-c2936fa9ced8-6fa9cebb" class="article-tab"><div class="article-tab-title"><h3 class="heading h6 hidden-mb">Categories</h3><div class="article-tab-title-mb hidden-dsk"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10-mb">CATEGORIES</div></div><div class="article-tab-title-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 8 8" fill="none" class="svg"><path d="M0.75 2L3.75 5L6.75 2" stroke="currentColor"></path></svg></div></div><div class="line"></div><div data-lenis-prevent="" class="article-tab-main-wrap"><div class="article-tab-main"><div class="article-tab-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">articles</div></div><div class="article-tab-cms w-dyn-list"><div role="list" class="article-tab-list w-dyn-items"><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/featured" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Featured</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/company-news" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company News</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/industry-news" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Industry News</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/case-studies" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Case Studies</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/company-updates" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company Updates</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="" data-type="Article" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/articles/announcements" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Market Updates</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div><div class="article-tab-main"><div class="article-tab-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">AI news</div></div><div class="article-tab-cms w-dyn-list"><div role="list" class="article-tab-list w-dyn-items"><div data-cursor="hidden" data-category="Global" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/global" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Global</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Europe" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/europe" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Europe</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Rest of World" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/rest-of-world-d2yv8" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Rest of World</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Middle East &amp; Africa " data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/middle-east-africa" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Middle East &amp; Africa </div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Asia" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/asia" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Asia</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Americas" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/americas" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Americas</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Asia Pacific" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/asia-pacific" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Asia Pacific</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div><div data-cursor="hidden" data-category="Company Update" data-type="AI news" role="listitem" class="article-tab-item w-dyn-item"><a data-cursor="hidden" data-link-random="" href="/ai-news/company-update" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Company Update</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div><div class="article-tab-main"><div class="article-tab-label"><a href="/linkedin" class="w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">SOCIAL updates</div></a></div><div data-cursor="hidden" data-category="Linkedin" data-type="SOCIAL updates" class="article-tab-item"><a data-cursor="hidden" data-link-random="" href="/linkedin" class="article-tab-item-link w-inline-block"><div class="article-tab-item-title"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Linkedin</div></div><div class="article-tab-item-sub"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">1</div></div><div class="article-tab-item-line"><div class="line"><div class="line-inner"></div></div></div></a></div></div></div></div></div><div class="hidden"><div class="insight-counter w-dyn-list"><div role="list" class="w-dyn-items"><div data-type="AI news" data-category="Europe" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Middle East &amp; Africa " role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Market Updates" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Market Updates" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Featured" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Americas" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Global" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="Article" data-category="Case Studies" role="listitem" class="w-dyn-item"></div><div data-type="AI news" data-category="Asia Pacific" role="listitem" class="w-dyn-item"></div></div></div><div class="insight-counter w-dyn-list"><div role="list" class="w-dyn-items"><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div><div data-type="SOCIAL updates" data-category="Linkedin" role="listitem" class="w-dyn-item"></div></div></div></div></section></div><main data-barba="wrapper" class="main"><div data-article-name="Insights" data-barba="container" data-barba-namespace="article" data-header="light" data-insights="listing-page" class="main-inner"><div class="page-css embed-css w-embed"><style>
-  .main:has(.popup.active) {
-    z-index: 105;
+
+  .airwin-news-card-date {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 0.35rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    min-width: 54px;
+    text-align: center;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
   }
-  .linkedin-popup-content p:has(+ p) {
-    margin-bottom: 2.6rem;
+
+  .airwin-news-card:hover .airwin-news-card-date {
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
   }
-  .halftone.hover-card {
-    --x: 50%;
-    --y: 50%;
-    --size: 0%;
-    --feather: 35%;
 
-    -webkit-mask-image: radial-gradient(circle at var(--x) var(--y), black var(--size), transparent calc(var(--size) + var(--feather))), repeating-linear-gradient(90deg, #0000 0 0.2rem, #000 0.2rem 0.8rem), repeating-linear-gradient(0deg, #0000 -0.4rem -0.2rem, #000 -0.2rem 0.6rem);
-
-    mask-image: radial-gradient(circle at var(--x) var(--y), black var(--size), transparent calc(var(--size) + var(--feather))), repeating-linear-gradient(90deg, #0000 0 0.2rem, #000 0.2rem 0.8rem), repeating-linear-gradient(0deg, #0000 -0.4rem -0.2rem, #000 -0.2rem 0.6rem);
-
-    -webkit-mask-size:
-      100% 100%,
-      0.8rem 0.8rem,
-      0.8rem 0.8rem;
-    mask-size:
-      100% 100%,
-      0.8rem 0.8rem,
-      0.8rem 0.8rem;
-
-    -webkit-mask-repeat: no-repeat, repeat, repeat;
-    mask-repeat: no-repeat, repeat, repeat;
-
-    -webkit-mask-composite: source-in, source-over;
-    mask-composite: intersect, add;
+  .news-date-day {
+    font-family: 'BT Steinhart', Arial, sans-serif;
+    font-size: 1.18rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #111111;
   }
-  .article-main-hl-content-item.swiper-slide-active {
-    pointer-events: auto;
+
+  .news-date-month {
+    font-family: 'BT Steinhart Mono', monospace, sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0066cc;
+    margin-top: 0.15rem;
   }
-  @media (hover: hover) and (min-width: 992px) {
-    .article-main-latest-item:hover .article-main-latest-item-decor {
-      opacity: 1;
-    }
-    .article-main-linkedin-item-ins:hover .article-main-latest-item-decor {
-      opacity: 1;
-    }
-    .article-main-linkedin-item-ins:hover .article-main-linkedin-item-bg {
-      opacity: 1;
-    }
-    .article-main-linkedin-item-ins:hover .article-main-linkedin-txt {
-      opacity: 1;
-    }
+
+  .airwin-news-card-tag {
+    background: rgba(17, 24, 39, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #111111;
+    font-family: 'BT Steinhart Mono', monospace, sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    transition: all 0.45s ease;
   }
-  @media (max-width: 767px) {
-    .linkedin-popup-content {
-      font-size: 1.4rem;
-      line-height: 1.3;
-      color: var(--_color---content--soft);
-    }
-    .popup-wrap.active .linkedin-popup {
-      transform: translate(0, 0);
-    }
-    .article-main-hl-ctrl-item.swiper-button-disabled {
-      color: var(--_color---content--disable);
-    }
-    .article-main-hl-sub {
-      order: 1;
-    }
-    .article-main-hl-title {
-      order: 2;
-    }
-    .article-main-hl-desc {
-      order: 3;
-    }
+
+  .airwin-news-card:hover .airwin-news-card-tag {
+    background: rgba(17, 24, 39, 0.76);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   }
-</style></div><div class="article-main-wrap"><div class="w-layout-blockcontainer container grid w-container"><section data-init-hidden="" id="w-node-_63b6a83a-b957-7bd0-c146-f74a7f803b6b-c403df49" class="article-main"><div class="article-main-hl"><div class="article-main-hl-blog"><div id="w-node-c426e28f-e555-b80f-ca57-e08023ae151d-c403df49" class="article-main-hl-label"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-tb">Highlights</div></div><div id="w-node-_5a20c12c-5dce-fa1a-cdb0-5b9d700e535c-c403df49" class="article-main-hl-ctrl hidden-dsk"><div class="article-main-hl-ctrl-item prev"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">PREV</div></div><div class="article-main-hl-ctrl-item-line"></div><div class="article-main-hl-ctrl-item next"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">Next</div></div></div><div data-swiper="swiper" id="w-node-ae563825-c986-429d-5414-76e24c8199d9-c403df49" class="article-main-hl-content w-dyn-list"><div data-swiper="wrapper" role="list" class="article-main-hl-content-list w-dyn-items"><div data-swiper="slide" id="w-node-ae563825-c986-429d-5414-76e24c8199db-c403df49" role="listitem" class="article-main-hl-content-item w-dyn-item"><a title="The Evolution of Airwin Logistics: 20+ Years of Excellence in Global Cargo Forwarding" data-cursor="hidden" href="/insights/how-an-australian-freight-forwarders-website-unexpectedly-went-viral" class="article-main-hl-content-item-link w-inline-block"><div class="article-main-hl-thumb-img hidden-dsk"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1).jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1).jpg 2592w" class="img-df img-fill"/></div><div class="article-main-hl-content-inner"><div class="article-main-hl-title"><div class="txt-clamp clamp-4"><h1 class="heading h5">The Evolution of Airwin Logistics: 20+ Years of Excellence in Global Cargo Forwarding</h1></div></div><div class="article-main-hl-sub"><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Featured</div></div><div class="article-main-hl-div"></div><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">17 Aug 26</div></div></div><div class="article-main-hl-desc"><div class="txt-clamp clamp-3"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-tb">“How an Australian freight forwarding and logistics company turned an ordinarily invisible B2B industry into a global digital experience — and unexpectedly attracted hundreds of thousands of visitors from around the world.”</div></div></div></div></a></div><div data-swiper="slide" id="w-node-ae563825-c986-429d-5414-76e24c8199db-c403df49" role="listitem" class="article-main-hl-content-item w-dyn-item"><a title="Grid-Scale Battery Project Logistics Delivery for Renewable Energy Infrastructure " data-cursor="hidden" href="/insights/grid-scale-battery-project-logistics-delivery-for-renewable-energy-infrastructure" class="article-main-hl-content-item-link w-inline-block"><div class="article-main-hl-thumb-img hidden-dsk"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-1080.webp 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-1600.webp 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-2000.webp 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010.webp 2592w" class="img-df img-fill"/></div><div class="article-main-hl-content-inner"><div class="article-main-hl-title"><div class="txt-clamp clamp-4"><h1 class="heading h5">Grid-Scale Battery Project Logistics Delivery for Renewable Energy Infrastructure </h1></div></div><div class="article-main-hl-sub"><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Case Studies</div></div><div class="article-main-hl-div"></div><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">08 Jul 26</div></div></div><div class="article-main-hl-desc"><div class="txt-clamp clamp-3"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-tb"></div></div></div></div></a></div><div data-swiper="slide" id="w-node-ae563825-c986-429d-5414-76e24c8199db-c403df49" role="listitem" class="article-main-hl-content-item w-dyn-item"><a title="Cost-Optimised and Speed to market Import Program for New Truck Launch in Australia" data-cursor="hidden" href="/insights/cost-optimised-and-speed-to-market-import-program-for-new-truck-launch-in-australia" class="article-main-hl-content-item-link w-inline-block"><div class="article-main-hl-thumb-img hidden-dsk"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-1080.webp 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-1600.webp 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-2000.webp 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207.webp 2592w" class="img-df img-fill"/></div><div class="article-main-hl-content-inner"><div class="article-main-hl-title"><div class="txt-clamp clamp-4"><h1 class="heading h5">Cost-Optimised and Speed to market Import Program for New Truck Launch in Australia</h1></div></div><div class="article-main-hl-sub"><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Case Studies</div></div><div class="article-main-hl-div"></div><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">01 Jul 26</div></div></div><div class="article-main-hl-desc"><div class="txt-clamp clamp-3"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-tb"></div></div></div></div></a></div><div data-swiper="slide" id="w-node-ae563825-c986-429d-5414-76e24c8199db-c403df49" role="listitem" class="article-main-hl-content-item w-dyn-item"><a title="Major Fleet-Wide Fuel Efficiency Agreement Signals Ongoing Focus on Shipping Performance and Decarbonisation" data-cursor="hidden" href="/insights/major-fleet-wide-fuel-efficiency-agreement-signals-ongoing-focus-on-shipping-performance-and-decarbonisation" class="article-main-hl-content-item-link w-inline-block"><div class="article-main-hl-thumb-img hidden-dsk"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-2600.jpg 2600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big.jpg 3456w" class="img-df img-fill"/></div><div class="article-main-hl-content-inner"><div class="article-main-hl-title"><div class="txt-clamp clamp-4"><h1 class="heading h5">Major Fleet-Wide Fuel Efficiency Agreement Signals Ongoing Focus on Shipping Performance and Decarbonisation</h1></div></div><div class="article-main-hl-sub"><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia Pacific</div></div><div class="article-main-hl-div"></div><div class="article-main-hl-sub-text"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">30 Jun 26</div></div></div><div class="article-main-hl-desc"><div class="txt-clamp clamp-3"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-tb"></div></div></div></div></a></div></div></div><div data-cursor="control" data-swiper="swiper" id="w-node-d756ceb4-6466-6ede-b69d-ca620247b277-c403df49" class="article-main-hl-thumb w-dyn-list"><div data-swiper="wrapper" role="list" class="article-main-hl-thumb-list swiper-wrapper w-dyn-items"><div title="The Evolution of Airwin Logistics: 20+ Years of Excellence in Global Cargo Forwarding" data-swiper="slide" id="w-node-d756ceb4-6466-6ede-b69d-ca620247b279-c403df49" role="listitem" class="article-main-hl-thumb-item w-dyn-item"><div class="article-main-hl-thumb-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1).jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1)-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c05731f1b9187ce880098_Image%20thumbnail%20(1).jpg 2592w" class="img-df img-fill"/></div></div><div title="Grid-Scale Battery Project Logistics Delivery for Renewable Energy Infrastructure " data-swiper="slide" id="w-node-d756ceb4-6466-6ede-b69d-ca620247b279-c403df49" role="listitem" class="article-main-hl-thumb-item w-dyn-item"><div class="article-main-hl-thumb-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-1080.webp 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-1600.webp 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010-p-2000.webp 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f917e6afa499c445dfb9a_Thumb%2010.webp 2592w" class="img-df img-fill"/></div></div><div title="Cost-Optimised and Speed to market Import Program for New Truck Launch in Australia" data-swiper="slide" id="w-node-d756ceb4-6466-6ede-b69d-ca620247b279-c403df49" role="listitem" class="article-main-hl-thumb-item w-dyn-item"><div class="article-main-hl-thumb-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-1080.webp 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-1600.webp 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207-p-2000.webp 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4f91c6a35d40cafa4543ca_Thumb%207.webp 2592w" class="img-df img-fill"/></div></div><div title="Major Fleet-Wide Fuel Efficiency Agreement Signals Ongoing Focus on Shipping Performance and Decarbonisation" data-swiper="slide" id="w-node-d756ceb4-6466-6ede-b69d-ca620247b279-c403df49" role="listitem" class="article-main-hl-thumb-item w-dyn-item"><div class="article-main-hl-thumb-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big-p-2600.jpg 2600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b250cf23ec83d3c9a7195_img-big.jpg 3456w" class="img-df img-fill"/></div></div></div></div><div id="w-node-d8de4a6b-51b6-a94a-5fd3-eac77f1a59e8-c403df49" class="article-main-hl-pagin"><div class="article-main-hl-pagin-dot"></div></div></div></div><div class="article-main-latest"><div class="line"></div><div class="article-main-head"><div class="article-main-title"><h2 class="heading h6 h3-mb">Latest <span class="cl-note">articles</span></h2></div></div><div class="article-main-latest-inner"><div class="article-main-latest-cms w-dyn-list"><div role="list" class="article-main-latest-list w-dyn-items"><div data-hover-card="" role="listitem" class="article-main-latest-item w-dyn-item"><a data-cursor="hidden" href="/insights/war-widens-in-the-black-sea-in-a-test-of-nato-red-lines" class="article-main-latest-item-link w-inline-block"><div class="article-main-latest-item-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126-p-800.jpeg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126.jpeg 1920w" class="img-df img-fill"/></div><div class="article-main-latest-item-label-wrap"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Europe</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">November 4, 2026</div></div><div class="article-main-latest-item-title"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">The Evolution of Airwin Logistics: Over 20 Years of Global Cargo Forwarding</div></div></a><div class="article-main-latest-item-decor"><div class="halftone hover-card"></div></div></div><div data-hover-card="" role="listitem" class="article-main-latest-item w-dyn-item"><a data-cursor="hidden" href="/insights/cyclone-arnab-disrupts-indias-transport-network-as-severe-weather-threatens-ports-airports-and-rail-services" class="article-main-latest-item-link w-inline-block"><div class="article-main-latest-item-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026.webp 1024w" class="img-df img-fill"/></div><div class="article-main-latest-item-label-wrap"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">October 28, 2026</div></div><div class="article-main-latest-item-title"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Cyclone Arnab Disrupts India&#x27;s Transport Network as Severe Weather Threatens Ports, Airports and Rail Services</div></div></a><div class="article-main-latest-item-decor"><div class="halftone hover-card"></div></div></div><div data-hover-card="" role="listitem" class="article-main-latest-item w-dyn-item"><a data-cursor="hidden" href="/insights/government-extends-relief-scheme-as-low-margin-exports-struggle-amid-west-asia-crisis" class="article-main-latest-item-link w-inline-block"><div class="article-main-latest-item-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026.jpg 1672w" class="img-df img-fill"/></div><div class="article-main-latest-item-label-wrap"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Middle East &amp; Africa </div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">October 27, 2026</div></div><div class="article-main-latest-item-title"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Government extends RELIEF scheme as low-margin exports struggle amid West Asia crisis</div></div></a><div class="article-main-latest-item-decor"><div class="halftone hover-card"></div></div></div><div data-hover-card="" role="listitem" class="article-main-latest-item w-dyn-item"><a data-cursor="hidden" href="/insights/typhoon-champi-ningbo-port-prepares-for-potential-container-shipping-disruptions" class="article-main-latest-item-link w-inline-block"><div class="article-main-latest-item-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi-p-800.jpeg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi.jpeg 1920w" class="img-df img-fill"/></div><div class="article-main-latest-item-label-wrap"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia Pacific</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">October 20, 2026</div></div><div class="article-main-latest-item-title"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Smart Logistics, Simplified: From Modern Warehousing to Last-Mile Express Distribution</div></div></a><div class="article-main-latest-item-decor"><div class="halftone hover-card"></div></div></div><div data-hover-card="" role="listitem" class="article-main-latest-item w-dyn-item"><a data-cursor="hidden" href="/insights/china-australia-ocean-freight-rates-are-moving-higher----what-importers-should-watch" class="article-main-latest-item-link w-inline-block"><div class="article-main-latest-item-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926.jpg 2500w" class="img-df img-fill"/></div><div class="article-main-latest-item-label-wrap"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia Pacific</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">September 24, 2026</div></div><div class="article-main-latest-item-title"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Navigating International Trade & In-House Customs Clearance with Precision</div></div></a><div class="article-main-latest-item-decor"><div class="halftone hover-card"></div></div></div><div data-hover-card="" role="listitem" class="article-main-latest-item w-dyn-item"><a data-cursor="hidden" href="/insights/insights-united-carriers-christopher-lebon-2026-local-business-awards-finalists" class="article-main-latest-item-link w-inline-block"><div class="article-main-latest-item-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aa8a6b8ef1f72717cd3bc13_2026_WMEL_LBA.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aa8a6b8ef1f72717cd3bc13_2026_WMEL_LBA-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aa8a6b8ef1f72717cd3bc13_2026_WMEL_LBA.jpeg 1000w" class="img-df img-fill"/></div><div class="article-main-latest-item-label-wrap"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Featured</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">|</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">September 15, 2026</div></div><div class="article-main-latest-item-title"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">Airwin Cargo &amp; Christopher Lebon Named 2026 Local Business Awards Finalists</div></div></a><div class="article-main-latest-item-decor"><div class="halftone hover-card"></div></div></div></div></div><a href="#" class="article-main-latest-load-more w-inline-block"><div data-cursor="hidden" data-link-random="" data-is-btn="" data-wf--button--variant="outline" class="btn"><div class="btn-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">LOAD MORE ARTICLES</div></div></div></a></div></div><div class="article-main-ai"><div class="line"></div><div class="article-main-head"><div class="article-main-title"><h2 class="heading h6 h3-mb">AI news <span class="cl-note">articles</span></h2></div></div><div class="article-main-ai-table"><div class="article-main-ai-table-head"><div class="article-main-ai-table-grid"><div id="w-node-_8d0b391e-79fd-a5f2-6a1a-e728542c5e43-c403df49" class="article-main-ai-table-col"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Title</div></div><div id="w-node-e433fdce-a161-67e6-721a-5a0090cde35e-c403df49" class="article-main-ai-table-col"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Tag</div></div></div></div><div data-follow-cursor-wrap="" class="article-main-ai-table-body"><div id="w-node-_9b440fa0-6989-5f12-e211-56998c688113-c403df49" class="article-main-ai-cms w-dyn-list"><div role="list" class="article-main-ai-list w-dyn-items"><div role="listitem" class="article-main-ai-item w-dyn-item"><a title="The Evolution of Airwin Logistics: Over 20 Years of Global Cargo Forwarding" data-cursor="hidden" href="/insights/war-widens-in-the-black-sea-in-a-test-of-nato-red-lines" class="article-main-ai-table-row w-inline-block"><div class="article-main-ai-thumb-mb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126-p-800.jpeg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126.jpeg 1920w" class="img-df img-fill"/></div><div class="article-main-ai-table-grid"><div id="w-node-f5bd3a9d-151e-b9f6-e6aa-32978fcedd5b-c403df49" class="article-main-ai-table-col"><div class="txt-clamp clamp-1 clamp-2-tb"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb fw-med">The Evolution of Airwin Logistics: Over 20 Years of Global Cargo Forwarding</div></div></div><div id="w-node-_6b7c70c1-04ae-8aae-6162-54181fb14ec7-c403df49" class="article-main-ai-table-col tag"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Europe</div></div></div></a></div><div role="listitem" class="article-main-ai-item w-dyn-item"><a title="Cyclone Arnab Disrupts India&#x27;s Transport Network as Severe Weather Threatens Ports, Airports and Rail Services" data-cursor="hidden" href="/insights/cyclone-arnab-disrupts-indias-transport-network-as-severe-weather-threatens-ports-airports-and-rail-services" class="article-main-ai-table-row w-inline-block"><div class="article-main-ai-thumb-mb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026.webp 1024w" class="img-df img-fill"/></div><div class="article-main-ai-table-grid"><div id="w-node-f5bd3a9d-151e-b9f6-e6aa-32978fcedd5b-c403df49" class="article-main-ai-table-col"><div class="txt-clamp clamp-1 clamp-2-tb"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb fw-med">Cyclone Arnab Disrupts India&#x27;s Transport Network as Severe Weather Threatens Ports, Airports and Rail Services</div></div></div><div id="w-node-_6b7c70c1-04ae-8aae-6162-54181fb14ec7-c403df49" class="article-main-ai-table-col tag"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia</div></div></div></a></div><div role="listitem" class="article-main-ai-item w-dyn-item"><a title="Government extends RELIEF scheme as low-margin exports struggle amid West Asia crisis" data-cursor="hidden" href="/insights/government-extends-relief-scheme-as-low-margin-exports-struggle-amid-west-asia-crisis" class="article-main-ai-table-row w-inline-block"><div class="article-main-ai-thumb-mb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026.jpg 1672w" class="img-df img-fill"/></div><div class="article-main-ai-table-grid"><div id="w-node-f5bd3a9d-151e-b9f6-e6aa-32978fcedd5b-c403df49" class="article-main-ai-table-col"><div class="txt-clamp clamp-1 clamp-2-tb"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb fw-med">Government extends RELIEF scheme as low-margin exports struggle amid West Asia crisis</div></div></div><div id="w-node-_6b7c70c1-04ae-8aae-6162-54181fb14ec7-c403df49" class="article-main-ai-table-col tag"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Middle East &amp; Africa </div></div></div></a></div><div role="listitem" class="article-main-ai-item w-dyn-item"><a title="Smart Logistics, Simplified: From Modern Warehousing to Last-Mile Express Distribution" data-cursor="hidden" href="/insights/typhoon-champi-ningbo-port-prepares-for-potential-container-shipping-disruptions" class="article-main-ai-table-row w-inline-block"><div class="article-main-ai-thumb-mb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi-p-800.jpeg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi.jpeg 1920w" class="img-df img-fill"/></div><div class="article-main-ai-table-grid"><div id="w-node-f5bd3a9d-151e-b9f6-e6aa-32978fcedd5b-c403df49" class="article-main-ai-table-col"><div class="txt-clamp clamp-1 clamp-2-tb"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb fw-med">Smart Logistics, Simplified: From Modern Warehousing to Last-Mile Express Distribution</div></div></div><div id="w-node-_6b7c70c1-04ae-8aae-6162-54181fb14ec7-c403df49" class="article-main-ai-table-col tag"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia Pacific</div></div></div></a></div><div role="listitem" class="article-main-ai-item w-dyn-item"><a title="Navigating International Trade & In-House Customs Clearance with Precision" data-cursor="hidden" href="/insights/china-australia-ocean-freight-rates-are-moving-higher----what-importers-should-watch" class="article-main-ai-table-row w-inline-block"><div class="article-main-ai-thumb-mb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926.jpg 2500w" class="img-df img-fill"/></div><div class="article-main-ai-table-grid"><div id="w-node-f5bd3a9d-151e-b9f6-e6aa-32978fcedd5b-c403df49" class="article-main-ai-table-col"><div class="txt-clamp clamp-1 clamp-2-tb"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb fw-med">Navigating International Trade & In-House Customs Clearance with Precision</div></div></div><div id="w-node-_6b7c70c1-04ae-8aae-6162-54181fb14ec7-c403df49" class="article-main-ai-table-col tag"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia Pacific</div></div></div></a></div><div role="listitem" class="article-main-ai-item w-dyn-item"><a title="China Set to Open Pinglu Canal – Its New Shortcut to South-East Asia" data-cursor="hidden" href="/insights/china-set-to-open-pinglu-canal---its-new-shortcut-to-south-east-asia" class="article-main-ai-table-row w-inline-block"><div class="article-main-ai-thumb-mb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9f7dd757d7a04392fd4aed_china%20short%20cut.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9f7dd757d7a04392fd4aed_china%20short%20cut-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9f7dd757d7a04392fd4aed_china%20short%20cut.jpg 1086w" class="img-df img-fill"/></div><div class="article-main-ai-table-grid"><div id="w-node-f5bd3a9d-151e-b9f6-e6aa-32978fcedd5b-c403df49" class="article-main-ai-table-col"><div class="txt-clamp clamp-1 clamp-2-tb"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb fw-med">China Set to Open Pinglu Canal – Its New Shortcut to South-East Asia</div></div></div><div id="w-node-_6b7c70c1-04ae-8aae-6162-54181fb14ec7-c403df49" class="article-main-ai-table-col tag"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">Asia Pacific</div></div></div></a></div></div></div><div data-follow-cursor-el="" id="w-node-_6b8cb9f7-6643-0e71-2505-03e2dad0708a-c403df49" class="article-main-ai-thumb w-dyn-list"><div role="list" class="display-contents w-dyn-items"><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126-p-800.jpeg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6aea929128be36a6d25c28d7_41126.jpeg 1920w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026.webp" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026-p-500.webp 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026-p-800.webp 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae12ebc3a83dbd9dd3e5839_281026.webp 1024w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ae00cdb0635e82d768e90f7_271026.jpg 1672w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi.jpeg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi-p-500.jpeg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi-p-800.jpeg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ad6dfaee4df726c6b082524_champi.jpeg 1920w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6ab48634d96f51e497f2b67e_240926.jpg 2500w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9f7dd757d7a04392fd4aed_china%20short%20cut.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9f7dd757d7a04392fd4aed_china%20short%20cut-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9f7dd757d7a04392fd4aed_china%20short%20cut.jpg 1086w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9e4d1915dca6e29795a7e1_6a73c5c54c295763e29e2dfd_Screenshot%202026-08-06%20at%209.22.40%E2%80%AFam%20(1).jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9e4d1915dca6e29795a7e1_6a73c5c54c295763e29e2dfd_Screenshot%202026-08-06%20at%209.22.40%E2%80%AFam%20(1)-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9e4d1915dca6e29795a7e1_6a73c5c54c295763e29e2dfd_Screenshot%202026-08-06%20at%209.22.40%E2%80%AFam%20(1)-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9e4d1915dca6e29795a7e1_6a73c5c54c295763e29e2dfd_Screenshot%202026-08-06%20at%209.22.40%E2%80%AFam%20(1).jpg 1414w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b2d1afac6fc4bb1115502_img-small.png" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b2d1afac6fc4bb1115502_img-small-p-500.png 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a4b2d1afac6fc4bb1115502_img-small.png 586w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9009ffae7857075686eef1_typhoon%20in%20china%20.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9009ffae7857075686eef1_typhoon%20in%20china%20-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9009ffae7857075686eef1_typhoon%20in%20china%20.jpg 1502w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c06e6ae9d89164eeb3862_Image%20preview%20(1).jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c06e6ae9d89164eeb3862_Image%20preview%20(1)-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8c06e6ae9d89164eeb3862_Image%20preview%20(1).jpg 586w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84389018ef751cddbbca23_conflict%20image.jpg 2164w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843aedffb3daa310f36217_red%20alert%20image.jpg 2148w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843d196f78a756c8867f0c_US%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843d196f78a756c8867f0c_US%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843d196f78a756c8867f0c_US%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843d196f78a756c8867f0c_US%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843d196f78a756c8867f0c_US%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843d196f78a756c8867f0c_US%20image.jpg 1962w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843efcc35eac9a13b972e7_typhoon%202%20image.jpg 2168w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image-p-2600.jpg 2600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843f764fe86966b5078038_trump%20image.jpg 2700w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843fc03b5502b3fbea6ac5_SE%20thumb.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843fc03b5502b3fbea6ac5_SE%20thumb-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843fc03b5502b3fbea6ac5_SE%20thumb-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a843fc03b5502b3fbea6ac5_SE%20thumb.jpg 1812w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84401841d6e1b1a9c92b2f_new%20era%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84401841d6e1b1a9c92b2f_new%20era%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84401841d6e1b1a9c92b2f_new%20era%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84401841d6e1b1a9c92b2f_new%20era%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84401841d6e1b1a9c92b2f_new%20era%20image.jpg 2154w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image-p-2000.jpg 2000w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84412727ee1c854056a273_world%20container%20image.jpg 2752w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84418d8cb93f8c0232be43_the%20panama%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84418d8cb93f8c0232be43_the%20panama%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84418d8cb93f8c0232be43_the%20panama%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84418d8cb93f8c0232be43_the%20panama%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84418d8cb93f8c0232be43_the%20panama%20image-p-1600.jpg 1600w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a84418d8cb93f8c0232be43_the%20panama%20image.jpg 2574w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85795f63d3b8548e274e91_has%20the%20peak.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85795f63d3b8548e274e91_has%20the%20peak-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85795f63d3b8548e274e91_has%20the%20peak-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85795f63d3b8548e274e91_has%20the%20peak.jpg 1734w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85791e51946ff1aa566616_Hong%20Kong.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85791e51946ff1aa566616_Hong%20Kong-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85791e51946ff1aa566616_Hong%20Kong-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85791e51946ff1aa566616_Hong%20Kong-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a85791e51946ff1aa566616_Hong%20Kong.jpg 2236w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8578cf33361f15af7f5ba8_2%20million%20image.jpg" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8578cf33361f15af7f5ba8_2%20million%20image-p-500.jpg 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8578cf33361f15af7f5ba8_2%20million%20image-p-800.jpg 800w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8578cf33361f15af7f5ba8_2%20million%20image-p-1080.jpg 1080w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a8578cf33361f15af7f5ba8_2%20million%20image.jpg 2430w" class="img-df img-fill"/></div><div role="listitem" class="article-main-ai-thumb-img w-dyn-item"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a5068979001bdbf231be037_Thumb%2013%20(1).png" loading="lazy" alt="" sizes="(max-width: 767px) 100vw, (max-width: 991px) 727px, 940px" srcset="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a5068979001bdbf231be037_Thumb%2013%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a5068979001bdbf231be037_Thumb%2013%20(1).png 586w" class="img-df img-fill"/></div></div></div><div data-follow-cursor-el="" id="w-node-b198839f-d7fc-ea4f-ec06-0fc1d615a500-c403df49" class="article-main-ai-table-bg"></div></div></div></div><div class="article-main-linkedin"><div class="line"></div><div class="article-main-head"><div class="article-main-title linkedin"><h3 class="heading h6 h3-mb">Latest Updates on <span class="cl-note">linkedin</span></h3></div><a data-cursor="hidden" data-link-random="" href="/linkedin" class="article-main-link-more w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fw-med">Show more</div></a></div><div class="article-main-linkedin-cms w-dyn-list"><div role="list" class="article-main-linkedin-list w-dyn-items"><div role="listitem" class="display-contents w-dyn-item"><div data-cursor="hidden" data-popup-linkedin="open" data-hover-card="" class="article-main-linkedin-item-ins"><div class="article-main-linkedin-item-inner"><div class="article-main-linkedin-head"><div class="article-main-linkedin-thumb"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" data-popup-linkedin="thumb" alt="" class="img-df img-fill w-dyn-bind-empty"/></div><div class="article-main-linkedin-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">LINKEDIN</div></div></div><div class="article-main-linkedin-content"><div class="article-main-linkedin-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9">21h</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">ago</div></div><div class="article-main-linkedin-desc"><div class="txt-clamp clamp-2"><div class="txt fs-14 w-richtext">🌍 Latest Industry Insights | Airwin Cargo
 
-Rising tensions in the Black Sea are creating further uncertainty for global trade and shipping.
+  /* Bottom Body */
+  .airwin-news-card-body {
+    position: relative;
+    z-index: 3;
+    padding: 0.75rem 1.25rem 1.35rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
 
-Read our latest AI News update on what these developments could mean for global supply chains.
+  .airwin-news-card-meta {
+    font-family: 'BT Steinhart Mono', monospace, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 0.45rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: color 0.45s ease;
+  }
 
-🔗 https://lnkd.in/gN-b2HAn
+  .airwin-news-card:hover .airwin-news-card-meta {
+    color: #94a3b8;
+  }
 
-Stay informed with the latest logistics and supply chain news on our website: 
-Unitedcarriers.com 
+  .news-meta-accent {
+    color: #0066cc;
+    transition: color 0.45s ease;
+  }
 
-#UnitedCarriersAPAC #SupplyChain #GlobalLogistics #FreightForwarding</div></div></div></div></div><div class="article-main-linkedin-item-bg"><div class="halftone hover-card"></div></div><div class="hidden"><div data-popup-linkedin="content" class="w-richtext">🌍 Latest Industry Insights | Airwin Cargo
+  .airwin-news-card:hover .news-meta-accent {
+    color: #38bdf8;
+  }
 
-Rising tensions in the Black Sea are creating further uncertainty for global trade and shipping.
+  .news-meta-dot {
+    opacity: 0.6;
+  }
 
-Read our latest AI News update on what these developments could mean for global supply chains.
+  /* Title: Black at rest -> Crisp White on hover */
+  .airwin-news-card-title {
+    font-family: 'BT Steinhart', Arial, sans-serif;
+    font-size: clamp(1.12rem, 1.28vw, 1.32rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin: 0 0 0.55rem 0;
+    text-transform: none;
+    transition: color 0.45s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
-🔗 https://lnkd.in/gN-b2HAn
+  .airwin-news-card:hover .airwin-news-card-title {
+    color: #ffffff;
+  }
 
-Stay informed with the latest logistics and supply chain news on our website: 
-Unitedcarriers.com 
+  /* Description: Dark Gray at rest -> White on hover */
+  .airwin-news-card-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #4b5563;
+    margin: 0 0 1.15rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.45s ease;
+  }
 
-#UnitedCarriersAPAC #SupplyChain #GlobalLogistics #FreightForwarding</div><a data-popup-linkedin="link" href="https://www.linkedin.com/feed/update/urn:li:share:7523568126500982784" class="w-inline-block"></a></div></div></div><div role="listitem" class="display-contents w-dyn-item"><div data-cursor="hidden" data-popup-linkedin="open" data-hover-card="" class="article-main-linkedin-item-ins"><div class="article-main-linkedin-item-inner"><div class="article-main-linkedin-head"><div class="article-main-linkedin-thumb"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" data-popup-linkedin="thumb" alt="" class="img-df img-fill w-dyn-bind-empty"/></div><div class="article-main-linkedin-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">LINKEDIN</div></div></div><div class="article-main-linkedin-content"><div class="article-main-linkedin-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9">1mo</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">ago</div></div><div class="article-main-linkedin-desc"><div class="txt-clamp clamp-2"><div class="txt fs-14 w-richtext">Check out our latest Industry Update ⬇️ 
+  .airwin-news-card:hover .airwin-news-card-desc {
+    color: rgba(255, 255, 255, 0.85);
+  }
 
-https://lnkd.in/g7a3tmqh</div></div></div></div></div><div class="article-main-linkedin-item-bg"><div class="halftone hover-card"></div></div><div class="hidden"><div data-popup-linkedin="content" class="w-richtext">Check out our latest Industry Update ⬇️ 
+  /* Action Link: Black text at rest with red arrow -> White text with extended red arrow on hover */
+  .airwin-news-card-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: 'BT Steinhart Mono', monospace, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111111;
+    margin-top: auto;
+    transition: color 0.45s ease;
+  }
 
-https://lnkd.in/g7a3tmqh</div><a data-popup-linkedin="link" href="https://www.linkedin.com/feed/update/urn:li:share:7508710054066376704" class="w-inline-block"></a></div></div></div><div role="listitem" class="display-contents w-dyn-item"><div data-cursor="hidden" data-popup-linkedin="open" data-hover-card="" class="article-main-linkedin-item-ins"><div class="article-main-linkedin-item-inner"><div class="article-main-linkedin-head"><div class="article-main-linkedin-thumb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a9a0b433e587ed6888df813_1788428234995.jpeg" loading="lazy" data-popup-linkedin="thumb" alt="" class="img-df img-fill"/></div><div class="article-main-linkedin-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">LINKEDIN</div></div></div><div class="article-main-linkedin-content"><div class="article-main-linkedin-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9">2mo</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">ago</div></div><div class="article-main-linkedin-desc"><div class="txt-clamp clamp-2"><div class="txt fs-14 w-richtext">Airwin Cargo receives Australian Trusted Trader accreditation from Australian Border Force. 
+  .airwin-news-card:hover .airwin-news-card-action {
+    color: #ffffff;
+  }
 
-We are proud to have received Australian Trusted Trader (ATT) accreditation, recognising our commitment to secure international supply chains and high standards of trade compliance.✅ 
- 
-Learn more about what this means for Airwin Cargo and our clients: https://lnkd.in/edp_wYu5
+  .news-action-arrow {
+    display: inline-flex;
+    align-items: center;
+    color: #e5243b;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-#UnitedCarriers #AustralianTrustedTrader #CustomsBrokerage #InternationalTrade #SupplyChain #Excellence</div></div></div></div></div><div class="article-main-linkedin-item-bg"><div class="halftone hover-card"></div></div><div class="hidden"><div data-popup-linkedin="content" class="w-richtext">Airwin Cargo receives Australian Trusted Trader accreditation from Australian Border Force. 
+  .news-action-line {
+    display: inline-block;
+    width: 18px;
+    height: 2px;
+    background: #e5243b;
+    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-We are proud to have received Australian Trusted Trader (ATT) accreditation, recognising our commitment to secure international supply chains and high standards of trade compliance.✅ 
- 
-Learn more about what this means for Airwin Cargo and our clients: https://lnkd.in/edp_wYu5
+  .news-action-head {
+    margin-left: -2px;
+    display: block;
+  }
 
-#UnitedCarriers #AustralianTrustedTrader #CustomsBrokerage #InternationalTrade #SupplyChain #Excellence</div><a data-popup-linkedin="link" href="https://www.linkedin.com/feed/update/urn:li:share:7501211703385382913" class="w-inline-block"></a></div></div></div><div role="listitem" class="display-contents w-dyn-item"><div data-cursor="hidden" data-popup-linkedin="open" data-hover-card="" class="article-main-linkedin-item-ins"><div class="article-main-linkedin-item-inner"><div class="article-main-linkedin-head"><div class="article-main-linkedin-thumb"><div class="display-contents w-embed"><video data-src="https://dms.licdn.com/playlist/vid/dynamic/D5605AQFA9FinAlfHgQ/CeJxzMjVLdPRLTwzL9DZxDdTVcULiuxSj8bN1AUfjDcU?e=1794445200&v=beta&t=hgOIS2u7F7tg4ewz-fnEcUxqXPP2QCSVCeiDa2m5XYU" preload="none" autoplay loop muted playsinline class="img-df img-fill" data-popup-linkedin="video"></video></div></div><div class="article-main-linkedin-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">LINKEDIN</div></div></div><div class="article-main-linkedin-content"><div class="article-main-linkedin-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9">2mo</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">ago</div></div><div class="article-main-linkedin-desc"><div class="txt-clamp clamp-2"><div class="txt fs-14 w-richtext">Our website unexpectedly went viral.
+  .airwin-news-card:hover .news-action-arrow {
+    transform: translateX(6px);
+  }
 
-Over the past two weeks, independent creators around the world have been discovering, reviewing and sharing the Airwin Cargo website. 
+  .airwin-news-card:hover .news-action-line {
+    width: 52px;
+  }
+</style>
 
-Across just a selection of this content, though videos have now accumulated more than 12 million combined views, alongside multiple international digital-design awards and recognition. 
+<div class="airwin-news-page-wrap">
+  <!-- Hero Header -->
+  <section class="airwin-news-hero">
+    <div class="airwin-news-eyebrow">
+      <span class="news-eyebrow-dot"></span>
+      <span>News &amp; Updates</span>
+    </div>
+    <h1 class="airwin-news-hero-title">Latest News &amp;<br/>Company Updates</h1>
+    <p class="airwin-news-hero-desc">
+      Stay informed with frontline industry perspectives, multi-modal freight network expansions, and corporate milestone announcements from Airwin Logistics.
+    </p>
+  </section>
 
-While the attention has been unexpected, the philosophy behind the website wasn't.
+  <!-- 3-Column News Grid -->
+  <main class="airwin-news-container">
+    <div class="airwin-news-grid">
+      <!-- Card 1 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_1.jpg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/logistics-management/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Logistics Management: Precision Freight Forwarding in Global Trade">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">15</span>
+              <span class="news-date-month">May, 2025</span>
+            </div>
+            <div class="airwin-news-card-tag">Logistics Management</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">LOGISTICS MANAGEMENT</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">4 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">Logistics Management: Precision Freight Forwarding in Global Trade</h2>
+            <p class="airwin-news-card-desc">Optimizing end-to-end multi-modal supply chains across air, sea, and land gateways with real-time tracking, transparent milestone monitoring, and priority customs coordination.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
 
-At Airwin Cargo, we believe Excellence should influence everything we do. 
-from how we move freight and serve our clients, to our Tech, people and how we represent our business. 
+      <!-- Card 2 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_2.jpeg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/domestic-676d45a79051a/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Domestic Cargo & Line-Haul Networks: Fast, Dedicated Pan-India Distribution">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">26</span>
+              <span class="news-date-month">Dec, 2024</span>
+            </div>
+            <div class="airwin-news-card-tag">Domestic Cargo</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">DOMESTIC EXPRESS</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">3 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">Domestic Cargo & Line-Haul Networks: Fast, Dedicated Pan-India Distribution</h2>
+            <p class="airwin-news-card-desc">Connecting Tier-1 economic hubs with rapid industrial corridors through scheduled line-haul fleets, synchronized regional transshipment, and time-critical express handling.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
 
-The website is simply one expression of that standard.
+      <!-- Card 3 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_3.jpeg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/airwin/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Airwin Logistics: Over 25 Years of Mission-Critical Global Cargo Excellence">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">31</span>
+              <span class="news-date-month">Aug, 2024</span>
+            </div>
+            <div class="airwin-news-card-tag">Global Network</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">GLOBAL NETWORK</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">6 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">Airwin Logistics: Over 25 Years of Mission-Critical Global Cargo Excellence</h2>
+            <p class="airwin-news-card-desc">Strengthening global cargo connectivity across 200+ partner airlines, ocean carriers, and dedicated freight hubs to guarantee seamless trans-continental delivery.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
 
-We're incredibly proud of what our creative partners at Bearplus have helped us achieve. 
+      <!-- Card 4 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_4.jpg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/14th-june-world-blood-donor-day/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read 14th June World Blood Donor Day: Supporting Healthcare Across Communities">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">14</span>
+              <span class="news-date-month">Jun, 2024</span>
+            </div>
+            <div class="airwin-news-card-tag">Community & CSR</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">COMMUNITY & CSR</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">2 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">14th June World Blood Donor Day: Supporting Healthcare Across Communities</h2>
+            <p class="airwin-news-card-desc">Airwin Logistics honors voluntary blood donors and reinforces its commitment to community health and corporate social responsibility across all our operational branches.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
 
-Read the full story on our website: https://lnkd.in/gKPF6UrV
+      <!-- Card 5 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_5.jpg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/the-evolution-of-airwin-logistics-20-years-of-excellence-in-global-cargo-forwarding/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Evolution of Airwin Logistics: 20 Years of Excellence in Global Cargo Forwarding">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">31</span>
+              <span class="news-date-month">May, 2024</span>
+            </div>
+            <div class="airwin-news-card-tag">Company Milestone</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">COMPANY MILESTONE</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">5 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">The Evolution of Airwin Logistics: 20 Years of Excellence in Global Cargo Forwarding</h2>
+            <p class="airwin-news-card-desc">From foundational regional freight forwarding to an international multi-modal logistics power, discover the key milestones that shaped Airwin's industry leadership.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
 
-#unitedcarriers #Excellence #movetheworld #supplychain #innovation #Digitaltransformation #logistics</div></div></div></div></div><div class="article-main-linkedin-item-bg"><div class="halftone hover-card"></div></div><div class="hidden"><div data-popup-linkedin="content" class="w-richtext">Our website unexpectedly went viral.
+      <!-- Card 6 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_6.jpg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/the-future-of-logistics-embracing-innovation-with-airwin-logistics/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Future of Logistics: Embracing Innovation with Airwin Logistics">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">31</span>
+              <span class="news-date-month">May, 2024</span>
+            </div>
+            <div class="airwin-news-card-tag">Innovation & Tech</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">INNOVATION & TECH</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">4 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">The Future of Logistics: Embracing Innovation with Airwin Logistics</h2>
+            <p class="airwin-news-card-desc">Exploring how predictive analytics, digital freight visibility, and intelligent route optimization are revolutionizing supply chain agility for international traders.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
 
-Over the past two weeks, independent creators around the world have been discovering, reviewing and sharing the Airwin Cargo website. 
-
-Across just a selection of this content, though videos have now accumulated more than 12 million combined views, alongside multiple international digital-design awards and recognition. 
-
-While the attention has been unexpected, the philosophy behind the website wasn't.
-
-At Airwin Cargo, we believe Excellence should influence everything we do. 
-from how we move freight and serve our clients, to our Tech, people and how we represent our business. 
-
-The website is simply one expression of that standard.
-
-We're incredibly proud of what our creative partners at Bearplus have helped us achieve. 
-
-Read the full story on our website: https://lnkd.in/gKPF6UrV
-
-#unitedcarriers #Excellence #movetheworld #supplychain #innovation #Digitaltransformation #logistics</div><a data-popup-linkedin="link" href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7494940170891182080" class="w-inline-block"></a></div></div></div><div role="listitem" class="display-contents w-dyn-item"><div data-cursor="hidden" data-popup-linkedin="open" data-hover-card="" class="article-main-linkedin-item-ins"><div class="article-main-linkedin-item-inner"><div class="article-main-linkedin-head"><div class="article-main-linkedin-thumb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a7a67441a2563fef36dbb78_1786401944523.jpeg" loading="lazy" data-popup-linkedin="thumb" alt="" class="img-df img-fill"/></div><div class="article-main-linkedin-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">LINKEDIN</div></div></div><div class="article-main-linkedin-content"><div class="article-main-linkedin-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9">2mo</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">ago</div></div><div class="article-main-linkedin-desc"><div class="txt-clamp clamp-2"><div class="txt fs-14 w-richtext">Airwin Cargo announces partnership with Rhys Lagos Motorsport as a Major Sponsor. 🏁🏎️ 
-
-Rhys is a talented young Victorian driver with an impressive start to his motorsport journey.
-At just 13 years old, Rhys became the 2024 Western Districts Car Club Junior Champion (12–18 years) in the Khanacross series at Geelong Motorsport Complex in Avalon, building on several years of karting and motorsport experience. 
-His journey now progressing into Formula Vee AKURRA Motorsport — one of Australia’s established grassroots development categories.
-
-This sponsorship is about supporting people with #ambition, #discipline and the #determination to build something for their future.
-
-Good luck, Rhys — we’re excited to be part of the journey. 🏎️🏁
-
-#UnitedCarriers #RhysLagosMotorsport #FormulaVee #Motorsport #GrassrootsMotorsport #AustralianMotorsport #Sponsorship #Community #SupportingYoungTalent Formula 1</div></div></div></div></div><div class="article-main-linkedin-item-bg"><div class="halftone hover-card"></div></div><div class="hidden"><div data-popup-linkedin="content" class="w-richtext">Airwin Cargo announces partnership with Rhys Lagos Motorsport as a Major Sponsor. 🏁🏎️ 
-
-Rhys is a talented young Victorian driver with an impressive start to his motorsport journey.
-At just 13 years old, Rhys became the 2024 Western Districts Car Club Junior Champion (12–18 years) in the Khanacross series at Geelong Motorsport Complex in Avalon, building on several years of karting and motorsport experience. 
-His journey now progressing into Formula Vee AKURRA Motorsport — one of Australia’s established grassroots development categories.
-
-This sponsorship is about supporting people with #ambition, #discipline and the #determination to build something for their future.
-
-Good luck, Rhys — we’re excited to be part of the journey. 🏎️🏁
-
-#UnitedCarriers #RhysLagosMotorsport #FormulaVee #Motorsport #GrassrootsMotorsport #AustralianMotorsport #Sponsorship #Community #SupportingYoungTalent Formula 1</div><a data-popup-linkedin="link" href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7492712830006095872" class="w-inline-block"></a></div></div></div><div role="listitem" class="display-contents w-dyn-item"><div data-cursor="hidden" data-popup-linkedin="open" data-hover-card="" class="article-main-linkedin-item-ins"><div class="article-main-linkedin-item-inner"><div class="article-main-linkedin-head"><div class="article-main-linkedin-thumb"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df68/6a712cc2608649d3c47bd1ab_1785754102027.jpeg" loading="lazy" data-popup-linkedin="thumb" alt="" class="img-df img-fill"/></div><div class="article-main-linkedin-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12">LINKEDIN</div></div></div><div class="article-main-linkedin-content"><div class="article-main-linkedin-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-9">3mo</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">ago</div></div><div class="article-main-linkedin-desc"><div class="txt-clamp clamp-2"><div class="txt fs-14 w-richtext">A Season to Be Proud Of 🖤❤️
-
-Some seasons are measured by trophies. Others are measured by the moments, the determination and the memories they create.
-
-While the journey came to an end in the semi-finals this weekend, what an incredible achievement it was for both the Keilor Thunder NBL1 Men's and Women's teams to make it that far.
-
-As proud sponsors of Keilor Basketball Association, we'd like to congratulate the players, coaches, staff, volunteers and supporters on a fantastic season. Every game was played with passion, grit and heart, and it was a privilege to be part of the journey.
-
-A special thank you to Jackson T. and Emma Jarman their support throughout the season, and to Chris Lebon and Roxanne Muscat for proudly representing Airwin Cargo as sponsors of the club.
-
-Congratulations on an outstanding season. We have no doubt the future is bright for Keilor Thunder, and Airwin Cargo is proud to continue supporting the club.
-
-Here's to an even bigger 2027. Go Thunder! ⚡🖤❤️
-#KeilorThunder #NBL1 #CommunityPartnership #ProudSponsor #SupportingCommunity #Teamwork #UnitedCarriers #Basketball</div></div></div></div></div><div class="article-main-linkedin-item-bg"><div class="halftone hover-card"></div></div><div class="hidden"><div data-popup-linkedin="content" class="w-richtext">A Season to Be Proud Of 🖤❤️
-
-Some seasons are measured by trophies. Others are measured by the moments, the determination and the memories they create.
-
-While the journey came to an end in the semi-finals this weekend, what an incredible achievement it was for both the Keilor Thunder NBL1 Men's and Women's teams to make it that far.
-
-As proud sponsors of Keilor Basketball Association, we'd like to congratulate the players, coaches, staff, volunteers and supporters on a fantastic season. Every game was played with passion, grit and heart, and it was a privilege to be part of the journey.
-
-A special thank you to Jackson T. and Emma Jarman their support throughout the season, and to Chris Lebon and Roxanne Muscat for proudly representing Airwin Cargo as sponsors of the club.
-
-Congratulations on an outstanding season. We have no doubt the future is bright for Keilor Thunder, and Airwin Cargo is proud to continue supporting the club.
-
-Here's to an even bigger 2027. Go Thunder! ⚡🖤❤️
-#KeilorThunder #NBL1 #CommunityPartnership #ProudSponsor #SupportingCommunity #Teamwork #UnitedCarriers #Basketball</div><a data-popup-linkedin="link" href="https://www.linkedin.com/feed/update/urn:li:share:7489995576521097216" class="w-inline-block"></a></div></div></div></div></div><a href="/linkedin" class="article-main-linkedin-load-more w-inline-block"><div data-cursor="hidden" data-link-random="" data-is-btn="" data-wf--button--variant="outline" class="btn"><div class="btn-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">VIEW ALL POSTS</div></div></div></a></div></section></div></div><div class="article-cta-wrap"><div data-cursor="link" data-section="dark" id="w-node-_16cd6236-a00c-1313-b86e-e3a622eca6fd-22eca6fd" data-wf--cta--variant="base" class="cta"><div class="cta-inner"><div class="css-embed w-embed"><style>
-  
-</style></div><div class="cta-bg"><img src="https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="img-df img-fill"/><div class="cta-bg-overlay"></div></div><div class="w-layout-blockcontainer container grid w-container"><div id="w-node-_16cd6236-a00c-1313-b86e-e3a622eca700-22eca6fd" class="cta-text-wrap"><div class="cta-title"><h2 class="heading h2">Ready to move smarter?</h2></div><div class="cta-desc"><div data-wf--text--text-styles="standard" class="txt fs-16 fs-14-mb">We are here to help you grow without hassle. No call centres. No runaround. Just experienced people ready to help.</div></div><a href="./contact.html" class="cta-btn-wrap w-inline-block"><div data-cursor="hidden" data-link-random="" data-is-btn="" data-wf--button--variant="outline" class="btn"><div class="btn-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">work with us</div></div></div></a></div><div id="w-node-_16cd6236-a00c-1313-b86e-e3a622eca707-22eca6fd" class="cta-circs"><div class="cta-circ anim-wave"></div></div></div><a href="./contact.html" class="cta-link w-inline-block"></a></div></div></div><div class="popup"><div data-popup-linkedin="wrap" class="popup-wrap"><div class="popup-inner"><div class="popup-inner-content"><div class="linkedin-popup"><div class="linkedin-popup-inner"><div class="linkedin-popup-thumb"><div id="w-node-_499551a3-373a-0a3b-5865-9257632163fb-c403df49" class="linkedin-popup-img"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a44eec1ed1af2c4c403dfdf_intro-thumb.jpg" loading="lazy" data-popup-linkedin="thumb" alt="" class="img-df img-fill"/></div><div id="w-node-_499551a3-373a-0a3b-5865-9257632163fd-c403df49" class="linkedin-popup-video w-embed"><video data-src="" preload="none" autoplay loop muted playsinline class="img-df img-fill" data-popup-linkedin="video"></video></div></div><div class="linkedin-popup-main"><div class="linkedin-popup-head"><div class="linkedin-popup-avt"><img src="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a44eec1ed1af2c4c403dfe0_uc-avt%20(1).png" loading="lazy" alt="" class="img-df img-fill"/></div><div class="linkedin-popup-head-inner"><div class="linkedin-popup-name-wrap"><div class="linkedin-popup-name"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">UNITED CARRIERS</div></div><div class="linkedin-popup-tag"><div data-wf--text--text-styles="standard" class="txt fs-14">@unitedcarriers</div></div></div><div class="linkedin-popup-date"><div data-popup-linkedin="date" data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">3 days</div><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10"> ago</div></div></div><a data-popup-linkedin="link" href="#" class="linkedin-popup-link-mb w-inline-block"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-10">linkedIn</div></a></div><div class="linkedin-popup-body"><div data-popup-linkedin="content" class="linkedin-popup-content w-richtext"><p>**Media Release**</p><p>Airwin Cargo has been named a finalist in the 2026 Australian Small Business Champion awards, recognised in both the Business Growth and Transport &amp; Logistics categories.</p><p>From more than 8,500 businesses across Australia, this recognition reflects the strength of our Australian operation and the consistent performance, discipline, and commitment of our team.</p><p>Thank you to our clients &amp; partners who continue to trust us to deliver at a high standard.</p><p>We look forward to the awards night and the opportunity to represent our industry.<br/>hashtag#UnitedCarriers hashtag#GlobalLogistics hashtag#SupplyChain hashtag#FreightForwarding hashtag#BusinessGrowth hashtag#TransportAndLogistics<br/>likecelebratelove</p></div><a data-popup-linkedin="link" href="#" class="linkedin-popup-link w-inline-block"><div data-cursor="hidden" data-wf--text-link--variant="show-icon" class="link w-variant-d85494b8-1e5e-a86a-7767-d2ea90b10285"><div class="link-inner"><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e16f-f295e16d" class="link-top"><div data-wf--text--text-styles="standard" class="txt">View details</div></div><div id="w-node-_46dcaa50-7643-5f9c-8eb2-30d0f295e171-f295e16d" class="link-bottom"><div data-wf--text--text-styles="standard" class="txt">View details</div></div></div><div class="link-ic-wrap w-variant-d85494b8-1e5e-a86a-7767-d2ea90b10285"><div id="w-node-_9ce6cb79-9707-8d44-f6c5-44e31bfcb4e0-f295e16d" class="link-ic w-variant-d85494b8-1e5e-a86a-7767-d2ea90b10285 top"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div><div id="w-node-df0a97a8-a5d7-1044-3159-1a758cdb1ac1-f295e16d" class="link-ic w-variant-d85494b8-1e5e-a86a-7767-d2ea90b10285 bot"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none"><path d="M8.26055 1.55028L1.06055 8.75028M1.86055 0.750281L9.06055 0.75V7.95028" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></div></div></div></a></div></div></div><button data-popup-linkedin="close" data-cursor="hidden" class="popup-close"><div class="popup-close-ic"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="svg"><path d="M6.85742 6.85693L17.7145 17.7141" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round"></path><path d="M17.7145 6.85693L6.85742 17.7141" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round"></path></svg></div></button></div></div></div></div></div><div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style id="airwin-common-footer-style">
+      <!-- Card 7 -->
+      <article class="airwin-news-card">
+        <div class="airwin-news-card-bg-wrap">
+          <img src="./images/news/news_7.jpg" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img"/>
+          <div class="airwin-news-card-overlay-light"></div>
+          <div class="airwin-news-card-overlay-dark"></div>
+        </div>
+        <a href="https://www.airwincargo.com/news/the-power-of-collaboration-airwin-logistics-approach-to-partnership/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Power of Collaboration: Airwin Logistics' Approach to Partnership">
+          <div class="airwin-news-card-top">
+            <div class="airwin-news-card-date">
+              <span class="news-date-day">31</span>
+              <span class="news-date-month">May, 2024</span>
+            </div>
+            <div class="airwin-news-card-tag">Strategic Alliances</div>
+          </div>
+          <div class="airwin-news-card-body">
+            <div class="airwin-news-card-meta">
+              <span class="news-meta-accent">STRATEGIC ALLIANCES</span>
+              <span class="news-meta-dot">•</span>
+              <span class="news-meta-time">4 MIN READ</span>
+            </div>
+            <h2 class="airwin-news-card-title">The Power of Collaboration: Airwin Logistics' Approach to Partnership</h2>
+            <p class="airwin-news-card-desc">Building enduring, high-trust alliances with airline carriers, shipping lines, and ground infrastructure partners to ensure capacity access even in peak freight seasons.</p>
+            <div class="airwin-news-card-action">
+              <span class="news-action-text">Read Article</span>
+              <span class="news-action-arrow" aria-hidden="true">
+                <span class="news-action-line"></span>
+                <svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+  </main>
+</div>
+<div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style id="airwin-common-footer-style">
   /* =========================================================
      AIRWIN COMMON FOOTER - PURE BLACK AESTHETIC & INTERACTIVE
      ========================================================= */
