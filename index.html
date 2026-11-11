@@ -3848,7 +3848,7 @@
     display: none !important;
   }
 
-      .airwin-blog-section {
+        .airwin-blog-section {
     position: relative;
     background: #ffffff;
     width: 100%;
@@ -3990,7 +3990,7 @@
     }
   }
 
-  /* UNDP Style Full-Bleed Editorial Cards */
+  /* UNDP Style Full-Bleed Editorial Cards with Faded Rest & Vivid Hover */
   .airwin-blog-card {
     position: relative;
     min-height: 560px;
@@ -3999,14 +3999,18 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-    background: #0b1118;
+    background: #f6f7f9;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.45s ease;
   }
 
   .airwin-blog-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
+    border-color: transparent;
+    box-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.32);
   }
 
   .airwin-blog-card-link {
@@ -4018,11 +4022,11 @@
     flex-direction: column;
     justify-content: space-between;
     text-decoration: none;
-    color: #ffffff;
+    color: inherit;
     z-index: 2;
   }
 
-  /* Full Bleed Background Image & Gradient Overlay */
+  /* Full Bleed Background Image & Dual Overlays */
   .airwin-card-bg-wrap {
     position: absolute;
     inset: 0;
@@ -4030,46 +4034,67 @@
     height: 100%;
     z-index: 1;
     overflow: hidden;
+    background: #f6f7f9;
   }
 
+  /* Background image: Soft Faded at rest -> Vivid on hover */
   .airwin-card-bg-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center 20%;
     display: block;
-    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+    opacity: 0.18;
+    filter: grayscale(70%) contrast(105%);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .airwin-blog-card:hover .airwin-card-bg-img {
+    opacity: 1;
+    filter: grayscale(0%) contrast(100%);
     transform: scale(1.07);
-    filter: brightness(0.92);
   }
 
-  /* Multi-Stop Cinematic Contrast Gradient */
-  .airwin-card-overlay {
+  /* Light Overlay Wash (Active Before Hover) */
+  .airwin-card-overlay-light {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(8, 12, 18, 0.50) 0%,
-      rgba(8, 12, 18, 0.20) 24%,
+      rgba(246, 247, 249, 0.35) 0%,
+      rgba(246, 247, 249, 0.75) 50%,
+      rgba(246, 247, 249, 0.98) 100%
+    );
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: 2;
+  }
+
+  .airwin-blog-card:hover .airwin-card-overlay-light {
+    opacity: 0;
+  }
+
+  /* Dark Cinematic Overlay (Active On Hover) */
+  .airwin-card-overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 12, 18, 0.52) 0%,
+      rgba(8, 12, 18, 0.22) 24%,
       rgba(8, 12, 18, 0.65) 50%,
       rgba(8, 12, 18, 0.95) 72%,
       rgba(8, 12, 18, 1.0) 100%
     );
-    transition: background 0.4s ease;
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
   }
 
-  .airwin-blog-card:hover .airwin-card-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(8, 12, 18, 0.56) 0%,
-      rgba(8, 12, 18, 0.16) 24%,
-      rgba(8, 12, 18, 0.60) 48%,
-      rgba(8, 12, 18, 0.94) 70%,
-      rgba(8, 12, 18, 1.0) 100%
-    );
+  .airwin-blog-card:hover .airwin-card-overlay-dark {
+    opacity: 1;
   }
 
   /* Card Top Bar (Date Badge Preserved on Left, Category Tag on Right) */
@@ -4093,10 +4118,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     min-width: 66px;
     text-align: center;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  .airwin-blog-card:hover .airwin-card-date {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
   }
 
   .card-date-day {
@@ -4119,11 +4150,9 @@
 
   /* Category Tag (UNDP Editorial Pill) */
   .airwin-card-tag {
-    background: rgba(17, 24, 39, 0.76);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    color: #ffffff;
+    background: rgba(17, 24, 39, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #111111;
     font-family: 'BT Steinhart Mono', monospace, sans-serif;
     font-size: 0.72rem;
     font-weight: 700;
@@ -4131,6 +4160,15 @@
     text-transform: uppercase;
     padding: 0.45rem 0.95rem;
     border-radius: 100px;
+    transition: all 0.45s ease;
+  }
+
+  .airwin-blog-card:hover .airwin-card-tag {
+    background: rgba(17, 24, 39, 0.76);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   }
 
@@ -4150,14 +4188,24 @@
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #94a3b8;
+    color: #64748b;
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: color 0.45s ease;
+  }
+
+  .airwin-blog-card:hover .airwin-card-meta {
+    color: #94a3b8;
   }
 
   .card-meta-accent {
+    color: #0066cc;
+    transition: color 0.45s ease;
+  }
+
+  .airwin-blog-card:hover .card-meta-accent {
     color: #38bdf8;
   }
 
@@ -4165,30 +4213,41 @@
     opacity: 0.6;
   }
 
+  /* Title: Black at rest -> Crisp White on hover */
   .airwin-card-title {
     font-family: 'BT Steinhart', Arial, sans-serif;
     font-size: clamp(1.35rem, 1.6vw, 1.65rem);
     font-weight: 800;
     line-height: 1.25;
     letter-spacing: -0.02em;
-    color: #ffffff;
+    color: #111111;
     margin: 0 0 0.85rem 0;
     text-transform: none;
-    transition: color 0.3s ease;
+    transition: color 0.45s ease;
   }
 
+  .airwin-blog-card:hover .airwin-card-title {
+    color: #ffffff;
+  }
+
+  /* Description: Dark Gray at rest -> White on hover */
   .airwin-card-desc {
     font-size: 0.94rem;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
+    color: #4b5563;
     margin: 0 0 1.65rem 0;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: color 0.45s ease;
   }
 
-  /* UNDP Signature Extended Line Arrow Action */
+  .airwin-blog-card:hover .airwin-card-desc {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Action Link: Black text at rest with red arrow -> White text with extended red arrow on hover */
   .undp-card-action {
     display: inline-flex;
     align-items: center;
@@ -4198,9 +4257,13 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #111111;
     margin-top: auto;
-    transition: color 0.3s ease;
+    transition: color 0.45s ease;
+  }
+
+  .airwin-blog-card:hover .undp-card-action {
+    color: #ffffff;
   }
 
   .undp-action-arrow {
@@ -4212,7 +4275,7 @@
 
   .undp-action-line {
     display: inline-block;
-    width: 52px;
+    width: 22px;
     height: 2px;
     background: #e5243b;
     transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -4228,7 +4291,7 @@
   }
 
   .airwin-blog-card:hover .undp-action-line {
-    width: 80px;
+    width: 76px;
   }
 </style>
 <section id="our-blog" class="airwin-blog-section">
@@ -4265,7 +4328,8 @@
       <article class="airwin-blog-card">
         <div class="airwin-card-bg-wrap">
           <img src="/images/blog/logistics_management.jpg" alt="Logistics Management" loading="lazy" class="airwin-card-bg-img"/>
-          <div class="airwin-card-overlay"></div>
+          <div class="airwin-card-overlay-light"></div>
+          <div class="airwin-card-overlay-dark"></div>
         </div>
         <a href="./insights.html" class="airwin-blog-card-link" aria-label="Read Next-Gen Logistics: Optimizing Multi-Modal Supply Chains Across Global Trade Lanes">
           <div class="airwin-card-top">
@@ -4302,7 +4366,8 @@
       <article class="airwin-blog-card">
         <div class="airwin-card-bg-wrap">
           <img src="/images/blog/domestic_logistics.jpg" alt="Domestic Logistics" loading="lazy" class="airwin-card-bg-img"/>
-          <div class="airwin-card-overlay"></div>
+          <div class="airwin-card-overlay-light"></div>
+          <div class="airwin-card-overlay-dark"></div>
         </div>
         <a href="./insights.html" class="airwin-blog-card-link" aria-label="Read Domestic Cargo & Line-Haul Networks: Fast, Dedicated Pan-India Distribution">
           <div class="airwin-card-top">
@@ -4339,7 +4404,8 @@
       <article class="airwin-blog-card">
         <div class="airwin-card-bg-wrap">
           <img src="/images/blog/airwin_partner.jpg" alt="Airwin Partner Excellence" loading="lazy" class="airwin-card-bg-img"/>
-          <div class="airwin-card-overlay"></div>
+          <div class="airwin-card-overlay-light"></div>
+          <div class="airwin-card-overlay-dark"></div>
         </div>
         <a href="./insights.html" class="airwin-blog-card-link" aria-label="Read Airwin Logistics Over 25 Years of Cargo Excellence">
           <div class="airwin-card-top">
