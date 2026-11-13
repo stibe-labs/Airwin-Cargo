@@ -8,7 +8,29 @@ html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-se
 .header.is-light-theme .header-logo-img.is-dark-theme{display:none!important}
 .header.is-light-theme .header-logo-img.is-light-theme{display:block!important}
 
-/* Airwin Partner Logo Hover Transition */
+/* Airwin Partner Logo Clean Borderless Style */
+.home-partners-item-line,
+.home-partners-item-dot,
+.home-partners-item.is-empty,
+.home-partners .hidden {
+  display: none !important;
+}
+.home-partners,
+.home-partners-label-wrap,
+.home-partners-main,
+.home-partners-list,
+.home-partners-item,
+.home-partners-item-inner {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+.home-partners-item:hover .home-partners-item-inner {
+  background: transparent !important;
+  background-color: transparent !important;
+}
 .home-partners-item .home-partners-item-inner {
   display: flex !important;
   align-items: center !important;
@@ -19,9 +41,17 @@ html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-se
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: 7rem !important;
+  height: 120px !important;
+  max-height: 130px !important;
   width: 100% !important;
   transition: opacity .35s ease, transform .35s ease !important;
+}
+.home-partners-item-thumb img {
+  max-width: 250px !important;
+  max-height: 110px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 .home-partners-item-thumb.is-hover {
   position: absolute !important;
@@ -30,12 +60,19 @@ html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-family:sans-se
   transform: translate(-50%, -50%) !important;
   opacity: 0 !important;
 }
+.home-partners-item-thumb.is-hover img {
+  max-width: 250px !important;
+  max-height: 110px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
 .home-partners-item:hover .home-partners-item-thumb:not(.is-hover) {
   opacity: 0 !important;
 }
 .home-partners-item:hover .home-partners-item-thumb.is-hover {
   opacity: 1 !important;
-  transform: translate(-50%, -50%) scale(1.06) !important;
+  transform: translate(-50%, -50%) scale(1.08) !important;
 }
 
 /* ==========================================================================
