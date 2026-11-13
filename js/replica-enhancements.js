@@ -735,6 +735,29 @@
         try { window.initAirwinFooterWordmark(); } catch (e) {}
       }
 
+      // 7b. Self-healing watchdog for home service truck & wheel animations
+      const truckInner = document.querySelector('.home-service-truck-inner');
+      if (truckInner && window.ScrollTrigger) {
+        try {
+          const triggers = window.ScrollTrigger.getAll();
+          const hasServiceTrigger = triggers.some(st => {
+            const el = st.trigger;
+            return el && (
+              (el.classList && (el.classList.contains('home-service-wrap') || el.classList.contains('home-service-second-screen'))) ||
+              el.closest?.('.home-service-wrap')
+            );
+          });
+          if (!hasServiceTrigger) {
+            const container = document.querySelector('[data-barba="container"]') || document.querySelector('.main-inner') || document.body;
+            if (container) {
+              const detail = { next: { container: container, namespace: 'home' } };
+              container.dispatchEvent(new CustomEvent('onceSetup', { detail: detail }));
+              container.dispatchEvent(new CustomEvent('oncePlay', { detail: detail }));
+            }
+          }
+        } catch (e) {}
+      }
+
       // 8. Refresh GSAP ScrollTrigger if available (safely without destructive window.resize)
       if (window.ScrollTrigger) {
         try { window.ScrollTrigger.refresh(); } catch (e) {}
