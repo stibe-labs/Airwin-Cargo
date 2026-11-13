@@ -608,6 +608,30 @@
   // 4. SCROLL & ANIMATION RESILIENCE ON HARD REFRESH / SLOW ASSETS
   function initScrollResilience() {
     function enforceVisibilityAndRefresh() {
+      // 0. Clean up any orphan blog or footer elements outside the main Barba wrapper
+      try {
+        const barbaWrapper = document.querySelector('[data-barba="wrapper"]') || document.querySelector('.main');
+        const activeContainer = document.querySelector('[data-barba="container"]');
+        const namespace = activeContainer ? activeContainer.getAttribute('data-barba-namespace') : '';
+
+        // If not on the homepage, the home blog section should never be displayed
+        if (namespace && namespace !== 'home') {
+          document.querySelectorAll('#our-blog, .airwin-blog-section').forEach(b => b.remove());
+        }
+
+        // Any footer outside the barbaWrapper is an orphan leftover
+        if (barbaWrapper) {
+          document.querySelectorAll('body > .footer-wrap, body > footer.footer').forEach(fw => {
+            fw.remove();
+          });
+          document.querySelectorAll('.footer-wrap').forEach(fw => {
+            if (!barbaWrapper.contains(fw)) {
+              fw.remove();
+            }
+          });
+        }
+      } catch (e) {}
+
       // 1. Remove all data-init-hidden markers across document
       document.querySelectorAll('[data-init-hidden]').forEach(el => {
         el.removeAttribute('data-init-hidden');
