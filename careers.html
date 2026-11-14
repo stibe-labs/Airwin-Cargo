@@ -241,13 +241,12 @@
     z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
     pointer-events: auto !important;
     display: block !important;
     visibility: visible !important;
@@ -686,13 +685,12 @@ html {
     z-index: 999999 !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
     pointer-events: auto !important;
     display: block !important;
     visibility: visible !important;
@@ -1080,81 +1078,150 @@ html {
 }
 
 /* ========================================================= */
-/* Hero Section                                              */
+/* Hero Section with Cinematic Background Image             */
 /* ========================================================= */
 .airwin-careers-hero {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 4vw, 3.5rem);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.airwin-careers-eyebrow {
-  font-family: 'BT Steinhart Mono', monospace, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #0016CB;
-  margin-bottom: 1.15rem;
+  position: relative;
+  width: 100%;
+  min-height: clamp(480px, 48vh, 600px);
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  background: #070d18;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: clamp(3.5rem, 5.5vw, 5.5rem);
+  padding-bottom: clamp(3.5rem, 5.5vw, 5.5rem);
 }
 
-.careers-eyebrow-dot {
+.airwin-careers-hero-bg-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.airwin-careers-hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.airwin-careers-hero:hover .airwin-careers-hero-bg-img {
+  transform: scale(1.05);
+}
+
+.airwin-careers-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 10, 22, 0.94) 0%,
+    rgba(8, 16, 34, 0.86) 45%,
+    rgba(6, 12, 26, 0.76) 100%
+  );
+  z-index: 2;
+}
+
+.airwin-careers-hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.airwin-careers-hero .airwin-careers-eyebrow {
+  font-family: 'BT Steinhart Mono', monospace, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin-bottom: 1.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.airwin-careers-hero .careers-eyebrow-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #0016CB;
+  background: #38bdf8;
   display: inline-block;
-  box-shadow: 0 0 10px rgba(0, 22, 203, 0.55);
+  box-shadow: 0 0 10px #38bdf8;
 }
 
-.airwin-careers-hero-title {
+.airwin-careers-hero .airwin-careers-hero-title {
   font-family: 'BT Steinhart', Arial, sans-serif;
   font-size: clamp(2.4rem, 4.8vw, 4.2rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 800;
-  color: #111111;
+  color: #ffffff;
   text-transform: uppercase;
   margin: 0 0 1.5rem 0;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
 }
 
-.airwin-careers-hero-desc {
+.airwin-careers-hero .airwin-careers-hero-desc {
   font-size: clamp(1rem, 1.2vw, 1.2rem);
   line-height: 1.65;
-  color: #4a5568;
+  color: rgba(255, 255, 255, 0.88);
   max-width: 780px;
-  margin: 0 0 2rem 0;
+  margin: 0 0 2.25rem 0;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
-.airwin-careers-hero-pills {
+.airwin-careers-hero .airwin-careers-hero-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
-.careers-pill {
+.airwin-careers-hero .careers-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 1rem;
-  background: #f4f5f8;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  gap: 0.55rem;
+  padding: 0.55rem 1.15rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 100px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #222222;
+  color: #ffffff;
   letter-spacing: 0.02em;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
-.careers-pill-dot {
-  width: 6px;
-  height: 6px;
+.airwin-careers-hero .careers-pill:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.airwin-careers-hero .careers-pill-dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #0016CB;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
 /* ========================================================= */
@@ -1254,8 +1321,8 @@ html {
   object-fit: cover;
   object-position: center center;
   display: block;
-  opacity: 0.14;
-  filter: grayscale(70%) contrast(105%);
+  opacity: 0.24;
+  filter: grayscale(35%) contrast(110%);
   transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.55s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1938,35 +2005,44 @@ html {
 <div class="airwin-careers-page-wrap">
 
   <!-- ========================================================= -->
-  <!-- HERO SECTION                                              -->
+  <!-- HERO SECTION WITH CINEMATIC BACKGROUND IMAGE              -->
   <!-- ========================================================= -->
   <section class="airwin-careers-hero">
-    <div class="airwin-careers-eyebrow">
-      <span class="careers-eyebrow-dot"></span>
-      Airwin Logistics &bull; Careers &amp; Opportunities
+    <div class="airwin-careers-hero-bg-wrap">
+      <picture>
+        <source srcset="/images/careers/hero-collaboration.webp" type="image/webp">
+        <img src="/images/careers/hero-collaboration.png" alt="Airwin Careers Office Collaboration" class="airwin-careers-hero-bg-img" />
+      </picture>
+      <div class="airwin-careers-hero-overlay"></div>
     </div>
-    <h1 class="airwin-careers-hero-title">
-      Join Our Global<br>Logistics Team
-    </h1>
-    <p class="airwin-careers-hero-desc">
-      Airwin Cargo Services is a distinguished cargo forwarding and courier distribution leader operating with excellence globally since 2001. We empower talent to power global supply chains with immediate career opportunities across India and the UAE.
-    </p>
-    <div class="airwin-careers-hero-pills">
-      <div class="careers-pill">
-        <span class="careers-pill-dot"></span>
-        Established in 2001
+    <div class="airwin-careers-hero-inner">
+      <div class="airwin-careers-eyebrow">
+        <span class="careers-eyebrow-dot"></span>
+        Airwin Logistics &bull; Careers &amp; Opportunities
       </div>
-      <div class="careers-pill">
-        <span class="careers-pill-dot"></span>
-        Global Freight &amp; Courier Network
-      </div>
-      <div class="careers-pill">
-        <span class="careers-pill-dot"></span>
-        Calicut, New Delhi &amp; Dubai Hubs
-      </div>
-      <div class="careers-pill">
-        <span class="careers-pill-dot"></span>
-        3 Active Openings
+      <h1 class="airwin-careers-hero-title">
+        Join Our Global<br>Logistics Team
+      </h1>
+      <p class="airwin-careers-hero-desc">
+        Airwin Cargo Services is a distinguished cargo forwarding and courier distribution leader operating with excellence globally since 2001. We empower talent to power global supply chains with immediate career opportunities across India and the UAE.
+      </p>
+      <div class="airwin-careers-hero-pills">
+        <div class="careers-pill">
+          <span class="careers-pill-dot"></span>
+          Established in 2001
+        </div>
+        <div class="careers-pill">
+          <span class="careers-pill-dot"></span>
+          Global Freight &amp; Courier Network
+        </div>
+        <div class="careers-pill">
+          <span class="careers-pill-dot"></span>
+          Calicut, New Delhi &amp; Dubai Hubs
+        </div>
+        <div class="careers-pill">
+          <span class="careers-pill-dot"></span>
+          3 Active Openings
+        </div>
       </div>
     </div>
   </section>
@@ -1995,7 +2071,10 @@ html {
       <!-- ======================================================= -->
       <article class="airwin-careers-card" id="job-card-1">
         <div class="airwin-careers-card-bg-wrap">
-          <img src="/images/services-gallery-2.jpg" alt="Customer Care Executive" class="airwin-careers-card-bg-img" loading="lazy" />
+          <picture>
+            <source srcset="/images/careers/customer-care-executive.webp" type="image/webp">
+            <img src="/images/careers/customer-care-executive.png" alt="Customer Care Executive" class="airwin-careers-card-bg-img" loading="lazy" />
+          </picture>
           <div class="airwin-careers-card-overlay-light"></div>
           <div class="airwin-careers-card-overlay-dark"></div>
         </div>
@@ -2053,7 +2132,10 @@ html {
       <!-- ======================================================= -->
       <article class="airwin-careers-card" id="job-card-2">
         <div class="airwin-careers-card-bg-wrap">
-          <img src="/images/services-gallery-3.jpg" alt="Graphic Designer" class="airwin-careers-card-bg-img" loading="lazy" />
+          <picture>
+            <source srcset="/images/careers/graphic-designer.webp" type="image/webp">
+            <img src="/images/careers/graphic-designer.jpg" alt="Graphic Designer" class="airwin-careers-card-bg-img" loading="lazy" />
+          </picture>
           <div class="airwin-careers-card-overlay-light"></div>
           <div class="airwin-careers-card-overlay-dark"></div>
         </div>
@@ -2112,7 +2194,10 @@ html {
       <!-- ======================================================= -->
       <article class="airwin-careers-card" id="job-card-3">
         <div class="airwin-careers-card-bg-wrap">
-          <img src="/images/blog/logistics_management.jpg" alt="Logistics Manager" class="airwin-careers-card-bg-img" loading="lazy" />
+          <picture>
+            <source srcset="/images/careers/logistics-manager.webp" type="image/webp">
+            <img src="/images/careers/logistics-manager.jpg" alt="Logistics Manager" class="airwin-careers-card-bg-img" loading="lazy" />
+          </picture>
           <div class="airwin-careers-card-overlay-light"></div>
           <div class="airwin-careers-card-overlay-dark"></div>
         </div>
