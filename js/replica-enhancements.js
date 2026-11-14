@@ -156,6 +156,13 @@
     }, { passive: true });
 
     // Handle clicks smoothly: if clicking link to current page, smooth scroll to top
+    header.querySelectorAll('.nav-link-item').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.nav-link-item').forEach(l => l.classList.remove('w--current', 'active'));
+        link.classList.add('w--current', 'active');
+      });
+    });
+
     header.querySelectorAll('.header-row-nav a, .nav-link-item, .header-tracking-btn, .header-logo-link').forEach((link) => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
@@ -857,34 +864,40 @@
   
   // =========================================================
   // HERO VIDEO SCROLL ANIMATION (CONTAINER LOADING ONTO TRUCK)
-  // Non-blocking, frame-by-frame scrub without layout thrashing
+  // Non-blocking, frame-by-frame scrub with persistent frame cache
   // =========================================================
+  const globalHeroVideoFrames = window.__airwinHeroVideoFrames || [];
+  window.__airwinHeroVideoFrames = globalHeroVideoFrames;
+  let hasStartedFramePreload = false;
+
+  function preloadHeroVideoFrames() {
+    if (hasStartedFramePreload) return;
+    hasStartedFramePreload = true;
+
+    const total = 118;
+    for (let i = 0; i < total; i++) {
+      if (!globalHeroVideoFrames[i]) {
+        const img = new Image();
+        const num = String(i).padStart(4, '0');
+        img.src = '/assets/hero-video-frames/frame_' + num + '.webp';
+        globalHeroVideoFrames[i] = img;
+      }
+    }
+  }
+
   window.initHeroVideoScrollAnimation = function initHeroVideoScrollAnimation() {
     const canvas = document.getElementById('airwin-hero-canvas');
     if (!canvas) return;
-    if (canvas.dataset.heroVidInit === 'true') {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
-        canvas.width = w;
-        canvas.height = h;
-      }
-      return;
-    }
-    canvas.dataset.heroVidInit = 'true';
+
+    // Start background preloading of all frames once
+    preloadHeroVideoFrames();
 
     const ctx = canvas.getContext('2d');
     const totalFrames = 118;
-    const framePaths = [];
-    for (let i = 0; i < totalFrames; i++) {
-      const num = String(i).padStart(4, '0');
-      framePaths.push('/assets/hero-video-frames/frame_' + num + '.webp');
-    }
-
-    const images = [];
     let currentFrame = 0;
     let targetFrame = 0;
     let lastRenderedFrame = -1;
+    let isVideoRafRunning = false;
 
     function resizeCanvas() {
       const w = window.innerWidth;
@@ -899,9 +912,9 @@
 
     function drawFrame(idx) {
       const frameIdx = Math.max(0, Math.min(totalFrames - 1, idx));
-      let img = images[frameIdx];
+      let img = globalHeroVideoFrames[frameIdx];
       if (!img || !img.complete || img.naturalWidth === 0) {
-        img = images[0];
+        img = globalHeroVideoFrames[0];
       }
       if (!img || !img.complete || img.naturalWidth === 0) return;
 
@@ -920,41 +933,26 @@
       ctx.drawImage(img, drawX, drawY, drawW, drawH);
     }
 
-    // Load first frame immediately
-    const firstImg = new Image();
-    firstImg.src = framePaths[0];
-    images[0] = firstImg;
-    firstImg.onload = function() {
-      resizeCanvas();
-      drawFrame(0);
-    };
+    // Force immediate sizing
+    resizeCanvas();
 
-    // Preload remaining frames in smooth non-blocking batches
-    for (let i = 1; i < Math.min(totalFrames, 8); i++) {
-      const img = new Image();
-      img.src = framePaths[i];
-      images[i] = img;
-    }
-    let nextFrameToLoad = 8;
-    function loadRemainingFrames() {
-      const batchLimit = Math.min(totalFrames, nextFrameToLoad + 6);
-      for (let i = nextFrameToLoad; i < batchLimit; i++) {
-        if (!images[i]) {
-          const img = new Image();
-          img.src = framePaths[i];
-          images[i] = img;
-        }
-      }
-      nextFrameToLoad = batchLimit;
-      if (nextFrameToLoad < totalFrames) {
-        if (window.requestIdleCallback) {
-          window.requestIdleCallback(loadRemainingFrames, { timeout: 200 });
-        } else {
-          setTimeout(loadRemainingFrames, 50);
-        }
+    // Ensure frame 0 is drawn immediately
+    if (globalHeroVideoFrames[0] && globalHeroVideoFrames[0].complete && globalHeroVideoFrames[0].naturalWidth > 0) {
+      drawFrame(0);
+    } else {
+      const first = new Image();
+      first.onload = function() {
+        globalHeroVideoFrames[0] = first;
+        resizeCanvas();
+        drawFrame(0);
+      };
+      first.src = '/assets/hero-video-frames/frame_0000.webp';
+      if (first.complete && first.naturalWidth > 0) {
+        globalHeroVideoFrames[0] = first;
+        resizeCanvas();
+        drawFrame(0);
       }
     }
-    setTimeout(loadRemainingFrames, 120);
 
     let cachedHeroHeight = 0;
     function updateHeroHeight() {
@@ -962,8 +960,6 @@
       cachedHeroHeight = heroWrap ? (heroWrap.offsetHeight || window.innerHeight * 1.2) : (window.innerHeight * 1.2);
     }
     updateHeroHeight();
-
-    let isVideoRafRunning = false;
 
     function updateProgress() {
       if (cachedHeroHeight <= 0) updateHeroHeight();
@@ -978,9 +974,6 @@
         requestAnimationFrame(renderLoop);
       }
     }
-
-    window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', () => { updateHeroHeight(); resizeCanvas(); updateProgress(); }, { passive: true });
 
     // Smooth sleep-aware render loop
     function renderLoop() {
@@ -1007,10 +1000,17 @@
         isVideoRafRunning = false;
       }
     }
+
+    // Always start render loop initially to draw current position
     isVideoRafRunning = true;
     requestAnimationFrame(renderLoop);
 
-    resizeCanvas();
+    if (canvas.dataset.heroVidEventsBound !== 'true') {
+      canvas.dataset.heroVidEventsBound = 'true';
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', () => { updateHeroHeight(); resizeCanvas(); updateProgress(); }, { passive: true });
+    }
+
     updateProgress();
   };
 
@@ -1043,31 +1043,53 @@
   /* =========================================================
      AIRWIN NAVIGATION ACTIVE LINK SYNCHRONIZER
      ========================================================= */
-  function updateAirwinActiveNavLinks() {
-    const currentPath = window.location.pathname.toLowerCase();
+  function updateAirwinActiveNavLinks(customPath) {
+    const rawPath = typeof customPath === 'string' ? customPath : window.location.pathname;
+    let path = (rawPath || '').toLowerCase().replace(/\/+$/, '') || '/';
+    if (path.endsWith('.html')) {
+      path = path.slice(0, -5);
+    }
+    if (path === '' || path === '/index') {
+      path = '/';
+    }
+
+    let activeKey = 'home';
+    if (path === '/') {
+      activeKey = 'home';
+    } else if (path.includes('about')) {
+      activeKey = 'about';
+    } else if (path.includes('service')) {
+      activeKey = 'services';
+    } else if (path.includes('insight') || path.includes('news')) {
+      activeKey = 'news';
+    } else if (path.includes('career')) {
+      activeKey = 'career';
+    } else if (path.includes('contact')) {
+      activeKey = 'contact';
+    }
+
     document.querySelectorAll('.nav-link-item').forEach(link => {
+      // First ALWAYS remove both classes cleanly
+      link.classList.remove('w--current', 'active');
+
       const href = (link.getAttribute('href') || '').toLowerCase();
-      const isHome = (currentPath === '/' || currentPath.endsWith('/index.html') || currentPath === '' || currentPath.endsWith('/index'));
-      if (isHome) {
-        if (href.includes('index.html') || href === '/' || href === './') {
-          link.classList.add('w--current');
-        } else {
-          link.classList.remove('w--current');
-        }
-      } else {
-        if (href.includes('about') && currentPath.includes('about')) {
-          link.classList.add('w--current');
-        } else if (href.includes('services') && currentPath.includes('services')) {
-          link.classList.add('w--current');
-        } else if (href.includes('insights') && (currentPath.includes('insights') || currentPath.includes('news'))) {
-          link.classList.add('w--current');
-        } else if (href.includes('careers') && currentPath.includes('career')) {
-          link.classList.add('w--current');
-        } else if (href.includes('contact') && currentPath.includes('contact')) {
-          link.classList.add('w--current');
-        } else {
-          link.classList.remove('w--current');
-        }
+      let match = false;
+      if (activeKey === 'home') {
+        match = (href.includes('index') || href === '/' || href === './');
+      } else if (activeKey === 'about') {
+        match = href.includes('about');
+      } else if (activeKey === 'services') {
+        match = href.includes('service');
+      } else if (activeKey === 'news') {
+        match = (href.includes('insight') || href.includes('news'));
+      } else if (activeKey === 'career') {
+        match = href.includes('career');
+      } else if (activeKey === 'contact') {
+        match = href.includes('contact');
+      }
+
+      if (match) {
+        link.classList.add('w--current', 'active');
       }
     });
   }
@@ -1079,17 +1101,39 @@
     updateAirwinActiveNavLinks();
   }
 
-  window.addEventListener('popstate', updateAirwinActiveNavLinks);
+  window.addEventListener('popstate', () => updateAirwinActiveNavLinks());
+
+  function getBarbaUrlPath(data) {
+    if (!data || !data.next) return window.location.pathname;
+    const u = data.next.url;
+    if (!u) return window.location.pathname;
+    if (typeof u === 'string') return u;
+    if (u.path) return u.path;
+    if (u.pathname) return u.pathname;
+    if (u.href) {
+      try { return new URL(u.href, window.location.origin).pathname; } catch(e) { return u.href; }
+    }
+    return window.location.pathname;
+  }
+
   if (window.barba) {
     try {
-      window.barba.hooks.after(updateAirwinActiveNavLinks);
-      window.barba.hooks.afterEnter(() => {
-        updateAirwinActiveNavLinks();
+      window.barba.hooks.beforeEnter((data) => {
+        updateAirwinActiveNavLinks(getBarbaUrlPath(data));
+      });
+      window.barba.hooks.afterEnter((data) => {
+        updateAirwinActiveNavLinks(getBarbaUrlPath(data));
         if (typeof window.initAboutHeroCardsAnimation === 'function') {
-          window.initAboutHeroCardsAnimation();
+          try { window.initAboutHeroCardsAnimation(); } catch(e) {}
         }
         if (typeof window.initHeroVideoScrollAnimation === 'function') {
-          window.initHeroVideoScrollAnimation();
+          try { window.initHeroVideoScrollAnimation(); } catch(e) {}
+        }
+      });
+      window.barba.hooks.after((data) => {
+        updateAirwinActiveNavLinks(getBarbaUrlPath(data));
+        if (typeof window.initHeroVideoScrollAnimation === 'function') {
+          try { window.initHeroVideoScrollAnimation(); } catch(e) {}
         }
       });
     } catch(e) {}
