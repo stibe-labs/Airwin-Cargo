@@ -5522,6 +5522,12 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         isVisible = entry.isIntersecting;
+        if (isVisible && !window._containersShaderRaf && texturesReady >= 2) {
+          window._containersShaderRaf = requestAnimationFrame(render);
+        } else if (!isVisible && window._containersShaderRaf) {
+          cancelAnimationFrame(window._containersShaderRaf);
+          window._containersShaderRaf = null;
+        }
       });
     }, { threshold: 0.05 });
     observer.observe(canvas);
@@ -5550,6 +5556,7 @@
     function render() {
       if (!canvas.isConnected) {
         canvas._containersActive = false;
+        window._containersShaderRaf = null;
         return;
       }
       if (isVisible && texturesReady >= 2) {
@@ -5577,7 +5584,11 @@
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.drawArrays(gl.TRIANGLES, 0, 6);
       }
-      window._containersShaderRaf = requestAnimationFrame(render);
+      if (isVisible) {
+        window._containersShaderRaf = requestAnimationFrame(render);
+      } else {
+        window._containersShaderRaf = null;
+      }
     }
   };
 
@@ -5713,19 +5724,30 @@
         onScroll();
       }
 
+      let scrollTicking = false;
+      function requestScrollTick() {
+        if (!scrollTicking) {
+          scrollTicking = true;
+          requestAnimationFrame(() => {
+            onScroll();
+            scrollTicking = false;
+          });
+        }
+      }
+
       resize();
       window.addEventListener("resize", resize, { passive: true });
-      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("scroll", requestScrollTick, { passive: true });
       if (window.lenis && typeof window.lenis.on === "function") {
-        window.lenis.on("scroll", onScroll);
+        window.lenis.on("scroll", requestScrollTick);
       }
       setTimeout(resize, 200);
 
       _servicesMosaicCleanup = function() {
         window.removeEventListener("resize", resize);
-        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("scroll", requestScrollTick);
         if (window.lenis && typeof window.lenis.off === "function") {
-          try { window.lenis.off("scroll", onScroll); } catch(e) {}
+          try { window.lenis.off("scroll", requestScrollTick); } catch(e) {}
         }
       };
     }
@@ -5774,6 +5796,7 @@
         targetRotX = -relY * 6;       // Tilt forward/backward
         targetRotY = relX * 8;        // 3D yaw facing cursor
         targetTransX = relX * 16;     // Lateral sway
+        startSwing();
       }
 
       function onPointerLeave() {
@@ -5782,6 +5805,7 @@
         targetRotX = 0;
         targetRotY = 0;
         targetTransX = 0;
+        startSwing();
       }
 
       sectionEl.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -5796,10 +5820,12 @@
             targetRotZ = -8;
             targetRotY = -6;
             targetTransX = -12;
+          startSwing();
           } else {
             targetRotZ = 8;
             targetRotY = 6;
             targetTransX = 12;
+          startSwing();
           }
         });
         item.addEventListener("mouseleave", () => {
@@ -5809,14 +5835,41 @@
         });
       });
 
-      // Smooth physics loop with spring/lerp inertia
+      let isSwingAnimating = false;
+      let isSwingVisible = false;
+
+      function startSwing() {
+        if (!isSwingAnimating && isSwingVisible) {
+          isSwingAnimating = true;
+          requestAnimationFrame(animate);
+        }
+      }
+
+      // Smooth sleep-aware physics loop with spring/lerp inertia
       function animate() {
+        if (!isSwingAnimating) return;
         const ease = isHovering ? 0.08 : 0.05;
 
         currentRotZ += (targetRotZ - currentRotZ) * ease;
         currentRotX += (targetRotX - currentRotX) * ease;
         currentRotY += (targetRotY - currentRotY) * ease;
         currentTransX += (targetTransX - currentTransX) * ease;
+
+        const isResting = !isHovering &&
+          Math.abs(targetRotZ - currentRotZ) < 0.008 &&
+          Math.abs(targetRotX - currentRotX) < 0.008 &&
+          Math.abs(targetRotY - currentRotY) < 0.008 &&
+          Math.abs(targetTransX - currentTransX) < 0.008;
+
+        if (isResting) {
+          currentRotZ = 0;
+          currentRotX = 0;
+          currentRotY = 0;
+          currentTransX = 0;
+          swingEl.style.transform = 'perspective(1200px) translateX(0px) rotateZ(0deg) rotateX(0deg) rotateY(0deg)';
+          isSwingAnimating = false;
+          return;
+        }
 
         swingEl.style.transform = `
           perspective(1200px) 
@@ -5826,10 +5879,24 @@
           rotateY(${currentRotY.toFixed(2)}deg)
         `;
 
-        requestAnimationFrame(animate);
+        if (isSwingVisible) {
+          requestAnimationFrame(animate);
+        } else {
+          isSwingAnimating = false;
+        }
       }
 
-      requestAnimationFrame(animate);
+      const swingObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          isSwingVisible = entry.isIntersecting;
+          if (isSwingVisible && (isHovering || currentRotZ !== 0 || currentTransX !== 0)) {
+            startSwing();
+          } else if (!isSwingVisible) {
+            isSwingAnimating = false;
+          }
+        });
+      }, { threshold: 0.08 });
+      swingObserver.observe(sectionEl);
     }
 
     window.initWhyChooseSwing = initWhyChooseSwing;

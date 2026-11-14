@@ -551,34 +551,49 @@
     let lastScrollTime = performance.now();
     let scrollTimeout = null;
 
-    function updateSpeedometer() {
-      if (!serviceSection) return;
-      const rect = serviceSection.getBoundingClientRect();
-      const inService = rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.2;
+    let inService = false;
+    let isSpeedometerRafRunning = false;
 
-      if (inService) {
-        speedInner.classList.add('active', 'on-start');
-        
-        // Easing interpolation
-        currentSpeed += (targetSpeed - currentSpeed) * 0.12;
-        if (currentSpeed < 0.5 && targetSpeed === 0) currentSpeed = 0;
-        
-        const displaySpeed = Math.round(currentSpeed);
-        const formatted = displaySpeed.toString().padStart(2, '0');
-        if (speedText.textContent !== formatted) {
-          speedText.textContent = formatted;
-        }
-      } else {
-        if (rect.bottom < window.innerHeight * 0.2 || rect.top > window.innerHeight) {
+    // Use IntersectionObserver instead of calling getBoundingClientRect 60fps
+    const serviceObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        inService = entry.isIntersecting;
+        if (!inService) {
           speedInner.classList.remove('active', 'on-start');
           currentSpeed = 0;
           targetSpeed = 0;
+          if (speedText.textContent !== '00') speedText.textContent = '00';
+          isSpeedometerRafRunning = false;
         }
+      });
+    }, { rootMargin: '0px 0px -20% 0px' });
+    serviceObserver.observe(serviceSection);
+
+    function updateSpeedometer() {
+      if (!inService) {
+        isSpeedometerRafRunning = false;
+        return;
       }
+
+      currentSpeed += (targetSpeed - currentSpeed) * 0.12;
+      if (currentSpeed < 0.5 && targetSpeed === 0) {
+        currentSpeed = 0;
+        if (speedText.textContent !== '00') speedText.textContent = '00';
+        isSpeedometerRafRunning = false;
+        return;
+      }
+
+      const displaySpeed = Math.round(currentSpeed);
+      const formatted = displaySpeed.toString().padStart(2, '0');
+      if (speedText.textContent !== formatted) {
+        speedText.textContent = formatted;
+      }
+
       requestAnimationFrame(updateSpeedometer);
     }
 
     window.addEventListener('scroll', () => {
+      if (!inService) return;
       const now = performance.now();
       const dt = Math.max(1, now - lastScrollTime);
       const dy = Math.abs(window.scrollY - lastScrollY);
@@ -587,22 +602,21 @@
       lastScrollY = window.scrollY;
       lastScrollTime = now;
 
-      if (!serviceSection) return;
-      const rect = serviceSection.getBoundingClientRect();
-      if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.2) {
-        // Calculate realistic highway speed based on scroll velocity (45 - 88 km/h)
-        const computed = Math.min(88, Math.max(42, Math.round(velocity * 0.045 + 40)));
-        targetSpeed = computed;
+      // Calculate realistic highway speed based on scroll velocity (45 - 88 km/h)
+      const computed = Math.min(88, Math.max(42, Math.round(velocity * 0.045 + 40)));
+      targetSpeed = computed;
+      speedInner.classList.add('active', 'on-start');
 
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          // Decelerate smoothly to idle cruise
-          targetSpeed = 0;
-        }, 180);
+      if (!isSpeedometerRafRunning) {
+        isSpeedometerRafRunning = true;
+        requestAnimationFrame(updateSpeedometer);
       }
-    }, { passive: true });
 
-    requestAnimationFrame(updateSpeedometer);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        targetSpeed = 0;
+      }, 180);
+    }, { passive: true });
   }
 
   // 4. SCROLL & ANIMATION RESILIENCE ON HARD REFRESH / SLOW ASSETS
@@ -782,9 +796,12 @@
         } catch (e) {}
       }
 
-      // 8. Refresh GSAP ScrollTrigger if available (safely without destructive window.resize)
+      // 8. Refresh GSAP ScrollTrigger if available (throttled to avoid layout thrashing)
       if (window.ScrollTrigger) {
-        try { window.ScrollTrigger.refresh(); } catch (e) {}
+        if (!window._lastSTRefresh || performance.now() - window._lastSTRefresh > 300) {
+          window._lastSTRefresh = performance.now();
+          try { window.ScrollTrigger.refresh(); } catch (e) {}
+        }
       }
 
       // 9. Refresh Lenis smooth scroll if available
@@ -793,50 +810,48 @@
       }
     }
 
-    // Schedule resilience sweeps on initial load
-    [100, 300, 700, 1500, 3000].forEach(delay => {
+    // Schedule single resilience sweep on initial load
+    [150, 600].forEach(delay => {
       setTimeout(enforceVisibilityAndRefresh, delay);
     });
 
     window.addEventListener('load', enforceVisibilityAndRefresh);
 
-    // Watch for Barba.js PJAX / SPA transitions and mutations
+    // Watch for Barba.js PJAX / SPA container mount without subtree thrashing
     try {
-      const barbaWrapper = document.querySelector('[data-barba="wrapper"]') || document.body;
-      const observer = new MutationObserver((mutations) => {
-        let hasContainerChange = false;
-        for (const m of mutations) {
-          if (m.type === 'childList' && m.addedNodes.length > 0) {
-            hasContainerChange = true;
-            break;
+      const barbaWrapper = document.querySelector('[data-barba="wrapper"]') || document.querySelector('.main');
+      if (barbaWrapper) {
+        let refreshDebounce = null;
+        const observer = new MutationObserver((mutations) => {
+          let hasContainerChange = false;
+          for (const m of mutations) {
+            for (let i = 0; i < m.addedNodes.length; i++) {
+              const node = m.addedNodes[i];
+              if (node.nodeType === 1 && (
+                node.getAttribute('data-barba') === 'container' ||
+                (node.classList && node.classList.contains('main-inner'))
+              )) {
+                hasContainerChange = true;
+                break;
+              }
+            }
+            if (hasContainerChange) break;
           }
-        }
-        if (hasContainerChange) {
-          enforceVisibilityAndRefresh();
-          setTimeout(enforceVisibilityAndRefresh, 150);
-          setTimeout(enforceVisibilityAndRefresh, 500);
-          setTimeout(enforceVisibilityAndRefresh, 1200);
-        }
-      });
-      observer.observe(barbaWrapper, { childList: true, subtree: true });
+          if (hasContainerChange) {
+            clearTimeout(refreshDebounce);
+            refreshDebounce = setTimeout(() => {
+              enforceVisibilityAndRefresh();
+            }, 100);
+          }
+        });
+        observer.observe(barbaWrapper, { childList: true, subtree: false });
+      }
     } catch (e) {}
 
     // Back / Forward browser navigation
     window.addEventListener('popstate', () => {
-      setTimeout(enforceVisibilityAndRefresh, 50);
-      setTimeout(enforceVisibilityAndRefresh, 300);
-      setTimeout(enforceVisibilityAndRefresh, 800);
+      setTimeout(enforceVisibilityAndRefresh, 80);
     });
-
-    // Internal navigation links
-    document.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (link && link.href && link.href.startsWith(window.location.origin)) {
-        setTimeout(enforceVisibilityAndRefresh, 350);
-        setTimeout(enforceVisibilityAndRefresh, 850);
-        setTimeout(enforceVisibilityAndRefresh, 1600);
-      }
-    }, { passive: true });
   }
 
   
@@ -914,33 +929,68 @@
       drawFrame(0);
     };
 
-    // Preload remaining frames in background
-    for (let i = 1; i < totalFrames; i++) {
+    // Preload remaining frames in smooth non-blocking batches
+    for (let i = 1; i < Math.min(totalFrames, 8); i++) {
       const img = new Image();
       img.src = framePaths[i];
       images[i] = img;
     }
+    let nextFrameToLoad = 8;
+    function loadRemainingFrames() {
+      const batchLimit = Math.min(totalFrames, nextFrameToLoad + 6);
+      for (let i = nextFrameToLoad; i < batchLimit; i++) {
+        if (!images[i]) {
+          const img = new Image();
+          img.src = framePaths[i];
+          images[i] = img;
+        }
+      }
+      nextFrameToLoad = batchLimit;
+      if (nextFrameToLoad < totalFrames) {
+        if (window.requestIdleCallback) {
+          window.requestIdleCallback(loadRemainingFrames, { timeout: 200 });
+        } else {
+          setTimeout(loadRemainingFrames, 50);
+        }
+      }
+    }
+    setTimeout(loadRemainingFrames, 120);
+
+    let cachedHeroHeight = 0;
+    function updateHeroHeight() {
+      const heroWrap = document.querySelector('.service-hero-wrap') || document.querySelector('.service-hero');
+      cachedHeroHeight = heroWrap ? (heroWrap.offsetHeight || window.innerHeight * 1.2) : (window.innerHeight * 1.2);
+    }
+    updateHeroHeight();
+
+    let isVideoRafRunning = false;
 
     function updateProgress() {
-      const heroWrap = document.querySelector('.service-hero-wrap') || document.querySelector('.service-hero');
-      const maxScroll = heroWrap ? (heroWrap.offsetHeight || window.innerHeight * 1.2) : (window.innerHeight * 1.2);
+      if (cachedHeroHeight <= 0) updateHeroHeight();
       const sy = (window.lenis && typeof window.lenis.scroll === 'number')
         ? window.lenis.scroll
         : (window.scrollY || window.pageYOffset || 0);
-      const progress = Math.min(1, Math.max(0, sy / maxScroll));
+      const progress = Math.min(1, Math.max(0, sy / cachedHeroHeight));
       targetFrame = progress * (totalFrames - 1);
+
+      if (!isVideoRafRunning) {
+        isVideoRafRunning = true;
+        requestAnimationFrame(renderLoop);
+      }
     }
 
     window.addEventListener('scroll', updateProgress, { passive: true });
-    window.addEventListener('resize', () => { resizeCanvas(); updateProgress(); }, { passive: true });
+    window.addEventListener('resize', () => { updateHeroHeight(); resizeCanvas(); updateProgress(); }, { passive: true });
 
-    // Smooth render loop
+    // Smooth sleep-aware render loop
     function renderLoop() {
-      if (!document.getElementById('airwin-hero-canvas')) return;
+      if (!document.getElementById('airwin-hero-canvas')) {
+        isVideoRafRunning = false;
+        return;
+      }
       if (canvas.width <= 300 || canvas.height <= 150) {
         resizeCanvas();
       }
-      updateProgress();
       if (Math.abs(targetFrame - currentFrame) > 0.01) {
         currentFrame += (targetFrame - currentFrame) * 0.28;
       } else {
@@ -951,8 +1001,13 @@
         lastRenderedFrame = rounded;
         drawFrame(rounded);
       }
-      requestAnimationFrame(renderLoop);
+      if (Math.abs(targetFrame - currentFrame) > 0.01) {
+        requestAnimationFrame(renderLoop);
+      } else {
+        isVideoRafRunning = false;
+      }
     }
+    isVideoRafRunning = true;
     requestAnimationFrame(renderLoop);
 
     resizeCanvas();
@@ -982,391 +1037,7 @@
 })();
 
 
-  // =========================================================
-  // Hero Containers WebGL Shader Reveal (Dropbox McLaren F1)
-  // Re-initializable for Barba.js transitions & fresh canvases
-  // =========================================================
-  window.initContainersShader = function initContainersShader() {
-    const canvas = document.getElementById('hero-containers-canvas');
-    if (!canvas) return;
-    const wrap = document.getElementById('hero-containers-interactive') || canvas.parentElement;
-    if (!wrap) return;
-
-    // Guarantee wrapper is visible and clickable
-    wrap.style.display = 'block';
-    wrap.style.visibility = 'visible';
-    wrap.style.opacity = '1';
-    wrap.style.pointerEvents = 'auto';
-
-    // If already active on THIS exact canvas element and rendering, return
-    if (canvas._containersActive && canvas._containersGL) {
-      return;
-    }
-
-    // Cancel old RAF if running
-    if (window._containersShaderRaf) {
-      cancelAnimationFrame(window._containersShaderRaf);
-      window._containersShaderRaf = null;
-    }
-
-    const gl = canvas.getContext('webgl', {
-      antialias: true,
-      alpha: true,
-      premultipliedAlpha: false
-    });
-    if (!gl) {
-      console.warn('WebGL not supported for containers');
-      return;
-    }
-
-    canvas._containersActive = true;
-    canvas._containersGL = gl;
-
-    const vsSource = `
-      attribute vec2 a_position;
-      void main() {
-        gl_Position = vec4(a_position, 0.0, 1.0);
-      }
-    `;
-
-    const fsSource = `
-      #ifdef GL_FRAGMENT_PRECISION_HIGH
-        precision highp float;
-      #else
-        precision mediump float;
-      #endif
-
-      uniform vec2 u_resolution;
-      uniform vec2 u_mouse;
-      uniform float u_time;
-      uniform float u_hover;
-      uniform sampler2D u_texture1; // Idle: Grayscale
-      uniform sampler2D u_texture2; // Active: Blue color
-
-      float random(vec3 pos) {
-        pos = fract(pos * vec3(0.1031, 0.1030, 0.0973));
-        pos += dot(pos, pos.yxz + 33.33);
-        return fract((pos.x + pos.y) * pos.z);
-      }
-
-      float noise(in vec3 st) {
-        vec3 i = floor(st);
-        vec3 f = fract(st);
-
-        float a = random(i);
-        float b = random(i + vec3(1.0, 0.0, 0.0));
-        float c = random(i + vec3(0.0, 1.0, 0.0));
-        float d = random(i + vec3(1.0, 1.0, 0.0));
-        float e = random(i + vec3(0.0, 0.0, 1.0));
-        float f1 = random(i + vec3(1.0, 0.0, 1.0));
-        float g = random(i + vec3(0.0, 1.0, 1.0));
-        float h = random(i + vec3(1.0, 1.0, 1.0));
-
-        vec3 u = f * f * (3.0 - 2.0 * f);
-
-        return mix(
-          mix(mix(a, b, u.x), mix(c, d, u.x), u.y),
-          mix(mix(e, f1, u.x), mix(g, h, u.x), u.y),
-          u.z
-        );
-      }
-
-      float noiseTexture(in vec3 st, float scale, float roughness) {
-        float value = 0.0;
-        float amplitude = 1.0;
-        float normalization = 0.0;
-        for (int i = 0; i < 3; i++) {
-          value += amplitude * (noise(st * scale) - 0.5);
-          normalization += amplitude;
-          st *= 2.0;
-          amplitude *= roughness;
-        }
-        return value / normalization;
-      }
-
-      void main() {
-        vec2 uv = gl_FragCoord.xy / u_resolution;
-        vec2 texCoord = vec2(uv.x, 1.0 - uv.y);
-
-        vec4 idleColor = texture2D(u_texture1, texCoord);
-        vec4 activeColor = texture2D(u_texture2, texCoord);
-
-        if (idleColor.a < 0.01 && activeColor.a < 0.01) {
-          gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
-          return;
-        }
-
-        vec2 cursor = u_mouse / u_resolution;
-        float aspect = u_resolution.x / u_resolution.y;
-        vec2 aspectUV = vec2(uv.x * aspect, uv.y);
-        vec2 aspectCursor = vec2(cursor.x * aspect, cursor.y);
-
-        float dist = distance(aspectUV, aspectCursor);
-
-        float spotlightSize = 0.18 * u_hover;
-        float spotlightBlurRadius = 0.20;
-
-        vec3 st = vec3(uv * 18.0, u_time * 0.12);
-        float n = noiseTexture(st, 4.0, 0.65);
-
-        float spotlight = 1.0 - ((dist - spotlightSize) / spotlightBlurRadius);
-        spotlight = clamp(spotlight, 0.0, 1.0);
-
-        float mask = spotlight;
-        mask *= (activeColor.b * 0.8 + 0.6);
-        mask += spotlight / 2.5;
-        mask *= max(0.0, (n + 0.4) * 3.0);
-        mask += max(0.0, (spotlight - 0.3) * 0.8);
-
-        float threshold = 0.45;
-        float activeArea = smoothstep(threshold - 0.08, threshold + 0.08, mask);
-        activeArea *= activeColor.a * u_hover;
-
-        gl_FragColor = mix(idleColor, activeColor, activeArea);
-      }
-    `;
-
-    function createShader(gl, type, source) {
-      const shader = gl.createShader(type);
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
-        gl.deleteShader(shader);
-        return null;
-      }
-      return shader;
-    }
-
-    const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
-    const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
-    if (!vs || !fs) return;
-
-    const program = gl.createProgram();
-    gl.attachShader(program, vs);
-    gl.attachShader(program, fs);
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error('Program link error:', gl.getShaderInfoLog(program));
-      return;
-    }
-    gl.useProgram(program);
-
-    const posBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1, -1,  1, -1, -1,  1,
-      -1,  1,  1, -1,  1,  1
-    ]), gl.STATIC_DRAW);
-
-    const posLoc = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(posLoc);
-    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-
-    const uRes = gl.getUniformLocation(program, 'u_resolution');
-    const uMouse = gl.getUniformLocation(program, 'u_mouse');
-    const uTime = gl.getUniformLocation(program, 'u_time');
-    const uHover = gl.getUniformLocation(program, 'u_hover');
-
-    let texturesReady = 0;
-    let hasStartedRender = false;
-    const textures = [null, null];
-
-    function loadTexture(url, unit) {
-      const tex = gl.createTexture();
-      textures[unit] = tex;
-      gl.activeTexture(gl.TEXTURE0 + unit);
-      gl.bindTexture(gl.TEXTURE_2D, tex);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0,0,0,0]));
-
-      const img = new Image();
-      let loaded = false;
-
-      function onLoaded() {
-        if (loaded) return;
-        loaded = true;
-        try {
-          gl.activeTexture(gl.TEXTURE0 + unit);
-          gl.bindTexture(gl.TEXTURE_2D, tex);
-          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-          texturesReady++;
-          if (texturesReady >= 2 && !hasStartedRender) {
-            hasStartedRender = true;
-            if (wrap) wrap.style.backgroundImage = 'none';
-            render();
-          }
-        } catch(e) {
-          console.warn('WebGL texImage2D error:', e);
-        }
-      }
-
-      img.onload = onLoaded;
-      img.onerror = () => {
-        if (loaded) return;
-        loaded = true;
-        console.warn('Fallback: container texture error', url);
-        texturesReady++;
-        if (texturesReady >= 2 && !hasStartedRender) {
-          hasStartedRender = true;
-          render();
-        }
-      };
-      img.src = url;
-      if (img.complete && img.naturalWidth > 0) {
-        onLoaded();
-      }
-    }
-
-    loadTexture('/images/containers-gray.png', 0);
-    loadTexture('/images/containers-blue.png', 1);
-
-    gl.uniform1i(gl.getUniformLocation(program, 'u_texture1'), 0);
-    gl.uniform1i(gl.getUniformLocation(program, 'u_texture2'), 1);
-
-    let targetMouse = [0, 0];
-    let currentMouse = [0, 0];
-    let isHovering = false;
-    let hoverValue = 0.0;
-    const startTime = performance.now();
-    let isVisible = true;
-
-    function resize() {
-      if (!canvas.isConnected) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const rect = canvas.getBoundingClientRect();
-      if (rect.width > 0 && rect.height > 0) {
-        canvas.width = Math.floor(rect.width * dpr);
-        canvas.height = Math.floor(rect.height * dpr);
-        gl.viewport(0, 0, canvas.width, canvas.height);
-      }
-    }
-
-    if (window._containersShaderResize) {
-      window.removeEventListener('resize', window._containersShaderResize);
-    }
-    window._containersShaderResize = resize;
-    window.addEventListener('resize', resize, { passive: true });
-    resize();
-
-    function onPointerMove(clientX, clientY) {
-      if (!canvas.isConnected) return;
-      const rect = canvas.getBoundingClientRect();
-      if (
-        clientX >= rect.left &&
-        clientX <= rect.right &&
-        clientY >= rect.top &&
-        clientY <= rect.bottom
-      ) {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        targetMouse[0] = (clientX - rect.left) * dpr;
-        targetMouse[1] = (rect.height - (clientY - rect.top)) * dpr;
-        isHovering = true;
-      } else {
-        isHovering = false;
-      }
-    }
-
-    if (window._containersShaderMouseMove) {
-      window.removeEventListener('mousemove', window._containersShaderMouseMove);
-    }
-    window._containersShaderMouseMove = (e) => {
-      onPointerMove(e.clientX, e.clientY);
-    };
-    window.addEventListener('mousemove', window._containersShaderMouseMove, { passive: true });
-
-    wrap.onmouseleave = () => {
-      isHovering = false;
-    };
-
-    wrap.ontouchstart = (e) => {
-      if (e.touches && e.touches[0]) {
-        const t = e.touches[0];
-        onPointerMove(t.clientX, t.clientY);
-        currentMouse[0] = targetMouse[0];
-        currentMouse[1] = targetMouse[1];
-      }
-    };
-    wrap.ontouchmove = (e) => {
-      if (e.touches && e.touches[0]) {
-        onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    };
-    wrap.ontouchend = () => {
-      isHovering = false;
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        isVisible = entry.isIntersecting;
-      });
-    }, { threshold: 0.05 });
-    observer.observe(canvas);
-
-    function updateContainersScrollFade() {
-      if (!canvas.isConnected) return;
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop || (window.lenis ? window.lenis.scroll : 0);
-      const fadeStart = 40;
-      const fadeEnd = 350;
-      let opacity = 1.0;
-      if (scrollY > fadeStart) {
-        opacity = Math.max(0.0, 1.0 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
-      }
-      wrap.style.opacity = opacity.toFixed(3);
-      wrap.style.pointerEvents = opacity > 0.05 ? 'auto' : 'none';
-    }
-
-    if (window._containersShaderScroll) {
-      window.removeEventListener('scroll', window._containersShaderScroll);
-    }
-    window._containersShaderScroll = updateContainersScrollFade;
-    window.addEventListener('scroll', updateContainersScrollFade, { passive: true });
-
-    updateContainersScrollFade();
-
-    function render() {
-      if (!canvas.isConnected) {
-        canvas._containersActive = false;
-        return;
-      }
-      if (isVisible && texturesReady >= 2) {
-        currentMouse[0] += (targetMouse[0] - currentMouse[0]) * 0.14;
-        currentMouse[1] += (targetMouse[1] - currentMouse[1]) * 0.14;
-
-        const targetHover = isHovering ? 1.0 : 0.0;
-        hoverValue += (targetHover - hoverValue) * 0.08;
-
-        if (textures[0]) {
-          gl.activeTexture(gl.TEXTURE0);
-          gl.bindTexture(gl.TEXTURE_2D, textures[0]);
-        }
-        if (textures[1]) {
-          gl.activeTexture(gl.TEXTURE1);
-          gl.bindTexture(gl.TEXTURE_2D, textures[1]);
-        }
-
-        gl.uniform2f(uRes, canvas.width, canvas.height);
-        gl.uniform2f(uMouse, currentMouse[0], currentMouse[1]);
-        gl.uniform1f(uTime, (performance.now() - startTime) / 1000);
-        gl.uniform1f(uHover, hoverValue);
-
-        gl.clearColor(0.0, 0.0, 0.0, 0.0);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-      }
-      window._containersShaderRaf = requestAnimationFrame(render);
-    }
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', window.initContainersShader);
-  } else {
-    window.initContainersShader();
-  }
-
+  // Note: Hero Containers WebGL Shader Reveal is maintained on the home page.
 
 
   /* =========================================================
