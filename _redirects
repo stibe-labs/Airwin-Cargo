@@ -1,0 +1,3 @@
+# Canonical Domain Redirect (www to apex)
+https://www.airwincargo.com/* https://airwincargo.com/:splat 301
+http://www.airwincargo.com/* https://airwincargo.com/:splat 301
