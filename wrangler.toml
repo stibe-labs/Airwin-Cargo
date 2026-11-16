@@ -1,0 +1,8 @@
+name = "airwin-cargo"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "airwin-cargo-db"
+database_id = "cd77e2a7-23c4-4a94-87d1-1eeab8ab74dd"
