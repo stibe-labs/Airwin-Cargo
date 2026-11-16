@@ -20,6 +20,40 @@ export function hexToBuffer(hex) {
   return bytes;
 }
 
+// Hash password with PBKDF2
+export async function hashPassword(password, saltHex = null) {
+  if (!saltHex) {
+    const saltBytes = new Uint8Array(16);
+    crypto.getRandomValues(saltBytes);
+    saltHex = bufferToHex(saltBytes);
+  }
+
+  const enc = new TextEncoder();
+  const passwordKey = await crypto.subtle.importKey(
+    'raw',
+    enc.encode(password),
+    { name: 'PBKDF2' },
+    false,
+    ['deriveBits']
+  );
+
+  const derivedBits = await crypto.subtle.deriveBits(
+    {
+      name: 'PBKDF2',
+      salt: hexToBuffer(saltHex),
+      iterations: 100000,
+      hash: 'SHA-256'
+    },
+    passwordKey,
+    256
+  );
+
+  return {
+    salt: saltHex,
+    hash: bufferToHex(derivedBits)
+  };
+}
+
 // PBKDF2 Password Verification
 export async function verifyPassword(password, saltHex, expectedHashHex) {
   const enc = new TextEncoder();

@@ -1,4 +1,4 @@
-import { verifyPassword, createJWT, authenticateRequest, jsonResponse, errorResponse } from '../utils/crypto.js';
+import { verifyPassword, hashPassword, createJWT, authenticateRequest, jsonResponse, errorResponse } from '../utils/crypto.js';
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -69,6 +69,60 @@ export async function onRequestGet({ request, env }) {
       success: true,
       authenticated: true,
       user
+    });
+  } catch (err) {
+    return errorResponse(`Server error: ${err.message}`, 500);
+  }
+}
+
+export async function onRequestPut({ request, env }) {
+  try {
+    const user = await authenticateRequest(request);
+    if (!user) return errorResponse('Unauthorized: Admin access required', 401);
+    if (!env.DB) return errorResponse('Database binding not configured', 500);
+
+    const body = await request.json().catch(() => ({}));
+    const { name, current_password, new_password } = body;
+
+    const dbUser = await env.DB.prepare('SELECT * FROM admin_users WHERE id = ?').bind(user.sub).first();
+    if (!dbUser) return errorResponse('User not found', 404);
+
+    let updatedName = dbUser.name;
+    if (name && name.trim()) {
+      updatedName = name.trim();
+    }
+
+    if (new_password) {
+      if (!current_password) {
+        return errorResponse('Current password is required to set a new password', 400);
+      }
+      const isCurrentValid = await verifyPassword(current_password, dbUser.salt, dbUser.password_hash);
+      if (!isCurrentValid) {
+        return errorResponse('Current password is incorrect', 400);
+      }
+      if (new_password.length < 8) {
+        return errorResponse('New password must be at least 8 characters long', 400);
+      }
+
+      const { salt, hash } = await hashPassword(new_password);
+      await env.DB.prepare(`
+        UPDATE admin_users SET name = ?, password_hash = ?, salt = ?, updated_at = datetime('now') WHERE id = ?
+      `).bind(updatedName, hash, salt, user.sub).run();
+
+      return jsonResponse({
+        success: true,
+        message: 'Password and profile updated successfully'
+      });
+    }
+
+    await env.DB.prepare(`
+      UPDATE admin_users SET name = ?, updated_at = datetime('now') WHERE id = ?
+    `).bind(updatedName, user.sub).run();
+
+    return jsonResponse({
+      success: true,
+      message: 'Profile updated successfully',
+      name: updatedName
     });
   } catch (err) {
     return errorResponse(`Server error: ${err.message}`, 500);
