@@ -624,13 +624,407 @@
     pointer-events: none !important;
   }
 </style>
+
+<style id="airwin-live-tracking-styles">
+  .tracking-hero {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: clamp(100px, 12vw, 140px) 24px 60px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+  }
+  .tracking-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #60a5fa;
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .tracking-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #60a5fa;
+    box-shadow: 0 0 8px #60a5fa;
+    animation: livePulse 2s infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+  .tracking-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 16px;
+    line-height: 1.15;
+  }
+  .tracking-subtitle {
+    font-size: clamp(14px, 1.3vw, 17px);
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    max-width: 620px;
+    line-height: 1.6;
+    margin: 0 0 36px;
+  }
+  .tracking-card {
+    background: rgba(17, 28, 53, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(24px, 3vw, 36px);
+    max-width: 720px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  }
+  .tracking-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .tracking-input {
+    flex: 1;
+    min-width: 260px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #090f1d;
+    color: #ffffff;
+    font-size: 15.5px;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  .tracking-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  }
+  .tracking-submit {
+    padding: 16px 32px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #0016cb, #2563eb);
+    color: #ffffff;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .tracking-submit:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+  }
+  .tracking-demo-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .demo-awb-chip {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #38bdf8;
+    padding: 3px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .demo-awb-chip:hover {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+  }
+
+  .loader { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+  /* LOADING SPINNER */
+  #tracking-loader {
+    display: none;
+    text-align: center;
+    padding: 36px 20px;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #2563eb;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ERROR ALERT */
+  #tracking-error-box {
+    display: none;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #fca5a5;
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* LIVE SHIPMENT RESULT CARD */
+  #tracking-result-box {
+    display: none;
+    margin-top: 28px;
+    background: #090f1d;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .res-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .res-awb-title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .copy-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #94a3b8;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.15); }
+  .res-status-pill {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .res-status-pill.in_flight, .res-status-pill.transit { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+  .res-status-pill.delivered { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+  .res-status-pill.customs { background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); }
+  .res-status-pill.booked { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.4); }
+
+  /* STEPPER */
+  .stepper-wrap {
+    padding: 28px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .stepper-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    gap: 8px;
+  }
+  .stepper-grid::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+  }
+  .step-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .step-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #090f1d;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+  }
+  .step-node.active .step-circle {
+    border-color: #38bdf8;
+    background: #0284c7;
+    color: #fff;
+    box-shadow: 0 0 12px #38bdf8;
+  }
+  .step-node.completed .step-circle {
+    border-color: #10b981;
+    background: #059669;
+    color: #fff;
+  }
+  .step-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .step-node.active .step-label {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+  .step-node.completed .step-label {
+    color: #10b981;
+  }
+
+  /* DETAILS GRID */
+  .res-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.01);
+  }
+  .meta-item {
+    font-size: 13px;
+  }
+  .meta-label {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .meta-val {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+
+  /* TIMELINE EVENTS */
+  .res-timeline-wrap {
+    padding: 24px;
+  }
+  .res-timeline-title {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    margin-bottom: 16px;
+  }
+  .checkpoint-list {
+    position: relative;
+    padding-left: 20px;
+  }
+  .checkpoint-list::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .checkpoint-item {
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .checkpoint-item:last-child {
+    margin-bottom: 0;
+  }
+  .cp-dot {
+    position: absolute;
+    left: -20px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #090f1d;
+    border: 2px solid #2563eb;
+  }
+  .checkpoint-item:last-child .cp-dot {
+    border-color: #38bdf8;
+    background: #38bdf8;
+    box-shadow: 0 0 8px #38bdf8;
+  }
+  .cp-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+  }
+  .cp-location {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  .cp-time {
+    font-size: 12px;
+    color: #64748b;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cp-desc {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.45;
+  }
+</style>
 </head>
 <body>
-<div class="loader">
-  <div class="airwin-loader-screen">
-    <div class="airwin-loader-brand">AIRWIN LOGISTICS</div>
-  </div>
-</div>
+
 <header class="header nav-visible" id="airwin-main-header">
   <div class="header-inner">
     <div class="header-row-nav">
@@ -653,23 +1047,110 @@
     </div>
   </div>
 </header>
-
-  
-
   <main class="tracking-hero">
-    <div class="tracking-badge">Live Freight Intelligence</div>
+    <div class="tracking-badge">
+      <span class="tracking-badge-dot"></span>
+      Live Freight Intelligence &bull; Edge Connected
+    </div>
     <h1 class="tracking-title">Track Your Shipment</h1>
     <p class="tracking-subtitle">
-      Enter your Air Waybill (AWB), Ocean Bill of Lading (B/L), or Container Booking number to monitor your cargo across 200+ global trade routes.
+      Real-time milestone visibility across 200+ global trade routes. Enter your Air Waybill (AWB) or Container Booking number below.
     </p>
 
     <div class="tracking-card">
-      <form class="tracking-form" onsubmit="event.preventDefault(); window.open('https://www.airwincargo.com/tracking?awb=' + encodeURIComponent(document.getElementById('awbInput').value), '_blank');">
-        <input type="text" id="awbInput" class="tracking-input" placeholder="e.g. AWB-92847102, B/L, or Container No." required />
-        <button type="submit" class="tracking-submit">Track Now</button>
+      <form class="tracking-form" onsubmit="handleLiveTrack(event)">
+        <input type="text" id="awbInput" class="tracking-input" placeholder="e.g. AWB-92847102" required autofocus />
+        <button type="submit" id="trackSubmitBtn" class="tracking-submit">
+          <span>Track Now</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
       </form>
-      <p class="tracking-note">
-        Need assistance with live tracking? <a href="./contact.html" class="tracking-direct-link">Contact our 24/7 Operations Support</a> or visit the <a href="https://www.airwincargo.com/tracking" target="_blank" class="tracking-direct-link">Airwin Global Portal</a>.
+
+      <div class="tracking-demo-row">
+        <span>Try Active Consignment:</span>
+        <button type="button" class="demo-awb-chip" onclick="quickFillTrack('AWB-92847102')">AWB-92847102</button>
+      </div>
+
+      <!-- LOADER -->
+      <div id="tracking-loader">
+        <div class="spinner"></div>
+        <div style="font-size: 13.5px; color: #94a3b8; font-weight: 600;">Querying Airwin Central Freight Edge...</div>
+      </div>
+
+      <!-- ERROR / NOT FOUND -->
+      <div id="tracking-error-box"></div>
+
+      <!-- REAL-TIME TRACKING RESULT CARD -->
+      <div id="tracking-result-box">
+        <!-- 1. Header -->
+        <div class="res-header">
+          <div>
+            <div class="res-awb-title">
+              <span id="res-awb-display">AWB-00000000</span>
+              <button type="button" class="copy-btn" onclick="copyAWB()" title="Copy AWB">Copy</button>
+            </div>
+            <div id="res-ref-display" style="font-size: 12px; color: #64748b; margin-top: 2px;"></div>
+          </div>
+          <div id="res-status-display" class="res-status-pill transit">IN TRANSIT</div>
+        </div>
+
+        <!-- 2. Stepper Progress -->
+        <div class="stepper-wrap">
+          <div class="stepper-grid">
+            <div class="step-node" id="step-1">
+              <div class="step-circle">&#10003;</div>
+              <div class="step-label">Booking</div>
+            </div>
+            <div class="step-node" id="step-2">
+              <div class="step-circle">2</div>
+              <div class="step-label">Origin Hub</div>
+            </div>
+            <div class="step-node" id="step-3">
+              <div class="step-circle">3</div>
+              <div class="step-label">In Flight</div>
+            </div>
+            <div class="step-node" id="step-4">
+              <div class="step-circle">4</div>
+              <div class="step-label">Delivered</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Meta Grid -->
+        <div class="res-meta-grid">
+          <div class="meta-item">
+            <div class="meta-label">Origin Hub</div>
+            <div class="meta-val" id="res-origin">—</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Destination Hub</div>
+            <div class="meta-val" id="res-destination">—</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Service &bull; Mode</div>
+            <div class="meta-val" id="res-service">—</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Cargo Specs</div>
+            <div class="meta-val" id="res-specs">—</div>
+          </div>
+          <div class="meta-item" style="grid-column: 1 / -1;">
+            <div class="meta-label">Estimated Delivery Schedule</div>
+            <div class="meta-val" id="res-delivery" style="color: #38bdf8;">—</div>
+          </div>
+        </div>
+
+        <!-- 4. Milestones Timeline -->
+        <div class="res-timeline-wrap">
+          <div class="res-timeline-title">Milestone Journey &bull; Chronological Event History</div>
+          <div class="checkpoint-list" id="res-checkpoints-list">
+            <!-- Dynamic checkpoints -->
+          </div>
+        </div>
+      </div>
+
+      <p class="tracking-note" style="margin-top: 24px;">
+        Need operational assistance? <a href="/contact.html" class="tracking-direct-link">Contact our 24/7 Support Desks</a> or view our <a href="/contact.html#branches" class="tracking-direct-link">Global Regional Hubs</a>.
       </p>
     </div>
   </main>
@@ -677,6 +1158,148 @@
   <footer class="tracking-footer">
     &copy; 2026 Airwin Cargo &amp; Airwin Logistics. All rights reserved.
   </footer>
-  <script src="/js/replica-enhancements.js"></script>
+
+  <script>
+    let currentAWB = '';
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '—';
+      try {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' +
+               d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    function quickFillTrack(awb) {
+      document.getElementById('awbInput').value = awb;
+      handleLiveTrack(null);
+    }
+
+    function copyAWB() {
+      if (!currentAWB) return;
+      navigator.clipboard.writeText(currentAWB);
+      alert('Copied AWB ' + currentAWB + ' to clipboard!');
+    }
+
+    async function handleLiveTrack(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('awbInput');
+      const awb = input.value.trim();
+      if (!awb) return;
+
+      const loader = document.getElementById('tracking-loader');
+      const errorBox = document.getElementById('tracking-error-box');
+      const resultBox = document.getElementById('tracking-result-box');
+      const submitBtn = document.getElementById('trackSubmitBtn');
+
+      loader.style.display = 'block';
+      errorBox.style.display = 'none';
+      resultBox.style.display = 'none';
+      submitBtn.disabled = true;
+
+      try {
+        const res = await fetch(`/api/tracking?awb=${encodeURIComponent(awb)}`);
+        const data = await res.json();
+
+        loader.style.display = 'none';
+        submitBtn.disabled = false;
+
+        if (data.success && data.found && data.shipment) {
+          const s = data.shipment;
+          currentAWB = s.awb_number;
+
+          // Update URL without reload
+          try {
+            const newUrl = window.location.pathname + '?awb=' + encodeURIComponent(s.awb_number);
+            window.history.replaceState({ path: newUrl }, '', newUrl);
+          } catch (e) {}
+
+          // Populate Result Box
+          document.getElementById('res-awb-display').innerText = s.awb_number;
+          document.getElementById('res-ref-display').innerText = s.reference_no ? 'Ref: ' + s.reference_no : '';
+          
+          const statusEl = document.getElementById('res-status-display');
+          statusEl.innerText = (s.current_status || 'IN TRANSIT').replace(/_/g, ' ');
+          statusEl.className = 'res-status-pill ' + (s.current_status || '').toLowerCase();
+
+          document.getElementById('res-origin').innerText = s.origin_hub + (s.origin_country ? ', ' + s.origin_country : '');
+          document.getElementById('res-destination').innerText = s.destination_city + (s.destination_country ? ', ' + s.destination_country : '');
+          document.getElementById('res-service').innerText = s.cargo_type + ' (' + (s.service_level || 'Standard') + ')';
+          document.getElementById('res-specs').innerText = (s.pieces || 1) + ' pcs' + (s.weight_kg ? ' • ' + s.weight_kg + ' kg' : '') + (s.dimensions ? ' • ' + s.dimensions : '');
+          document.getElementById('res-delivery').innerText = s.estimated_delivery || 'Schedule pending carrier update';
+
+          // Update Stepper
+          updateStepper(s.current_status);
+
+          // Populate Checkpoints Timeline
+          const cpList = document.getElementById('res-checkpoints-list');
+          if (data.checkpoints && data.checkpoints.length > 0) {
+            cpList.innerHTML = data.checkpoints.map(cp => `
+              <div class="checkpoint-item">
+                <div class="cp-dot"></div>
+                <div class="cp-top">
+                  <span class="cp-location">${cp.location}</span>
+                  <span class="cp-time">${formatDate(cp.timestamp)}</span>
+                </div>
+                <div class="cp-desc">${cp.description}</div>
+              </div>
+            `).join('');
+          } else {
+            cpList.innerHTML = '<div style="color: #64748b; font-size: 13px;">No milestone checkpoints recorded yet.</div>';
+          }
+
+          resultBox.style.display = 'block';
+          resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          errorBox.innerHTML = `<strong>No records found</strong><br/>No active shipment was found matching "<strong>${awb}</strong>". Please verify the number on your consignment receipt or contact our 24/7 Operations Desk at <a href="tel:+919886714286" style="color:#fff; text-decoration:underline;">+91 9886 714 286</a>.`;
+          errorBox.style.display = 'block';
+        }
+      } catch (err) {
+        loader.style.display = 'none';
+        submitBtn.disabled = false;
+        errorBox.innerHTML = 'Network error communicating with Airwin Tracking API. Please check your connection and try again.';
+        errorBox.style.display = 'block';
+      }
+    }
+
+    function updateStepper(status) {
+      const s = (status || '').toUpperCase();
+      const s1 = document.getElementById('step-1');
+      const s2 = document.getElementById('step-2');
+      const s3 = document.getElementById('step-3');
+      const s4 = document.getElementById('step-4');
+
+      [s1, s2, s3, s4].forEach(el => el.className = 'step-node');
+
+      if (s === 'BOOKED') {
+        s1.className = 'step-node active';
+      } else if (s.includes('ORIGIN') || s.includes('PICKED') || s.includes('CUSTOMS_CLEARED_ORIGIN')) {
+        s1.className = 'step-node completed';
+        s2.className = 'step-node active';
+      } else if (s.includes('FLIGHT') || s.includes('TRANSIT') || s.includes('ARRIVED') || s.includes('OUT_FOR_DELIVERY')) {
+        s1.className = 'step-node completed';
+        s2.className = 'step-node completed';
+        s3.className = 'step-node active';
+      } else if (s.includes('DELIVERED')) {
+        s1.className = 'step-node completed';
+        s2.className = 'step-node completed';
+        s3.className = 'step-node completed';
+        s4.className = 'step-node completed';
+      }
+    }
+
+    // Auto-search on page load if URL has ?awb=
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const awb = params.get('awb');
+      if (awb) {
+        document.getElementById('awbInput').value = awb.trim();
+        handleLiveTrack(null);
+      }
+    });
+  </script>
 </body>
 </html>

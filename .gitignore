@@ -17,3 +17,5 @@ Thumbs.db
 
 # Original page backups
 *.original
+
+tmp_chrome*/

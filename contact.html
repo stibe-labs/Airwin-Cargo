@@ -2657,4 +2657,92 @@
   }
 </script>
 
+
+<script>
+window.handleAirwinContactSubmit = async function(form) {
+  if (!form) form = document.getElementById('contact_form');
+  if (!form) return;
+
+  var fname = (form.querySelector('#fname') || form.querySelector('[name="fname"]')).value.trim();
+  var email = (form.querySelector('#email') || form.querySelector('[name="email"]')).value.trim();
+  var phone = (form.querySelector('#phone') || form.querySelector('[name="phone"]')).value.trim();
+  var subject = (form.querySelector('#subject_text') || form.querySelector('[name="subject_text"]')).value.trim();
+  var comment = (form.querySelector('#comment') || form.querySelector('[name="comment"]')).value.trim();
+  var selectedRadio = form.querySelector('input[name="subject"]:checked') || form.querySelector('input[name="service"]:checked');
+  var service = selectedRadio ? selectedRadio.value : 'General Freight';
+
+  var submitBtn = document.getElementById('contact-submit-btn') || form.querySelector('button[type="submit"]');
+  var msgEl = document.getElementById('contact-status-msg');
+  var successEl = document.getElementById('contact-form-success');
+
+  if (!fname || !email || !phone || !comment) {
+    if (msgEl) {
+      msgEl.style.display = 'block';
+      msgEl.style.background = '#fef2f2';
+      msgEl.style.color = '#b91c1c';
+      msgEl.style.border = '1px solid #fecaca';
+      msgEl.innerText = 'Please fill in all required fields marked with *';
+    }
+    return;
+  }
+
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.7';
+    var textSpan = submitBtn.querySelector('.btn-text');
+    if (textSpan) textSpan.innerText = 'SENDING...';
+  }
+
+  try {
+    var res = await fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: fname,
+        email: email,
+        phone: phone,
+        subject: subject || 'General Inquiry',
+        service: service,
+        message: comment
+      })
+    });
+    var data = await res.json();
+    if (data.success) {
+      form.style.display = 'none';
+      if (successEl) {
+        successEl.style.display = 'block';
+      }
+    } else {
+      if (msgEl) {
+        msgEl.style.display = 'block';
+        msgEl.style.background = '#fef2f2';
+        msgEl.style.color = '#b91c1c';
+        msgEl.style.border = '1px solid #fecaca';
+        msgEl.innerText = data.error || 'Failed to submit inquiry. Please try again.';
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        var textSpan = submitBtn.querySelector('.btn-text');
+        if (textSpan) textSpan.innerText = 'SEND YOUR MESSAGE';
+      }
+    }
+  } catch (err) {
+    if (msgEl) {
+      msgEl.style.display = 'block';
+      msgEl.style.background = '#fef2f2';
+      msgEl.style.color = '#b91c1c';
+      msgEl.style.border = '1px solid #fecaca';
+      msgEl.innerText = 'Network error sending message. Please try again.';
+    }
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      var textSpan = submitBtn.querySelector('.btn-text');
+      if (textSpan) textSpan.innerText = 'SEND YOUR MESSAGE';
+    }
+  }
+};
+</script>
+
 </body></html>

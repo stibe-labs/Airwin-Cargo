@@ -11,3 +11,5 @@ server.js
 package.json
 package-lock.json
 
+
+tmp_chrome*/

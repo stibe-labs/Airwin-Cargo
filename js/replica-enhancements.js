@@ -1034,6 +1034,237 @@
     init();
   }
   window.addEventListener('load', unlockScroll);
+
+  // =========================================================
+  // AIRWIN CARGO - LIVE FORM EVENT LISTENERS (PHASE 3 CONNECT)
+  // =========================================================
+
+  // A. LIVE FOOTER QUOTE SUBMISSION
+  document.addEventListener('submit', async function(e) {
+    var form = e.target ? e.target.closest('.footer-quote-form') : null;
+    if (!form) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    var nameInput = form.querySelector('input[name="name"]');
+    var mobileInput = form.querySelector('input[name="mobile"]');
+    var emailInput = form.querySelector('input[name="email"]');
+    var commentsInput = form.querySelector('textarea[name="comments"]');
+    var btnWrap = form.querySelector('.footer-quote-btn-wrap');
+    var submitBtn = form.querySelector('.footer-quote-submit');
+    var successEl = form.querySelector('.footer-quote-success');
+
+    var name = nameInput ? nameInput.value.trim() : '';
+    var mobile = mobileInput ? mobileInput.value.trim() : '';
+    var email = emailInput ? emailInput.value.trim() : '';
+    var comments = commentsInput ? commentsInput.value.trim() : '';
+
+    if (!name || !mobile || !email) {
+      alert('Please fill in your name, mobile, and email address.');
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Submitting...';
+    }
+
+    try {
+      var res = await fetch('/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          mobile: mobile,
+          email: email,
+          comments: comments,
+          service_type: 'General Air/Sea Freight'
+        })
+      });
+      var data = await res.json();
+      if (data.success) {
+        if (btnWrap) btnWrap.style.display = 'none';
+        if (nameInput) nameInput.style.display = 'none';
+        if (mobileInput) mobileInput.style.display = 'none';
+        if (emailInput) emailInput.style.display = 'none';
+        if (commentsInput) commentsInput.style.display = 'none';
+        if (successEl) {
+          successEl.style.display = 'block';
+          successEl.innerHTML = '&#10003; Thank you, <strong>' + name + '</strong>! Your quote request has been received by Airwin Operations. We will get back to you shortly.';
+        }
+      } else {
+        alert(data.error || 'Failed to submit quote request. Please try again.');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Submit';
+        }
+      }
+    } catch(err) {
+      alert('Network error connecting to Airwin Quote API. Please try again.');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit';
+      }
+    }
+  }, true);
+
+  // B. LIVE CAREERS APPLICATION FORM SUBMISSION
+  document.addEventListener('submit', async function(e) {
+    var form = e.target ? e.target.closest('#airwinJobApplyForm') : null;
+    if (!form) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    var nameInput = form.querySelector('#applicantName');
+    var emailInput = form.querySelector('#applicantEmail');
+    var phoneInput = form.querySelector('#applicantPhone');
+    var cityInput = form.querySelector('#applicantCity');
+    var roleInput = form.querySelector('#applicantRole');
+    var btn = form.querySelector('#submitAppBtn');
+    var msg = form.querySelector('#formFeedbackMessage');
+
+    var name = nameInput ? nameInput.value.trim() : '';
+    var email = emailInput ? emailInput.value.trim() : '';
+    var phone = phoneInput ? phoneInput.value.trim() : '';
+    var city = cityInput ? cityInput.value.trim() : '';
+    var role = roleInput ? roleInput.value.trim() : 'General Application';
+
+    if (!name || !email || !phone) return;
+
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = '<span>Submitting Application...</span>';
+    }
+
+    try {
+      var res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone,
+          subject: 'Job Application: ' + role + ' (' + (city || 'Candidate') + ')',
+          service_of_interest: 'Careers / ' + role,
+          message: 'Candidate ' + name + ' applied for ' + role + ' from ' + city + '. Phone: ' + phone + ', Email: ' + email
+        })
+      });
+      var data = await res.json();
+      if (data.success) {
+        if (btn) {
+          btn.innerHTML = '<span>Application Sent Successfully!</span> &#10003;';
+          btn.style.background = '#059669';
+        }
+        if (msg) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(16, 185, 129, 0.12)';
+          msg.style.color = '#047857';
+          msg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+          msg.innerHTML = 'Thank you, ' + name + '! Your application for <strong>' + role + '</strong> has been submitted. Our HR recruitment team will review it promptly.';
+        }
+        form.reset();
+      } else {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<span>Send Application</span> &rarr;';
+        }
+        alert(data.error || 'Failed to submit application.');
+      }
+    } catch (err) {
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Send Application</span> &rarr;';
+      }
+      alert('Network error submitting application. Please try again.');
+    }
+  }, true);
+
+  // C. LIVE CONTACT FORM HANDLER (FALLBACK & DIRECT)
+  window.handleAirwinContactSubmit = async function(form) {
+    if (!form) form = document.getElementById('contact_form');
+    if (!form) return;
+
+    var fname = (form.querySelector('#fname') || form.querySelector('[name="fname"]')).value.trim();
+    var email = (form.querySelector('#email') || form.querySelector('[name="email"]')).value.trim();
+    var phone = (form.querySelector('#phone') || form.querySelector('[name="phone"]')).value.trim();
+    var subject = (form.querySelector('#subject_text') || form.querySelector('[name="subject_text"]')).value.trim();
+    var comment = (form.querySelector('#comment') || form.querySelector('[name="comment"]')).value.trim();
+    var selectedRadio = form.querySelector('input[name="subject"]:checked') || form.querySelector('input[name="service"]:checked');
+    var service = selectedRadio ? selectedRadio.value : 'General Freight';
+
+    var submitBtn = document.getElementById('contact-submit-btn') || form.querySelector('button[type="submit"]');
+    var msgEl = document.getElementById('contact-status-msg');
+    var successEl = document.getElementById('contact-form-success');
+
+    if (!fname || !email || !phone || !comment) {
+      if (msgEl) {
+        msgEl.style.display = 'block';
+        msgEl.style.background = '#fef2f2';
+        msgEl.style.color = '#b91c1c';
+        msgEl.style.border = '1px solid #fecaca';
+        msgEl.innerText = 'Please fill in all required fields marked with *';
+      }
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+      var textSpan = submitBtn.querySelector('.btn-text');
+      if (textSpan) textSpan.innerText = 'SENDING...';
+    }
+
+    try {
+      var res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fname,
+          email: email,
+          phone: phone,
+          subject: subject || 'General Inquiry',
+          service: service,
+          message: comment
+        })
+      });
+      var data = await res.json();
+      if (data.success) {
+        form.style.display = 'none';
+        if (successEl) {
+          successEl.style.display = 'block';
+        }
+      } else {
+        if (msgEl) {
+          msgEl.style.display = 'block';
+          msgEl.style.background = '#fef2f2';
+          msgEl.style.color = '#b91c1c';
+          msgEl.style.border = '1px solid #fecaca';
+          msgEl.innerText = data.error || 'Failed to submit inquiry. Please try again.';
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          var textSpan = submitBtn.querySelector('.btn-text');
+          if (textSpan) textSpan.innerText = 'SEND YOUR MESSAGE';
+        }
+      }
+    } catch (err) {
+      if (msgEl) {
+        msgEl.style.display = 'block';
+        msgEl.style.background = '#fef2f2';
+        msgEl.style.color = '#b91c1c';
+        msgEl.style.border = '1px solid #fecaca';
+        msgEl.innerText = 'Network error sending message. Please try again.';
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        var textSpan = submitBtn.querySelector('.btn-text');
+        if (textSpan) textSpan.innerText = 'SEND YOUR MESSAGE';
+      }
+    }
+  };
+
 })();
 
 
