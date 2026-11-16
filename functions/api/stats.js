@@ -13,18 +13,26 @@ export async function onRequestGet({ request, env }) {
       deliveredShipments,
       pendingQuotes,
       newInquiries,
+      activeJobs,
+      newApplications,
+      totalArticles,
       recentShipments,
       recentQuotes,
-      recentInquiries
+      recentInquiries,
+      recentApplications
     ] = await Promise.all([
       env.DB.prepare('SELECT COUNT(*) as count FROM shipments').first(),
       env.DB.prepare("SELECT COUNT(*) as count FROM shipments WHERE current_status NOT IN ('DELIVERED', 'EXCEPTION')").first(),
       env.DB.prepare("SELECT COUNT(*) as count FROM shipments WHERE current_status = 'DELIVERED'").first(),
       env.DB.prepare("SELECT COUNT(*) as count FROM quote_requests WHERE status = 'PENDING'").first(),
       env.DB.prepare("SELECT COUNT(*) as count FROM contact_inquiries WHERE status = 'NEW'").first(),
+      env.DB.prepare("SELECT COUNT(*) as count FROM job_postings WHERE is_active = 1").first(),
+      env.DB.prepare("SELECT COUNT(*) as count FROM job_applications WHERE status = 'NEW'").first(),
+      env.DB.prepare("SELECT COUNT(*) as count FROM news_articles").first(),
       env.DB.prepare('SELECT id, awb_number, cargo_type, origin_hub, destination_city, current_status, created_at FROM shipments ORDER BY created_at DESC LIMIT 5').all(),
       env.DB.prepare('SELECT id, name, mobile, service_type, origin, destination, status, created_at FROM quote_requests ORDER BY created_at DESC LIMIT 5').all(),
-      env.DB.prepare('SELECT id, name, email, subject, service_of_interest, status, created_at FROM contact_inquiries ORDER BY created_at DESC LIMIT 5').all()
+      env.DB.prepare('SELECT id, name, email, subject, service_of_interest, status, created_at FROM contact_inquiries ORDER BY created_at DESC LIMIT 5').all(),
+      env.DB.prepare('SELECT id, role, name, email, phone, place, status, created_at FROM job_applications ORDER BY created_at DESC LIMIT 5').all()
     ]);
 
     return jsonResponse({
@@ -34,12 +42,16 @@ export async function onRequestGet({ request, env }) {
         active_shipments: activeShipments?.count || 0,
         delivered_shipments: deliveredShipments?.count || 0,
         pending_quotes: pendingQuotes?.count || 0,
-        new_inquiries: newInquiries?.count || 0
+        new_inquiries: newInquiries?.count || 0,
+        active_jobs: activeJobs?.count || 0,
+        new_applications: newApplications?.count || 0,
+        total_articles: totalArticles?.count || 0
       },
       recent: {
         shipments: recentShipments?.results || [],
         quotes: recentQuotes?.results || [],
-        inquiries: recentInquiries?.results || []
+        inquiries: recentInquiries?.results || [],
+        applications: recentApplications?.results || []
       }
     });
   } catch (err) {

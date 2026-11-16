@@ -3534,6 +3534,74 @@
   }
 </script>
 
+<script id="airwin-insights-dynamic-loader">
+(function() {
+  async function loadDynamicArticles() {
+    try {
+      var res = await fetch('/api/news');
+      var data = await res.json();
+      if (data && data.success && Array.isArray(data.articles) && data.articles.length > 0) {
+        var grid = document.querySelector('.airwin-news-grid');
+        if (!grid) return;
+        grid.innerHTML = data.articles.map(function(art) {
+          var dateParts = (art.publish_date || '15 May, 2025').trim().split(/[\s,]+/);
+          var day = dateParts[0] || '15';
+          var monthYear = dateParts.slice(1).join(' ') || 'May, 2025';
+          var img = art.image_url || './images/news/news_1.jpg';
+          var category = art.category || 'Logistics Management';
+          var readTime = (art.read_time || '4 min read').toUpperCase();
+          var title = art.title || '';
+          var summary = art.summary || '';
+          var slug = art.slug || '';
+
+          return '<article class="airwin-news-card">' +
+            '<div class="airwin-news-card-bg-wrap">' +
+              '<img src="' + img + '" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img" onerror="this.src=\'./images/news/news_1.jpg\';"/>' +
+              '<div class="airwin-news-card-overlay-light"></div>' +
+              '<div class="airwin-news-card-overlay-dark"></div>' +
+            '</div>' +
+            '<a href="/news/' + slug + '/" class="airwin-news-card-link" aria-label="Read ' + title.replace(/"/g, '&quot;') + '">' +
+              '<div class="airwin-news-card-top">' +
+                '<div class="airwin-news-card-date">' +
+                  '<span class="news-date-day">' + day + '</span>' +
+                  '<span class="news-date-month">' + monthYear + '</span>' +
+                '</div>' +
+                '<div class="airwin-news-card-tag">' + category + '</div>' +
+              '</div>' +
+              '<div class="airwin-news-card-body">' +
+                '<div class="airwin-news-card-meta">' +
+                  '<span class="news-meta-accent">' + category.toUpperCase() + '</span>' +
+                  '<span class="news-meta-dot">•</span>' +
+                  '<span class="news-meta-time">' + readTime + '</span>' +
+                '</div>' +
+                '<h2 class="airwin-news-card-title">' + title + '</h2>' +
+                '<p class="airwin-news-card-desc">' + summary + '</p>' +
+                '<div class="airwin-news-card-action">' +
+                  '<span class="news-action-text">Read Article</span>' +
+                  '<span class="news-action-arrow" aria-hidden="true">' +
+                    '<span class="news-action-line"></span>' +
+                    '<svg class="news-action-head" width="9" height="11" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                      '<path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+                    '</svg>' +
+                  '</span>' +
+                '</div>' +
+              '</div>' +
+            '</a>' +
+          '</article>';
+        }).join('');
+      }
+    } catch(e) {
+      // Fallback to static articles
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadDynamicArticles);
+  } else {
+    loadDynamicArticles();
+  }
+})();
+</script>
 <script id="airwin-insights-safety">
 (function() {
   function unlock() {

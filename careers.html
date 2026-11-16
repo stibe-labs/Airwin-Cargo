@@ -2739,34 +2739,68 @@ html {
     }
   }
 
-  function handleJobApplication(e) {
+  async function handleJobApplication(e) {
     e.preventDefault();
     const btn = document.getElementById('submitAppBtn');
     const msg = document.getElementById('formFeedbackMessage');
     const form = document.getElementById('airwinJobApplyForm');
 
+    const name = (document.getElementById('applicantName')?.value || '').trim();
+    const email = (document.getElementById('applicantEmail')?.value || '').trim();
+    const phone = (document.getElementById('applicantPhone')?.value || '').trim();
+    const place = (document.getElementById('applicantPlace')?.value || '').trim();
+    const role = document.getElementById('applicantRole')?.value || 'General Application';
+    const cvInput = document.getElementById('applicantCV');
+    const resume_filename = (cvInput && cvInput.files && cvInput.files[0]) ? cvInput.files[0].name : '';
+
     btn.disabled = true;
     btn.innerHTML = '<span>Submitting Application...</span>';
 
-    setTimeout(function() {
+    try {
+      const res = await fetch('/api/careers?type=applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          place,
+          role,
+          resume_filename,
+          cover_notes: 'Direct application submitted from Airwin careers portal.'
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Application Sent Successfully!</span> &#10003;';
+        btn.style.background = '#059669';
+
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(16, 185, 129, 0.12)';
+        msg.style.color = '#047857';
+        msg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+        msg.innerHTML = 'Thank you, ' + name + '! Your application for <strong>' + role + '</strong> has been received. Our HR team will review your profile promptly.';
+
+        form.reset();
+        updateFileName(document.getElementById('applicantCV'));
+
+        setTimeout(function() {
+          btn.innerHTML = '<span>Send Application</span> &rarr;';
+          btn.style.background = '#0016CB';
+        }, 8000);
+      } else {
+        throw new Error(data.error || 'Submission failed');
+      }
+    } catch (err) {
       btn.disabled = false;
-      btn.innerHTML = '<span>Application Sent Successfully!</span> &#10003;';
-      btn.style.background = '#059669';
-
+      btn.innerHTML = '<span>Send Application</span> &rarr;';
       msg.style.display = 'block';
-      msg.style.background = 'rgba(16, 185, 129, 0.12)';
-      msg.style.color = '#047857';
-      msg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
-      msg.innerHTML = 'Thank you! Your application for <strong>' + document.getElementById('applicantRole').value + '</strong> has been received. Our HR team will get in touch with you shortly.';
-
-      form.reset();
-      updateFileName(document.getElementById('applicantCV'));
-
-      setTimeout(function() {
-        btn.innerHTML = '<span>Send Application</span> &rarr;';
-        btn.style.background = '#0016CB';
-      }, 6000);
-    }, 1200);
+      msg.style.background = 'rgba(239, 68, 68, 0.12)';
+      msg.style.color = '#dc2626';
+      msg.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+      msg.innerHTML = err.message || 'Error submitting application. You can also email your CV to delhi@airwinlogistic.com.';
+    }
   }
 </script>
 <style id="airwin-common-footer-style">
