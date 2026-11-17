@@ -791,10 +791,6 @@
   }
   
   /* Content container */
-    .about-fea .container {
-    position: relative !important;
-    z-index: 10 !important;
-  }
   .about-fea-content {
     position: relative !important;
     z-index: 5 !important;
@@ -923,34 +919,41 @@
   }
 
   @media (max-width: 991px) {
-    /* Hide the huge desktop empty blocks on mobile - no ghost whitespace! */
-    .about-fea-empty-block {
+    /* Empty block before section is 0 height on mobile */
+    .about-fea-empty-block.hidden-dsk {
       display: none !important;
       height: 0 !important;
     }
 
-    /* Wrap acts as a clean full section container on mobile */
+    /* Empty block after section provides the scroll runway: ~260vh (approx 5-6 scrolls) */
+    .about-fea-empty-block.hidden-mb {
+      display: block !important;
+      height: 260vh !important;
+    }
+
+    /* Wrap acts as the sticky track container */
     .about-fea-wrap {
       position: relative !important;
       height: auto !important;
       background: #000000 !important;
-      overflow: hidden !important;
     }
 
-    /* Section container on mobile */
+    /* Section sticks to top during scroll */
     .about-fea {
-      position: relative !important;
-      height: 100svh !important;
-      min-height: 640px !important;
-      max-height: 860px !important;
-      overflow: hidden !important;
+      position: sticky !important;
       top: 0 !important;
-      padding: 0 !important;
+      height: 100vh !important;
+      height: 100svh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
       width: 100% !important;
       background: #000000 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 5 !important;
     }
 
-    /* Background images container */
+    /* Full-bleed background images */
     .about-fea-bg {
       position: absolute !important;
       inset: 0 !important;
@@ -960,50 +963,39 @@
       display: block !important;
     }
 
-    /* Cross-fade between truck (item 1) and airliner (item 2) */
     .about-fea-bg-item {
       position: absolute !important;
       inset: 0 !important;
       width: 100% !important;
       height: 100% !important;
-      transition: opacity 0.45s ease-in-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
-      opacity: 0 !important;
-      z-index: 1 !important;
-      pointer-events: none !important;
+      overflow: hidden !important;
+      transition: opacity 0.35s ease !important;
     }
     .about-fea-bg-item:nth-child(1) {
-      opacity: 1 !important;
       z-index: 2 !important;
+      opacity: 1;
     }
     .about-fea-bg-item:nth-child(2) {
-      opacity: 0 !important;
-      z-index: 1 !important;
+      z-index: 3 !important;
+      opacity: 0;
     }
 
-    /* When Management is active: cross-fade to airliner */
-    .about-fea[data-active-index="1"] .about-fea-bg-item:nth-child(1) {
-      opacity: 0 !important;
-      z-index: 1 !important;
-    }
-    .about-fea[data-active-index="1"] .about-fea-bg-item:nth-child(2) {
-      opacity: 1 !important;
-      z-index: 2 !important;
-    }
-
-    /* Image zoom and positioning for mobile portrait */
     .about-fea-bg-item-thumb {
       width: 100% !important;
       height: 100% !important;
+      overflow: hidden !important;
     }
     .about-fea-bg-item-thumb img {
       width: 100% !important;
       height: 100% !important;
       object-fit: cover !important;
-      object-position: center 26% !important;
-      transform: scale(1.04) !important;
+      object-position: center 46% !important;
+      transform: scale(1.04);
+      transform-origin: center center !important;
+      will-change: transform !important;
     }
 
-    /* Mobile dark vignette overlay: transparent in upper-center for the vehicle, dark at bottom for text contrast */
+    /* Mobile vignette: darker at top for header readability, darker at bottom for content readability, center transparent for vehicle */
     .about-fea-bg-overlay {
       position: absolute !important;
       inset: 0 !important;
@@ -1011,39 +1003,49 @@
       height: 100% !important;
       background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.72) 0%,
-        rgba(0, 0, 0, 0.15) 24%,
-        rgba(0, 0, 0, 0.35) 45%,
-        rgba(0, 0, 0, 0.88) 72%,
-        rgba(0, 0, 0, 0.98) 100%
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.50) 14%,
+        rgba(0, 0, 0, 0.05) 28%,
+        rgba(0, 0, 0, 0.05) 55%,
+        rgba(0, 0, 0, 0.65) 68%,
+        rgba(0, 0, 0, 0.94) 84%,
+        #000000 100%
       ) !important;
-      z-index: 3 !important;
+      z-index: 4 !important;
       opacity: 1 !important;
       pointer-events: none !important;
       display: block !important;
     }
 
     /* Content container */
-      .about-fea .container {
-    position: relative !important;
-    z-index: 10 !important;
-  }
-  .about-fea-content {
+    .about-fea .container {
       position: relative !important;
       z-index: 10 !important;
       height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-between !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 2.2rem !important;
+      margin: 0 !important;
       box-sizing: border-box !important;
-      padding: 7.2rem 1.6rem 2.8rem 1.6rem !important;
+      display: block !important;
+    }
+    .about-fea-content {
+      position: relative !important;
+      z-index: 15 !important;
+      height: 100% !important;
+      width: 100% !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
     .about-fea-content-wrap {
+      position: relative !important;
       height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-between !important;
       width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block !important;
     }
 
     /* Hide desktop horizontal line on mobile */
@@ -1051,180 +1053,120 @@
       display: none !important;
     }
 
-    /* Header label 'OUR' */
+    /* Small 'OUR' in upper corner beside/above heading like desktop view */
     .about-fea-label {
-      display: none !important;
+      position: absolute !important;
+      top: 3.2rem !important;
+      left: 2.2rem !important;
+      z-index: 20 !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     .about-fea-label .txt {
-      font-size: 1.15rem !important;
-      letter-spacing: 0.25em !important;
-      color: #0077ee !important;
-      font-weight: 700 !important;
+      font-family: monospace !important;
+      font-size: 1.25rem !important;
+      letter-spacing: 0.24em !important;
       text-transform: uppercase !important;
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 700 !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
     }
 
-    /* Mobile interactive switch tabs */
-    .about-fea-mobile-tabs {
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.8rem !important;
-      margin-bottom: 1.6rem !important;
-      width: 100% !important;
-      z-index: 15 !important;
-    }
-    .about-fea-tab-btn {
-      flex: 1 !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 0.6rem !important;
-      padding: 0.95rem 1.2rem !important;
-      border-radius: 999px !important;
-      border: 1px solid rgba(255, 255, 255, 0.16) !important;
-      background: rgba(18, 24, 38, 0.72) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      color: rgba(255, 255, 255, 0.65) !important;
-      font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
-      font-size: 1.3rem !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      cursor: pointer !important;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-      -webkit-tap-highlight-color: transparent !important;
-    }
-    .about-fea-tab-btn .tab-dot {
-      width: 6px !important;
-      height: 6px !important;
-      border-radius: 50% !important;
-      background: rgba(255, 255, 255, 0.4) !important;
-      transition: all 0.3s ease !important;
-    }
-    .about-fea-tab-btn.active {
-      background: #0077ee !important;
-      border-color: #0077ee !important;
-      color: #ffffff !important;
-      box-shadow: 0 4px 16px rgba(0, 119, 238, 0.45) !important;
-    }
-    .about-fea-tab-btn.active .tab-dot {
-      background: #ffffff !important;
-      box-shadow: 0 0 8px #ffffff !important;
-    }
-
-    /* Content list */
+    /* Content list - reset template margin-top and grid completely */
     .about-fea-content-list {
       position: relative !important;
-      width: 100% !important;
       height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-between !important;
+      width: 100% !important;
+      margin: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      display: block !important;
       transform: none !important;
     }
 
-    /* Content item on mobile */
     .about-fea-content-item {
-      margin-left: 0 !important;
-      padding-bottom: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
       position: static !important;
       display: block !important;
     }
 
-    /* Hide desktop titles since the top mobile tabs provide the headers */
+    /* Large Headings in upper area with same font style as desktop view */
     .about-fea-item-title {
-      display: none !important;
-    }
-
-    /* Bottom Frosted Card for description */
-    .about-fea-item-desc {
       position: absolute !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      top: auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      transform: translateY(20px) !important;
+      top: 5.2rem !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      width: auto !important;
+      transform: none !important;
+      z-index: 20 !important;
+      display: block !important;
       opacity: 0 !important;
       pointer-events: none !important;
-      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-      background: rgba(10, 15, 28, 0.88) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
-      border: 1px solid rgba(255, 255, 255, 0.14) !important;
-      border-radius: 20px !important;
-      padding: 1.8rem 2rem !important;
-      box-sizing: border-box !important;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-      z-index: 20 !important;
+      transition: opacity 0.35s ease !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
-
-    /* Active item description */
-    .about-fea-content-item.active .about-fea-item-desc,
-    .about-fea:not([data-active-index="1"]) .about-fea-content-item:nth-child(1) .about-fea-item-desc,
-    .about-fea[data-active-index="1"] .about-fea-content-item:nth-child(2) .about-fea-item-desc {
+    .about-fea-content-item.active .about-fea-item-title {
       opacity: 1 !important;
-      transform: translateY(0) !important;
       pointer-events: auto !important;
     }
-    /* When active index is 1, hide item 1 */
-    .about-fea[data-active-index="1"] .about-fea-content-item:nth-child(1) .about-fea-item-desc {
-      opacity: 0 !important;
-      transform: translateY(20px) !important;
-      pointer-events: none !important;
-    }
-    /* When active index is 0, hide item 2 */
-    .about-fea:not([data-active-index="1"]) .about-fea-content-item:nth-child(2) .about-fea-item-desc {
-      opacity: 0 !important;
-      transform: translateY(20px) !important;
-      pointer-events: none !important;
-    }
-
-    /* Card Header Badge inside desc */
-    .about-fea-card-header {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      margin-bottom: 1.2rem !important;
-      padding-bottom: 0.8rem !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-    }
-    .about-fea-card-badge {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 0.6rem !important;
+    .about-fea-item-title .heading {
       font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
-      font-size: 1.4rem !important;
+      font-size: clamp(3.0rem, 8.8vw, 4.4rem) !important;
       font-weight: 700 !important;
       text-transform: uppercase !important;
       color: #ffffff !important;
-      letter-spacing: 0.05em !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.05 !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+      margin: 0 !important;
+      white-space: nowrap !important;
     }
-    .about-fea-card-badge::before {
-      content: '' !important;
-      display: inline-block !important;
-      width: 8px !important;
-      height: 8px !important;
-      border-radius: 50% !important;
-      background: #0077ee !important;
-      box-shadow: 0 0 10px #0077ee !important;
+    .about-fea-item-title-inner {
+      clip-path: none !important;
+      opacity: 1 !important;
     }
-    .about-fea-card-num {
-      font-family: monospace !important;
-      font-size: 1.2rem !important;
-      color: rgba(255, 255, 255, 0.45) !important;
-      letter-spacing: 0.15em !important;
+    .about-fea-item-title-mask {
+      display: none !important;
     }
 
-    /* Description typography */
+    /* Under content: like desktop view, NO outline card, NO border box */
+    .about-fea-item-desc {
+      position: absolute !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      bottom: 2.5rem !important;
+      top: auto !important;
+      width: auto !important;
+      max-width: none !important;
+      transform: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 20 !important;
+    }
+    .about-fea-content-item.active .about-fea-item-desc {
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+    }
     .about-fea-item-desc .txt {
       font-family: var(--font--body, 'Space Grotesk', Arial, sans-serif) !important;
-      font-size: 1.35rem !important;
-      line-height: 1.65 !important;
-      color: rgba(255, 255, 255, 0.92) !important;
-      text-shadow: none !important;
+      font-size: clamp(1.2rem, 3.4vw, 1.45rem) !important;
+      line-height: 1.55 !important;
+      color: #ffffff !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 1px 4px #000000 !important;
       margin: 0 !important;
+      padding: 0 !important;
     }
   }
 </style>
@@ -2326,10 +2268,6 @@
   }
   
   /* Content container */
-    .about-fea .container {
-    position: relative !important;
-    z-index: 10 !important;
-  }
   .about-fea-content {
     position: relative !important;
     z-index: 5 !important;
@@ -2458,34 +2396,41 @@
   }
 
   @media (max-width: 991px) {
-    /* Hide the huge desktop empty blocks on mobile - no ghost whitespace! */
-    .about-fea-empty-block {
+    /* Empty block before section is 0 height on mobile */
+    .about-fea-empty-block.hidden-dsk {
       display: none !important;
       height: 0 !important;
     }
 
-    /* Wrap acts as a clean full section container on mobile */
+    /* Empty block after section provides the scroll runway: ~260vh (approx 5-6 scrolls) */
+    .about-fea-empty-block.hidden-mb {
+      display: block !important;
+      height: 260vh !important;
+    }
+
+    /* Wrap acts as the sticky track container */
     .about-fea-wrap {
       position: relative !important;
       height: auto !important;
       background: #000000 !important;
-      overflow: hidden !important;
     }
 
-    /* Section container on mobile */
+    /* Section sticks to top during scroll */
     .about-fea {
-      position: relative !important;
-      height: 100svh !important;
-      min-height: 640px !important;
-      max-height: 860px !important;
-      overflow: hidden !important;
+      position: sticky !important;
       top: 0 !important;
-      padding: 0 !important;
+      height: 100vh !important;
+      height: 100svh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
       width: 100% !important;
       background: #000000 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 5 !important;
     }
 
-    /* Background images container */
+    /* Full-bleed background images */
     .about-fea-bg {
       position: absolute !important;
       inset: 0 !important;
@@ -2495,50 +2440,39 @@
       display: block !important;
     }
 
-    /* Cross-fade between truck (item 1) and airliner (item 2) */
     .about-fea-bg-item {
       position: absolute !important;
       inset: 0 !important;
       width: 100% !important;
       height: 100% !important;
-      transition: opacity 0.45s ease-in-out, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1) !important;
-      opacity: 0 !important;
-      z-index: 1 !important;
-      pointer-events: none !important;
+      overflow: hidden !important;
+      transition: opacity 0.35s ease !important;
     }
     .about-fea-bg-item:nth-child(1) {
-      opacity: 1 !important;
       z-index: 2 !important;
+      opacity: 1;
     }
     .about-fea-bg-item:nth-child(2) {
-      opacity: 0 !important;
-      z-index: 1 !important;
+      z-index: 3 !important;
+      opacity: 0;
     }
 
-    /* When Management is active: cross-fade to airliner */
-    .about-fea[data-active-index="1"] .about-fea-bg-item:nth-child(1) {
-      opacity: 0 !important;
-      z-index: 1 !important;
-    }
-    .about-fea[data-active-index="1"] .about-fea-bg-item:nth-child(2) {
-      opacity: 1 !important;
-      z-index: 2 !important;
-    }
-
-    /* Image zoom and positioning for mobile portrait */
     .about-fea-bg-item-thumb {
       width: 100% !important;
       height: 100% !important;
+      overflow: hidden !important;
     }
     .about-fea-bg-item-thumb img {
       width: 100% !important;
       height: 100% !important;
       object-fit: cover !important;
-      object-position: center 26% !important;
-      transform: scale(1.04) !important;
+      object-position: center 46% !important;
+      transform: scale(1.04);
+      transform-origin: center center !important;
+      will-change: transform !important;
     }
 
-    /* Mobile dark vignette overlay: transparent in upper-center for the vehicle, dark at bottom for text contrast */
+    /* Mobile vignette: darker at top for header readability, darker at bottom for content readability, center transparent for vehicle */
     .about-fea-bg-overlay {
       position: absolute !important;
       inset: 0 !important;
@@ -2546,39 +2480,49 @@
       height: 100% !important;
       background: linear-gradient(
         180deg,
-        rgba(0, 0, 0, 0.72) 0%,
-        rgba(0, 0, 0, 0.15) 24%,
-        rgba(0, 0, 0, 0.35) 45%,
-        rgba(0, 0, 0, 0.88) 72%,
-        rgba(0, 0, 0, 0.98) 100%
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.50) 14%,
+        rgba(0, 0, 0, 0.05) 28%,
+        rgba(0, 0, 0, 0.05) 55%,
+        rgba(0, 0, 0, 0.65) 68%,
+        rgba(0, 0, 0, 0.94) 84%,
+        #000000 100%
       ) !important;
-      z-index: 3 !important;
+      z-index: 4 !important;
       opacity: 1 !important;
       pointer-events: none !important;
       display: block !important;
     }
 
     /* Content container */
-      .about-fea .container {
-    position: relative !important;
-    z-index: 10 !important;
-  }
-  .about-fea-content {
+    .about-fea .container {
       position: relative !important;
       z-index: 10 !important;
       height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-between !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 2.2rem !important;
+      margin: 0 !important;
       box-sizing: border-box !important;
-      padding: 7.2rem 1.6rem 2.8rem 1.6rem !important;
+      display: block !important;
+    }
+    .about-fea-content {
+      position: relative !important;
+      z-index: 15 !important;
+      height: 100% !important;
+      width: 100% !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
     .about-fea-content-wrap {
+      position: relative !important;
       height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-between !important;
       width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block !important;
     }
 
     /* Hide desktop horizontal line on mobile */
@@ -2586,180 +2530,120 @@
       display: none !important;
     }
 
-    /* Header label 'OUR' */
+    /* Small 'OUR' in upper corner beside/above heading like desktop view */
     .about-fea-label {
-      display: none !important;
+      position: absolute !important;
+      top: 3.2rem !important;
+      left: 2.2rem !important;
+      z-index: 20 !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     .about-fea-label .txt {
-      font-size: 1.15rem !important;
-      letter-spacing: 0.25em !important;
-      color: #0077ee !important;
-      font-weight: 700 !important;
+      font-family: monospace !important;
+      font-size: 1.25rem !important;
+      letter-spacing: 0.24em !important;
       text-transform: uppercase !important;
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 700 !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
     }
 
-    /* Mobile interactive switch tabs */
-    .about-fea-mobile-tabs {
-      display: flex !important;
-      align-items: center !important;
-      gap: 0.8rem !important;
-      margin-bottom: 1.6rem !important;
-      width: 100% !important;
-      z-index: 15 !important;
-    }
-    .about-fea-tab-btn {
-      flex: 1 !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 0.6rem !important;
-      padding: 0.95rem 1.2rem !important;
-      border-radius: 999px !important;
-      border: 1px solid rgba(255, 255, 255, 0.16) !important;
-      background: rgba(18, 24, 38, 0.72) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      color: rgba(255, 255, 255, 0.65) !important;
-      font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
-      font-size: 1.3rem !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.08em !important;
-      text-transform: uppercase !important;
-      cursor: pointer !important;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-      -webkit-tap-highlight-color: transparent !important;
-    }
-    .about-fea-tab-btn .tab-dot {
-      width: 6px !important;
-      height: 6px !important;
-      border-radius: 50% !important;
-      background: rgba(255, 255, 255, 0.4) !important;
-      transition: all 0.3s ease !important;
-    }
-    .about-fea-tab-btn.active {
-      background: #0077ee !important;
-      border-color: #0077ee !important;
-      color: #ffffff !important;
-      box-shadow: 0 4px 16px rgba(0, 119, 238, 0.45) !important;
-    }
-    .about-fea-tab-btn.active .tab-dot {
-      background: #ffffff !important;
-      box-shadow: 0 0 8px #ffffff !important;
-    }
-
-    /* Content list */
+    /* Content list - reset template margin-top and grid completely */
     .about-fea-content-list {
       position: relative !important;
-      width: 100% !important;
       height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: space-between !important;
+      width: 100% !important;
+      margin: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      display: block !important;
       transform: none !important;
     }
 
-    /* Content item on mobile */
     .about-fea-content-item {
-      margin-left: 0 !important;
-      padding-bottom: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
       position: static !important;
       display: block !important;
     }
 
-    /* Hide desktop titles since the top mobile tabs provide the headers */
+    /* Large Headings in upper area with same font style as desktop view */
     .about-fea-item-title {
-      display: none !important;
-    }
-
-    /* Bottom Frosted Card for description */
-    .about-fea-item-desc {
       position: absolute !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      top: auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      transform: translateY(20px) !important;
+      top: 5.2rem !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      width: auto !important;
+      transform: none !important;
+      z-index: 20 !important;
+      display: block !important;
       opacity: 0 !important;
       pointer-events: none !important;
-      transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-      background: rgba(10, 15, 28, 0.88) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
-      border: 1px solid rgba(255, 255, 255, 0.14) !important;
-      border-radius: 20px !important;
-      padding: 1.8rem 2rem !important;
-      box-sizing: border-box !important;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-      z-index: 20 !important;
+      transition: opacity 0.35s ease !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
-
-    /* Active item description */
-    .about-fea-content-item.active .about-fea-item-desc,
-    .about-fea:not([data-active-index="1"]) .about-fea-content-item:nth-child(1) .about-fea-item-desc,
-    .about-fea[data-active-index="1"] .about-fea-content-item:nth-child(2) .about-fea-item-desc {
+    .about-fea-content-item.active .about-fea-item-title {
       opacity: 1 !important;
-      transform: translateY(0) !important;
       pointer-events: auto !important;
     }
-    /* When active index is 1, hide item 1 */
-    .about-fea[data-active-index="1"] .about-fea-content-item:nth-child(1) .about-fea-item-desc {
-      opacity: 0 !important;
-      transform: translateY(20px) !important;
-      pointer-events: none !important;
-    }
-    /* When active index is 0, hide item 2 */
-    .about-fea:not([data-active-index="1"]) .about-fea-content-item:nth-child(2) .about-fea-item-desc {
-      opacity: 0 !important;
-      transform: translateY(20px) !important;
-      pointer-events: none !important;
-    }
-
-    /* Card Header Badge inside desc */
-    .about-fea-card-header {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      margin-bottom: 1.2rem !important;
-      padding-bottom: 0.8rem !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-    }
-    .about-fea-card-badge {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 0.6rem !important;
+    .about-fea-item-title .heading {
       font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
-      font-size: 1.4rem !important;
+      font-size: clamp(3.0rem, 8.8vw, 4.4rem) !important;
       font-weight: 700 !important;
       text-transform: uppercase !important;
       color: #ffffff !important;
-      letter-spacing: 0.05em !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.05 !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+      margin: 0 !important;
+      white-space: nowrap !important;
     }
-    .about-fea-card-badge::before {
-      content: '' !important;
-      display: inline-block !important;
-      width: 8px !important;
-      height: 8px !important;
-      border-radius: 50% !important;
-      background: #0077ee !important;
-      box-shadow: 0 0 10px #0077ee !important;
+    .about-fea-item-title-inner {
+      clip-path: none !important;
+      opacity: 1 !important;
     }
-    .about-fea-card-num {
-      font-family: monospace !important;
-      font-size: 1.2rem !important;
-      color: rgba(255, 255, 255, 0.45) !important;
-      letter-spacing: 0.15em !important;
+    .about-fea-item-title-mask {
+      display: none !important;
     }
 
-    /* Description typography */
+    /* Under content: like desktop view, NO outline card, NO border box */
+    .about-fea-item-desc {
+      position: absolute !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      bottom: 2.5rem !important;
+      top: auto !important;
+      width: auto !important;
+      max-width: none !important;
+      transform: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 20 !important;
+    }
+    .about-fea-content-item.active .about-fea-item-desc {
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+    }
     .about-fea-item-desc .txt {
       font-family: var(--font--body, 'Space Grotesk', Arial, sans-serif) !important;
-      font-size: 1.35rem !important;
-      line-height: 1.65 !important;
-      color: rgba(255, 255, 255, 0.92) !important;
-      text-shadow: none !important;
+      font-size: clamp(1.2rem, 3.4vw, 1.45rem) !important;
+      line-height: 1.55 !important;
+      color: #ffffff !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 1px 4px #000000 !important;
       margin: 0 !important;
+      padding: 0 !important;
     }
   }
 </style>
@@ -4724,19 +4608,8 @@
     <!-- Content inside grid container (Headings left, Center clear for truck/plane, Content right) -->
     <div class="w-layout-blockcontainer container grid full-h w-container">
       <div class="about-fea-content">
-        <div class="about-fea-label hidden-mb">
+        <div class="about-fea-label">
           <div class="txt">OUR</div>
-        </div>
-        <!-- Mobile Interactive Segmented Switcher (Mobile Only) -->
-        <div class="about-fea-mobile-tabs hidden-dsk" role="tablist" aria-label="Our Values Selector">
-          <button type="button" class="about-fea-tab-btn active" data-fea-idx="0" role="tab" aria-selected="true">
-            <span class="tab-dot"></span>
-            <span>01 &bull; MISSION</span>
-          </button>
-          <button type="button" class="about-fea-tab-btn" data-fea-idx="1" role="tab" aria-selected="false">
-            <span class="tab-dot"></span>
-            <span>02 &bull; MANAGEMENT</span>
-          </button>
         </div>
         <div class="about-fea-content-wrap">
           <div class="about-fea-line">
@@ -4754,10 +4627,6 @@
                 </div>
               </div>
               <div class="about-fea-item-desc">
-                <div class="about-fea-card-header hidden-dsk">
-                  <div class="about-fea-card-badge">OUR MISSION</div>
-                  <div class="about-fea-card-num">01 / 02</div>
-                </div>
                 <div class="txt">
                   Our mission is to provide unparalleled quality service, delivering value that exceeds expectations. We customize our products to meet the unique requirements of our clients, aiming to impress them with our responsiveness, clear and honest communications, and proactive approach. We are dedicated to maintaining close relationships with our clients, fostering a culture of teamwork and transparency in management.
                 </div>
@@ -4775,10 +4644,6 @@
                 </div>
               </div>
               <div class="about-fea-item-desc">
-                <div class="about-fea-card-header hidden-dsk">
-                  <div class="about-fea-card-badge">OUR MANAGEMENT</div>
-                  <div class="about-fea-card-num">02 / 02</div>
-                </div>
                 <div class="txt">
                   At Airwin, our dedicated professionals ensure the success of every transaction. With a global network, we strive to be the most reliable freight forwarding, project logistics management, and removal &amp; relocation company. Excelling in worldwide moving and related services, we aim to be trusted advisors, committed to serving our valued customers and associates with integrity and efficiency.
                 </div>
@@ -5489,74 +5354,109 @@
     initAboutHeroCardsAnimation();
   }
 </script>
-<script id="airwin-about-fea-mobile-controller">
+<script id="airwin-about-fea-scroll-zoom-controller">
 (function() {
-  function initMobileAboutFea() {
+  function initMobileAboutScrollZoom() {
+    const wrap = document.querySelector('.about-fea-wrap');
     const fea = document.querySelector('.about-fea');
-    if (!fea) return;
+    if (!wrap || !fea) return;
 
-    const tabBtns = fea.querySelectorAll('.about-fea-tab-btn');
-    const contentItems = fea.querySelectorAll('.about-fea-content-item');
+    const items = fea.querySelectorAll('.about-fea-content-item');
     const bgItems = fea.querySelectorAll('.about-fea-bg-item');
+    if (items.length < 2 || bgItems.length < 2) return;
 
-    function setActiveTab(idx) {
-      fea.setAttribute('data-active-index', idx);
-      tabBtns.forEach((btn, i) => {
-        btn.classList.toggle('active', i === idx);
-        btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
-      });
-      contentItems.forEach((item, i) => {
-        item.classList.toggle('active', i === idx);
-      });
-      bgItems.forEach((bg, i) => {
-        bg.classList.toggle('active', i === idx);
-      });
+    const img1 = bgItems[0].querySelector('img');
+    const img2 = bgItems[1].querySelector('img');
+
+    let ticking = false;
+
+    function update() {
+      ticking = false;
+      if (window.innerWidth > 991) {
+        // Reset transforms when resized to desktop
+        if (img1) img1.style.transform = '';
+        if (img2) img2.style.transform = '';
+        bgItems[0].style.opacity = '';
+        bgItems[1].style.opacity = '';
+        return;
+      }
+
+      const rect = wrap.getBoundingClientRect();
+      const scrollDist = wrap.offsetHeight - window.innerHeight;
+      if (scrollDist <= 0) return;
+
+      // Progress from 0 (when section sticks at top) to 1 (when section finishes)
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollDist));
+
+      if (progress < 0.48) {
+        // === 1. MISSION PHASE ===
+        const p1 = progress / 0.48; // 0.0 to 1.0
+        // Progressive image zoom: scale increases with each scroll (from 1.04 to 1.22)
+        const scale1 = (1.04 + p1 * 0.18).toFixed(4);
+        if (img1) img1.style.transform = `scale(${scale1})`;
+
+        bgItems[0].style.opacity = '1';
+        bgItems[1].style.opacity = '0';
+
+        items[0].classList.add('active');
+        items[1].classList.remove('active');
+        fea.setAttribute('data-active-index', '0');
+
+      } else if (progress < 0.54) {
+        // === 2. CROSS-FADE TRANSITION ===
+        const pt = (progress - 0.48) / 0.06; // 0.0 to 1.0
+        bgItems[0].style.opacity = (1 - pt).toFixed(3);
+        bgItems[1].style.opacity = pt.toFixed(3);
+
+        if (pt >= 0.5) {
+          items[0].classList.remove('active');
+          items[1].classList.add('active');
+          fea.setAttribute('data-active-index', '1');
+        } else {
+          items[0].classList.add('active');
+          items[1].classList.remove('active');
+          fea.setAttribute('data-active-index', '0');
+        }
+
+      } else {
+        // === 3. MANAGEMENT PHASE ===
+        const p2 = (progress - 0.54) / 0.46; // 0.0 to 1.0
+        // Progressive image zoom: scale increases with each scroll (from 1.04 to 1.24)
+        const scale2 = (1.04 + p2 * 0.20).toFixed(4);
+        if (img2) img2.style.transform = `scale(${scale2})`;
+
+        bgItems[0].style.opacity = '0';
+        bgItems[1].style.opacity = '1';
+
+        items[0].classList.remove('active');
+        items[1].classList.add('active');
+        fea.setAttribute('data-active-index', '1');
+      }
     }
 
-    tabBtns.forEach((btn) => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const idx = parseInt(this.getAttribute('data-fea-idx'), 10);
-        setActiveTab(idx);
-      });
-    });
-
-    // Touch swipe support on mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    fea.addEventListener('touchstart', function(e) {
-      if (e.changedTouches && e.changedTouches.length > 0) {
-        touchStartX = e.changedTouches[0].clientX;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
       }
-    }, { passive: true });
+    }
 
-    fea.addEventListener('touchend', function(e) {
-      if (e.changedTouches && e.changedTouches.length > 0) {
-        touchEndX = e.changedTouches[0].clientX;
-        const diffX = touchEndX - touchStartX;
-        if (Math.abs(diffX) > 40) {
-          const currentIdx = parseInt(fea.getAttribute('data-active-index') || '0', 10);
-          if (diffX < 0 && currentIdx === 0) {
-            setActiveTab(1);
-          } else if (diffX > 0 && currentIdx === 1) {
-            setActiveTab(0);
-          }
-        }
-      }
-    }, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
   }
 
-  window.initMobileAboutFea = initMobileAboutFea;
+  window.initMobileAboutScrollZoom = initMobileAboutScrollZoom;
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMobileAboutFea);
+    document.addEventListener('DOMContentLoaded', initMobileAboutScrollZoom);
   } else {
-    initMobileAboutFea();
+    initMobileAboutScrollZoom();
   }
 
   if (window.barba) {
     try {
-      window.barba.hooks.afterEnter(initMobileAboutFea);
+      window.barba.hooks.afterEnter(initMobileAboutScrollZoom);
     } catch(e) {}
   }
 })();
