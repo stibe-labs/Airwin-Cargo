@@ -1028,6 +1028,64 @@
     setTimeout(unlockScroll, 800);
   }
 
+
+  // Mobile Interactive Controller for About Page Mission/Management Feature Section
+  function initMobileAboutFea() {
+    const fea = document.querySelector('.about-fea');
+    if (!fea) return;
+
+    const tabBtns = fea.querySelectorAll('.about-fea-tab-btn');
+    const contentItems = fea.querySelectorAll('.about-fea-content-item');
+    const bgItems = fea.querySelectorAll('.about-fea-bg-item');
+
+    function setActiveTab(idx) {
+      fea.setAttribute('data-active-index', idx);
+      tabBtns.forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+        btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      });
+      contentItems.forEach((item, i) => {
+        item.classList.toggle('active', i === idx);
+      });
+      bgItems.forEach((bg, i) => {
+        bg.classList.toggle('active', i === idx);
+      });
+    }
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const idx = parseInt(this.getAttribute('data-fea-idx'), 10);
+        setActiveTab(idx);
+      });
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    fea.addEventListener('touchstart', function(e) {
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        touchStartX = e.changedTouches[0].clientX;
+      }
+    }, { passive: true });
+
+    fea.addEventListener('touchend', function(e) {
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        touchEndX = e.changedTouches[0].clientX;
+        const diffX = touchEndX - touchStartX;
+        if (Math.abs(diffX) > 40) {
+          const currentIdx = parseInt(fea.getAttribute('data-active-index') || '0', 10);
+          if (diffX < 0 && currentIdx === 0) {
+            setActiveTab(1);
+          } else if (diffX > 0 && currentIdx === 1) {
+            setActiveTab(0);
+          }
+        }
+      }
+    }, { passive: true });
+  }
+
+  window.initMobileAboutFea = initMobileAboutFea;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -1326,10 +1384,69 @@
   }
 
   window.updateAirwinActiveNavLinks = updateAirwinActiveNavLinks;
+
+  // Mobile Interactive Controller for About Page Mission/Management Feature Section
+  function initMobileAboutFea() {
+    const fea = document.querySelector('.about-fea');
+    if (!fea) return;
+
+    const tabBtns = fea.querySelectorAll('.about-fea-tab-btn');
+    const contentItems = fea.querySelectorAll('.about-fea-content-item');
+    const bgItems = fea.querySelectorAll('.about-fea-bg-item');
+
+    function setActiveTab(idx) {
+      fea.setAttribute('data-active-index', idx);
+      tabBtns.forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+        btn.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+      });
+      contentItems.forEach((item, i) => {
+        item.classList.toggle('active', i === idx);
+      });
+      bgItems.forEach((bg, i) => {
+        bg.classList.toggle('active', i === idx);
+      });
+    }
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const idx = parseInt(this.getAttribute('data-fea-idx'), 10);
+        setActiveTab(idx);
+      });
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    fea.addEventListener('touchstart', function(e) {
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        touchStartX = e.changedTouches[0].clientX;
+      }
+    }, { passive: true });
+
+    fea.addEventListener('touchend', function(e) {
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        touchEndX = e.changedTouches[0].clientX;
+        const diffX = touchEndX - touchStartX;
+        if (Math.abs(diffX) > 40) {
+          const currentIdx = parseInt(fea.getAttribute('data-active-index') || '0', 10);
+          if (diffX < 0 && currentIdx === 0) {
+            setActiveTab(1);
+          } else if (diffX > 0 && currentIdx === 1) {
+            setActiveTab(0);
+          }
+        }
+      }
+    }, { passive: true });
+  }
+
+  window.initMobileAboutFea = initMobileAboutFea;
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateAirwinActiveNavLinks);
   } else {
     updateAirwinActiveNavLinks();
+    initMobileAboutFea();
   }
 
   window.addEventListener('popstate', () => updateAirwinActiveNavLinks());
@@ -1354,6 +1471,7 @@
       });
       window.barba.hooks.afterEnter((data) => {
         updateAirwinActiveNavLinks(getBarbaUrlPath(data));
+        initMobileAboutFea();
         if (typeof window.initAboutHeroCardsAnimation === 'function') {
           try { window.initAboutHeroCardsAnimation(); } catch(e) {}
         }
