@@ -983,43 +983,19 @@
     }
     updateHeroHeight();
 
-    let isUserInteractingMobile = false;
-    let mobileIdleTimer = null;
-    let mobileAutoPlayFrame = 0;
-
     function updateProgress() {
-      const isMobile = window.innerWidth <= 991;
-      let sy = 0;
-      let scrollRunway = cachedHeroHeight;
+      // MOBILE VIEW: No scrolling animation! The video continuously plays smoothly.
+      if (window.innerWidth <= 991) return;
 
-      if (isMobile) {
-        // On mobile, use native scroll (window.scrollY)
-        sy = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-        scrollRunway = 260; // compact runway matching hero height
-        isUserInteractingMobile = true;
-        if (mobileIdleTimer) clearTimeout(mobileIdleTimer);
-        mobileIdleTimer = setTimeout(() => {
-          isUserInteractingMobile = false;
-          mobileAutoPlayFrame = currentFrame;
-          if (!isVideoRafRunning) {
-            isVideoRafRunning = true;
-            requestAnimationFrame(renderLoop);
-          }
-        }, 1500);
+      // DESKTOP: EXACT ORIGINAL BEHAVIOR - 100% UNTOUCHED
+      if (cachedHeroHeight <= 0) updateHeroHeight();
+      const scrollRunway = cachedHeroHeight;
+      const sy = (window.lenis && typeof window.lenis.scroll === 'number')
+        ? window.lenis.scroll
+        : (window.scrollY || window.pageYOffset || 0);
 
-        const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
-        targetFrame = progress * (totalFrames - 1);
-      } else {
-        // DESKTOP: EXACT ORIGINAL BEHAVIOR - 100% UNTOUCHED
-        if (cachedHeroHeight <= 0) updateHeroHeight();
-        scrollRunway = cachedHeroHeight;
-        sy = (window.lenis && typeof window.lenis.scroll === 'number')
-          ? window.lenis.scroll
-          : (window.scrollY || window.pageYOffset || 0);
-
-        const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
-        targetFrame = progress * (totalFrames - 1);
-      }
+      const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
+      targetFrame = progress * (totalFrames - 1);
 
       if (!isVideoRafRunning) {
         isVideoRafRunning = true;
@@ -1027,8 +1003,14 @@
       }
     }
 
-    // Smooth sleep-aware render loop with mobile idle autoplay
-    function renderLoop() {
+    // Continuous smooth playback variables for mobile
+    let lastMobileTimestamp = 0;
+    let mobilePlayFrame = 0;
+    const MOBILE_FPS = 24; // 24 fps cinematic smooth playback
+    const MOBILE_FRAME_INTERVAL = 1000 / MOBILE_FPS;
+
+    // Render loop: continuous playback on mobile, scroll-driven easing on desktop
+    function renderLoop(timestamp) {
       if (!document.getElementById('airwin-hero-canvas')) {
         isVideoRafRunning = false;
         return;
@@ -1038,15 +1020,31 @@
       }
 
       const isMobile = window.innerWidth <= 991;
-      if (isMobile && !isUserInteractingMobile && (window.scrollY || 0) < 50) {
-        // Idle autoplay on mobile: advance smoothly in a loop
-        mobileAutoPlayFrame += 0.45;
-        if (mobileAutoPlayFrame >= totalFrames) {
-          mobileAutoPlayFrame = 0;
+
+      if (isMobile) {
+        // === MOBILE VIEW: CONTINUOUS SMOOTH PLAYBACK LOOP (NO SCROLL JITTER) ===
+        const now = timestamp || performance.now();
+        if (!lastMobileTimestamp) lastMobileTimestamp = now;
+        const delta = now - lastMobileTimestamp;
+
+        if (delta >= MOBILE_FRAME_INTERVAL) {
+          const framesToAdvance = Math.floor(delta / MOBILE_FRAME_INTERVAL);
+          mobilePlayFrame = (mobilePlayFrame + framesToAdvance) % totalFrames;
+          lastMobileTimestamp = now - (delta % MOBILE_FRAME_INTERVAL);
+
+          const rounded = Math.floor(mobilePlayFrame);
+          if (rounded !== lastRenderedFrame) {
+            lastRenderedFrame = rounded;
+            drawFrame(rounded);
+          }
         }
-        targetFrame = mobileAutoPlayFrame;
+
+        // Keep continuous loop running on mobile
+        requestAnimationFrame(renderLoop);
+        return;
       }
 
+      // === DESKTOP VIEW: EXACT ORIGINAL SCROLL-DRIVEN EASING LOOP ===
       if (Math.abs(targetFrame - currentFrame) > 0.01) {
         currentFrame += (targetFrame - currentFrame) * 0.28;
       } else {
@@ -1057,24 +1055,20 @@
         lastRenderedFrame = rounded;
         drawFrame(rounded);
       }
-
-      if (isMobile && !isUserInteractingMobile && (window.scrollY || 0) < 50) {
-        requestAnimationFrame(renderLoop);
-      } else if (Math.abs(targetFrame - currentFrame) > 0.01) {
+      if (Math.abs(targetFrame - currentFrame) > 0.01) {
         requestAnimationFrame(renderLoop);
       } else {
         isVideoRafRunning = false;
       }
     }
 
-    // Always start render loop initially to draw current position
+    // Always start render loop initially
     isVideoRafRunning = true;
     requestAnimationFrame(renderLoop);
 
     if (canvas.dataset.heroVidEventsBound !== 'true') {
       canvas.dataset.heroVidEventsBound = 'true';
       window.addEventListener('scroll', updateProgress, { passive: true });
-      window.addEventListener('touchmove', updateProgress, { passive: true });
       window.addEventListener('resize', () => { updateHeroHeight(); resizeCanvas(); updateProgress(); }, { passive: true });
     }
 
