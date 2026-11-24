@@ -12,6 +12,61 @@
     sessionStorage.setItem('isLoaded', 'true');
   } catch (e) {}
 
+  // === MOBILE SCROLL SNAP PREVENTION GUARD ===
+  // Prevents unwanted programmatic scrollTo(0,0) resets on mobile (<= 991px)
+  // during user scrolling, touch momentum, or resize observer triggers.
+  // Desktop view (> 991px) remains 100% UNTOUCHED.
+  let lastUserTapTime = 0;
+  let isNavigatingNewPage = false;
+
+  window.addEventListener('click', function (e) {
+    const target = e.target;
+    if (target && target.closest && (
+      target.closest('.header-logo-link') ||
+      target.closest('.logo') ||
+      target.closest('[data-scroll-to-top]') ||
+      target.closest('.back-to-top')
+    )) {
+      lastUserTapTime = Date.now();
+    }
+  }, { capture: true, passive: true });
+
+  if (window.barba) {
+    try {
+      window.barba.hooks.beforeEnter(() => {
+        isNavigatingNewPage = true;
+        setTimeout(() => { isNavigatingNewPage = false; }, 800);
+      });
+    } catch (e) {}
+  }
+
+  const origWindowScrollTo = window.scrollTo;
+  window.scrollTo = function (...args) {
+    const isMobile = (window.innerWidth <= 991);
+    if (isMobile) {
+      let targetY = 0;
+      if (typeof args[0] === 'object' && args[0] !== null) {
+        targetY = (typeof args[0].top === 'number') ? args[0].top : 0;
+      } else if (typeof args[1] === 'number') {
+        targetY = args[1];
+      }
+      const currentY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+      const isRecentUserTap = (Date.now() - lastUserTapTime < 1000);
+
+      // Block unintended programmatic reset to top on mobile while user is scrolled down
+      if (currentY > 60 && (targetY === 0 || targetY < 50) && !isRecentUserTap && !isNavigatingNewPage) {
+        return;
+      }
+    }
+    return origWindowScrollTo.apply(this, args);
+  };
+
+  if (window.innerWidth <= 991 && 'scrollRestoration' in history) {
+    try {
+      history.scrollRestoration = 'auto';
+    } catch (e) {}
+  }
+
   // 1. SCROLL UNLOCK & RESTORATION (PRESERVING STICKY POSITIONING)
   function unlockScroll() {
     // CRITICAL: Use overflow-x: clip (NOT hidden!) so position:sticky works on child elements
