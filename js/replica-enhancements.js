@@ -900,8 +900,14 @@
     let isVideoRafRunning = false;
 
     function resizeCanvas() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+      let w = window.innerWidth;
+      let h = window.innerHeight;
+      if (window.innerWidth <= 991) {
+        // MOBILE: size canvas to its actual container bounds (or 16:9 natural ratio)
+        const rect = canvas.getBoundingClientRect();
+        w = Math.round(rect.width) || window.innerWidth;
+        h = Math.round(rect.height) || Math.round(w * (720 / 1280));
+      }
       if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
         canvas.width = w;
         canvas.height = h;
@@ -925,17 +931,13 @@
 
       if (window.innerWidth <= 991) {
         // === MOBILE VIEW OPTIMIZATION (Mobile/Tablet <= 991px) ===
-        // In the 1280x720 video frames, the subject (crane spreader + shipping container + truck)
-        // is horizontally centered around X=685, Y=350, with subject width ~960px.
-        // On mobile portrait, scale to fit the subject width nicely across the screen:
-        const subjectW = 960;
-        const mobileScale = Math.min((w - 20) / subjectW, (h * 0.70) / imgH);
-        const drawW = imgW * mobileScale;
-        const drawH = imgH * mobileScale;
-        const subjectCenterX = 685;
-        const subjectCenterY = 350;
-        const drawX = (w / 2) - (subjectCenterX * mobileScale);
-        const drawY = (h / 2) - (subjectCenterY * mobileScale);
+        // On mobile, canvas is compact 16:9 directly under navbar.
+        // Scale video cleanly across width with pure white studio fill.
+        const scale = w / imgW;
+        const drawW = w;
+        const drawH = Math.round(imgH * scale);
+        const drawX = 0;
+        const drawY = Math.round((h - drawH) / 2);
 
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, w, h);
@@ -981,23 +983,32 @@
     }
     updateHeroHeight();
 
+    let isUserInteractingMobile = false;
+    let mobileIdleTimer = null;
+    let mobileAutoPlayFrame = 0;
+
     function updateProgress() {
       const isMobile = window.innerWidth <= 991;
       let sy = 0;
       let scrollRunway = cachedHeroHeight;
 
       if (isMobile) {
-        // On mobile, use native scroll (window.scrollY) because touch scrolling doesn't update lenis.scroll
+        // On mobile, use native scroll (window.scrollY)
         sy = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-        const heroBlock = document.querySelector('.service-hero-block');
-        const heroWrap = document.querySelector('.service-hero-wrap');
-        if (heroBlock && heroBlock.offsetHeight > 0) {
-          scrollRunway = heroBlock.offsetHeight;
-        } else if (heroWrap && heroWrap.offsetHeight > window.innerHeight) {
-          scrollRunway = heroWrap.offsetHeight - window.innerHeight;
-        } else {
-          scrollRunway = window.innerHeight;
-        }
+        scrollRunway = 260; // compact runway matching hero height
+        isUserInteractingMobile = true;
+        if (mobileIdleTimer) clearTimeout(mobileIdleTimer);
+        mobileIdleTimer = setTimeout(() => {
+          isUserInteractingMobile = false;
+          mobileAutoPlayFrame = currentFrame;
+          if (!isVideoRafRunning) {
+            isVideoRafRunning = true;
+            requestAnimationFrame(renderLoop);
+          }
+        }, 1500);
+
+        const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
+        targetFrame = progress * (totalFrames - 1);
       } else {
         // DESKTOP: EXACT ORIGINAL BEHAVIOR - 100% UNTOUCHED
         if (cachedHeroHeight <= 0) updateHeroHeight();
@@ -1005,10 +1016,10 @@
         sy = (window.lenis && typeof window.lenis.scroll === 'number')
           ? window.lenis.scroll
           : (window.scrollY || window.pageYOffset || 0);
-      }
 
-      const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
-      targetFrame = progress * (totalFrames - 1);
+        const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
+        targetFrame = progress * (totalFrames - 1);
+      }
 
       if (!isVideoRafRunning) {
         isVideoRafRunning = true;
@@ -1016,15 +1027,26 @@
       }
     }
 
-    // Smooth sleep-aware render loop
+    // Smooth sleep-aware render loop with mobile idle autoplay
     function renderLoop() {
       if (!document.getElementById('airwin-hero-canvas')) {
         isVideoRafRunning = false;
         return;
       }
-      if (canvas.width <= 300 || canvas.height <= 150) {
+      if (canvas.width <= 100 || canvas.height <= 50) {
         resizeCanvas();
       }
+
+      const isMobile = window.innerWidth <= 991;
+      if (isMobile && !isUserInteractingMobile && (window.scrollY || 0) < 50) {
+        // Idle autoplay on mobile: advance smoothly in a loop
+        mobileAutoPlayFrame += 0.45;
+        if (mobileAutoPlayFrame >= totalFrames) {
+          mobileAutoPlayFrame = 0;
+        }
+        targetFrame = mobileAutoPlayFrame;
+      }
+
       if (Math.abs(targetFrame - currentFrame) > 0.01) {
         currentFrame += (targetFrame - currentFrame) * 0.28;
       } else {
@@ -1035,7 +1057,10 @@
         lastRenderedFrame = rounded;
         drawFrame(rounded);
       }
-      if (Math.abs(targetFrame - currentFrame) > 0.01) {
+
+      if (isMobile && !isUserInteractingMobile && (window.scrollY || 0) < 50) {
+        requestAnimationFrame(renderLoop);
+      } else if (Math.abs(targetFrame - currentFrame) > 0.01) {
         requestAnimationFrame(renderLoop);
       } else {
         isVideoRafRunning = false;
