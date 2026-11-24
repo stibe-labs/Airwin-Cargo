@@ -923,14 +923,34 @@
       const imgW = img.naturalWidth;
       const imgH = img.naturalHeight;
 
-      const scale = Math.max(w / imgW, h / imgH);
-      const drawW = imgW * scale;
-      const drawH = imgH * scale;
-      const drawX = (w - drawW) / 2;
-      const drawY = (h - drawH) / 2;
+      if (window.innerWidth <= 991) {
+        // === MOBILE VIEW OPTIMIZATION (Mobile/Tablet <= 991px) ===
+        // In the 1280x720 video frames, the subject (crane spreader + shipping container + truck)
+        // is horizontally centered around X=685, Y=350, with subject width ~960px.
+        // On mobile portrait, scale to fit the subject width nicely across the screen:
+        const subjectW = 960;
+        const mobileScale = Math.min((w - 20) / subjectW, (h * 0.70) / imgH);
+        const drawW = imgW * mobileScale;
+        const drawH = imgH * mobileScale;
+        const subjectCenterX = 685;
+        const subjectCenterY = 350;
+        const drawX = (w / 2) - (subjectCenterX * mobileScale);
+        const drawY = (h / 2) - (subjectCenterY * mobileScale);
 
-      ctx.clearRect(0, 0, w, h);
-      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+      } else {
+        // === DESKTOP VIEW (EXACT ORIGINAL LOGIC - 100% UNTOUCHED) ===
+        const scale = Math.max(w / imgW, h / imgH);
+        const drawW = imgW * scale;
+        const drawH = imgH * scale;
+        const drawX = (w - drawW) / 2;
+        const drawY = (h - drawH) / 2;
+
+        ctx.clearRect(0, 0, w, h);
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+      }
     }
 
     // Force immediate sizing
@@ -962,11 +982,32 @@
     updateHeroHeight();
 
     function updateProgress() {
-      if (cachedHeroHeight <= 0) updateHeroHeight();
-      const sy = (window.lenis && typeof window.lenis.scroll === 'number')
-        ? window.lenis.scroll
-        : (window.scrollY || window.pageYOffset || 0);
-      const progress = Math.min(1, Math.max(0, sy / cachedHeroHeight));
+      const isMobile = window.innerWidth <= 991;
+      let sy = 0;
+      let scrollRunway = cachedHeroHeight;
+
+      if (isMobile) {
+        // On mobile, use native scroll (window.scrollY) because touch scrolling doesn't update lenis.scroll
+        sy = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        const heroBlock = document.querySelector('.service-hero-block');
+        const heroWrap = document.querySelector('.service-hero-wrap');
+        if (heroBlock && heroBlock.offsetHeight > 0) {
+          scrollRunway = heroBlock.offsetHeight;
+        } else if (heroWrap && heroWrap.offsetHeight > window.innerHeight) {
+          scrollRunway = heroWrap.offsetHeight - window.innerHeight;
+        } else {
+          scrollRunway = window.innerHeight;
+        }
+      } else {
+        // DESKTOP: EXACT ORIGINAL BEHAVIOR - 100% UNTOUCHED
+        if (cachedHeroHeight <= 0) updateHeroHeight();
+        scrollRunway = cachedHeroHeight;
+        sy = (window.lenis && typeof window.lenis.scroll === 'number')
+          ? window.lenis.scroll
+          : (window.scrollY || window.pageYOffset || 0);
+      }
+
+      const progress = Math.min(1, Math.max(0, sy / (scrollRunway || 1)));
       targetFrame = progress * (totalFrames - 1);
 
       if (!isVideoRafRunning) {
@@ -1008,6 +1049,7 @@
     if (canvas.dataset.heroVidEventsBound !== 'true') {
       canvas.dataset.heroVidEventsBound = 'true';
       window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('touchmove', updateProgress, { passive: true });
       window.addEventListener('resize', () => { updateHeroHeight(); resizeCanvas(); updateProgress(); }, { passive: true });
     }
 
