@@ -255,6 +255,354 @@
         });
       } catch (e) {}
     }
+
+    // === MOBILE NAVBAR HAMBURGER & NAVIGATION DRAWER ===
+    // In mobile view (<= 991px), places hamburger icon directly beside the Tracking button.
+    // Desktop view (> 991px) remains 100% untouched with hamburger completely hidden.
+    (function setupMobileNavbar() {
+      // 1. Inject responsive CSS if not already present
+      if (!document.getElementById('airwin-mobile-nav-style')) {
+        const style = document.createElement('style');
+        style.id = 'airwin-mobile-nav-style';
+        style.textContent = `
+          /* Desktop: hide mobile hamburger and mobile drawer */
+          @media (min-width: 992px) {
+            .header-hamburger-btn,
+            #airwin-nav-toggle,
+            .airwin-mobile-drawer,
+            #airwin-mobile-drawer {
+              display: none !important;
+            }
+          }
+
+          @media (max-width: 991px) {
+            .header-inner {
+              position: relative !important;
+              z-index: 1005 !important;
+            }
+            .header-nav-actions {
+              display: flex !important;
+              align-items: center !important;
+              gap: 0.8rem !important;
+              margin-left: auto !important;
+            }
+            .header-tracking-btn {
+              display: inline-flex !important;
+              padding: 0.7rem 1.6rem !important;
+              font-size: 1.1rem !important;
+              font-weight: 600 !important;
+              letter-spacing: 0.05em !important;
+              border-radius: 9999px !important;
+            }
+            .header-hamburger-btn,
+            #airwin-nav-toggle {
+              display: inline-flex !important;
+              flex-direction: column !important;
+              justify-content: center !important;
+              align-items: center !important;
+              gap: 4.5px !important;
+              width: 38px !important;
+              height: 38px !important;
+              padding: 0 !important;
+              background: rgba(0, 0, 0, 0.04) !important;
+              border: 1px solid rgba(0, 0, 0, 0.09) !important;
+              border-radius: 8px !important;
+              cursor: pointer !important;
+              outline: none !important;
+              flex-shrink: 0 !important;
+              z-index: 1005 !important;
+              position: relative !important;
+              transition: background-color 0.2s ease, border-color 0.2s ease !important;
+              -webkit-tap-highlight-color: transparent !important;
+            }
+            .header-hamburger-btn:hover,
+            .header-hamburger-btn:active,
+            .header-hamburger-btn.is-active {
+              background: rgba(0, 119, 238, 0.08) !important;
+              border-color: rgba(0, 119, 238, 0.3) !important;
+            }
+            .header-hamburger-btn .hamburger-line {
+              display: block !important;
+              width: 18px !important;
+              height: 2px !important;
+              background-color: #111111 !important;
+              border-radius: 2px !important;
+              transform-origin: center !important;
+              transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, background-color 0.2s ease !important;
+            }
+            .header-hamburger-btn.is-active .hamburger-line {
+              background-color: #0077ee !important;
+            }
+            .header-hamburger-btn.is-active .line-1 {
+              transform: translateY(6.5px) rotate(45deg) !important;
+            }
+            .header-hamburger-btn.is-active .line-2 {
+              opacity: 0 !important;
+              transform: scaleX(0) !important;
+            }
+            .header-hamburger-btn.is-active .line-3 {
+              transform: translateY(-6.5px) rotate(-45deg) !important;
+            }
+
+            /* Full Mobile Navigation Drawer */
+            .airwin-mobile-drawer {
+              display: block !important;
+              position: fixed !important;
+              inset: 0 !important;
+              width: 100vw !important;
+              height: 100vh !important;
+              z-index: 1000 !important;
+              pointer-events: none !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+              transition: opacity 0.28s ease, visibility 0.28s ease !important;
+            }
+            .airwin-mobile-drawer.is-open {
+              pointer-events: auto !important;
+              opacity: 1 !important;
+              visibility: visible !important;
+            }
+            .airwin-mobile-drawer-backdrop {
+              position: absolute !important;
+              inset: 0 !important;
+              background: rgba(0, 0, 0, 0.45) !important;
+              backdrop-filter: blur(5px) !important;
+              -webkit-backdrop-filter: blur(5px) !important;
+            }
+            .airwin-mobile-drawer-content {
+              position: absolute !important;
+              top: 0 !important;
+              left: 0 !important;
+              right: 0 !important;
+              background: #ffffff !important;
+              padding: 68px 22px 28px 22px !important;
+              box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
+              border-bottom-left-radius: 20px !important;
+              border-bottom-right-radius: 20px !important;
+              transform: translateY(-100%) !important;
+              transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1) !important;
+              max-height: 85vh !important;
+              overflow-y: auto !important;
+            }
+            .airwin-mobile-drawer.is-open .airwin-mobile-drawer-content {
+              transform: translateY(0) !important;
+            }
+            .airwin-mobile-nav-menu {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 2px !important;
+              margin-top: 10px !important;
+            }
+            .mobile-nav-item {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: space-between !important;
+              padding: 13px 14px !important;
+              font-size: 1.25rem !important;
+              font-weight: 600 !important;
+              letter-spacing: 0.02em !important;
+              color: #1a1a1a !important;
+              text-decoration: none !important;
+              border-radius: 10px !important;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.04) !important;
+              transition: background-color 0.2s ease, color 0.2s ease, padding-left 0.2s ease !important;
+            }
+            .mobile-nav-item:hover,
+            .mobile-nav-item.active,
+            .mobile-nav-item.w--current {
+              background-color: rgba(0, 119, 238, 0.08) !important;
+              color: #0077ee !important;
+              padding-left: 18px !important;
+            }
+            .mobile-nav-item::after {
+              content: '→' !important;
+              font-size: 1.2rem !important;
+              opacity: 0.35 !important;
+              transition: opacity 0.2s ease, transform 0.2s ease !important;
+            }
+            .mobile-nav-item:hover::after,
+            .mobile-nav-item.active::after,
+            .mobile-nav-item.w--current::after {
+              opacity: 1 !important;
+              color: #0077ee !important;
+              transform: translateX(3px) !important;
+            }
+            .mobile-drawer-footer {
+              margin-top: 18px !important;
+              padding-top: 14px !important;
+              border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 10px !important;
+            }
+            .mobile-drawer-track-btn {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              width: 100% !important;
+              padding: 12px !important;
+              border-radius: 10px !important;
+              background: #0077ee !important;
+              color: #ffffff !important;
+              font-weight: 600 !important;
+              font-size: 1.15rem !important;
+              text-transform: uppercase !important;
+              letter-spacing: 0.06em !important;
+              text-decoration: none !important;
+              box-shadow: 0 4px 14px rgba(0, 119, 238, 0.35) !important;
+            }
+          }
+
+          @media (max-width: 767px) {
+            .header-tracking-btn {
+              padding: 0.65rem 1.4rem !important;
+              font-size: 1.05rem !important;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      // 2. Ensure hamburger button sits inside .header-nav-actions right beside tracking button
+      const navActions = header.querySelector('.header-nav-actions');
+      if (navActions) {
+        let hamburgerBtn = navActions.querySelector('.header-hamburger-btn');
+        if (!hamburgerBtn) {
+          hamburgerBtn = document.createElement('button');
+          hamburgerBtn.className = 'header-hamburger-btn';
+          hamburgerBtn.id = 'airwin-nav-toggle';
+          hamburgerBtn.setAttribute('aria-label', 'Toggle navigation menu');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          hamburgerBtn.setAttribute('type', 'button');
+          hamburgerBtn.innerHTML = `
+            <span class="hamburger-line line-1"></span>
+            <span class="hamburger-line line-2"></span>
+            <span class="hamburger-line line-3"></span>
+          `;
+          navActions.appendChild(hamburgerBtn);
+        }
+
+        // 3. Ensure mobile drawer exists in header
+        let drawer = header.querySelector('.airwin-mobile-drawer') || document.getElementById('airwin-mobile-drawer');
+        if (!drawer) {
+          drawer = document.createElement('div');
+          drawer.className = 'airwin-mobile-drawer';
+          drawer.id = 'airwin-mobile-drawer';
+          drawer.setAttribute('aria-hidden', 'true');
+          drawer.innerHTML = `
+            <div class="airwin-mobile-drawer-backdrop" id="airwin-drawer-backdrop"></div>
+            <div class="airwin-mobile-drawer-content">
+              <nav class="airwin-mobile-nav-menu">
+                <a href="/index.html" class="mobile-nav-item">Home</a>
+                <a href="/about.html" class="mobile-nav-item">About</a>
+                <a href="/services.html" class="mobile-nav-item">Services</a>
+                <a href="/insights.html" class="mobile-nav-item">News &amp; Updates</a>
+                <a href="/careers.html" class="mobile-nav-item">Career</a>
+                <a href="/contact.html" class="mobile-nav-item">Contact</a>
+              </nav>
+              <div class="mobile-drawer-footer">
+                <a href="/tracking.html" class="mobile-drawer-track-btn">Track Shipment</a>
+              </div>
+            </div>
+          `;
+          header.appendChild(drawer);
+        }
+
+        // 4. Open / Close controllers
+        function openDrawer() {
+          if (!drawer || !hamburgerBtn) return;
+          drawer.classList.add('is-open');
+          drawer.setAttribute('aria-hidden', 'false');
+          hamburgerBtn.classList.add('is-active');
+          hamburgerBtn.setAttribute('aria-expanded', 'true');
+          header.classList.remove('nav-hidden');
+          header.classList.add('nav-visible');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+          if (!drawer || !hamburgerBtn) return;
+          drawer.classList.remove('is-open');
+          drawer.setAttribute('aria-hidden', 'true');
+          hamburgerBtn.classList.remove('is-active');
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+
+        if (!hamburgerBtn._airwinBound) {
+          hamburgerBtn._airwinBound = true;
+          hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (drawer.classList.contains('is-open')) {
+              closeDrawer();
+            } else {
+              openDrawer();
+            }
+          });
+        }
+
+        const backdrop = drawer.querySelector('.airwin-mobile-drawer-backdrop');
+        if (backdrop && !backdrop._airwinBound) {
+          backdrop._airwinBound = true;
+          backdrop.addEventListener('click', closeDrawer);
+        }
+
+        // Close on escape
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && drawer && drawer.classList.contains('is-open')) {
+            closeDrawer();
+          }
+        });
+
+        // Close when clicking any nav item in drawer
+        drawer.querySelectorAll('.mobile-nav-item, .mobile-drawer-track-btn').forEach(link => {
+          if (!link._airwinBound) {
+            link._airwinBound = true;
+            link.addEventListener('click', () => {
+              closeDrawer();
+            });
+          }
+        });
+
+        // Active link highlighting
+        function updateMobileActiveLinks() {
+          if (!drawer) return;
+          const path = window.location.pathname.toLowerCase();
+          drawer.querySelectorAll('.mobile-nav-item').forEach(link => {
+            const href = (link.getAttribute('href') || '').toLowerCase();
+            let isMatch = false;
+            if ((path === '/' || path.endsWith('/index.html') || path === '') && (href.includes('index.html') || href === '/')) {
+              isMatch = true;
+            } else if (path.includes('about') && href.includes('about')) {
+              isMatch = true;
+            } else if (path.includes('service') && href.includes('service')) {
+              isMatch = true;
+            } else if ((path.includes('insight') || path.includes('news')) && href.includes('insight')) {
+              isMatch = true;
+            } else if (path.includes('career') && href.includes('career')) {
+              isMatch = true;
+            } else if (path.includes('contact') && href.includes('contact')) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              link.classList.add('w--current', 'active');
+            } else {
+              link.classList.remove('w--current', 'active');
+            }
+          });
+        }
+        updateMobileActiveLinks();
+
+        if (window.barba) {
+          try {
+            window.barba.hooks.afterEnter(() => {
+              closeDrawer();
+              updateMobileActiveLinks();
+            });
+          } catch (e) {}
+        }
+      }
+    })();
   }
 
   function initFAQ() {
