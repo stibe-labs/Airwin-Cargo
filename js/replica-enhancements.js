@@ -1298,6 +1298,51 @@
 
   window.initHeroVideoScrollAnimation = function initHeroVideoScrollAnimation() {
     const canvas = document.getElementById('airwin-hero-canvas');
+    const mobileVideo = document.getElementById('airwin-hero-mobile-video');
+    const isMobile = window.innerWidth <= 991;
+
+    // Guarantee strict desktop/mobile separation of elements
+    if (isMobile) {
+      if (canvas) canvas.style.setProperty('display', 'none', 'important');
+      if (mobileVideo) mobileVideo.style.setProperty('display', 'block', 'important');
+    } else {
+      if (canvas) canvas.style.setProperty('display', 'block', 'important');
+      if (mobileVideo) mobileVideo.style.setProperty('display', 'none', 'important');
+    }
+
+    // 1. Mobile continuous autoplay video handling
+    if (mobileVideo) {
+      mobileVideo.muted = true;
+      mobileVideo.playsInline = true;
+      mobileVideo.loop = true;
+      if (isMobile) {
+        const playPromise = mobileVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            const onGesture = () => {
+              mobileVideo.play().catch(() => {});
+              window.removeEventListener('touchstart', onGesture);
+              window.removeEventListener('click', onGesture);
+            };
+            window.addEventListener('touchstart', onGesture, { once: true, passive: true });
+            window.addEventListener('click', onGesture, { once: true, passive: true });
+          });
+        }
+      } else {
+        if (!mobileVideo.paused) {
+          mobileVideo.pause();
+        }
+      }
+    }
+
+    // 2. BREAKPOINT GATE: If on mobile, exit here immediately!
+    // Desktop canvas sizing, frame preloading, scroll listeners, and RAF easing loops
+    // MUST NOT run or interfere with mobile playback.
+    if (isMobile) {
+      return;
+    }
+
+    // === DESKTOP VIEW: EXACT ORIGINAL SCROLL-CONTROLLED ANIMATION (100% UNTOUCHED) ===
     if (!canvas) return;
 
     // Start background preloading of all frames once
@@ -1311,14 +1356,9 @@
     let isVideoRafRunning = false;
 
     function resizeCanvas() {
-      let w = window.innerWidth;
-      let h = window.innerHeight;
-      if (window.innerWidth <= 991) {
-        // MOBILE: size canvas to its actual container bounds (or 16:9 natural ratio)
-        const rect = canvas.getBoundingClientRect();
-        w = Math.round(rect.width) || window.innerWidth;
-        h = Math.round(rect.height) || Math.round(w * (720 / 1280));
-      }
+      if (window.innerWidth <= 991) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
       if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
         canvas.width = w;
         canvas.height = h;
@@ -1328,6 +1368,7 @@
     }
 
     function drawFrame(idx) {
+      if (window.innerWidth <= 991) return;
       const frameIdx = Math.max(0, Math.min(totalFrames - 1, idx));
       let img = globalHeroVideoFrames[frameIdx];
       if (!img || !img.complete || img.naturalWidth === 0) {
@@ -1340,30 +1381,14 @@
       const imgW = img.naturalWidth;
       const imgH = img.naturalHeight;
 
-      if (window.innerWidth <= 991) {
-        // === MOBILE VIEW OPTIMIZATION (Mobile/Tablet <= 991px) ===
-        // On mobile, canvas is compact 16:9 directly under navbar.
-        // Scale video cleanly across width with pure white studio fill.
-        const scale = w / imgW;
-        const drawW = w;
-        const drawH = Math.round(imgH * scale);
-        const drawX = 0;
-        const drawY = Math.round((h - drawH) / 2);
+      const scale = Math.max(w / imgW, h / imgH);
+      const drawW = imgW * scale;
+      const drawH = imgH * scale;
+      const drawX = (w - drawW) / 2;
+      const drawY = (h - drawH) / 2;
 
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, w, h);
-        ctx.drawImage(img, drawX, drawY, drawW, drawH);
-      } else {
-        // === DESKTOP VIEW (EXACT ORIGINAL LOGIC - 100% UNTOUCHED) ===
-        const scale = Math.max(w / imgW, h / imgH);
-        const drawW = imgW * scale;
-        const drawH = imgH * scale;
-        const drawX = (w - drawW) / 2;
-        const drawY = (h - drawH) / 2;
-
-        ctx.clearRect(0, 0, w, h);
-        ctx.drawImage(img, drawX, drawY, drawW, drawH);
-      }
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
     }
 
     // Force immediate sizing
@@ -1395,10 +1420,7 @@
     updateHeroHeight();
 
     function updateProgress() {
-      // MOBILE VIEW: No scrolling animation! The video continuously plays smoothly.
       if (window.innerWidth <= 991) return;
-
-      // DESKTOP: EXACT ORIGINAL BEHAVIOR - 100% UNTOUCHED
       if (cachedHeroHeight <= 0) updateHeroHeight();
       const scrollRunway = cachedHeroHeight;
       const sy = (window.lenis && typeof window.lenis.scroll === 'number')
@@ -1414,48 +1436,16 @@
       }
     }
 
-    // Continuous smooth playback variables for mobile
-    let lastMobileTimestamp = 0;
-    let mobilePlayFrame = 0;
-    const MOBILE_FPS = 24; // 24 fps cinematic smooth playback
-    const MOBILE_FRAME_INTERVAL = 1000 / MOBILE_FPS;
-
-    // Render loop: continuous playback on mobile, scroll-driven easing on desktop
-    function renderLoop(timestamp) {
+    function renderLoop() {
+      if (window.innerWidth <= 991) {
+        isVideoRafRunning = false;
+        return;
+      }
       if (!document.getElementById('airwin-hero-canvas')) {
         isVideoRafRunning = false;
         return;
       }
-      if (canvas.width <= 100 || canvas.height <= 50) {
-        resizeCanvas();
-      }
 
-      const isMobile = window.innerWidth <= 991;
-
-      if (isMobile) {
-        // === MOBILE VIEW: CONTINUOUS SMOOTH PLAYBACK LOOP (NO SCROLL JITTER) ===
-        const now = timestamp || performance.now();
-        if (!lastMobileTimestamp) lastMobileTimestamp = now;
-        const delta = now - lastMobileTimestamp;
-
-        if (delta >= MOBILE_FRAME_INTERVAL) {
-          const framesToAdvance = Math.floor(delta / MOBILE_FRAME_INTERVAL);
-          mobilePlayFrame = (mobilePlayFrame + framesToAdvance) % totalFrames;
-          lastMobileTimestamp = now - (delta % MOBILE_FRAME_INTERVAL);
-
-          const rounded = Math.floor(mobilePlayFrame);
-          if (rounded !== lastRenderedFrame) {
-            lastRenderedFrame = rounded;
-            drawFrame(rounded);
-          }
-        }
-
-        // Keep continuous loop running on mobile
-        requestAnimationFrame(renderLoop);
-        return;
-      }
-
-      // === DESKTOP VIEW: EXACT ORIGINAL SCROLL-DRIVEN EASING LOOP ===
       if (Math.abs(targetFrame - currentFrame) > 0.01) {
         currentFrame += (targetFrame - currentFrame) * 0.28;
       } else {
@@ -1473,14 +1463,23 @@
       }
     }
 
-    // Always start render loop initially
+    // Always start render loop initially on desktop
     isVideoRafRunning = true;
     requestAnimationFrame(renderLoop);
 
     if (canvas.dataset.heroVidEventsBound !== 'true') {
       canvas.dataset.heroVidEventsBound = 'true';
       window.addEventListener('scroll', updateProgress, { passive: true });
-      window.addEventListener('resize', () => { updateHeroHeight(); resizeCanvas(); updateProgress(); }, { passive: true });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth <= 991) {
+          if (mobileVideo && mobileVideo.paused) mobileVideo.play().catch(() => {});
+        } else {
+          if (mobileVideo && !mobileVideo.paused) mobileVideo.pause();
+          updateHeroHeight();
+          resizeCanvas();
+          updateProgress();
+        }
+      }, { passive: true });
     }
 
     updateProgress();
