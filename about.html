@@ -765,6 +765,17 @@
     position: relative !important;
     overflow: hidden !important;
   }
+  @media (min-width: 992px) {
+    .about-fea-bg-item:nth-child(1) {
+      z-index: 2 !important;
+      opacity: 1;
+    }
+    .about-fea-bg-item:nth-child(2) {
+      z-index: 3 !important;
+      opacity: 0;
+      transition: opacity 0.35s ease !important;
+    }
+  }
   .about-fea-bg-item-thumb {
     width: 100% !important;
     height: 100% !important;
@@ -2241,6 +2252,17 @@
     height: 100% !important;
     position: relative !important;
     overflow: hidden !important;
+  }
+  @media (min-width: 992px) {
+    .about-fea-bg-item:nth-child(1) {
+      z-index: 2 !important;
+      opacity: 1;
+    }
+    .about-fea-bg-item:nth-child(2) {
+      z-index: 3 !important;
+      opacity: 0;
+      transition: opacity 0.35s ease !important;
+    }
   }
   .about-fea-bg-item-thumb {
     width: 100% !important;
@@ -4591,7 +4613,7 @@
       <!-- Item 1: Desert Highway Truck (Mission) -->
       <div class="about-fea-bg-item">
         <div class="about-fea-bg-item-thumb">
-          <img src="./images/desert-truck-above.png" loading="eager" alt="Airwin Cargo Fleet Transport" class="img-df img-fill" />
+          <img src="/images/desert-truck-above.png" loading="eager" alt="Airwin Cargo Fleet Transport" class="img-df img-fill" />
           <div class="about-fea-bg-item-overlay"></div>
         </div>
       </div>
@@ -4599,7 +4621,7 @@
       <!-- Item 2: Airliner in Wispy Blue Skies (Management) -->
       <div class="about-fea-bg-item">
         <div class="about-fea-bg-item-thumb">
-          <img src="./images/airliner-blue-skies.png" loading="eager" alt="Airwin Global Air Freight" class="img-df img-fill" />
+          <img src="/images/airliner-blue-skies.png" loading="eager" alt="Airwin Global Air Freight" class="img-df img-fill" />
           <div class="about-fea-bg-item-overlay"></div>
         </div>
       </div>
@@ -5373,11 +5395,11 @@
     function update() {
       ticking = false;
       if (window.innerWidth > 991) {
-        // Reset transforms when resized to desktop
         if (img1) img1.style.transform = '';
         if (img2) img2.style.transform = '';
-        bgItems[0].style.opacity = '';
-        bgItems[1].style.opacity = '';
+        const isMgmtActive = items[1] && items[1].classList.contains('active');
+        bgItems[0].style.opacity = '1';
+        bgItems[1].style.opacity = isMgmtActive ? '1' : '0';
         return;
       }
 

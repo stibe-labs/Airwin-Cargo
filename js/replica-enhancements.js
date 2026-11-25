@@ -1513,8 +1513,9 @@
       if (window.innerWidth > 991) {
         if (img1) img1.style.transform = '';
         if (img2) img2.style.transform = '';
-        bgItems[0].style.opacity = '';
-        bgItems[1].style.opacity = '';
+        const isMgmtActive = items[1] && items[1].classList.contains('active');
+        bgItems[0].style.opacity = '1';
+        bgItems[1].style.opacity = isMgmtActive ? '1' : '0';
         return;
       }
 
@@ -1899,8 +1900,9 @@
       if (window.innerWidth > 991) {
         if (img1) img1.style.transform = '';
         if (img2) img2.style.transform = '';
-        bgItems[0].style.opacity = '';
-        bgItems[1].style.opacity = '';
+        const isMgmtActive = items[1] && items[1].classList.contains('active');
+        bgItems[0].style.opacity = '1';
+        bgItems[1].style.opacity = isMgmtActive ? '1' : '0';
         return;
       }
 
