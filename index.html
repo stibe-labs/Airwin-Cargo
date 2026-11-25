@@ -3940,22 +3940,22 @@
       </div>
     </div></div></div><div id="w-node-_19f5e1e9-0322-6ef2-b334-aed938afcd3e-c403df38" class="home-intro-text-wrap"><div class="home-intro-desc"><div data-wf--text--text-styles="standard" class="txt fs-28 fs-20-mb fw-med">Airwin Logistics is a distinguished cargo forwarding and courier distribution company operating with excellence globally since 2001. With more than two decades of proven experience, we manage mission-critical supply chains with complete reliability and transparent execution.</div></div><a href="./about.html" class="home-intro-btn w-inline-block"><div data-cursor="hidden" data-link-random="" data-is-btn="" data-wf--button--variant="outline" class="btn"><div class="btn-txt"><div data-wf--text--text-styles="mono" class="txt w-variant-3648de38-311e-0b18-0c7d-747bd60ae1a8 fs-12 fs-10-mb">Learn more about us</div></div></div></a></div><div id="w-node-_535a1fee-0a98-4a0f-5adc-92091ae2291c-c403df38" class="home-intro-text-wrap"><div class="home-intro-label"><div data-wf--text--text-styles="standard" class="txt fs-16 fw-med">From countless journeys, clarity emerges</div><div class="home-intro-label-line"></div></div><div class="home-intro-stats">
   <div class="home-intro-stats-item">
-    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="">150</span>+</h3></div>
+    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="" data-target="150">150</span>+</h3></div>
     <div class="home-intro-stats-item-desc"><div data-wf--text--text-styles="standard" class="txt fs-24 fw-med">Active Team Members</div></div>
     <div class="home-intro-stats-item-line"></div>
   </div>
   <div class="home-intro-stats-item">
-    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="">8</span>k+</h3></div>
+    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="" data-target="8">8</span>k+</h3></div>
     <div class="home-intro-stats-item-desc"><div data-wf--text--text-styles="standard" class="txt fs-24 fw-med">Happy Customers</div></div>
     <div class="home-intro-stats-item-line"></div>
   </div>
   <div class="home-intro-stats-item">
-    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="">25</span>k+</h3></div>
+    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="" data-target="25">25</span>k+</h3></div>
     <div class="home-intro-stats-item-desc"><div data-wf--text--text-styles="standard" class="txt fs-24 fw-med">Shipment</div></div>
     <div class="home-intro-stats-item-line"></div>
   </div>
   <div class="home-intro-stats-item">
-    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="">70</span>%</h3></div>
+    <div class="home-intro-stats-item-val"><h3 class="heading h0"><span data-count="" data-target="70">70</span>%</h3></div>
     <div class="home-intro-stats-item-desc"><div data-wf--text--text-styles="standard" class="txt fs-24 fw-med">Increase Traffics</div></div>
     <div class="home-intro-stats-item-line"></div>
   </div>
@@ -5993,6 +5993,98 @@
       document.addEventListener("DOMContentLoaded", initServicesMosaic);
     } else {
       initServicesMosaic();
+    }
+  })();
+  </script>
+
+  <script>
+  // ==============================================================
+  // Home Intro Stats: Mobile Count-Up Animation (Mobile Only)
+  // ==============================================================
+  (function() {
+    function initMobileStatsCounter() {
+      // Strictly mobile only (<= 767px) - desktop remains 100% untouched
+      if (window.innerWidth > 767) return;
+
+      const stats = document.querySelector('.home-intro-stats');
+      if (!stats) return;
+
+      const spans = Array.from(stats.querySelectorAll('[data-count]'));
+      if (!spans.length) return;
+
+      const data = spans.map(span => {
+        const raw = span.getAttribute('data-target') || span.textContent.trim();
+        const target = parseFloat(raw.replace(/,/g, '')) || 0;
+        span.setAttribute('data-target', target);
+        span.textContent = '0';
+        return { span, target };
+      });
+
+      let animated = false;
+
+      function easeOutExpo(x) {
+        return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+      }
+
+      function animateStats() {
+        if (animated) return;
+        animated = true;
+
+        data.forEach((item, idx) => {
+          const duration = 1600;
+          const delay = idx * 120;
+          const startVal = 0;
+          const endVal = item.target;
+
+          setTimeout(() => {
+            let startTime = null;
+            function step(now) {
+              if (!startTime) startTime = now;
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const current = Math.round(startVal + (endVal - startVal) * easeOutExpo(progress));
+              item.span.textContent = current;
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                item.span.textContent = endVal;
+              }
+            }
+            requestAnimationFrame(step);
+          }, delay);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animateStats();
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -40px 0px'
+        });
+        observer.observe(stats);
+      } else {
+        const onScroll = () => {
+          const rect = stats.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.85) {
+            animateStats();
+            window.removeEventListener('scroll', onScroll);
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMobileStatsCounter);
+    } else {
+      initMobileStatsCounter();
     }
   })();
   </script>
