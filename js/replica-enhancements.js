@@ -1157,6 +1157,12 @@
           try { window.initHeroVideoScrollAnimation(); } catch (e) {}
         }
       }
+      // 5d. Re-initialize Services Cards (accordion click expand on mobile, hover on desktop)
+      if (document.querySelector('.commu-charity-item')) {
+        if (typeof window.initAirwinServicesCards === 'function') {
+          try { window.initAirwinServicesCards(); } catch (e) {}
+        }
+      }
       // Guarantee home service icons are visible
       document.querySelectorAll('.home-service-item-ic').forEach(el => {
         el.style.setProperty('opacity', '1', 'important');
@@ -1485,6 +1491,95 @@
     updateProgress();
   };
 
+  // === AIRWIN SERVICES CARDS: DESKTOP HOVER & MOBILE CLICK ACCORDION ===
+  window.initAirwinServicesCards = function initAirwinServicesCards() {
+    const container = document.querySelector('.commu-charity-wrap') || document.querySelector('.commu-charity');
+    if (!container) return;
+
+    const cards = container.querySelectorAll('.commu-charity-item');
+    if (!cards || cards.length === 0) return;
+
+    // 1. Desktop Hover: Halftone effect & smooth expansion (100% untouched)
+    const onMove = function(e) {
+      if (window.innerWidth <= 991) return;
+      const card = e.target.closest('[data-hover-card]');
+      if (!card) return;
+      const halftone = card.querySelector('.halftone');
+      if (!halftone) return;
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      halftone.style.setProperty('--x', x + '%');
+      halftone.style.setProperty('--y', y + '%');
+    };
+
+    const onOver = function(e) {
+      if (window.innerWidth <= 991) return;
+      const card = e.target.closest('[data-hover-card]');
+      if (!card || card.contains(e.relatedTarget)) return;
+      const halftone = card.querySelector('.halftone');
+      if (halftone) halftone.style.setProperty('--size', '35%');
+    };
+
+    const onOut = function(e) {
+      if (window.innerWidth <= 991) return;
+      const card = e.target.closest('[data-hover-card]');
+      if (!card || card.contains(e.relatedTarget)) return;
+      const halftone = card.querySelector('.halftone');
+      if (halftone) halftone.style.setProperty('--size', '0%');
+    };
+
+    container.removeEventListener('mousemove', onMove);
+    container.removeEventListener('mouseover', onOver);
+    container.removeEventListener('mouseout', onOut);
+
+    container.addEventListener('mousemove', onMove, { passive: true });
+    container.addEventListener('mouseover', onOver, { passive: true });
+    container.addEventListener('mouseout', onOut, { passive: true });
+
+    // 2. Mobile View: Click / Tap to Expand Complete Details
+    cards.forEach(function(card) {
+      if (card._airwinServicesClickBound) return;
+      card._airwinServicesClickBound = true;
+
+      card.addEventListener('click', function(e) {
+        if (window.innerWidth > 991) return; // Desktop view remains 100% untouched!
+
+        // If user tapped on "Learn more" link/button, let navigation to /contact.html proceed
+        if (e.target.closest('.commu-charity-item-label')) {
+          return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const wasActive = card.classList.contains('active') || card.classList.contains('is-expanded');
+
+        // Close other cards for clean accordion flow
+        cards.forEach(function(other) {
+          if (other !== card) {
+            other.classList.remove('active');
+            other.classList.remove('is-expanded');
+            const otherBody = other.querySelector('.commu-charity-item-body');
+            if (otherBody) otherBody.style.display = '';
+          }
+        });
+
+        if (wasActive) {
+          card.classList.remove('active');
+          card.classList.remove('is-expanded');
+          const body = card.querySelector('.commu-charity-item-body');
+          if (body) body.style.display = '';
+        } else {
+          card.classList.add('active');
+          card.classList.add('is-expanded');
+          const body = card.querySelector('.commu-charity-item-body');
+          if (body) body.style.display = 'block';
+        }
+      });
+    });
+  };
+
   function init() {
     initDynamicSpeedometer();
     unlockScroll();
@@ -1495,6 +1590,9 @@
     initModals();
     initScrollResilience();
     window.initHeroVideoScrollAnimation();
+    if (typeof window.initAirwinServicesCards === 'function') {
+      try { window.initAirwinServicesCards(); } catch (e) {}
+    }
     setTimeout(unlockScroll, 200);
     setTimeout(unlockScroll, 800);
   }
@@ -1957,6 +2055,9 @@
         if (typeof window.initHeroVideoScrollAnimation === 'function') {
           try { window.initHeroVideoScrollAnimation(); } catch(e) {}
         }
+        if (typeof window.initAirwinServicesCards === 'function') {
+          try { window.initAirwinServicesCards(); } catch(e) {}
+        }
         if (typeof unlockScroll === 'function') {
           unlockScroll();
         }
@@ -1971,6 +2072,9 @@
         updateAirwinActiveNavLinks(getBarbaUrlPath(data));
         if (typeof window.initHeroVideoScrollAnimation === 'function') {
           try { window.initHeroVideoScrollAnimation(); } catch(e) {}
+        }
+        if (typeof window.initAirwinServicesCards === 'function') {
+          try { window.initAirwinServicesCards(); } catch(e) {}
         }
         setTimeout(() => {
           isNavigatingNewPage = false;
