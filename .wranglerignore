@@ -1,0 +1,7 @@
+.git
+tmp_chrome*
+tools
+pages_archive
+scratch*
+*.py
+*.log
