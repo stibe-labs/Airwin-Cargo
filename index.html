@@ -3545,9 +3545,35 @@
   }
 
   /* ========================================================= */
-  /* Home Intro Stats: Compact Side-by-Side Mobile Layout      */
+  /* Home Intro: Centered Collage & Stats Mobile Layout        */
   /* ========================================================= */
   @media only screen and (max-width: 767px) {
+    .home-intro-stick-wrap {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+    .home-intro-stick {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 1.5rem auto !important;
+    }
+    .services-mosaic-graphics {
+      width: 100% !important;
+      max-width: clamp(290px, 86vw, 360px) !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    .services-mosaic-canvas {
+      max-width: 100% !important;
+      margin: 0 auto !important;
+    }
     .home-intro-stats {
       margin-bottom: 3.5rem !important;
     }
