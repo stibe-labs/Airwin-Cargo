@@ -3544,6 +3544,56 @@
     }
   }
 
+  /* ========================================================= */
+  /* Home Intro Stats: Compact Side-by-Side Mobile Layout      */
+  /* ========================================================= */
+  @media only screen and (max-width: 767px) {
+    .home-intro-stats {
+      margin-bottom: 3.5rem !important;
+    }
+    .home-intro-stats-item {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      padding: clamp(12px, 3.2vw, 16px) 0 !important;
+      gap: clamp(14px, 4vw, 22px) !important;
+      position: relative !important;
+    }
+    .home-intro-stats-item-val {
+      margin: 0 !important;
+      flex: 0 0 clamp(110px, 32vw, 130px) !important;
+      min-width: clamp(110px, 32vw, 130px) !important;
+    }
+    .home-intro-stats-item-val h3,
+    .home-intro-stats-item-val .heading.h0 {
+      font-size: clamp(38px, 11.5vw, 48px) !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      letter-spacing: -0.02em !important;
+    }
+    .home-intro-stats-item-desc {
+      margin: 0 !important;
+      flex: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+    .home-intro-stats-item-desc .txt {
+      font-size: clamp(15px, 4.2vw, 17px) !important;
+      line-height: 1.25 !important;
+      font-weight: 500 !important;
+      margin: 0 !important;
+    }
+    .home-intro-stats-item-line {
+      display: block !important;
+      position: absolute !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+    }
+  }
+
 
   /* ========================================================= */
   /* Why Choose Airwin Logistics Section (Cargoworks Style)     */
