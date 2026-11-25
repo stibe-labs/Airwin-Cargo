@@ -4660,6 +4660,301 @@
   <div class="about-stand" style="height: 1px; margin-top: -1px;"></div>
 </div>
 
+<!-- ======================================================== -->
+<!-- AIRWIN ABOUT YOUTUBE VIDEO SECTION (CENTERED, BEFORE FOOTER) -->
+<!-- ======================================================== -->
+<style id="airwin-about-video-style">
+  .about-video-section {
+    width: 100%;
+    background-color: #000000;
+    padding: clamp(50px, 7vw, 100px) 24px clamp(40px, 6vw, 80px) 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 20;
+  }
+  .about-video-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .about-video-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: clamp(18px, 2.8vw, 30px);
+    overflow: hidden;
+    background: #0a0d14;
+    cursor: pointer;
+    box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    transform: translateZ(0);
+    will-change: transform;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .about-video-card:hover {
+    box-shadow: 0 35px 80px -10px rgba(0, 22, 203, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.22);
+  }
+  .about-video-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .about-video-card:hover .about-video-poster {
+    transform: scale(1.025);
+  }
+  .about-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.28) 100%);
+    pointer-events: none;
+    transition: background 0.35s ease;
+  }
+  .about-video-card:hover .about-video-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.18) 100%);
+  }
+
+  /* Floating Magnetic "Watch video" Button */
+  .about-video-watch-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #ffffff;
+    color: #0b0f19;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-family: var(--font--standard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38), 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .about-video-watch-btn svg {
+    width: 12px;
+    height: 14px;
+    flex-shrink: 0;
+    fill: currentColor;
+    display: block;
+    transition: fill 0.2s ease, transform 0.2s ease;
+  }
+  .about-video-card:hover .about-video-watch-btn {
+    background: #ffffff;
+    color: #0016cb;
+    box-shadow: 0 14px 36px rgba(0, 22, 203, 0.28), 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  .about-video-card:hover .about-video-watch-btn svg {
+    fill: #0016cb;
+    transform: scale(1.08);
+  }
+
+  /* Embedded YouTube player container */
+  .about-video-player-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 20;
+    background: #000000;
+  }
+  .about-video-player-wrap.is-active {
+    display: block;
+  }
+  .about-video-player-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Mobile Responsive Tweaks */
+  @media (max-width: 768px) {
+    .about-video-section {
+      padding: 36px 16px 54px 16px;
+    }
+    .about-video-card {
+      border-radius: 18px;
+    }
+    .about-video-watch-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+      gap: 8px;
+    }
+    .about-video-watch-btn svg {
+      width: 10px;
+      height: 12px;
+    }
+  }
+</style>
+
+<section class="about-video-section" id="about-video-section">
+  <div class="about-video-container">
+    <div class="about-video-card" id="aboutVideoCard" role="button" tabindex="0" aria-label="Play Airwin Logistics Corporate Video">
+      <!-- Thumbnail Poster -->
+      <img src="images/about-video-poster.jpg" alt="Airwin Logistics" class="about-video-poster" id="aboutVideoPoster" loading="lazy">
+      <div class="about-video-overlay"></div>
+
+      <!-- Floating Magnetic "Watch video" Button -->
+      <div class="about-video-watch-btn" id="aboutVideoWatchBtn">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true">
+          <path d="M1 1.5L11 7L1 12.5V1.5Z"/>
+        </svg>
+        <span>Watch video</span>
+      </div>
+
+      <!-- Video Player Container (dynamically injected iframe on click) -->
+      <div class="about-video-player-wrap" id="aboutVideoPlayerWrap"></div>
+    </div>
+  </div>
+</section>
+
+<script id="airwin-about-video-script">
+(function() {
+  function initAboutVideo() {
+    const card = document.getElementById('aboutVideoCard');
+    const btn = document.getElementById('aboutVideoWatchBtn');
+    const playerWrap = document.getElementById('aboutVideoPlayerWrap');
+    if (!card || !btn || !playerWrap) return;
+
+    let isHovered = false;
+    let cardRect = null;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let currentScale = 1;
+    let targetScale = 1;
+    let animId = null;
+    let isPlaying = false;
+
+    function updateCardRect() {
+      cardRect = card.getBoundingClientRect();
+    }
+
+    function render() {
+      if (isPlaying) return;
+
+      currentX += (targetX - currentX) * 0.14;
+      currentY += (targetY - currentY) * 0.14;
+      currentScale += (targetScale - currentScale) * 0.14;
+
+      btn.style.transform = `translate3d(calc(-50% + ${currentX.toFixed(2)}px), calc(-50% + ${currentY.toFixed(2)}px), 0) scale(${currentScale.toFixed(3)})`;
+
+      const dist = Math.hypot(targetX - currentX, targetY - currentY);
+      if (isHovered || dist > 0.15 || Math.abs(targetScale - currentScale) > 0.005) {
+        animId = requestAnimationFrame(render);
+      } else {
+        animId = null;
+      }
+    }
+
+    function startAnim() {
+      if (!animId && !isPlaying) {
+        animId = requestAnimationFrame(render);
+      }
+    }
+
+    // Follow cursor smoothly inside video borders
+    card.addEventListener('mousemove', function(e) {
+      if (isPlaying) return;
+      if (!cardRect) updateCardRect();
+
+      const mouseX = e.clientX - cardRect.left;
+      const mouseY = e.clientY - cardRect.top;
+      const centerX = cardRect.width / 2;
+      const centerY = cardRect.height / 2;
+
+      const rawOffsetX = mouseX - centerX;
+      const rawOffsetY = mouseY - centerY;
+
+      // Keep button safely inside card boundaries
+      const btnW = btn.offsetWidth || 140;
+      const btnH = btn.offsetHeight || 48;
+      const pad = 20;
+      const maxOffsetX = Math.max(0, (cardRect.width / 2) - (btnW / 2) - pad);
+      const maxOffsetY = Math.max(0, (cardRect.height / 2) - (btnH / 2) - pad);
+
+      targetX = Math.max(-maxOffsetX, Math.min(maxOffsetX, rawOffsetX));
+      targetY = Math.max(-maxOffsetY, Math.min(maxOffsetY, rawOffsetY));
+      targetScale = 1.08;
+
+      startAnim();
+    });
+
+    card.addEventListener('mouseenter', function() {
+      if (isPlaying) return;
+      isHovered = true;
+      updateCardRect();
+      targetScale = 1.08;
+      startAnim();
+    });
+
+    card.addEventListener('mouseleave', function() {
+      if (isPlaying) return;
+      isHovered = false;
+      targetX = 0;
+      targetY = 0;
+      targetScale = 1.0;
+      startAnim();
+    });
+
+    window.addEventListener('resize', function() {
+      if (isHovered) updateCardRect();
+    });
+
+    function playVideo() {
+      if (isPlaying) return;
+      isPlaying = true;
+      if (animId) cancelAnimationFrame(animId);
+
+      btn.style.display = 'none';
+      const poster = document.getElementById('aboutVideoPoster');
+      if (poster) poster.style.display = 'none';
+      const overlay = card.querySelector('.about-video-overlay');
+      if (overlay) overlay.style.display = 'none';
+
+      playerWrap.innerHTML = '<iframe src="https://www.youtube.com/embed/6EcM0RWHtaU?autoplay=1&rel=0&modestbranding=1" title="Airwin Logistics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      playerWrap.classList.add('is-active');
+      card.style.cursor = 'default';
+    }
+
+    card.addEventListener('click', playVideo);
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playVideo();
+      }
+    });
+  }
+
+  // Execute immediately since elements precede script
+  initAboutVideo();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutVideo);
+  }
+  window.addEventListener('load', initAboutVideo);
+})();
+</script>
+
 <div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style id="airwin-common-footer-style">
   /* =========================================================
      AIRWIN COMMON FOOTER - PURE BLACK AESTHETIC & INTERACTIVE

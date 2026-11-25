@@ -13,7 +13,7 @@
       font-size: 2.5445292621vw !important;
     }
   }
-</style><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>About Us | Airwin Cargo — 25+ Years of Logistics Excellence</title><meta content="Your trusted partner in global freight forwarding and logistics — combining global reach, proven expertise, and the capability to deliver success across complex supply chains." name="description"/><meta content="About us" property="og:title"/><meta content="Your trusted partner in global freight forwarding and logistics — combining global reach, proven expertise, and the capability to deliver success across complex supply chains." property="og:description"/><meta content="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a44eec1ed1af2c4c403dfc4_e7dc5a3fbf83ec1ed6ee0b12fc4989e9_OG.jpg" property="og:image"/><meta content="About us" name="twitter:title"/><meta content="Your trusted partner in global freight forwarding and logistics — combining global reach, proven expertise, and the capability to deliver success across complex supply chains." name="twitter:description"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="_aWE7Sv-hV2nN3KNpOwVW4GViBWc91hYOFKC9LaEmMs" name="google-site-verification"/><meta content="Webflow" name="generator"/><link href="/css/united-carriers.min.css" rel="stylesheet" type="text/css"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a631242ed3423f9f458466a_Favicon%20(1).png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)"/><link href="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a631242ed3423f9f458466a_Favicon%20(1).png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)"/><link href="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a63124232ee5c68d1d4fcde_Favicon%20(1).png" rel="icon" type="image/png" sizes="48x48"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+</style><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>About Us | Airwin Cargo — 25+ Years of Logistics Excellence</title><meta content="Your trusted partner in global freight forwarding and logistics — combining global reach, proven expertise, and the capability to deliver success across complex supply chains." name="description"/><meta content="About us" property="og:title"/><meta content="Your trusted partner in global freight forwarding and logistics — combining global reach, proven expertise, and the capability to deliver success across complex supply chains." property="og:description"/><meta content="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a44eec1ed1af2c4c403dfc4_e7dc5a3fbf83ec1ed6ee0b12fc4989e9_OG.jpg" property="og:image"/><meta content="About us" name="twitter:title"/><meta content="Your trusted partner in global freight forwarding and logistics — combining global reach, proven expertise, and the capability to deliver success across complex supply chains." name="twitter:description"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="_aWE7Sv-hV2nN3KNpOwVW4GViBWc91hYOFKC9LaEmMs" name="google-site-verification"/><meta content="Webflow" name="generator"/><link href="./css/united-carriers.min.css" rel="stylesheet" type="text/css"/><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a631242ed3423f9f458466a_Favicon%20(1).png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)"/><link href="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a631242ed3423f9f458466a_Favicon%20(1).png" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)"/><link href="https://cdn.prod.website-files.com/6a44eec1ed1af2c4c403df6b/6a63124232ee5c68d1d4fcde_Favicon%20(1).png" rel="icon" type="image/png" sizes="48x48"/><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 <link href="/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32"/>
 <link href="/favicon-192x192.png" rel="icon" type="image/png" sizes="192x192"/>
 <link href="/favicon-512x512.png" rel="icon" type="image/png" sizes="512x512"/>
@@ -920,8 +920,254 @@
   }
 
   @media (max-width: 991px) {
+    /* Empty block before section is 0 height on mobile */
+    .about-fea-empty-block.hidden-dsk {
+      display: none !important;
+      height: 0 !important;
+    }
+
+    /* Empty block after section provides the scroll runway: ~260vh (approx 5-6 scrolls) */
+    .about-fea-empty-block.hidden-mb {
+      display: block !important;
+      height: 260vh !important;
+    }
+
+    /* Wrap acts as the sticky track container */
+    .about-fea-wrap {
+      position: relative !important;
+      height: auto !important;
+      background: #000000 !important;
+    }
+
+    /* Section sticks to top during scroll */
+    .about-fea {
+      position: sticky !important;
+      top: 0 !important;
+      height: 100vh !important;
+      height: 100svh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
+      width: 100% !important;
+      background: #000000 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 5 !important;
+    }
+
+    /* Full-bleed background images */
+    .about-fea-bg {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 1 !important;
+      display: block !important;
+    }
+
+    .about-fea-bg-item {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden !important;
+      transition: opacity 0.35s ease !important;
+    }
+    .about-fea-bg-item:nth-child(1) {
+      z-index: 2 !important;
+      opacity: 1;
+    }
+    .about-fea-bg-item:nth-child(2) {
+      z-index: 3 !important;
+      opacity: 0;
+    }
+
+    .about-fea-bg-item-thumb {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden !important;
+    }
+    .about-fea-bg-item-thumb img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center 46% !important;
+      transform: scale(1.04);
+      transform-origin: center center !important;
+      will-change: transform !important;
+    }
+
+    /* Mobile vignette: darker at top for header readability, darker at bottom for content readability, center transparent for vehicle */
+    .about-fea-bg-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.55) 15%,
+        rgba(0, 0, 0, 0.05) 28%,
+        rgba(0, 0, 0, 0.05) 54%,
+        rgba(0, 0, 0, 0.65) 68%,
+        rgba(0, 0, 0, 0.94) 84%,
+        #000000 100%
+      ) !important;
+      z-index: 4 !important;
+      opacity: 1 !important;
+      pointer-events: none !important;
+      display: block !important;
+    }
+
+    /* Content container */
+    .about-fea .container {
+      position: relative !important;
+      z-index: 10 !important;
+      height: 100% !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 2.2rem !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      display: block !important;
+    }
+    .about-fea-content {
+      position: relative !important;
+      z-index: 15 !important;
+      height: 100% !important;
+      width: 100% !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .about-fea-content-wrap {
+      position: relative !important;
+      height: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+    }
+
+    /* Hide desktop horizontal line on mobile */
+    .about-fea-line {
+      display: none !important;
+    }
+
+    /* Small 'OUR' in upper corner beside/above heading - safely below mobile navbar */
+    .about-fea-label {
+      position: absolute !important;
+      top: 6.0rem !important;
+      left: 2.2rem !important;
+      z-index: 20 !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .about-fea-label .txt {
+      font-family: monospace !important;
+      font-size: 1.25rem !important;
+      letter-spacing: 0.24em !important;
+      text-transform: uppercase !important;
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 700 !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    /* Content list - reset template margin-top and grid completely */
+    .about-fea-content-list {
+      position: relative !important;
+      height: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+      transform: none !important;
+    }
+
+    .about-fea-content-item {
+      margin: 0 !important;
+      padding: 0 !important;
+      position: static !important;
+      display: block !important;
+    }
+
+    /* Large Headings in upper area with same font style as desktop view - positioned below 'OUR' */
+    .about-fea-item-title {
+      position: absolute !important;
+      top: 7.8rem !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      width: auto !important;
+      transform: none !important;
+      z-index: 20 !important;
+      display: block !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .about-fea-content-item.active .about-fea-item-title {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .about-fea-item-title .heading {
+      font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
+      font-size: clamp(3.0rem, 8.8vw, 4.4rem) !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.05 !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+      margin: 0 !important;
+      white-space: nowrap !important;
+    }
+    .about-fea-item-title-inner {
+      clip-path: none !important;
+      opacity: 1 !important;
+    }
+    .about-fea-item-title-mask {
+      display: none !important;
+    }
+
+    /* Under content: like desktop view, NO outline card, NO border box */
     .about-fea-item-desc {
-      width: min(38rem, 40vw) !important;
+      position: absolute !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      bottom: 2.5rem !important;
+      top: auto !important;
+      width: auto !important;
+      max-width: none !important;
+      transform: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 20 !important;
+    }
+    .about-fea-content-item.active .about-fea-item-desc {
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+    }
+    .about-fea-item-desc .txt {
+      font-family: var(--font--body, 'Space Grotesk', Arial, sans-serif) !important;
+      font-size: clamp(1.2rem, 3.4vw, 1.45rem) !important;
+      line-height: 1.55 !important;
+      color: #ffffff !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 1px 4px #000000 !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
   }
 </style>
@@ -2152,8 +2398,254 @@
   }
 
   @media (max-width: 991px) {
+    /* Empty block before section is 0 height on mobile */
+    .about-fea-empty-block.hidden-dsk {
+      display: none !important;
+      height: 0 !important;
+    }
+
+    /* Empty block after section provides the scroll runway: ~260vh (approx 5-6 scrolls) */
+    .about-fea-empty-block.hidden-mb {
+      display: block !important;
+      height: 260vh !important;
+    }
+
+    /* Wrap acts as the sticky track container */
+    .about-fea-wrap {
+      position: relative !important;
+      height: auto !important;
+      background: #000000 !important;
+    }
+
+    /* Section sticks to top during scroll */
+    .about-fea {
+      position: sticky !important;
+      top: 0 !important;
+      height: 100vh !important;
+      height: 100svh !important;
+      max-height: 100vh !important;
+      overflow: hidden !important;
+      width: 100% !important;
+      background: #000000 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 5 !important;
+    }
+
+    /* Full-bleed background images */
+    .about-fea-bg {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      z-index: 1 !important;
+      display: block !important;
+    }
+
+    .about-fea-bg-item {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden !important;
+      transition: opacity 0.35s ease !important;
+    }
+    .about-fea-bg-item:nth-child(1) {
+      z-index: 2 !important;
+      opacity: 1;
+    }
+    .about-fea-bg-item:nth-child(2) {
+      z-index: 3 !important;
+      opacity: 0;
+    }
+
+    .about-fea-bg-item-thumb {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden !important;
+    }
+    .about-fea-bg-item-thumb img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center 46% !important;
+      transform: scale(1.04);
+      transform-origin: center center !important;
+      will-change: transform !important;
+    }
+
+    /* Mobile vignette: darker at top for header readability, darker at bottom for content readability, center transparent for vehicle */
+    .about-fea-bg-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.55) 15%,
+        rgba(0, 0, 0, 0.05) 28%,
+        rgba(0, 0, 0, 0.05) 54%,
+        rgba(0, 0, 0, 0.65) 68%,
+        rgba(0, 0, 0, 0.94) 84%,
+        #000000 100%
+      ) !important;
+      z-index: 4 !important;
+      opacity: 1 !important;
+      pointer-events: none !important;
+      display: block !important;
+    }
+
+    /* Content container */
+    .about-fea .container {
+      position: relative !important;
+      z-index: 10 !important;
+      height: 100% !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 2.2rem !important;
+      margin: 0 !important;
+      box-sizing: border-box !important;
+      display: block !important;
+    }
+    .about-fea-content {
+      position: relative !important;
+      z-index: 15 !important;
+      height: 100% !important;
+      width: 100% !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .about-fea-content-wrap {
+      position: relative !important;
+      height: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+    }
+
+    /* Hide desktop horizontal line on mobile */
+    .about-fea-line {
+      display: none !important;
+    }
+
+    /* Small 'OUR' in upper corner beside/above heading - safely below mobile navbar */
+    .about-fea-label {
+      position: absolute !important;
+      top: 6.0rem !important;
+      left: 2.2rem !important;
+      z-index: 20 !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .about-fea-label .txt {
+      font-family: monospace !important;
+      font-size: 1.25rem !important;
+      letter-spacing: 0.24em !important;
+      text-transform: uppercase !important;
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 700 !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    /* Content list - reset template margin-top and grid completely */
+    .about-fea-content-list {
+      position: relative !important;
+      height: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+      transform: none !important;
+    }
+
+    .about-fea-content-item {
+      margin: 0 !important;
+      padding: 0 !important;
+      position: static !important;
+      display: block !important;
+    }
+
+    /* Large Headings in upper area with same font style as desktop view - positioned below 'OUR' */
+    .about-fea-item-title {
+      position: absolute !important;
+      top: 7.8rem !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      width: auto !important;
+      transform: none !important;
+      z-index: 20 !important;
+      display: block !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .about-fea-content-item.active .about-fea-item-title {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    .about-fea-item-title .heading {
+      font-family: var(--font--heading, 'BT Steinhart', Arial, sans-serif) !important;
+      font-size: clamp(3.0rem, 8.8vw, 4.4rem) !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
+      letter-spacing: -0.01em !important;
+      line-height: 1.05 !important;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9) !important;
+      margin: 0 !important;
+      white-space: nowrap !important;
+    }
+    .about-fea-item-title-inner {
+      clip-path: none !important;
+      opacity: 1 !important;
+    }
+    .about-fea-item-title-mask {
+      display: none !important;
+    }
+
+    /* Under content: like desktop view, NO outline card, NO border box */
     .about-fea-item-desc {
-      width: min(38rem, 40vw) !important;
+      position: absolute !important;
+      left: 2.2rem !important;
+      right: 2.2rem !important;
+      bottom: 2.5rem !important;
+      top: auto !important;
+      width: auto !important;
+      max-width: none !important;
+      transform: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity 0.35s ease !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      z-index: 20 !important;
+    }
+    .about-fea-content-item.active .about-fea-item-desc {
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+    }
+    .about-fea-item-desc .txt {
+      font-family: var(--font--body, 'Space Grotesk', Arial, sans-serif) !important;
+      font-size: clamp(1.2rem, 3.4vw, 1.45rem) !important;
+      line-height: 1.55 !important;
+      color: #ffffff !important;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 1px 4px #000000 !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
   }
 </style>
@@ -4168,6 +4660,301 @@
   <div class="about-stand" style="height: 1px; margin-top: -1px;"></div>
 </div>
 
+<!-- ======================================================== -->
+<!-- AIRWIN ABOUT YOUTUBE VIDEO SECTION (CENTERED, BEFORE FOOTER) -->
+<!-- ======================================================== -->
+<style id="airwin-about-video-style">
+  .about-video-section {
+    width: 100%;
+    background-color: #000000;
+    padding: clamp(50px, 7vw, 100px) 24px clamp(40px, 6vw, 80px) 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 20;
+  }
+  .about-video-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .about-video-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: clamp(18px, 2.8vw, 30px);
+    overflow: hidden;
+    background: #0a0d14;
+    cursor: pointer;
+    box-shadow: 0 25px 65px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    transform: translateZ(0);
+    will-change: transform;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .about-video-card:hover {
+    box-shadow: 0 35px 80px -10px rgba(0, 22, 203, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.22);
+  }
+  .about-video-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .about-video-card:hover .about-video-poster {
+    transform: scale(1.025);
+  }
+  .about-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.28) 100%);
+    pointer-events: none;
+    transition: background 0.35s ease;
+  }
+  .about-video-card:hover .about-video-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.18) 100%);
+  }
+
+  /* Floating Magnetic "Watch video" Button */
+  .about-video-watch-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #ffffff;
+    color: #0b0f19;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-family: var(--font--standard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38), 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .about-video-watch-btn svg {
+    width: 12px;
+    height: 14px;
+    flex-shrink: 0;
+    fill: currentColor;
+    display: block;
+    transition: fill 0.2s ease, transform 0.2s ease;
+  }
+  .about-video-card:hover .about-video-watch-btn {
+    background: #ffffff;
+    color: #0016cb;
+    box-shadow: 0 14px 36px rgba(0, 22, 203, 0.28), 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  .about-video-card:hover .about-video-watch-btn svg {
+    fill: #0016cb;
+    transform: scale(1.08);
+  }
+
+  /* Embedded YouTube player container */
+  .about-video-player-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 20;
+    background: #000000;
+  }
+  .about-video-player-wrap.is-active {
+    display: block;
+  }
+  .about-video-player-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Mobile Responsive Tweaks */
+  @media (max-width: 768px) {
+    .about-video-section {
+      padding: 36px 16px 54px 16px;
+    }
+    .about-video-card {
+      border-radius: 18px;
+    }
+    .about-video-watch-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+      gap: 8px;
+    }
+    .about-video-watch-btn svg {
+      width: 10px;
+      height: 12px;
+    }
+  }
+</style>
+
+<section class="about-video-section" id="about-video-section">
+  <div class="about-video-container">
+    <div class="about-video-card" id="aboutVideoCard" role="button" tabindex="0" aria-label="Play Airwin Logistics Corporate Video">
+      <!-- Thumbnail Poster -->
+      <img src="images/about-video-poster.jpg" alt="Airwin Logistics" class="about-video-poster" id="aboutVideoPoster" loading="lazy">
+      <div class="about-video-overlay"></div>
+
+      <!-- Floating Magnetic "Watch video" Button -->
+      <div class="about-video-watch-btn" id="aboutVideoWatchBtn">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor" aria-hidden="true">
+          <path d="M1 1.5L11 7L1 12.5V1.5Z"/>
+        </svg>
+        <span>Watch video</span>
+      </div>
+
+      <!-- Video Player Container (dynamically injected iframe on click) -->
+      <div class="about-video-player-wrap" id="aboutVideoPlayerWrap"></div>
+    </div>
+  </div>
+</section>
+
+<script id="airwin-about-video-script">
+(function() {
+  function initAboutVideo() {
+    const card = document.getElementById('aboutVideoCard');
+    const btn = document.getElementById('aboutVideoWatchBtn');
+    const playerWrap = document.getElementById('aboutVideoPlayerWrap');
+    if (!card || !btn || !playerWrap) return;
+
+    let isHovered = false;
+    let cardRect = null;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let currentScale = 1;
+    let targetScale = 1;
+    let animId = null;
+    let isPlaying = false;
+
+    function updateCardRect() {
+      cardRect = card.getBoundingClientRect();
+    }
+
+    function render() {
+      if (isPlaying) return;
+
+      currentX += (targetX - currentX) * 0.14;
+      currentY += (targetY - currentY) * 0.14;
+      currentScale += (targetScale - currentScale) * 0.14;
+
+      btn.style.transform = `translate3d(calc(-50% + ${currentX.toFixed(2)}px), calc(-50% + ${currentY.toFixed(2)}px), 0) scale(${currentScale.toFixed(3)})`;
+
+      const dist = Math.hypot(targetX - currentX, targetY - currentY);
+      if (isHovered || dist > 0.15 || Math.abs(targetScale - currentScale) > 0.005) {
+        animId = requestAnimationFrame(render);
+      } else {
+        animId = null;
+      }
+    }
+
+    function startAnim() {
+      if (!animId && !isPlaying) {
+        animId = requestAnimationFrame(render);
+      }
+    }
+
+    // Follow cursor smoothly inside video borders
+    card.addEventListener('mousemove', function(e) {
+      if (isPlaying) return;
+      if (!cardRect) updateCardRect();
+
+      const mouseX = e.clientX - cardRect.left;
+      const mouseY = e.clientY - cardRect.top;
+      const centerX = cardRect.width / 2;
+      const centerY = cardRect.height / 2;
+
+      const rawOffsetX = mouseX - centerX;
+      const rawOffsetY = mouseY - centerY;
+
+      // Keep button safely inside card boundaries
+      const btnW = btn.offsetWidth || 140;
+      const btnH = btn.offsetHeight || 48;
+      const pad = 20;
+      const maxOffsetX = Math.max(0, (cardRect.width / 2) - (btnW / 2) - pad);
+      const maxOffsetY = Math.max(0, (cardRect.height / 2) - (btnH / 2) - pad);
+
+      targetX = Math.max(-maxOffsetX, Math.min(maxOffsetX, rawOffsetX));
+      targetY = Math.max(-maxOffsetY, Math.min(maxOffsetY, rawOffsetY));
+      targetScale = 1.08;
+
+      startAnim();
+    });
+
+    card.addEventListener('mouseenter', function() {
+      if (isPlaying) return;
+      isHovered = true;
+      updateCardRect();
+      targetScale = 1.08;
+      startAnim();
+    });
+
+    card.addEventListener('mouseleave', function() {
+      if (isPlaying) return;
+      isHovered = false;
+      targetX = 0;
+      targetY = 0;
+      targetScale = 1.0;
+      startAnim();
+    });
+
+    window.addEventListener('resize', function() {
+      if (isHovered) updateCardRect();
+    });
+
+    function playVideo() {
+      if (isPlaying) return;
+      isPlaying = true;
+      if (animId) cancelAnimationFrame(animId);
+
+      btn.style.display = 'none';
+      const poster = document.getElementById('aboutVideoPoster');
+      if (poster) poster.style.display = 'none';
+      const overlay = card.querySelector('.about-video-overlay');
+      if (overlay) overlay.style.display = 'none';
+
+      playerWrap.innerHTML = '<iframe src="https://www.youtube.com/embed/6EcM0RWHtaU?autoplay=1&rel=0&modestbranding=1" title="Airwin Logistics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      playerWrap.classList.add('is-active');
+      card.style.cursor = 'default';
+    }
+
+    card.addEventListener('click', playVideo);
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        playVideo();
+      }
+    });
+  }
+
+  // Execute immediately since elements precede script
+  initAboutVideo();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutVideo);
+  }
+  window.addEventListener('load', initAboutVideo);
+})();
+</script>
+
 <div id="w-node-_0e256e74-1667-c06f-27cd-83dda0c65bd9-a0c65bd9" class="footer-wrap"><div class="css-embed w-embed"><style id="airwin-common-footer-style">
   /* =========================================================
      AIRWIN COMMON FOOTER - PURE BLACK AESTHETIC & INTERACTIVE
@@ -4864,4 +5651,5 @@
     initAboutHeroCardsAnimation();
   }
 </script>
-</body></html>
+</body>
+</html>
