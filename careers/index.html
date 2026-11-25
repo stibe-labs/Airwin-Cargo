@@ -1148,12 +1148,12 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 0.4rem 1rem;
-  border-radius: 100px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .airwin-careers-hero .careers-eyebrow-dot {
@@ -1201,7 +1201,7 @@ html {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 100px;
+  border-radius: 4px;
   font-size: 0.85rem;
   font-weight: 600;
   color: #ffffff;
@@ -2009,7 +2009,10 @@ html {
   /* Hero Section */
   .airwin-careers-hero .airwin-careers-eyebrow {
     font-size: 1rem !important;
-    padding: 0.5rem 1.25rem !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
   }
   .airwin-careers-hero .airwin-careers-hero-title {
     font-size: clamp(3.2rem, 4.8vw, 4.6rem) !important;
@@ -2023,6 +2026,7 @@ html {
   .airwin-careers-hero .careers-pill {
     font-size: 1rem !important;
     padding: 0.65rem 1.35rem !important;
+    border-radius: 4px !important;
   }
 
   /* Section Header */
@@ -2039,6 +2043,7 @@ html {
   .airwin-careers-section-head .careers-pill {
     font-size: 1rem !important;
     padding: 0.65rem 1.35rem !important;
+    border-radius: 4px !important;
   }
 
   /* Job Cards */
