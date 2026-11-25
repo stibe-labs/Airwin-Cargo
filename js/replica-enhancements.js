@@ -1580,6 +1580,162 @@
     });
   };
 
+  // 17. Mobile 3D Gallery Card Stacking Controller for Services Page
+  window.initMobileServicesGalleryStack = function initMobileServicesGalleryStack() {
+    const wrap = document.querySelector('.service-logis-wrap');
+    const section = document.querySelector('.service-logis');
+    const gallery = document.querySelector('.service-logis-gallery');
+    if (!wrap || !section || !gallery) return;
+
+    const items = Array.from(gallery.querySelectorAll('.service-logis-gallery-item'));
+    if (items.length < 4) return;
+
+    if (window._airwinServicesGalleryScrollHandler) {
+      window.removeEventListener('scroll', window._airwinServicesGalleryScrollHandler);
+      window.removeEventListener('resize', window._airwinServicesGalleryScrollHandler);
+      if (window.lenis && typeof window.lenis.off === 'function') {
+        window.lenis.off('scroll', window._airwinServicesGalleryScrollHandler);
+      }
+      window._airwinServicesGalleryScrollHandler = null;
+    }
+
+    let isRafActive = false;
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function updateStack() {
+      isRafActive = false;
+      const isMobile = window.innerWidth <= 991;
+
+      if (!isMobile) {
+        // Desktop: reset all inline styles so desktop flex row is 100% untouched
+        items.forEach((item) => {
+          item.style.transform = '';
+          item.style.filter = '';
+          item.style.opacity = '';
+          item.style.zIndex = '';
+          item.style.boxShadow = '';
+        });
+        return;
+      }
+
+      const rect = wrap.getBoundingClientRect();
+      const topOffset = 55;
+      const scrollDistance = wrap.offsetHeight - section.offsetHeight;
+      if (scrollDistance <= 0) return;
+
+      const current = topOffset - rect.top;
+      const p = Math.min(1, Math.max(0, current / scrollDistance));
+
+      // 4 cards stacking sequence:
+      // Card 0: Base card. Stays at first image position.
+      // Card 1: Comes from down to upper of card between p = 0.04 and p = 0.32
+      // Card 2: Comes from down to upper of card between p = 0.35 and p = 0.63
+      // Card 3: Comes from down to upper of card between p = 0.66 and p = 0.94
+      // Between p = 0.94 and 1.0: Full 4-card stack held, then unpins and scrolls to next text/section
+
+      const raw1 = Math.min(1, Math.max(0, (p - 0.04) / 0.28));
+      const t1 = easeOutCubic(raw1);
+
+      const raw2 = Math.min(1, Math.max(0, (p - 0.35) / 0.28));
+      const t2 = easeOutCubic(raw2);
+
+      const raw3 = Math.min(1, Math.max(0, (p - 0.66) / 0.28));
+      const t3 = easeOutCubic(raw3);
+
+      // Card 0:
+      const scale0 = (1.0 - (t1 * 0.05) - (t2 * 0.04) - (t3 * 0.03)).toFixed(4);
+      const transY0 = (- (t1 * 6) - (t2 * 5) - (t3 * 4)).toFixed(2);
+      const bright0 = (1.0 - (t1 * 0.08) - (t2 * 0.08) - (t3 * 0.06)).toFixed(3);
+      items[0].style.zIndex = '10';
+      items[0].style.opacity = '1';
+      items[0].style.transform = `translate3d(0, ${transY0}px, 0) scale(${scale0})`;
+      items[0].style.filter = `brightness(${bright0})`;
+      items[0].style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
+
+      // Card 1:
+      if (raw1 <= 0) {
+        items[1].style.zIndex = '20';
+        items[1].style.opacity = '0';
+        items[1].style.transform = 'translate3d(0, 115%, 0) rotateX(-12deg) scale(0.92)';
+        items[1].style.filter = 'brightness(0.9)';
+        items[1].style.boxShadow = 'none';
+      } else {
+        const enterPercent1 = (1 - t1) * 115;
+        const rotX1 = ((1 - t1) * -12).toFixed(2);
+        const scaleBase1 = 0.92 + 0.08 * t1;
+        const underScale1 = (scaleBase1 - (t2 * 0.05) - (t3 * 0.04)).toFixed(4);
+        const tuckPx1 = (t2 * 6 + t3 * 5).toFixed(1);
+        const bright1 = (1.0 - (t2 * 0.08) - (t3 * 0.08)).toFixed(3);
+
+        items[1].style.zIndex = '20';
+        items[1].style.opacity = String(Math.min(1, raw1 * 4).toFixed(3));
+        items[1].style.transform = `translate3d(0, calc(${enterPercent1.toFixed(2)}% - ${tuckPx1}px), 0) rotateX(${rotX1}deg) scale(${underScale1})`;
+        items[1].style.filter = `brightness(${bright1})`;
+        items[1].style.boxShadow = `0 ${(12 * t1).toFixed(1)}px ${(28 * t1).toFixed(1)}px rgba(0,0,0,${(0.24 * t1).toFixed(2)})`;
+      }
+
+      // Card 2:
+      if (raw2 <= 0) {
+        items[2].style.zIndex = '30';
+        items[2].style.opacity = '0';
+        items[2].style.transform = 'translate3d(0, 115%, 0) rotateX(-12deg) scale(0.92)';
+        items[2].style.filter = 'brightness(0.9)';
+        items[2].style.boxShadow = 'none';
+      } else {
+        const enterPercent2 = (1 - t2) * 115;
+        const rotX2 = ((1 - t2) * -12).toFixed(2);
+        const scaleBase2 = 0.92 + 0.08 * t2;
+        const underScale2 = (scaleBase2 - (t3 * 0.05)).toFixed(4);
+        const tuckPx2 = (t3 * 6).toFixed(1);
+        const bright2 = (1.0 - (t3 * 0.08)).toFixed(3);
+
+        items[2].style.zIndex = '30';
+        items[2].style.opacity = String(Math.min(1, raw2 * 4).toFixed(3));
+        items[2].style.transform = `translate3d(0, calc(${enterPercent2.toFixed(2)}% - ${tuckPx2}px), 0) rotateX(${rotX2}deg) scale(${underScale2})`;
+        items[2].style.filter = `brightness(${bright2})`;
+        items[2].style.boxShadow = `0 ${(12 * t2).toFixed(1)}px ${(28 * t2).toFixed(1)}px rgba(0,0,0,${(0.24 * t2).toFixed(2)})`;
+      }
+
+      // Card 3:
+      if (raw3 <= 0) {
+        items[3].style.zIndex = '40';
+        items[3].style.opacity = '0';
+        items[3].style.transform = 'translate3d(0, 115%, 0) rotateX(-12deg) scale(0.92)';
+        items[3].style.filter = 'brightness(1)';
+        items[3].style.boxShadow = 'none';
+      } else {
+        const enterPercent3 = ((1 - t3) * 115).toFixed(2);
+        const rotX3 = ((1 - t3) * -12).toFixed(2);
+        const scaleBase3 = (0.92 + 0.08 * t3).toFixed(4);
+
+        items[3].style.zIndex = '40';
+        items[3].style.opacity = String(Math.min(1, raw3 * 4).toFixed(3));
+        items[3].style.transform = `translate3d(0, ${enterPercent3}%, 0) rotateX(${rotX3}deg) scale(${scaleBase3})`;
+        items[3].style.filter = 'brightness(1)';
+        items[3].style.boxShadow = `0 ${(12 * t3).toFixed(1)}px ${(28 * t3).toFixed(1)}px rgba(0,0,0,${(0.24 * t3).toFixed(2)})`;
+      }
+    }
+
+    function requestUpdate() {
+      if (!isRafActive) {
+        isRafActive = true;
+        requestAnimationFrame(updateStack);
+      }
+    }
+
+    window._airwinServicesGalleryScrollHandler = requestUpdate;
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate, { passive: true });
+    if (window.lenis && typeof window.lenis.on === 'function') {
+      window.lenis.on('scroll', requestUpdate);
+    }
+
+    requestUpdate();
+  };
+
   function init() {
     initDynamicSpeedometer();
     unlockScroll();
@@ -1592,6 +1748,9 @@
     window.initHeroVideoScrollAnimation();
     if (typeof window.initAirwinServicesCards === 'function') {
       try { window.initAirwinServicesCards(); } catch (e) {}
+    }
+    if (typeof window.initMobileServicesGalleryStack === 'function') {
+      try { window.initMobileServicesGalleryStack(); } catch (e) {}
     }
     setTimeout(unlockScroll, 200);
     setTimeout(unlockScroll, 800);
@@ -2058,6 +2217,9 @@
         if (typeof window.initAirwinServicesCards === 'function') {
           try { window.initAirwinServicesCards(); } catch(e) {}
         }
+        if (typeof window.initMobileServicesGalleryStack === 'function') {
+          try { window.initMobileServicesGalleryStack(); } catch(e) {}
+        }
         if (typeof unlockScroll === 'function') {
           unlockScroll();
         }
@@ -2075,6 +2237,9 @@
         }
         if (typeof window.initAirwinServicesCards === 'function') {
           try { window.initAirwinServicesCards(); } catch(e) {}
+        }
+        if (typeof window.initMobileServicesGalleryStack === 'function') {
+          try { window.initMobileServicesGalleryStack(); } catch(e) {}
         }
         setTimeout(() => {
           isNavigatingNewPage = false;

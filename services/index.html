@@ -381,6 +381,48 @@
     object-fit: cover !important;
     display: block !important;
   }
+  @media (min-width: 992px) {
+    .service-logis-wrap {
+      height: auto !important;
+      position: static !important;
+    }
+    .service-logis {
+      position: static !important;
+      height: auto !important;
+      padding-top: 8rem !important;
+      padding-bottom: 8rem !important;
+      display: block !important;
+    }
+    .service-logis-gallery {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 1.5rem !important;
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      margin-top: 2.5rem !important;
+      perspective: none !important;
+      transform-style: flat !important;
+    }
+    .service-logis-gallery-item {
+      position: relative !important;
+      inset: auto !important;
+      flex: 1 1 0 !important;
+      width: auto !important;
+      height: auto !important;
+      aspect-ratio: 293 / 386 !important;
+      border-radius: 4px !important;
+      transform: none !important;
+      filter: none !important;
+      opacity: 1 !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+      transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+    }
+    .service-logis-gallery-item:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+    }
+  }
   
   
   #airwin-hero-canvas {
@@ -490,33 +532,72 @@
       margin-top: 0 !important;
     }
     .service-logis-wrap {
+      position: relative !important;
+      height: 280vh !important;
       padding-top: 0 !important;
       margin-top: 0 !important;
     }
     .service-logis {
-      padding-top: 10px !important; /* tiny gap before WHAT WE PROVIDE */
-      padding-bottom: 4rem !important;
+      position: sticky !important;
+      top: 55px !important;
+      height: auto !important;
+      min-height: calc(100vh - 55px) !important;
+      padding-top: 10px !important;
+      padding-bottom: 2rem !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
     }
     .service-logis-label {
-      margin-bottom: 0.5rem !important;
+      margin-bottom: 0.4rem !important;
     }
     .service-logis-title {
       margin-bottom: 0 !important;
+      width: 100% !important;
     }
     .service-logis-title h2 {
-      margin-bottom: 1.5rem !important;
-      font-size: 2.2rem !important;
+      margin-bottom: 0.8rem !important;
+      font-size: 1.85rem !important;
       line-height: 1.2 !important;
     }
     .service-logis-gallery {
-      display: grid !important;
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 1.2rem !important;
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: 360px !important;
+      height: 280px !important;
+      margin: 0.5rem auto 1rem auto !important;
+      perspective: 1200px !important;
+      transform-style: preserve-3d !important;
     }
-  }
-  @media (max-width: 550px) {
-    .service-logis-gallery {
-      grid-template-columns: 1fr !important;
+    .service-logis-gallery-item {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 14px !important;
+      overflow: hidden !important;
+      background-color: #111111 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+      transform-origin: center bottom !important;
+      will-change: transform, opacity, filter, box-shadow !important;
+      transition: none !important;
+    }
+    .service-logis-gallery-item img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+      pointer-events: none !important;
+    }
+    .service-logis-sub {
+      margin-top: 0.5rem !important;
+      max-width: 380px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      line-height: 1.4 !important;
     }
   }
   .body-inner {
@@ -1123,6 +1204,48 @@
     object-fit: cover !important;
     display: block !important;
   }
+  @media (min-width: 992px) {
+    .service-logis-wrap {
+      height: auto !important;
+      position: static !important;
+    }
+    .service-logis {
+      position: static !important;
+      height: auto !important;
+      padding-top: 8rem !important;
+      padding-bottom: 8rem !important;
+      display: block !important;
+    }
+    .service-logis-gallery {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 1.5rem !important;
+      width: 100% !important;
+      max-width: none !important;
+      height: auto !important;
+      margin-top: 2.5rem !important;
+      perspective: none !important;
+      transform-style: flat !important;
+    }
+    .service-logis-gallery-item {
+      position: relative !important;
+      inset: auto !important;
+      flex: 1 1 0 !important;
+      width: auto !important;
+      height: auto !important;
+      aspect-ratio: 293 / 386 !important;
+      border-radius: 4px !important;
+      transform: none !important;
+      filter: none !important;
+      opacity: 1 !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+      transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+    }
+    .service-logis-gallery-item:hover {
+      transform: translateY(-5px) !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+    }
+  }
 
   #airwin-hero-canvas {
     display: block !important;
@@ -1215,33 +1338,72 @@
       margin-top: 0 !important;
     }
     .service-logis-wrap {
+      position: relative !important;
+      height: 280vh !important;
       padding-top: 0 !important;
       margin-top: 0 !important;
     }
     .service-logis {
-      padding-top: 10px !important; /* tiny gap before WHAT WE PROVIDE */
-      padding-bottom: 4rem !important;
+      position: sticky !important;
+      top: 55px !important;
+      height: auto !important;
+      min-height: calc(100vh - 55px) !important;
+      padding-top: 10px !important;
+      padding-bottom: 2rem !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
     }
     .service-logis-label {
-      margin-bottom: 0.5rem !important;
+      margin-bottom: 0.4rem !important;
     }
     .service-logis-title {
       margin-bottom: 0 !important;
+      width: 100% !important;
     }
     .service-logis-title h2 {
-      margin-bottom: 1.5rem !important;
-      font-size: 2.2rem !important;
+      margin-bottom: 0.8rem !important;
+      font-size: 1.85rem !important;
       line-height: 1.2 !important;
     }
     .service-logis-gallery {
-      display: grid !important;
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 1.2rem !important;
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: 360px !important;
+      height: 280px !important;
+      margin: 0.5rem auto 1rem auto !important;
+      perspective: 1200px !important;
+      transform-style: preserve-3d !important;
     }
-  }
-  @media (max-width: 550px) {
-    .service-logis-gallery {
-      grid-template-columns: 1fr !important;
+    .service-logis-gallery-item {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 14px !important;
+      overflow: hidden !important;
+      background-color: #111111 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+      transform-origin: center bottom !important;
+      will-change: transform, opacity, filter, box-shadow !important;
+      transition: none !important;
+    }
+    .service-logis-gallery-item img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+      pointer-events: none !important;
+    }
+    .service-logis-sub {
+      margin-top: 0.5rem !important;
+      max-width: 380px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      line-height: 1.4 !important;
     }
   }
   .body-inner {
