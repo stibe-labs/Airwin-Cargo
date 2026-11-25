@@ -1527,9 +1527,6 @@
       if (window.innerWidth > 991) {
         if (img1) img1.style.transform = '';
         if (img2) img2.style.transform = '';
-        const isMgmtActive = items[1] && items[1].classList.contains('active');
-        bgItems[0].style.opacity = '1';
-        bgItems[1].style.opacity = isMgmtActive ? '1' : '0';
         return;
       }
 
@@ -1895,14 +1892,19 @@
 
   window.updateAirwinActiveNavLinks = updateAirwinActiveNavLinks;
 
+  // Run immediately if DOM elements already parsed
+  updateAirwinActiveNavLinks();
+  if (typeof initMobileAboutFea === 'function') {
+    initMobileAboutFea();
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       updateAirwinActiveNavLinks();
-      initMobileAboutFea();
+      if (typeof initMobileAboutFea === 'function') {
+        initMobileAboutFea();
+      }
     });
-  } else {
-    updateAirwinActiveNavLinks();
-    initMobileAboutFea();
   }
 
   window.addEventListener('popstate', () => updateAirwinActiveNavLinks());
