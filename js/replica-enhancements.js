@@ -18,27 +18,32 @@
   // Desktop view (> 991px) remains 100% UNTOUCHED.
   let lastUserTapTime = 0;
   let isNavigatingNewPage = false;
+  let pageInitTime = Date.now();
 
   window.addEventListener('click', function (e) {
     const target = e.target;
-    if (target && target.closest && (
-      target.closest('.header-logo-link') ||
-      target.closest('.logo') ||
-      target.closest('[data-scroll-to-top]') ||
-      target.closest('.back-to-top')
-    )) {
-      lastUserTapTime = Date.now();
+    if (target && target.closest) {
+      const a = target.closest('a');
+      if (a) {
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+          isNavigatingNewPage = true;
+          lastUserTapTime = Date.now();
+        }
+      }
+      if (
+        target.closest('.header-logo-link') ||
+        target.closest('.logo') ||
+        target.closest('[data-scroll-to-top]') ||
+        target.closest('.back-to-top') ||
+        target.closest('.mobile-nav-item') ||
+        target.closest('.header-nav-link')
+      ) {
+        lastUserTapTime = Date.now();
+        isNavigatingNewPage = true;
+      }
     }
   }, { capture: true, passive: true });
-
-  if (window.barba) {
-    try {
-      window.barba.hooks.beforeEnter(() => {
-        isNavigatingNewPage = true;
-        setTimeout(() => { isNavigatingNewPage = false; }, 800);
-      });
-    } catch (e) {}
-  }
 
   const origWindowScrollTo = window.scrollTo;
   window.scrollTo = function (...args) {
@@ -51,19 +56,22 @@
         targetY = args[1];
       }
       const currentY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
-      const isRecentUserTap = (Date.now() - lastUserTapTime < 1000);
+      const isRecentUserTap = (Date.now() - lastUserTapTime < 2000);
+      const isInitialPageLoad = (Date.now() - pageInitTime < 2500);
 
-      // Block unintended programmatic reset to top on mobile while user is scrolled down
-      if (currentY > 60 && (targetY === 0 || targetY < 50) && !isRecentUserTap && !isNavigatingNewPage) {
+      // Block unintended programmatic reset to top on mobile ONLY while user is actively scrolled down
+      // AND it is NOT a new page navigation, tap, or initial page load
+      if (currentY > 60 && (targetY === 0 || targetY < 50) && !isRecentUserTap && !isNavigatingNewPage && !isInitialPageLoad) {
         return;
       }
     }
     return origWindowScrollTo.apply(this, args);
   };
 
-  if (window.innerWidth <= 991 && 'scrollRestoration' in history) {
+  // Ensure every newly visited page starts cleanly at top (no random browser restoration down the page)
+  if ('scrollRestoration' in history) {
     try {
-      history.scrollRestoration = 'auto';
+      history.scrollRestoration = 'manual';
     } catch (e) {}
   }
 
@@ -1506,6 +1514,12 @@
     const img1 = bgItems[0].querySelector('img');
     const img2 = bgItems[1].querySelector('img');
 
+    if (window._airwinAboutFeaScrollHandler) {
+      window.removeEventListener('scroll', window._airwinAboutFeaScrollHandler);
+      window.removeEventListener('resize', window._airwinAboutFeaScrollHandler);
+      window._airwinAboutFeaScrollHandler = null;
+    }
+
     let ticking = false;
 
     function update() {
@@ -1573,6 +1587,7 @@
       }
     }
 
+    window._airwinAboutFeaScrollHandler = onScroll;
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     update();
@@ -1880,96 +1895,11 @@
 
   window.updateAirwinActiveNavLinks = updateAirwinActiveNavLinks;
 
-  // Mobile Sticky Scroll & Zoom Controller for About Page Mission/Management Feature Section
-  function initMobileAboutScrollZoom() {
-    const wrap = document.querySelector('.about-fea-wrap');
-    const fea = document.querySelector('.about-fea');
-    if (!wrap || !fea) return;
-
-    const items = fea.querySelectorAll('.about-fea-content-item');
-    const bgItems = fea.querySelectorAll('.about-fea-bg-item');
-    if (items.length < 2 || bgItems.length < 2) return;
-
-    const img1 = bgItems[0].querySelector('img');
-    const img2 = bgItems[1].querySelector('img');
-
-    let ticking = false;
-
-    function update() {
-      ticking = false;
-      if (window.innerWidth > 991) {
-        if (img1) img1.style.transform = '';
-        if (img2) img2.style.transform = '';
-        const isMgmtActive = items[1] && items[1].classList.contains('active');
-        bgItems[0].style.opacity = '1';
-        bgItems[1].style.opacity = isMgmtActive ? '1' : '0';
-        return;
-      }
-
-      const rect = wrap.getBoundingClientRect();
-      const scrollDist = wrap.offsetHeight - window.innerHeight;
-      if (scrollDist <= 0) return;
-
-      const progress = Math.max(0, Math.min(1, -rect.top / scrollDist));
-
-      if (progress < 0.48) {
-        const p1 = progress / 0.48;
-        const scale1 = (1.04 + p1 * 0.18).toFixed(4);
-        if (img1) img1.style.transform = `scale(${scale1})`;
-
-        bgItems[0].style.opacity = '1';
-        bgItems[1].style.opacity = '0';
-
-        items[0].classList.add('active');
-        items[1].classList.remove('active');
-        fea.setAttribute('data-active-index', '0');
-
-      } else if (progress < 0.54) {
-        const pt = (progress - 0.48) / 0.06;
-        bgItems[0].style.opacity = (1 - pt).toFixed(3);
-        bgItems[1].style.opacity = pt.toFixed(3);
-
-        if (pt >= 0.5) {
-          items[0].classList.remove('active');
-          items[1].classList.add('active');
-          fea.setAttribute('data-active-index', '1');
-        } else {
-          items[0].classList.add('active');
-          items[1].classList.remove('active');
-          fea.setAttribute('data-active-index', '0');
-        }
-
-      } else {
-        const p2 = (progress - 0.54) / 0.46;
-        const scale2 = (1.04 + p2 * 0.20).toFixed(4);
-        if (img2) img2.style.transform = `scale(${scale2})`;
-
-        bgItems[0].style.opacity = '0';
-        bgItems[1].style.opacity = '1';
-
-        items[0].classList.remove('active');
-        items[1].classList.add('active');
-        fea.setAttribute('data-active-index', '1');
-      }
-    }
-
-    function onScroll() {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  }
-
-  window.initMobileAboutScrollZoom = initMobileAboutScrollZoom;
-  window.initMobileAboutFea = initMobileAboutScrollZoom;
-
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateAirwinActiveNavLinks);
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAirwinActiveNavLinks();
+      initMobileAboutFea();
+    });
   } else {
     updateAirwinActiveNavLinks();
     initMobileAboutFea();
@@ -1990,26 +1920,77 @@
     return window.location.pathname;
   }
 
-  if (window.barba) {
+  function setupBarbaHooks() {
+    if (!window.barba || window._airwinBarbaHooksBound) return;
+    window._airwinBarbaHooksBound = true;
     try {
+      window.barba.hooks.before(() => {
+        isNavigatingNewPage = true;
+      });
       window.barba.hooks.beforeEnter((data) => {
+        isNavigatingNewPage = true;
+        pageInitTime = Date.now();
+        try {
+          origWindowScrollTo.call(window, 0, 0);
+          if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+            window.lenis.scrollTo(0, { immediate: true });
+          }
+        } catch (e) {}
         updateAirwinActiveNavLinks(getBarbaUrlPath(data));
       });
       window.barba.hooks.afterEnter((data) => {
+        pageInitTime = Date.now();
+        try {
+          origWindowScrollTo.call(window, 0, 0);
+          if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+            window.lenis.scrollTo(0, { immediate: true });
+          }
+        } catch (e) {}
         updateAirwinActiveNavLinks(getBarbaUrlPath(data));
-        initMobileAboutFea();
+        if (typeof initMobileAboutFea === 'function') {
+          initMobileAboutFea();
+        }
         if (typeof window.initAboutHeroCardsAnimation === 'function') {
           try { window.initAboutHeroCardsAnimation(); } catch(e) {}
         }
         if (typeof window.initHeroVideoScrollAnimation === 'function') {
           try { window.initHeroVideoScrollAnimation(); } catch(e) {}
         }
+        if (typeof unlockScroll === 'function') {
+          unlockScroll();
+        }
       });
       window.barba.hooks.after((data) => {
+        try {
+          origWindowScrollTo.call(window, 0, 0);
+          if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+            window.lenis.scrollTo(0, { immediate: true });
+          }
+        } catch (e) {}
         updateAirwinActiveNavLinks(getBarbaUrlPath(data));
         if (typeof window.initHeroVideoScrollAnimation === 'function') {
           try { window.initHeroVideoScrollAnimation(); } catch(e) {}
         }
+        setTimeout(() => {
+          isNavigatingNewPage = false;
+          if (window.ScrollTrigger) {
+            try { window.ScrollTrigger.refresh(); } catch(e) {}
+          }
+        }, 350);
       });
     } catch(e) {}
+  }
+
+  setupBarbaHooks();
+  if (!window.barba) {
+    let attempts = 0;
+    const barbaTimer = setInterval(() => {
+      attempts++;
+      if (window.barba) {
+        setupBarbaHooks();
+        clearInterval(barbaTimer);
+      } else if (attempts > 50) {
+        clearInterval(barbaTimer);
+      }
+    }, 100);
   }
