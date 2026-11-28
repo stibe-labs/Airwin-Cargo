@@ -321,7 +321,7 @@
       <div class="airwin-article-modal-dialog">
         <div class="airwin-article-modal-topbar">
           <div class="airwin-article-modal-badge">
-            <span class="modal-badge-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#0016CB;"></span>
+            <span class="modal-badge-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2eabdf;"></span>
             <span class="modal-badge-text">ARTICLE</span>
           </div>
           <button type="button" class="airwin-article-modal-close-btn" aria-label="Close article">✕</button>

@@ -739,11 +739,11 @@
         transition: border 0.2s;
       }
       .uc-input:focus {
-        border-color: #0016cb;
+        border-color: #0077ee;
       }
       .uc-btn-action {
         width: 100%;
-        background: #0016cb;
+        background: #0077ee;
         color: #fff;
         border: none;
         padding: 1rem;
@@ -778,8 +778,8 @@
         background: rgba(255,255,255,0.3);
       }
       .uc-timeline-step.done::before {
-        background: #0016cb;
-        box-shadow: 0 0 8px #0016cb;
+        background: #0077ee;
+        box-shadow: 0 0 8px #0077ee;
       }
       .uc-timeline-step.active::before {
         background: #f50;
@@ -875,7 +875,7 @@
         </div>
         <button class="uc-btn-action" id="uc-carbon-calc-btn">Compute Emissions</button>
         
-        <div id="uc-carbon-result" style="margin-top: 1.5rem; background: rgba(0, 22, 203, 0.15); border: 1px solid #0016cb; padding: 1.25rem;">
+        <div id="uc-carbon-result" style="margin-top: 1.5rem; background: rgba(0, 119, 238, 0.15); border: 1px solid #0077ee; padding: 1.25rem;">
           <div style="font-size: 0.8rem; text-transform: uppercase; color: rgba(255,255,255,0.7);">Estimated Footprint:</div>
           <div style="font-size: 2.2rem; font-weight: 700; color: #fff; margin: 0.5rem 0;" id="uc-carbon-value">1.530 t CO₂e</div>
           <div style="font-size: 0.85rem; color: #f50;">Offset equivalent: ~76 mature trees planted for 100% net-zero neutrality.</div>
