@@ -200,3 +200,5 @@ body:has(.unavailable-viewport) .footer-wrap,
 body:has(.unavailable-viewport) footer {
   display: none !important;
 }
+
+.footer-main-map.footer-aerial-wrap{width:auto!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important}.footer-aerial-image{width:240px!important;max-width:100%!important;height:auto!important;aspect-ratio:1538/1023!important;object-fit:cover!important;border-radius:0!important;display:block!important}@media(max-width:767px){.footer-main-map.footer-aerial-wrap{width:100%!important;margin-top:1.2rem!important;margin-bottom:2.4rem!important;padding-top:0!important}.footer-aerial-image{width:185px!important;max-width:65%!important;border-radius:0!important}}
