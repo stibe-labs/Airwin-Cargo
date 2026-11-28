@@ -321,7 +321,7 @@
       <div class="airwin-article-modal-dialog">
         <div class="airwin-article-modal-topbar">
           <div class="airwin-article-modal-badge">
-            <span class="modal-badge-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#38bdf8;"></span>
+            <span class="modal-badge-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#0016CB;"></span>
             <span class="modal-badge-text">ARTICLE</span>
           </div>
           <button type="button" class="airwin-article-modal-close-btn" aria-label="Close article">✕</button>
@@ -373,7 +373,85 @@
       }
     });
 
+    // Wheel isolation: Modal content scrolls independently; page background NEVER scrolls
+    modalBackdrop.addEventListener('wheel', function (e) {
+      const scrollable = modalBackdrop.querySelector('.airwin-article-modal-content');
+      if (!scrollable) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      if (e.target.closest('.airwin-article-modal-content')) {
+        const delta = e.deltaY;
+        const atTop = scrollable.scrollTop <= 0 && delta < 0;
+        const atBottom = (scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1) && delta > 0;
+
+        if (atTop || atBottom) {
+          e.preventDefault();
+        }
+        e.stopPropagation();
+      } else {
+        // Outside the scrollable article content (e.g. topbar, backdrop, footer)
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, { passive: false });
+
+    // Touch event isolation for mobile devices
+    let touchStartY = 0;
+    modalBackdrop.addEventListener('touchstart', function (e) {
+      if (e.touches && e.touches[0]) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    modalBackdrop.addEventListener('touchmove', function (e) {
+      const scrollable = modalBackdrop.querySelector('.airwin-article-modal-content');
+      if (!scrollable || !e.target.closest('.airwin-article-modal-content')) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      const currentY = e.touches && e.touches[0] ? e.touches[0].clientY : 0;
+      const deltaY = touchStartY - currentY;
+      const atTop = scrollable.scrollTop <= 0 && deltaY < 0;
+      const atBottom = (scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 1) && deltaY > 0;
+
+      if (atTop || atBottom) {
+        e.preventDefault();
+      }
+      e.stopPropagation();
+    }, { passive: false });
+
     return modalBackdrop;
+  }
+
+  // SCROLL LOCKING HELPERS
+  function lockBodyScroll() {
+    const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    document.body.dataset.modalScrollY = scrollY;
+    document.documentElement.classList.add('airwin-modal-open');
+    document.body.classList.add('airwin-modal-open');
+    document.documentElement.style.setProperty('overflow', 'hidden', 'important');
+    document.documentElement.style.setProperty('overflow-y', 'hidden', 'important');
+    document.body.style.setProperty('overflow', 'hidden', 'important');
+    document.body.style.setProperty('overflow-y', 'hidden', 'important');
+  }
+
+  function unlockBodyScroll() {
+    document.documentElement.classList.remove('airwin-modal-open');
+    document.body.classList.remove('airwin-modal-open');
+    document.documentElement.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow-y');
+    document.body.style.removeProperty('overflow');
+    document.body.style.removeProperty('overflow-y');
+
+    const savedY = parseInt(document.body.dataset.modalScrollY || '0', 10);
+    if (!isNaN(savedY) && savedY > 0) {
+      window.scrollTo(0, savedY);
+    }
   }
 
   // 4. OPEN ARTICLE MODAL
@@ -426,11 +504,10 @@
     // Reset scroll to top
     if (contentScroll) contentScroll.scrollTop = 0;
 
-    // Show modal
+    // Show modal & firmly lock background scroll
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
+    lockBodyScroll();
 
     // Update URL hash cleanly without jumping
     try {
@@ -443,8 +520,7 @@
     if (!modalBackdrop) return;
     modalBackdrop.classList.remove('is-open');
     modalBackdrop.setAttribute('aria-hidden', 'true');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
+    unlockBodyScroll();
 
     // Clear hash cleanly
     try {
@@ -518,9 +594,12 @@
       loader.style.setProperty('visibility', 'hidden', 'important');
       loader.style.setProperty('pointer-events', 'none', 'important');
     }
-    document.documentElement.style.setProperty('overflow-y', 'auto', 'important');
-    document.body.style.setProperty('overflow-y', 'visible', 'important');
-    document.body.style.setProperty('position', 'static', 'important');
+    // Only restore scroll if modal is not active
+    if (!modalBackdrop || !modalBackdrop.classList.contains('is-open')) {
+      document.documentElement.style.setProperty('overflow-y', 'auto', 'important');
+      document.body.style.setProperty('overflow-y', 'visible', 'important');
+      document.body.style.setProperty('position', 'static', 'important');
+    }
   }
 
   // 9. EXPOSE PUBLIC API

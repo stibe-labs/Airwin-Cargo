@@ -1,25 +1,39 @@
 /* ==========================================================================
-   AIRWIN CARGO - ARTICLE READER POPUP MODAL STYLES
+   AIRWIN CARGO - ARTICLE READER POPUP MODAL (CLEAN LIGHT THEME)
    ========================================================================== */
 
+/* Body lock when modal is open */
+html.airwin-modal-open,
+body.airwin-modal-open,
+body.body.airwin-modal-open {
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  height: 100% !important;
+  touch-action: none !important;
+}
+
 .airwin-article-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(4, 6, 12, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(1rem, 3vw, 2.5rem);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
-  box-sizing: border-box;
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: clamp(1rem, 3vw, 2.5rem) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  overscroll-behavior: contain !important;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease !important;
+  box-sizing: border-box !important;
 }
 
 .airwin-article-modal-backdrop.is-open {
@@ -28,259 +42,335 @@
   pointer-events: auto !important;
 }
 
+/* Light Theme Modal Dialog Window */
 .airwin-article-modal-dialog {
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  max-height: 90vh;
-  background: #0d0f15;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 18px;
-  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transform: scale(0.94) translateY(24px);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #ffffff;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 900px !important;
+  max-height: 90vh !important;
+  height: 90vh !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  overscroll-behavior: contain !important;
+  transform: scale(0.95) translateY(20px) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  color: #111827 !important;
+  box-sizing: border-box !important;
 }
 
 .airwin-article-modal-backdrop.is-open .airwin-article-modal-dialog {
   transform: scale(1) translateY(0) !important;
 }
 
+/* Modal Sticky Top Bar (Light Theme) */
 .airwin-article-modal-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 1.8rem;
-  background: rgba(13, 15, 21, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 1.1rem 1.8rem !important;
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E5E7EB !important;
+  z-index: 10 !important;
 }
 
 .airwin-article-modal-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font--mono, "BT Steinhart Mono", monospace, sans-serif);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #38bdf8;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background: #EEF2FF !important;
+  border: 1px solid #E0E7FF !important;
+  padding: 0.35rem 0.85rem !important;
+  border-radius: 9999px !important;
+  font-family: var(--font--mono, "BT Steinhart Mono", monospace, sans-serif) !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #0016CB !important;
+}
+
+.modal-badge-dot {
+  display: inline-block !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background: #0016CB !important;
 }
 
 .airwin-article-modal-close-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  outline: none;
-  font-size: 1.35rem;
-  line-height: 1;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: #F3F4F6 !important;
+  border: 1px solid #E5E7EB !important;
+  color: #374151 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  outline: none !important;
+  font-size: 1.25rem !important;
+  line-height: 1 !important;
 }
 
 .airwin-article-modal-close-btn:hover {
-  background: #0016CB;
-  border-color: #0016CB;
-  transform: rotate(90deg) scale(1.05);
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+  color: #FFFFFF !important;
+  transform: rotate(90deg) scale(1.05) !important;
 }
 
+/* Modal Scrollable Content Container */
 .airwin-article-modal-content {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: clamp(1.5rem, 3.5vw, 2.8rem);
-  line-height: 1.75;
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  touch-action: pan-y !important;
+  padding: clamp(1.5rem, 3.5vw, 2.8rem) !important;
+  line-height: 1.75 !important;
+  box-sizing: border-box !important;
 }
 
+/* Custom Clean Scrollbar for Modal Content */
+.airwin-article-modal-content::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.airwin-article-modal-content::-webkit-scrollbar-track {
+  background: #F1F5F9 !important;
+  border-radius: 9999px !important;
+}
+
+.airwin-article-modal-content::-webkit-scrollbar-thumb {
+  background: #CBD5E1 !important;
+  border-radius: 9999px !important;
+}
+
+.airwin-article-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8 !important;
+}
+
+/* Hero Image Wrap */
 .airwin-article-hero-wrap {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-  position: relative;
-  background: #161822;
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  max-height: 400px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  margin-bottom: 1.8rem !important;
+  position: relative !important;
+  background: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
 }
 
 .airwin-article-hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
+/* Meta Information Row */
 .airwin-article-meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 1.2rem;
-  font-family: var(--font--mono, "BT Steinhart Mono", monospace, sans-serif);
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  margin-bottom: 1rem !important;
+  font-family: var(--font--mono, "BT Steinhart Mono", monospace, sans-serif) !important;
+  font-size: 0.88rem !important;
+  color: #6B7280 !important;
 }
 
 .airwin-article-meta-date {
-  color: #ffffff;
-  font-weight: 600;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+.airwin-article-meta-readtime {
+  color: #4B5563 !important;
+  font-weight: 600 !important;
+}
+
+.airwin-article-meta-author {
+  color: #0016CB !important;
+  font-weight: 600 !important;
 }
 
 .airwin-article-meta-dot {
-  opacity: 0.4;
+  opacity: 0.4 !important;
 }
 
+/* Main Article Headline */
 .airwin-article-title {
-  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 800;
-  line-height: 1.25;
-  color: #ffffff;
-  margin: 0 0 1.5rem 0;
-  letter-spacing: -0.02em;
+  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif) !important;
+  font-size: clamp(1.75rem, 3.2vw, 2.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  color: #111827 !important;
+  margin: 0 0 1.4rem 0 !important;
+  letter-spacing: -0.02em !important;
 }
 
+/* Lead Executive Summary */
 .airwin-article-lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.95);
-  border-left: 3px solid #0016CB;
-  padding: 0.9rem 1.4rem;
-  margin: 0 0 2rem 0;
-  font-weight: 500;
-  background: rgba(0, 22, 203, 0.08);
-  border-radius: 0 8px 8px 0;
+  font-size: clamp(1.02rem, 1.6vw, 1.15rem) !important;
+  line-height: 1.7 !important;
+  color: #1E293B !important;
+  border-left: 4px solid #0016CB !important;
+  padding: 1rem 1.4rem !important;
+  margin: 0 0 2rem 0 !important;
+  font-weight: 500 !important;
+  background: #F0F4FF !important;
+  border-radius: 0 8px 8px 0 !important;
 }
 
+/* Article Body Typography (Light Theme) */
 .airwin-article-body {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.02rem !important;
+  color: #374151 !important;
 }
 
 .airwin-article-body h3 {
-  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 2.2rem 0 0.8rem 0;
-  letter-spacing: -0.01em;
+  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif) !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  margin: 2rem 0 0.8rem 0 !important;
+  letter-spacing: -0.01em !important;
 }
 
 .airwin-article-body p {
-  margin: 0 0 1.2rem 0;
+  margin: 0 0 1.2rem 0 !important;
+  color: #374151 !important;
+  line-height: 1.75 !important;
 }
 
+/* Quote Callout Box */
 .article-quote-box {
-  background: rgba(0, 22, 203, 0.08);
-  border-left: 3px solid #0016CB;
-  border-radius: 0 8px 8px 0;
-  padding: 1.4rem 1.6rem;
-  margin: 1.8rem 0;
+  background: #F8FAFC !important;
+  border-left: 4px solid #0016CB !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 1.2rem 1.6rem !important;
+  margin: 1.8rem 0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
 }
 
 .article-quote-box blockquote {
-  font-style: italic;
-  color: #ffffff;
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem 0;
-  line-height: 1.6;
+  font-style: italic !important;
+  color: #0F172A !important;
+  font-size: 1.05rem !important;
+  margin: 0 0 0.5rem 0 !important;
+  line-height: 1.65 !important;
 }
 
 .article-quote-author {
-  font-family: var(--font--mono, monospace);
-  font-size: 0.82rem;
-  color: #38bdf8;
-  text-transform: uppercase;
+  font-family: var(--font--mono, monospace) !important;
+  font-size: 0.82rem !important;
+  color: #0016CB !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 }
 
+/* Key Takeaways Box */
 .article-key-takeaways {
-  background: #14161f;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem 1.8rem;
-  margin: 2rem 0;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  padding: 1.4rem 1.8rem !important;
+  margin: 2rem 0 !important;
 }
 
 .article-key-takeaways h4 {
-  font-family: var(--font--heading, Arial, sans-serif);
-  font-size: 1.1rem;
-  color: #ffffff;
-  margin: 0 0 1rem 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-family: var(--font--heading, Arial, sans-serif) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+  margin: 0 0 0.85rem 0 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
 }
 
 .article-key-takeaways ul {
-  margin: 0;
-  padding-left: 1.4rem;
+  margin: 0 !important;
+  padding-left: 1.4rem !important;
 }
 
 .article-key-takeaways li {
-  margin-bottom: 0.6rem;
-  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.6rem !important;
+  color: #334155 !important;
+  line-height: 1.6 !important;
 }
 
+.article-key-takeaways li strong {
+  color: #0F172A !important;
+}
+
+/* Modal Bottom Action Bar (Light Theme) */
 .airwin-article-modal-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.2rem 1.8rem;
-  background: rgba(13, 15, 21, 0.96);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  padding: 1.1rem 1.8rem !important;
+  background: #F9FAFB !important;
+  border-top: 1px solid #E5E7EB !important;
 }
 
 .airwin-article-modal-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: #0016CB;
-  color: #ffffff !important;
-  font-family: var(--font--heading, Arial, sans-serif);
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.8rem 1.6rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  background: #0016CB !important;
+  color: #FFFFFF !important;
+  font-family: var(--font--heading, Arial, sans-serif) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  padding: 0.75rem 1.6rem !important;
+  border-radius: 9999px !important;
+  text-decoration: none !important;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0 4px 12px rgba(0, 22, 203, 0.25) !important;
 }
 
 .airwin-article-modal-cta-btn:hover {
-  background: #1C35D8;
-  transform: translateY(-2px);
+  background: #1C35D8 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(0, 22, 203, 0.35) !important;
 }
 
 .airwin-article-modal-dismiss-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  padding: 0.8rem 1.4rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
+  background: #FFFFFF !important;
+  border: 1px solid #D1D5DB !important;
+  color: #374151 !important;
+  padding: 0.75rem 1.4rem !important;
+  border-radius: 9999px !important;
+  cursor: pointer !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
 }
 
 .airwin-article-modal-dismiss-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: #F3F4F6 !important;
+  border-color: #9CA3AF !important;
+  color: #111827 !important;
 }
 
-/* Ensure cursor is a pointer for all news and blog cards */
+/* News and Blog card cursor pointer */
 .airwin-news-card,
 .airwin-news-card-link,
 .airwin-blog-card,
@@ -288,29 +378,41 @@
   cursor: pointer !important;
 }
 
+/* Mobile Responsive Adjustments (max-width: 767px) */
 @media (max-width: 767px) {
   .airwin-article-modal-backdrop {
-    padding: 0;
-    align-items: flex-end;
+    padding: 0 !important;
+    align-items: flex-end !important;
   }
   .airwin-article-modal-dialog {
-    max-width: 100vw;
-    width: 100vw;
-    max-height: 94vh;
-    height: 94vh;
-    border-radius: 20px 20px 0 0;
-    border-bottom: none;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    max-height: 94vh !important;
+    height: 94vh !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-bottom: none !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25) !important;
+  }
+  .airwin-article-modal-topbar {
+    padding: 0.85rem 1.2rem !important;
   }
   .airwin-article-modal-content {
-    padding: 1.2rem;
+    padding: 1.2rem !important;
   }
   .airwin-article-title {
-    font-size: 1.55rem;
+    font-size: 1.5rem !important;
+    line-height: 1.25 !important;
   }
   .airwin-article-hero-wrap {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.2rem !important;
+    max-height: 240px !important;
+  }
+  .airwin-article-lead {
+    padding: 0.85rem 1rem !important;
+    font-size: 0.98rem !important;
+    margin-bottom: 1.4rem !important;
   }
   .airwin-article-modal-footer {
-    padding: 1rem 1.2rem;
+    padding: 0.85rem 1.2rem !important;
   }
 }
