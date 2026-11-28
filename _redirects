@@ -4,3 +4,9 @@ http://www.airwincargo.com/* https://airwincargo.com/:splat 301
 
 # News & Article Subpaths Redirect to Insights Reader
 /news/* /insights.html 302
+
+# Retired Pages Redirects
+/industries* /services.html 301
+/qhse* /about.html 301
+/community* /about.html 301
+/merchandises* /index.html 301
