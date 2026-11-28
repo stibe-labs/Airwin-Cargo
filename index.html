@@ -4436,17 +4436,26 @@
     }
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 767px) {
     .airwin-blog-grid {
       grid-template-columns: 1fr;
     }
     .airwin-blog-header {
       flex-direction: column;
       align-items: flex-start;
-      gap: 1.5rem;
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+    .airwin-blog-header-left,
+    .airwin-blog-header-right {
+      flex: none;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      height: auto;
     }
     .airwin-blog-header-right {
-      max-width: 100%;
+      gap: 1.25rem;
     }
   }
 
