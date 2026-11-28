@@ -1,3 +1,6 @@
 # Canonical Domain Redirect (www to apex)
 https://www.airwincargo.com/* https://airwincargo.com/:splat 301
 http://www.airwincargo.com/* https://airwincargo.com/:splat 301
+
+# News & Article Subpaths Redirect to Insights Reader
+/news/* /insights.html 302

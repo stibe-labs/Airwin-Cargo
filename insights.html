@@ -987,12 +987,9 @@
     pointer-events: none !important;
   }
 </style>
+  <link rel="stylesheet" href="/css/airwin-article-modal.css"/>
 </head><body class="body">
-<div class="loader">
-  <div class="airwin-loader-screen">
-    <div class="airwin-loader-brand">AIRWIN LOGISTICS</div>
-  </div>
-</div>
+<!-- Loader removed for instant page rendering -->
 <header class="header nav-visible" id="airwin-main-header">
   <div class="header-inner">
     <div class="header-row-nav">
@@ -2662,7 +2659,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/logistics-management/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Logistics Management: Precision Freight Forwarding in Global Trade">
+        <a href="#article-logistics-management" data-article-id="logistics-management" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Logistics Management: Precision Freight Forwarding in Global Trade">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">15</span>
@@ -2698,7 +2695,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/domestic-676d45a79051a/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Domestic Cargo & Line-Haul Networks: Fast, Dedicated Pan-India Distribution">
+        <a href="#article-domestic-cargo" data-article-id="domestic-cargo" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Domestic Cargo & Line-Haul Networks: Fast, Dedicated Pan-India Distribution">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">26</span>
@@ -2734,7 +2731,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/airwin/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Airwin Logistics: Over 25 Years of Mission-Critical Global Cargo Excellence">
+        <a href="#article-airwin-25-years" data-article-id="airwin-25-years" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read Airwin Logistics: Over 25 Years of Mission-Critical Global Cargo Excellence">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">31</span>
@@ -2770,7 +2767,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/14th-june-world-blood-donor-day/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read 14th June World Blood Donor Day: Supporting Healthcare Across Communities">
+        <a href="#article-blood-donor-day" data-article-id="blood-donor-day" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read 14th June World Blood Donor Day: Supporting Healthcare Across Communities">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">14</span>
@@ -2806,7 +2803,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/the-evolution-of-airwin-logistics-20-years-of-excellence-in-global-cargo-forwarding/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Evolution of Airwin Logistics: 20 Years of Excellence in Global Cargo Forwarding">
+        <a href="#article-evolution-20-years" data-article-id="evolution-20-years" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Evolution of Airwin Logistics: 20 Years of Excellence in Global Cargo Forwarding">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">31</span>
@@ -2842,7 +2839,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/the-future-of-logistics-embracing-innovation-with-airwin-logistics/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Future of Logistics: Embracing Innovation with Airwin Logistics">
+        <a href="#article-future-of-logistics" data-article-id="future-of-logistics" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Future of Logistics: Embracing Innovation with Airwin Logistics">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">31</span>
@@ -2878,7 +2875,7 @@
           <div class="airwin-news-card-overlay-light"></div>
           <div class="airwin-news-card-overlay-dark"></div>
         </div>
-        <a href="https://www.airwincargo.com/news/the-power-of-collaboration-airwin-logistics-approach-to-partnership/" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Power of Collaboration: Airwin Logistics' Approach to Partnership">
+        <a href="#article-power-of-collaboration" data-article-id="power-of-collaboration" target="_blank" rel="noopener noreferrer" class="airwin-news-card-link" aria-label="Read The Power of Collaboration: Airwin Logistics' Approach to Partnership">
           <div class="airwin-news-card-top">
             <div class="airwin-news-card-date">
               <span class="news-date-day">31</span>
@@ -3605,7 +3602,10 @@
           var summary = art.summary || '';
           var slug = art.slug || '';
 
-          return '<article class="airwin-news-card">' +
+          if (window.AirwinArticleModal && window.AirwinArticleModal.register) {
+            window.AirwinArticleModal.register(art);
+          }
+          return '<article class="airwin-news-card" data-article-id="' + slug + '">' +
             '<div class="airwin-news-card-bg-wrap">' +
               '<img src="' + img + '" alt="" aria-hidden="true" loading="lazy" class="airwin-news-card-bg-img" onerror="this.src=\'./images/news/news_1.jpg\';"/>' +
               '<div class="airwin-news-card-overlay-light"></div>' +
@@ -3677,4 +3677,5 @@
   window.addEventListener('load', unlock);
 })();
 </script>
+  <script src="/js/airwin-article-modal.js"></script>
 </body></html>

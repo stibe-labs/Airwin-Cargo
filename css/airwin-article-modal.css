@@ -1,0 +1,316 @@
+/* ==========================================================================
+   AIRWIN CARGO - ARTICLE READER POPUP MODAL STYLES
+   ========================================================================== */
+
+.airwin-article-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(4, 6, 12, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease;
+  box-sizing: border-box;
+}
+
+.airwin-article-modal-backdrop.is-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.airwin-article-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: #0d0f15;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.94) translateY(24px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+}
+
+.airwin-article-modal-backdrop.is-open .airwin-article-modal-dialog {
+  transform: scale(1) translateY(0) !important;
+}
+
+.airwin-article-modal-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.8rem;
+  background: rgba(13, 15, 21, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.airwin-article-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font--mono, "BT Steinhart Mono", monospace, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+.airwin-article-modal-close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  outline: none;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.airwin-article-modal-close-btn:hover {
+  background: #0016CB;
+  border-color: #0016CB;
+  transform: rotate(90deg) scale(1.05);
+}
+
+.airwin-article-modal-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: clamp(1.5rem, 3.5vw, 2.8rem);
+  line-height: 1.75;
+}
+
+.airwin-article-hero-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  position: relative;
+  background: #161822;
+}
+
+.airwin-article-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.airwin-article-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.2rem;
+  font-family: var(--font--mono, "BT Steinhart Mono", monospace, sans-serif);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.airwin-article-meta-date {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.airwin-article-meta-dot {
+  opacity: 0.4;
+}
+
+.airwin-article-title {
+  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.airwin-article-lead {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  border-left: 3px solid #0016CB;
+  padding: 0.9rem 1.4rem;
+  margin: 0 0 2rem 0;
+  font-weight: 500;
+  background: rgba(0, 22, 203, 0.08);
+  border-radius: 0 8px 8px 0;
+}
+
+.airwin-article-body {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.airwin-article-body h3 {
+  font-family: var(--font--heading, "BT Steinhart", Arial, sans-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 2.2rem 0 0.8rem 0;
+  letter-spacing: -0.01em;
+}
+
+.airwin-article-body p {
+  margin: 0 0 1.2rem 0;
+}
+
+.article-quote-box {
+  background: rgba(0, 22, 203, 0.08);
+  border-left: 3px solid #0016CB;
+  border-radius: 0 8px 8px 0;
+  padding: 1.4rem 1.6rem;
+  margin: 1.8rem 0;
+}
+
+.article-quote-box blockquote {
+  font-style: italic;
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.6;
+}
+
+.article-quote-author {
+  font-family: var(--font--mono, monospace);
+  font-size: 0.82rem;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.article-key-takeaways {
+  background: #14161f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+}
+
+.article-key-takeaways h4 {
+  font-family: var(--font--heading, Arial, sans-serif);
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.article-key-takeaways ul {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.article-key-takeaways li {
+  margin-bottom: 0.6rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.airwin-article-modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.8rem;
+  background: rgba(13, 15, 21, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.airwin-article-modal-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #0016CB;
+  color: #ffffff !important;
+  font-family: var(--font--heading, Arial, sans-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.airwin-article-modal-cta-btn:hover {
+  background: #1C35D8;
+  transform: translateY(-2px);
+}
+
+.airwin-article-modal-dismiss-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.8rem 1.4rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.airwin-article-modal-dismiss-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Ensure cursor is a pointer for all news and blog cards */
+.airwin-news-card,
+.airwin-news-card-link,
+.airwin-blog-card,
+.airwin-blog-card-link {
+  cursor: pointer !important;
+}
+
+@media (max-width: 767px) {
+  .airwin-article-modal-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .airwin-article-modal-dialog {
+    max-width: 100vw;
+    width: 100vw;
+    max-height: 94vh;
+    height: 94vh;
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+  }
+  .airwin-article-modal-content {
+    padding: 1.2rem;
+  }
+  .airwin-article-title {
+    font-size: 1.55rem;
+  }
+  .airwin-article-hero-wrap {
+    margin-bottom: 1.2rem;
+  }
+  .airwin-article-modal-footer {
+    padding: 1rem 1.2rem;
+  }
+}
